@@ -34,35 +34,46 @@ class BrowserEngine:
         self.last_error: Dict[str, str] = {}  # Track last error message per element
         
     def start(self, url: str) -> bool:
-        """
-        Launch the browser and navigate to the target URL.
-        
-        Args:
-            url: The website URL to test
+            """
+            Launch a PERSISTENT browser and navigate to the target URL.
+            This saves cookies and session data to a local folder.
+            """
+            try:
+                self.playwright = sync_playwright().start()
+                
+                # Define a folder to store the browser profile (cookies, local storage, etc.)
+                user_data_dir = "./browser_session"
+                
+                print(f"📂 Using persistent session in: {user_data_dir}")
+                
+                # launch_persistent_context combines browser launch and context creation
+                self.context = self.playwright.chromium.launch_persistent_context(
+                    user_data_dir,
+                    headless=self.headless,
+                    viewport={'width': 1280, 'height': 720},
+                    # This ensures the browser doesn't close between steps if you don't want it to
+                    no_viewport=False 
+                )
+                
+                # In a persistent context, a page is often already open
+                if len(self.context.pages) > 0:
+                    self.page = self.context.pages[0]
+                else:
+                    self.page = self.context.new_page()
+                
+                # Navigate to URL
+                print(f"🌐 Navigating to {url}...")
+                self.page.goto(url, wait_until="networkidle", timeout=30000)
+                time.sleep(2) 
+                
+                print("✅ Persistent browser started successfully")
+                return True
+                
+            except Exception as e:
+                print(f"❌ Failed to start browser: {str(e)}")
+                return False
             
-        Returns:
-            True if successful, False otherwise
-        """
-        try:
-            self.playwright = sync_playwright().start()
-            self.browser = self.playwright.chromium.launch(headless=self.headless)
-            self.context = self.browser.new_context(
-                viewport={'width': 1280, 'height': 720}
-            )
-            self.page = self.context.new_page()
-            
-            # Navigate to URL
-            print(f"🌐 Navigating to {url}...")
-            self.page.goto(url, wait_until="networkidle", timeout=30000)
-            time.sleep(2)  # Allow page to settle
-            
-            print("✅ Browser started successfully")
-            return True
-            
-        except Exception as e:
-            print(f"❌ Failed to start browser: {str(e)}")
-            return False
-    
+                
     def update_element_map(self, new_map: Dict):
         """
         Update the internal mapping of element IDs to CSS selectors.

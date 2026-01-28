@@ -66,10 +66,14 @@ class Orchestrator:
         print("=" * 60)
         
         self.current_url = url
-        
-        # Step 1: Initialize browser
-        if not self.browser.start(url):
-            return self._generate_report(success=False, error="Failed to start browser")
+         
+        # Step 1: Initialize browser (ONLY if not already running)
+        if not self.browser.page:
+            print(f"🚀 Launching new browser session...")
+            if not self.browser.start(url):
+                return self._generate_report(success=False, error="Failed to start browser")
+        else:
+            print(f"🔄 Continuing in existing browser session at: {self.browser.page.url}")
         
         try:
             # Step 2: Main testing loop
@@ -164,7 +168,7 @@ class Orchestrator:
         
         finally:
             # Clean up
-            self.browser.cleanup()
+            print("Keep-alive: Browser remains open for the next task.")
     
     def _execute_with_diagnostic_loop(self, 
                                      decision: AgentDecision, 

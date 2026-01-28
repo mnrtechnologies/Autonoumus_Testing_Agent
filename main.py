@@ -98,17 +98,30 @@ Examples:
     # Create and run orchestrator
     orchestrator = Orchestrator(api_key=api_key, headless=args.headless)
     orchestrator.max_steps = args.max_steps
-    
+    if not orchestrator.browser.start(args.url):
+        return
     try:
-        result = orchestrator.run(url=args.url, goal=args.goal)
+        current_goal = args.goal 
         
-        # Exit with appropriate code
-        exit(0 if result["success"] else 1)
-        
+        while True:
+            # 2. IMPORTANT: Pass 'None' or handle the URL in a way that 
+            # tells the Orchestrator NOT to call start() again
+            orchestrator.run(url=orchestrator.browser.get_page().url, goal=current_goal)
+            
+            print("\n" + "="*70)
+            print("🟢 TASK FINISHED. Browser is still open and waiting.")
+            print("="*70)
+            
+            current_goal = input("\n WHAT IS THE NEXT TASK? (or type 'exit' to quit): ")
+            if current_goal.lower() in ['exit', 'quit']:
+                break
+                
     except KeyboardInterrupt:
         print("\n\n👋 Goodbye!")
-        exit(130)
-
+    finally:
+        # 4. Only close the browser when you actually exit the loop
+        orchestrator.browser.cleanup()
+        
 
 if __name__ == "__main__":
     main()

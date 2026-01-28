@@ -241,6 +241,9 @@ RULES:
 4. If an element is covered or not clickable, try a different approach
 5. Be patient - wait for pages to load when needed
 6. Trust the provided element text data over visual interpretation
+7. CRITICAL: If multiple elements have the same text (e.g., "Launch Experiment →"), you MUST use a unique selector.
+8. To target a specific element among many identical ones, describe its position (e.g., "the first one") in your thought and use the exact element_id assigned to it.
+9. If a direct text click fails, look for unique parent containers or sibling text to distinguish the target.
 
 Remember: Your ENTIRE response must be valid JSON and nothing else."""
 
@@ -284,8 +287,11 @@ The screenshot shows red numbered boxes. Here is the EXACT data for each element
 
 {elements_text}
 
-IMPORTANT: Use the EXACT text shown above, not what you see in the screenshot!
+IMPORTANT: 
+- Use the EXACT text shown above, not what you see in the screenshot!
 For example, if ID 14 shows 'text="Class 10"', the actual text is "Class 10" (with space).
+- If you see multiple elements with the same text in the list above, do not use a generic selector. 
+Pick the specific element_id that corresponds to the correct item (e.g., if you want the first experiment, pick the ID of its specific button).
 
 PREVIOUS ACTIONS:
 {history_text}
