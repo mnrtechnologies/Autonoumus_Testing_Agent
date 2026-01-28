@@ -1,22 +1,23 @@
 """
-Orchestrator - Main control loop that coordinates all engines
-UPDATED: Better error handling for alphanumeric element IDs
+Orchestrator - UPGRADED to v3.0 - Data-Driven Determinism
+NOW: Implements Diagnostic Loop with repair selector generation
+TRIGGERS: After 2 consecutive failures on same element
+MEMORY: Saves working repair selectors per-domain
 """
 from engines.browser_engine import BrowserEngine
-from engines.vision_engine import VisionEngine
+from engines.vision_engine import VisionEngine, ElementProfile
 from engines.brain_engine import BrainEngine, AgentDecision
+from engines.selector_memory import SelectorMemory
 from typing import List, Dict
 import json
 from datetime import datetime
 from pathlib import Path
-from engines.failure_tracker import FailureTracker
-from engines.diagnostic_engine import DiagnosticEngine
 
 
 class Orchestrator:
     """
     The main controller that runs the testing loop.
-    Coordinates Browser, Vision, and Brain engines to autonomously test a website.
+    VERSION 3.0: Implements Diagnostic Loop for intelligent failure recovery.
     """
     
     def __init__(self, api_key: str, headless: bool = False):
@@ -28,54 +29,21 @@ class Orchestrator:
             headless: Whether to run browser in headless mode
         """
         self.browser = BrowserEngine(headless=headless)
-        self.failure_tracker = FailureTracker()
         self.vision = VisionEngine()
         self.brain = BrainEngine(api_key=api_key)
-        self.diagnostic = DiagnosticEngine(api_key=api_key)
-        self.diagnostic_mode = True 
+        self.memory = SelectorMemory()  # NEW: Selector memory system
         
         self.action_history: List[str] = []
         self.step_count = 0
         self.max_steps = 50  # Safety limit
-
-    def _retry_with_new_selector(self, decision, new_selector: str) -> Dict:
-        """
-        Retry an action with a different selector.
+        self.current_url = ""  # Track current URL for memory
         
-        Args:
-            decision: Original AgentDecision
-            new_selector: New selector to try
-            
-        Returns:
-            Result dictionary
-        """
-        try:
-            # Temporarily update the element map
-            temp_element_map = self.browser.element_map.copy()
-            temp_element_map[str(decision.element_id)] = new_selector
-            
-            # Swap in the new map
-            old_map = self.browser.element_map
-            self.browser.element_map = temp_element_map
-            
-            # Try the action
-            result = self.browser.execute_action(
-                action_type=decision.action,
-                element_id=decision.element_id,
-                value=decision.value
-            )
-            
-            # Restore old map if it didn't work
-            if not result.get("success"):
-                self.browser.element_map = old_map
-            
-            return result
-            
-        except Exception as e:
-            return {"success": False, "message": str(e)}    
+        # Diagnostic Loop constants
+        self.FAILURE_THRESHOLD = 2  # Trigger diagnostic after 2 failures
+        
     def run(self, url: str, goal: str) -> Dict:
         """
-        Run the autonomous testing loop.
+        Run the autonomous testing loop with Diagnostic Loop support.
         
         Args:
             url: Website URL to test
@@ -85,12 +53,19 @@ class Orchestrator:
             Dictionary with test results
         """
         print("=" * 60)
-        print("🤖 ROBO-TESTER STARTING")
+        print("🤖 ROBO-TESTER v3.0 - DATA-DRIVEN DETERMINISM")
         print("=" * 60)
         print(f"🎯 Goal: {goal}")
         print(f"🌐 URL: {url}")
         print(f"📊 Max steps: {self.max_steps}")
+        print(f"🔧 Diagnostic Loop: Enabled (triggers after {self.FAILURE_THRESHOLD} failures)")
+        
+        # Show memory stats
+        stats = self.memory.get_stats()
+        print(f"💾 Memory: {stats['total_selectors']} selectors across {stats['total_domains']} domains")
         print("=" * 60)
+        
+        self.current_url = url
         
         # Step 1: Initialize browser
         if not self.browser.start(url):
@@ -104,11 +79,11 @@ class Orchestrator:
                 print(f"STEP {self.step_count}/{self.max_steps}")
                 print('='*60)
                 
-                # Observe: Capture current state
+                # Observe: Capture current state with Ground Truth
                 page = self.browser.get_page()
                 
                 try:
-                    screenshot_path, element_map = self.vision.capture_state(page)
+                    screenshot_path, element_profiles = self.vision.capture_state(page)
                 except Exception as capture_error:
                     print(f"❌ Error capturing state: {str(capture_error)}")
                     import traceback
@@ -117,30 +92,29 @@ class Orchestrator:
                     self.action_history.append(f"Step {self.step_count}: Failed to capture state - {str(capture_error)}")
                     continue
                 
-                if not screenshot_path or not element_map:
+                if not screenshot_path or not element_profiles:
                     print("⚠️  Failed to capture state, waiting and retrying...")
                     self.action_history.append(f"Step {self.step_count}: Failed to capture state")
                     continue
                 
                 # Update browser with new element map
                 try:
-                    self.browser.update_element_map(element_map)
+                    self.browser.update_element_map(element_profiles)
                 except Exception as update_error:
                     print(f"❌ Error updating element map: {str(update_error)}")
                     import traceback
                     traceback.print_exc()
                     continue
                 
-                # Think: Ask Claude what to do
+                # Think: Ask Claude what to do (using Ground Truth data!)
                 try:
                     decision = self.brain.decide_next_action(
                         screenshot_path=screenshot_path,
-                        element_map=element_map,
+                        element_profiles=element_profiles,  # Now passing profiles!
                         action_history=self.action_history,
                         goal=goal,
                         max_steps=self.max_steps,
-                        current_step=self.step_count,
-                        failure_tracker=self.failure_tracker
+                        current_step=self.step_count
                     )
                 except Exception as brain_error:
                     print(f"❌ Error getting decision from Claude: {str(brain_error)}")
@@ -156,145 +130,19 @@ class Orchestrator:
                     )
                     return self._generate_report(success=True)
                 
-                # Act: Execute the decision
-                # try:
-                #     result = self._execute_decision(decision)
-                # except Exception as action_error:
-                #     print(f"❌ Error executing action: {str(action_error)}")
-                #     import traceback
-                #     traceback.print_exc()
-                #     result = {"success": False, "message": str(action_error)}
-                
-                # # Record the action
-                # action_description = self._format_action_description(decision, result)
-                # self.action_history.append(action_description)
-                
-                # CHECK: Is this element blocked?
-                if decision.element_id:
-                    if self.failure_tracker.is_element_blocked(str(decision.element_id)):
-                        print(f"⚠️  WARNING: Element {decision.element_id} is BLOCKED (failed 3+ times)")
-                        print(f"   Asking Claude to find alternative approach...")
-                        continue  # Skip to next iteration
-                
-                # Act: Execute the decision
+                # Act: Execute the decision (with Diagnostic Loop support!)
                 try:
-                    result = self._execute_decision(decision)
+                    result = self._execute_with_diagnostic_loop(decision, element_profiles)
                 except Exception as action_error:
                     print(f"❌ Error executing action: {str(action_error)}")
                     import traceback
                     traceback.print_exc()
                     result = {"success": False, "message": str(action_error)}
                 
-                # ============================================
-                # INITIALIZE action_description HERE (before any continue statements)
-                # ============================================
+                # Record the action
                 action_description = self._format_action_description(decision, result)
-                
-                # Track the result
-                if result.get("success"):
-                    if decision.element_id:
-                        self.failure_tracker.record_success(str(decision.element_id), decision.action)
-                else:
-                    if decision.element_id:
-                        self.failure_tracker.record_failure(
-                            str(decision.element_id), 
-                            decision.action,
-                            result.get("message", "Unknown error")
-                        )
-                    
-                    # ============================================
-                    # 🆕 NEW: TRIGGER DIAGNOSTIC ENGINE ON FAILURE
-                    # ============================================
-                    if self.diagnostic_mode and decision.element_id:
-                        print(f"\n🔍 DIAGNOSTIC MODE: Analyzing failure for element {decision.element_id}...")
-                        
-                        # Get the selector that failed
-                        failed_selector = self.browser.element_map.get(str(decision.element_id))
-                        
-                        if failed_selector:
-                            # Run diagnostic analysis
-                            diagnostic_result = self.diagnostic.diagnose_failure(
-                                page=self.browser.get_page(),
-                                element_id=str(decision.element_id),
-                                failed_selector=failed_selector,
-                                error_message=result.get("message", "Unknown error")
-                            )
-                            
-                            # If we got diagnostic suggestions, add them to history
-                            if diagnostic_result:
-                                diagnostic_msg = f"\n🔍 DIAGNOSTIC ANALYSIS for element {decision.element_id}:\n"
-                                diagnostic_msg += f"  📋 Diagnosis: {diagnostic_result.diagnosis}\n"
-                                diagnostic_msg += f"  🎯 Root cause: {diagnostic_result.root_cause}\n"
-                                diagnostic_msg += f"  💪 Confidence: {diagnostic_result.confidence}\n"
-                                
-                                if diagnostic_result.suggested_selectors:
-                                    diagnostic_msg += f"\n  💡 Suggested alternative selectors:\n"
-                                    for i, suggestion in enumerate(diagnostic_result.suggested_selectors[:3], 1):
-                                        diagnostic_msg += f"    {i}. {suggestion['selector']} "
-                                        diagnostic_msg += f"(reliability: {suggestion['reliability']})\n"
-                                        diagnostic_msg += f"       Reason: {suggestion['reason']}\n"
-                                
-                                print(diagnostic_msg)
-                                self.action_history.append(diagnostic_msg)
-                                
-                                # Optional: Try the best suggested selector automatically
-                                if diagnostic_result.confidence == "high" and diagnostic_result.suggested_selectors:
-                                    best_selector = diagnostic_result.suggested_selectors[0]['selector']
-                                    print(f"\n🔄 Auto-retry: Trying best suggested selector: {best_selector}")
-                                    
-                                    retry_result = self._retry_with_new_selector(decision, best_selector)
-                                    
-                                    if retry_result.get("success"):
-                                        print(f"   ✅ SUCCESS with diagnostic suggestion!")
-                                        result = retry_result  # Update result to success
-                                        # Update action_description to reflect the retry success
-                                        action_description = f"Step {self.step_count}: ✅ Clicked element {decision.element_id} (succeeded with diagnostic retry)"
-                                        self.action_history.append(action_description)
-                                        # Update the element map with the working selector
-                                        self.browser.element_map[str(decision.element_id)] = best_selector
-                                        # Record success in failure tracker
-                                        self.failure_tracker.record_success(str(decision.element_id), decision.action)
-                                    else:
-                                        print(f"   ❌ Retry also failed: {retry_result.get('message')}")
-                            else:
-                                print("   ⚠️  Diagnostic analysis did not produce suggestions")
-                    
-                    # If there's failure context from browser_engine, add it to history
-                    if result.get("failure_context"):
-                        context = result["failure_context"]
-                        context_msg = f"\n⚠️ Element {decision.element_id} FAILURE CONTEXT:\n"
-                        context_msg += f"  • Tried selector: {context.get('failed_selector')}\n"
-                        context_msg += f"  • Searched for text: '{context.get('searched_for')}'\n"
-                        context_msg += f"  • Found {len(context.get('similar_elements', []))} similar elements on page\n"
-                        
-                        for idx, elem in enumerate(context.get('similar_elements', [])[:2], 1):
-                            context_msg += f"\n    Element {idx}:\n"
-                            context_msg += f"      - innerText: '{elem.get('innerText')}'\n"
-                            context_msg += f"      - textContent: '{elem.get('textContent')}'\n"
-                            context_msg += f"      - visible: {elem.get('visible')}\n"
-                        
-                        if context.get('similar_elements'):
-                            context_msg += "\n💡 The actual text on the page may differ from what you're searching for!\n"
-                        
-                        print(context_msg)
-                        self.action_history.append(context_msg)
-                
-                # Check for loops
-                loop_detected = self.failure_tracker.detect_loop()
-                if loop_detected:
-                    print(f"\n🔄 {loop_detected}")
-                    print(self.failure_tracker.get_failure_summary())
-                    
-                    should_continue = self._handle_stuck_situation(goal, self.step_count)
-                    if not should_continue:
-                        print("\n❌ Claude determined the goal is not achievable with current approach")
-                        return self._generate_report(
-                            success=False,
-                            error="Agent stuck in loop - no viable alternative found"
-                        )
-                
-                # Record and print the action (action_description already initialized above)
                 self.action_history.append(action_description)
+                
                 print(f"   📝 {action_description}")
             
             # Reached max steps
@@ -318,103 +166,135 @@ class Orchestrator:
             # Clean up
             self.browser.cleanup()
     
-    def _handle_stuck_situation(self, goal: str, current_step: int) -> bool:
+    def _execute_with_diagnostic_loop(self, 
+                                     decision: AgentDecision, 
+                                     element_profiles: Dict[str, ElementProfile]) -> Dict:
         """
-        Called when agent appears stuck in a loop.
-        Asks Claude for a strategic re-evaluation.
+        Execute an action with Diagnostic Loop support.
         
-        Returns:
-            True if should continue, False if should abort
-        """
-        print("\n" + "="*60)
-        print("🔄 STUCK LOOP DETECTED - REQUESTING STRATEGIC RE-EVALUATION")
-        print("="*60)
-        
-        failure_summary = self.failure_tracker.get_failure_summary()
-        
-        print(failure_summary)
-        print("\nAsking Claude to analyze the situation and suggest alternatives...")
-        
-        # Take a fresh screenshot
-        page = self.browser.get_page()
-        screenshot_path, element_map = self.vision.capture_state(page)
-        
-        if not screenshot_path:
-            return False
-        
-        # Update element map
-        self.browser.update_element_map(element_map)
-        
-        # Ask Claude for strategic thinking
-        strategic_prompt = f"""
-    SITUATION ANALYSIS REQUIRED
-
-    You have been trying to accomplish this goal: {goal}
-
-    However, you appear to be stuck. Here's what happened:
-
-    {failure_summary}
-
-    Recent action history:
-    {chr(10).join(self.action_history[-10:])}
-
-    Current step: {current_step}
-
-    IMPORTANT: Look at the current screenshot and answer these questions in your JSON response:
-
-    1. In "thought": Explain WHY you think the previous approach failed
-    2. In "action": Suggest a COMPLETELY DIFFERENT approach (not the same failed action)
-    3. Consider: 
-    - Is there an alternative element to try?
-    - Should you try a different sequence of actions?
-    - Is there a prerequisite step you missed?
-    - Should you report this as a blocking issue?
-
-    You MUST try something different than what failed before.
-    """
-
-        # This is a strategic decision, so we'll modify the system prompt temporarily
-        original_decide = self.brain.decide_next_action
-        
-        try:
-            # Get strategic decision
-            decision = self.brain.decide_next_action(
-                screenshot_path=screenshot_path,
-                element_map=element_map,
-                action_history=[strategic_prompt],  # Override with strategic prompt
-                goal=goal,
-                max_steps=self.max_steps,
-                current_step=current_step,
-                failure_tracker=self.failure_tracker
-            )
-            
-            print(f"\n💡 Claude's strategic analysis:")
-            print(f"   {decision.thought}")
-            print(f"   Suggested action: {decision.action}")
-            
-            if decision.action == "done":
-                return False  # Claude says it's impossible
-            
-            return True  # Continue with new strategy
-            
-        except Exception as e:
-            print(f"❌ Strategic analysis failed: {str(e)}")
-            return False
-    def _execute_decision(self, decision: AgentDecision) -> Dict:
-        """
-        Execute the action decided by the brain.
+        DIAGNOSTIC LOOP LOGIC:
+        1. Try normal execution
+        2. If it fails, check failure count
+        3. If failure count >= FAILURE_THRESHOLD:
+           a. Check memory for repair selector
+           b. If not in memory, generate new repair selector using Ground Truth
+           c. Try action with repair selector
+           d. If successful, save to memory
         
         Args:
             decision: The AgentDecision from Claude
+            element_profiles: Dictionary of element profiles with Ground Truth
             
         Returns:
             Result dictionary from browser engine
         """
-        return self.browser.execute_action(
+        element_id = decision.element_id
+        
+        # Step 1: Check if we have a repair selector in memory (OPTIMIZATION)
+        if element_id and element_id in element_profiles:
+            profile = element_profiles[str(element_id)]
+            element_text = profile.text
+            
+            # Try memory first if element has text
+            if element_text:
+                memory_selector = self.memory.get_repair_selector(self.current_url, element_text)
+                if memory_selector:
+                    print(f"   🎯 Using memorized repair selector for '{element_text}'")
+                    result = self.browser.execute_action(
+                        action_type=decision.action,
+                        element_id=element_id,
+                        value=decision.value,
+                        repair_selector=memory_selector
+                    )
+                    if result["success"]:
+                        return result
+                    else:
+                        print(f"   ⚠️  Memorized selector failed, falling back to normal flow")
+        
+        # Step 2: Try normal execution
+        result = self.browser.execute_action(
             action_type=decision.action,
-            element_id=decision.element_id,
+            element_id=element_id,
             value=decision.value
         )
+        
+        # Step 3: If successful, we're done!
+        if result["success"]:
+            return result
+        
+        # Step 4: FAILURE - Check if we should trigger Diagnostic Loop
+        if not element_id or decision.action in ["wait", "scroll"]:
+            # Can't diagnose actions without element_id
+            return result
+        
+        failure_count = self.browser.get_failure_count(str(element_id))
+        
+        print(f"   ⚠️  Action failed (attempt {failure_count}/{self.FAILURE_THRESHOLD})")
+        
+        # Step 5: TRIGGER DIAGNOSTIC LOOP if threshold reached
+        if failure_count >= self.FAILURE_THRESHOLD:
+            print(f"\n{'🔧'*30}")
+            print(f"🔧 DIAGNOSTIC LOOP ACTIVATED (Element {element_id})")
+            print(f"{'🔧'*30}")
+            
+            # Get element profile and error details
+            profile = element_profiles.get(str(element_id))
+            if not profile:
+                print(f"   ❌ Cannot diagnose: No profile found for element {element_id}")
+                return result
+            
+            last_error = self.browser.get_last_error(str(element_id))
+            failed_selector = profile.get_selector()
+            
+            print(f"   📊 DIAGNOSIS:")
+            print(f"   - Failed Selector: {failed_selector}")
+            print(f"   - Ground Truth: {profile}")
+            print(f"   - Error: {last_error}")
+            
+            # Generate repair selector using Ground Truth
+            print(f"\n   🧠 Asking Claude to generate repair selector...")
+            repair_selector = self.brain.generate_repair_selector(
+                element_profile=profile,
+                failed_selector=failed_selector,
+                error_message=last_error or "Unknown error"
+            )
+            
+            if not repair_selector:
+                print(f"   ❌ Failed to generate repair selector")
+                return result
+            
+            # Try action with repair selector
+            print(f"\n   🔧 Attempting action with repair selector...")
+            repair_result = self.browser.execute_action(
+                action_type=decision.action,
+                element_id=element_id,
+                value=decision.value,
+                repair_selector=repair_selector
+            )
+            
+            # If repair worked, save to memory!
+            if repair_result["success"]:
+                print(f"\n   ✅ REPAIR SUCCESSFUL!")
+                
+                # Save to memory if element has text
+                if profile.text:
+                    self.memory.save_repair_selector(
+                        url=self.current_url,
+                        element_text=profile.text,
+                        tag=profile.tag,
+                        repair_selector=repair_selector
+                    )
+                    print(f"   💾 Repair selector saved to memory for future use")
+                
+                print(f"{'🔧'*30}\n")
+                return repair_result
+            else:
+                print(f"\n   ❌ Repair selector also failed: {repair_result['message']}")
+                print(f"{'🔧'*30}\n")
+                return repair_result
+        
+        # Not at threshold yet, return original failure
+        return result
     
     def _format_action_description(self, decision: AgentDecision, result: Dict) -> str:
         """Format an action into a readable description."""
@@ -453,6 +333,10 @@ class Orchestrator:
         if error:
             report["error"] = error
         
+        # Add memory stats
+        stats = self.memory.get_stats()
+        report["memory_stats"] = stats
+        
         # Save report to file
         report_path = Path("test_report.json")
         with open(report_path, "w") as f:
@@ -463,6 +347,7 @@ class Orchestrator:
         print('='*60)
         print(f"Status: {'✅ SUCCESS' if success else '❌ FAILED'}")
         print(f"Steps taken: {self.step_count}/{self.max_steps}")
+        print(f"Memory: {stats['total_selectors']} selectors across {stats['total_domains']} domains")
         if error:
             print(f"Error: {error}")
         print(f"\n📄 Full report saved to: {report_path}")

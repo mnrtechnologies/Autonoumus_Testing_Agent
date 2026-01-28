@@ -63,7 +63,7 @@ def format_action_history(history: list) -> str:
     Format the action history into a readable string for the LLM.
     
     Args:
-        history: List of action dictionaries
+        history: List of action descriptions
         
     Returns:
         Formatted string of action history
@@ -71,8 +71,14 @@ def format_action_history(history: list) -> str:
     if not history:
         return "No actions taken yet."
     
-    formatted = []
-    for i, action in enumerate(history, 1):
-        formatted.append(f"Step {i}: {action}")
+    # Limit to last 10 actions to keep context manageable
+    recent_history = history[-10:] if len(history) > 10 else history
+    
+    if len(history) > 10:
+        formatted = [f"... ({len(history) - 10} earlier actions omitted) ..."]
+    else:
+        formatted = []
+    
+    formatted.extend(recent_history)
     
     return "\n".join(formatted)

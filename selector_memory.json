@@ -1,0 +1,10 @@
+{
+  "mnr-pst.com": {
+    "Class 10": {
+      "selector": "//button[normalize-space()='Class 10']",
+      "tag": "button",
+      "success_count": 1,
+      "last_used": "2026-01-28T15:08:33.301154"
+    }
+  }
+}

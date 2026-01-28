@@ -1,5 +1,6 @@
 """
-Robo-Tester - Autonomous Web Testing Agent
+Robo-Tester v3.0 - Data-Driven Determinism
+Autonomous Web Testing Agent with Ground Truth Extraction
 Entry point for running tests
 """
 import argparse
@@ -9,15 +10,20 @@ from engines.orchestrator import Orchestrator
 
 
 def main():
-    """Main entry point for the Robo-Tester."""
+    """Main entry point for the Robo-Tester v3.0."""
     # Load environment variables
     load_dotenv()
     
     # Set up argument parser
     parser = argparse.ArgumentParser(
-        description="Robo-Tester: Autonomous web testing with AI",
+        description="Robo-Tester v3.0: Data-Driven Determinism - No more visual guessing!",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
+🎯 NEW IN v3.0: DATA-DRIVEN DETERMINISM
+- Extracts exact text from DOM (no more "Class10" vs "Class 10" errors!)
+- Diagnostic Loop automatically repairs failing selectors
+- Per-domain memory learns from repairs
+
 Examples:
   # Test a login flow
   python main.py --url "https://example.com/login" --goal "Login with username 'test@example.com' and password 'demo123'"
@@ -54,7 +60,7 @@ Examples:
         "--max-steps",
         type=int,
         default=50,
-        help="Maximum number of steps before giving up (default: 20)"
+        help="Maximum number of steps before giving up (default: 50)"
     )
     
     parser.add_argument(
@@ -63,11 +69,6 @@ Examples:
         default=None,
         help="Anthropic API key (or set ANTHROPIC_API_KEY environment variable)"
     )
-    parser.add_argument(
-    "--no-diagnostics",
-    action="store_true",
-    help="Disable AI-powered diagnostic mode (faster but less adaptive)"
-)
     
     args = parser.parse_args()
     
@@ -85,15 +86,19 @@ Examples:
         print("❌ Error: URL must start with http:// or https://")
         return
     
+    # Banner
+    print("\n" + "="*70)
+    print("🤖 ROBO-TESTER v3.0 - DATA-DRIVEN DETERMINISM")
+    print("="*70)
+    print("✨ NEW: Ground Truth extraction eliminates visual guessing")
+    print("🔧 NEW: Diagnostic Loop auto-repairs failing selectors")
+    print("💾 NEW: Per-domain memory learns from repairs")
+    print("="*70 + "\n")
+    
     # Create and run orchestrator
     orchestrator = Orchestrator(api_key=api_key, headless=args.headless)
     orchestrator.max_steps = args.max_steps
-    orchestrator.diagnostic_mode = not args.no_diagnostics
-
-    if orchestrator.diagnostic_mode:
-        print("🔍 Diagnostic mode: ENABLED (AI will analyze failures)")
-    else:
-        print("⚡ Diagnostic mode: DISABLED (faster but less adaptive)")
+    
     try:
         result = orchestrator.run(url=args.url, goal=args.goal)
         

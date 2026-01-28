@@ -1,8 +1,12 @@
-// tagger.js - UPGRADED VERSION 2.0
-// NEW FEATURES:
-// 1. Shadow DOM Support - Recursively pierces shadow roots
-// 2. DOM Stabilization - Waits for page to stop changing before tagging
-// 3. Dropdown Option Support (preserved from v1)
+// tagger.js - VERSION 3.0 - DATA-DRIVEN DETERMINISM
+// NEW IN V3.0:
+// - Extracts "Ground Truth" profiles for each element
+// - Returns: {selector, text, tag, attributes} instead of just selector
+// - Eliminates visual guessing by providing exact DOM data
+// PRESERVED FROM V2.0:
+// - Shadow DOM Support
+// - DOM Stabilization
+// - Dropdown Option Support
 
 (function() {
     // ============================================
@@ -15,7 +19,7 @@
         // Failsafe: If page never settles after 3 seconds, tag anyway
         const maxWaitTimer = setTimeout(() => {
             if (observer) observer.disconnect();
-            console.log('[Tagger] Failsafe triggered: Page still changing after 3s, tagging anyway');
+            console.log('[Tagger v3.0] Failsafe triggered: Page still changing after 3s, tagging anyway');
             resolve(performTagging());
         }, 3000);
 
@@ -28,7 +32,7 @@
                 // DOM has been stable for 300ms!
                 clearTimeout(maxWaitTimer); // Cancel failsafe
                 observer.disconnect();
-                console.log('[Tagger] DOM stable for 300ms, starting tagging');
+                console.log('[Tagger v3.0] DOM stable for 300ms, starting tagging');
                 resolve(performTagging());
             }, 300);
         });
@@ -44,7 +48,7 @@
         stabilityTimer = setTimeout(() => {
             clearTimeout(maxWaitTimer);
             observer.disconnect();
-            console.log('[Tagger] Page was already stable, starting tagging');
+            console.log('[Tagger v3.0] Page was already stable, starting tagging');
             resolve(performTagging());
         }, 300);
     });
@@ -85,7 +89,7 @@
             const allNodes = root.querySelectorAll('*');
             allNodes.forEach(node => {
                 if (node.shadowRoot) {
-                    console.log('[Tagger] Found shadow root in:', node.tagName);
+                    console.log('[Tagger v3.0] Found shadow root in:', node.tagName);
                     // Recursively get elements from this shadow root
                     const shadowElements = getAllElementsIncludingShadow(node.shadowRoot);
                     elements = elements.concat(shadowElements);
@@ -95,15 +99,69 @@
             return elements;
         }
 
+        // ============================================
+        // NEW IN V3.0: EXTRACT ELEMENT PROFILE
+        // Returns complete "Ground Truth" data about an element
+        // ============================================
+        function extractElementProfile(el) {
+            const profile = {
+                selector: null,  // Will be filled by getUniversalSelector()
+                text: '',
+                tag: el.tagName.toLowerCase(),
+                attributes: {}
+            };
+            
+            // Extract text content (normalize whitespace)
+            let textContent = '';
+            
+            // For input elements, get placeholder or value
+            if (el.tagName.toLowerCase() === 'input' || el.tagName.toLowerCase() === 'textarea') {
+                textContent = el.placeholder || el.value || '';
+            } else {
+                // Get direct text content (not from children)
+                for (let node of el.childNodes) {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        textContent += node.textContent;
+                    }
+                }
+            }
+            
+            // Normalize whitespace: trim and replace multiple spaces with single space
+            profile.text = textContent.trim().replace(/\s+/g, ' ');
+            
+            // Extract key attributes
+            const keyAttributes = [
+                'id', 'name', 'type', 'class', 'value',
+                'aria-label', 'aria-labelledby', 'placeholder',
+                'role', 'href', 'title', 'alt'
+            ];
+            
+            keyAttributes.forEach(attr => {
+                const value = el.getAttribute(attr);
+                if (value !== null && value !== '') {
+                    profile.attributes[attr] = value;
+                }
+            });
+            
+            // Also capture data-* attributes
+            Array.from(el.attributes).forEach(attr => {
+                if (attr.name.startsWith('data-')) {
+                    profile.attributes[attr.name] = attr.value;
+                }
+            });
+            
+            return profile;
+        }
+
         // Get ALL interactive elements (including shadow DOM)
         const elements = getAllElementsIncludingShadow(document);
-        console.log(`[Tagger] Found ${elements.length} total interactive elements (including shadow DOM)`);
+        console.log(`[Tagger v3.0] Found ${elements.length} total interactive elements (including shadow DOM)`);
 
         const elementMap = {};
         let idCounter = 1;
 
         // ============================================
-        // HELPER FUNCTIONS (Preserved from v1)
+        // HELPER FUNCTIONS
         // ============================================
         
         // Get text content (excluding children)
@@ -239,12 +297,16 @@
 
             if (!isVisible) return;
 
+            // NEW V3.0: Extract complete profile
+            const profile = extractElementProfile(element);
+            
             // Generate selector
-            const selector = getUniversalSelector(element);
+            profile.selector = getUniversalSelector(element);
+            
             const elementId = idCounter++;
 
-            // Store mapping
-            elementMap[elementId] = selector;
+            // Store profile (not just selector!)
+            elementMap[elementId] = profile;
 
             // Create visual tag
             const tag = document.createElement('div');
@@ -288,6 +350,7 @@
 
         // ============================================
         // STEP 2: Handle <select> dropdown options
+        // NEW V3.0: Extract option text AND value
         // ============================================
         
         const selectElements = document.querySelectorAll('select');
@@ -311,7 +374,7 @@
             const selectSelector = getUniversalSelector(selectElement);
             
             for (let id in elementMap) {
-                if (elementMap[id] === selectSelector) {
+                if (elementMap[id].selector === selectSelector) {
                     selectId = id;
                     break;
                 }
@@ -340,8 +403,19 @@
                 // Create selector for this specific option
                 const optionSelector = `${selectSelector} option[value="${option.value}"]`;
                 
-                // Store in element map
-                elementMap[optionId] = optionSelector;
+                // NEW V3.0: Extract option profile with text AND value
+                const optionProfile = {
+                    selector: optionSelector,
+                    text: option.textContent.trim().replace(/\s+/g, ' '), // Normalized text
+                    tag: 'option',
+                    attributes: {
+                        value: option.value,
+                        'parent-select': selectSelector
+                    }
+                };
+                
+                // Store profile in element map
+                elementMap[optionId] = optionProfile;
                 
                 // Create visual indicator (blue badge next to the select)
                 const optionBadge = document.createElement('div');
@@ -369,8 +443,9 @@
                 optionBadge.style.top = (selectRect.top + scrollY + (validOptionIndex * 20)) + 'px';
                 
                 // Show option ID and text
-                const optionText = option.textContent.trim();
-                const displayText = optionText.length > 20 ? optionText.substring(0, 20) + '...' : optionText;
+                const displayText = optionProfile.text.length > 20 ? 
+                    optionProfile.text.substring(0, 20) + '...' : 
+                    optionProfile.text;
                 optionBadge.textContent = `${optionId}: ${displayText}`;
                 
                 document.body.appendChild(optionBadge);
@@ -379,7 +454,7 @@
             });
         });
 
-        console.log(`[Tagger] Tagged ${Object.keys(elementMap).length} total elements`);
+        console.log(`[Tagger v3.0] Tagged ${Object.keys(elementMap).length} total elements with Ground Truth profiles`);
         
         // Return the mapping as a JSON string
         return JSON.stringify(elementMap);

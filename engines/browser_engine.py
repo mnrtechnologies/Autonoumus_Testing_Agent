@@ -1,5 +1,7 @@
 """
-BrowserEngine - UPDATED - Handles both CSS and XPath selectors + Dropdown Options
+BrowserEngine - UPGRADED to v3.0 - Diagnostic Loop Support
+NOW: Tracks failures and supports repair selectors with XPath normalize-space()
+PRESERVES: CSS/XPath/Playwright selector support, dropdown options
 """
 from playwright.sync_api import sync_playwright, Browser, Page, BrowserContext
 from typing import Optional, Dict
@@ -10,7 +12,7 @@ import re
 class BrowserEngine:
     """
     Wraps Playwright to provide simple browser control methods.
-    NOW SUPPORTS: CSS selectors, XPath, Playwright text selectors, and dropdown options
+    VERSION 3.0: Tracks element failures and supports repair selectors
     """
     
     def __init__(self, headless: bool = False):
@@ -25,7 +27,11 @@ class BrowserEngine:
         self.browser: Optional[Browser] = None
         self.context: Optional[BrowserContext] = None
         self.page: Optional[Page] = None
-        self.element_map: Dict[int, str] = {}  # Maps element IDs to CSS selectors
+        self.element_map: Dict[str, str] = {}  # Maps element IDs to selectors
+        
+        # NEW V3.0: Failure tracking for Diagnostic Loop
+        self.failure_counts: Dict[str, int] = {}  # Track consecutive failures per element
+        self.last_error: Dict[str, str] = {}  # Track last error message per element
         
     def start(self, url: str) -> bool:
         """
@@ -64,11 +70,22 @@ class BrowserEngine:
         Now handles both numeric IDs and alphanumeric IDs (like "10a", "10b").
         
         Args:
-            new_map: Dictionary mapping element IDs to CSS selectors
+            new_map: Dictionary mapping element IDs to selectors (or ElementProfile objects)
         """
-        # Convert keys to strings if they're integers (for consistency)
-        self.element_map = {str(k): v for k, v in new_map.items()}
-        print(f"📍 Updated element map with {len(new_map)} elements")
+        # Handle both old format (selector strings) and new format (ElementProfile objects)
+        self.element_map = {}
+        for elem_id, value in new_map.items():
+            elem_id_str = str(elem_id)
+            
+            # Check if value is an ElementProfile object or a string
+            if hasattr(value, 'get_selector'):
+                # It's an ElementProfile object
+                self.element_map[elem_id_str] = value.get_selector()
+            else:
+                # It's a string selector (backward compatibility)
+                self.element_map[elem_id_str] = str(value)
+        
+        print(f"📍 Updated element map with {len(self.element_map)} elements")
     
     def _get_locator(self, selector: str):
         """
@@ -93,16 +110,69 @@ class BrowserEngine:
         else:
             return self.page.locator(selector)
     
+    def get_failure_count(self, element_id: str) -> int:
+        """
+        Get the number of consecutive failures for an element.
+        
+        Args:
+            element_id: The element ID
+            
+        Returns:
+            Number of consecutive failures
+        """
+        return self.failure_counts.get(str(element_id), 0)
+    
+    def get_last_error(self, element_id: str) -> Optional[str]:
+        """
+        Get the last error message for an element.
+        
+        Args:
+            element_id: The element ID
+            
+        Returns:
+            Last error message or None
+        """
+        return self.last_error.get(str(element_id))
+    
+    def reset_failure_count(self, element_id: str):
+        """
+        Reset the failure count for an element (after success).
+        
+        Args:
+            element_id: The element ID
+        """
+        elem_id_str = str(element_id)
+        if elem_id_str in self.failure_counts:
+            del self.failure_counts[elem_id_str]
+        if elem_id_str in self.last_error:
+            del self.last_error[elem_id_str]
+    
+    def _record_failure(self, element_id: str, error_message: str):
+        """
+        Record a failure for an element.
+        
+        Args:
+            element_id: The element ID
+            error_message: The error message
+        """
+        elem_id_str = str(element_id)
+        self.failure_counts[elem_id_str] = self.failure_counts.get(elem_id_str, 0) + 1
+        self.last_error[elem_id_str] = error_message
+        
+        failure_count = self.failure_counts[elem_id_str]
+        print(f"   ⚠️  Failure #{failure_count} for element {element_id}")
+    
     def execute_action(self, action_type: str, element_id: Optional[str] = None, 
-                  value: Optional[str] = None) -> Dict:
+                      value: Optional[str] = None, repair_selector: Optional[str] = None) -> Dict:
         """
         Execute a browser action based on the LLM's decision.
-        NOW SUPPORTS: Dropdown option selection (e.g., element_id="10a")
+        VERSION 3.0: Supports repair selectors for failed actions.
         
         Args:
             action_type: Type of action ('click', 'type', 'wait', 'scroll')
             element_id: The ID of the element to interact with (can be "10" or "10a")
             value: Text value (for 'type' actions)
+            repair_selector: Optional repair XPath selector to use instead of normal selector
             
         Returns:
             Dictionary with success status and message
@@ -126,38 +196,25 @@ class BrowserEngine:
             # Convert element_id to string for consistent lookup
             element_id_str = str(element_id)
             
-            # Get the selector for this element
-            selector = self.element_map.get(element_id_str)
-            if not selector:
-                return {
-                    "success": False, 
-                    "message": f"Element ID {element_id} not found in current map"
-                }
+            # Determine which selector to use
+            if repair_selector:
+                print(f"   🔧 Using REPAIR SELECTOR: {repair_selector}")
+                selector = repair_selector
+            else:
+                # Get the normal selector for this element
+                selector = self.element_map.get(element_id_str)
+                if not selector:
+                    return {
+                        "success": False, 
+                        "message": f"Element ID {element_id} not found in current map"
+                    }
             
             # Execute the specific action
             if action_type == "click":
                 print(f"🖱️  Clicking element {element_id} ({selector[:80]}...)...")
-                locator = self._get_locator(selector)
-
-                try:
-                    # Check if element is visible
-                    is_visible = locator.is_visible(timeout=2000)
-                    if not is_visible:
-                        return {
-                            "success": False,
-                            "message": f"Element {element_id} exists but is not visible (may be hidden or off-screen)"
-                        }
-                    is_enabled = locator.is_enabled(timeout=2000)
-                    if not is_enabled:
-                        return {
-                            "success": False,
-                            "message": f"Element {element_id} is disabled (cannot be clicked)"
-                        }
-                except Exception as check_error:
-                    print(f"   ⚠️  Pre-flight check warning: {str(check_error)}")    
                 
                 # ============================================
-                # NEW: Check if this is a dropdown option
+                # Check if this is a dropdown option
                 # ============================================
                 if " option[" in selector:
                     # This is a <select> option - use select_option instead of click
@@ -181,6 +238,9 @@ class BrowserEngine:
                         select_locator.select_option(value=option_value, timeout=5000)
                         time.sleep(1)
                         
+                        # SUCCESS: Reset failure count
+                        self.reset_failure_count(element_id_str)
+                        
                         return {
                             "success": True, 
                             "message": f"Selected option '{option_value}' in dropdown {element_id}"
@@ -191,6 +251,10 @@ class BrowserEngine:
                         locator = self._get_locator(selector)
                         locator.click(timeout=5000)
                         time.sleep(1)
+                        
+                        # SUCCESS: Reset failure count
+                        self.reset_failure_count(element_id_str)
+                        
                         return {"success": True, "message": f"Clicked element {element_id}"}
                 
                 # ============================================
@@ -198,43 +262,25 @@ class BrowserEngine:
                 # ============================================
                 else:
                     locator = self._get_locator(selector)
-
+                    
+                    # Scroll element into view first
+                    locator.scroll_into_view_if_needed(timeout=5000)
+                    time.sleep(0.3)  # Wait for scroll animation
+                    
+                    # Click with retry logic
                     try:
-                        # Scroll element into view first
-                        locator.scroll_into_view_if_needed(timeout=5000)
-                        time.sleep(0.3)  # Wait for scroll animation
                         locator.click(timeout=15000, force=False)
-                        time.sleep(1)  # Allow page to respond
-                        return {"success": True, "message": f"Clicked element {element_id}"}
-                        
                     except Exception as e:
-                        error_message = str(e)
-                        
-                        # ============================================
-                        # 👇 NEW: Fetch actual DOM context when click fails
-                        # ============================================
-                        print(f"   🔍 Fetching actual element context...")
-                        
-                        actual_context = self._fetch_failure_context(selector)
-                        
-                        if "timeout" in error_message.lower():
-                            return {
-                                "success": False,
-                                "message": f"Element {element_id} timed out - may be covered by another element or not clickable",
-                                "failure_context": actual_context
-                            }
-                        elif "not visible" in error_message.lower():
-                            return {
-                                "success": False,
-                                "message": f"Element {element_id} is not visible on screen",
-                                "failure_context": actual_context
-                            }
-                        else:
-                            return {
-                                "success": False,
-                                "message": f"Failed to click element {element_id}: {error_message}",
-                                "failure_context": actual_context
-                            }
+                        # If normal click fails, try force click
+                        print(f"   ⚠️  Normal click failed, trying force click...")
+                        locator.click(timeout=5000, force=True)
+                    
+                    time.sleep(1)  # Allow page to respond
+                    
+                    # SUCCESS: Reset failure count
+                    self.reset_failure_count(element_id_str)
+                    
+                    return {"success": True, "message": f"Clicked element {element_id}"}
             
             elif action_type == "type":
                 if not value:
@@ -244,79 +290,26 @@ class BrowserEngine:
                 locator = self._get_locator(selector)
                 locator.fill(value, timeout=5000)
                 time.sleep(0.5)
+                
+                # SUCCESS: Reset failure count
+                self.reset_failure_count(element_id_str)
+                
                 return {"success": True, "message": f"Typed '{value}' into element {element_id}"}
             
             else:
                 return {"success": False, "message": f"Unknown action type: {action_type}"}
         
         except Exception as e:
-            error_msg = f"Failed to {action_type} element {element_id}: {str(e)}"
-            print(f"❌ {error_msg}")
-            return {"success": False, "message": error_msg}
-
-
-    def _fetch_failure_context(self, failed_selector: str) -> Dict:
-        """
-        Fetch actual DOM context when a selector fails.
-        Finds similar elements and returns their real properties.
-        
-        Args:
-            failed_selector: The selector that didn't work
+            error_msg = str(e)
             
-        Returns:
-            Dict with information about actual elements on the page
-        """
-        try:
-            # Extract search text from Playwright selector
-            search_text = None
-            if ":has-text(" in failed_selector:
-                import re
-                text_match = re.search(r':has-text\(["\']([^"\']+)["\']\)', failed_selector)
-                if text_match:
-                    search_text = text_match.group(1)
+            # FAILURE: Record it
+            if element_id:
+                self._record_failure(str(element_id), error_msg)
             
-            if not search_text:
-                return {"failed_selector": failed_selector, "similar_elements": []}
+            full_error = f"Failed to {action_type} element {element_id}: {error_msg}"
+            print(f"❌ {full_error}")
             
-            # Find similar elements on the page
-            similar_elements = self.page.evaluate(f"""
-                (function() {{
-                    const searchText = "{search_text}";
-                    const allButtons = document.querySelectorAll('button');
-                    const matches = [];
-                    
-                    allButtons.forEach(btn => {{
-                        const innerText = (btn.innerText || '').trim();
-                        const textContent = (btn.textContent || '').trim();
-                        
-                        // Check if text contains what we're looking for
-                        if (innerText.toLowerCase().includes(searchText.toLowerCase()) ||
-                            textContent.toLowerCase().includes(searchText.toLowerCase())) {{
-                            
-                            matches.push({{
-                                innerText: innerText,
-                                textContent: textContent,
-                                className: btn.className,
-                                visible: btn.offsetParent !== null
-                            }});
-                        }}
-                    }});
-                    
-                    return matches;
-                }})()
-            """)
-            
-            print(f"   📊 Found {len(similar_elements)} similar elements")
-            
-            return {
-                "failed_selector": failed_selector,
-                "searched_for": search_text,
-                "similar_elements": similar_elements
-            }
-            
-        except Exception as e:
-            print(f"   ⚠️  Could not fetch context: {str(e)}")
-            return {"failed_selector": failed_selector, "error": str(e)}
+            return {"success": False, "message": full_error}
     
     def get_page(self) -> Optional[Page]:
         """
