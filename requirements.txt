@@ -1,0 +1,14 @@
+# Browser automation
+playwright==1.41.0
+
+# LLM API
+anthropic==0.18.1
+
+# Data validation
+pydantic==2.6.0
+
+# Image processing
+pillow==10.2.0
+
+# Utilities
+python-dotenv==1.0.1
