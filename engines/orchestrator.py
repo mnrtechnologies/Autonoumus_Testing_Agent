@@ -41,6 +41,16 @@ class Orchestrator:
         # Diagnostic Loop constants
         self.FAILURE_THRESHOLD = 2  # Trigger diagnostic after 2 failures
         
+        # Login tracking - to avoid asking for credentials multiple times
+        self.login_page_handled = False  # Have we already asked for credentials?
+        self.login_page_url = None  # Track which URL we asked for credentials on
+        self.collected_credentials = {}  # Store the credentials we collected
+        self.login_goal_in_progress = False  # Are we executing a login goal?
+        
+        # Loop detection - prevent clicking same element repeatedly
+        self.recent_actions: List[tuple] = []  # Track (element_id, action_type) tuples
+        self.LOOP_THRESHOLD = 4  # If same element clicked 4+ times, ask user for help
+    
     def run(self, url: str, goal: str) -> Dict:
         """
         Run the autonomous testing loop with Diagnostic Loop support.
@@ -52,6 +62,10 @@ class Orchestrator:
         Returns:
             Dictionary with test results
         """
+        # Reset detailed steps for new test
+        from test_modes import ReportGenerator
+        ReportGenerator.detailed_steps = []
+        
         print("=" * 60)
         print("🤖 ROBO-TESTER v3.0 - DATA-DRIVEN DETERMINISM")
         print("=" * 60)
@@ -111,6 +125,8 @@ class Orchestrator:
                     continue
                 
                 # Think: Ask Claude what to do (using Ground Truth data!)
+                # NOTE: Form detection is removed - Claude will navigate autonomously first
+                # Forms will be filled when Claude reaches them
                 try:
                     decision = self.brain.decide_next_action(
                         screenshot_path=screenshot_path,
@@ -125,6 +141,32 @@ class Orchestrator:
                     import traceback
                     traceback.print_exc()
                     continue
+                
+                # Check if Claude is asking for user input for a form field
+                if decision.need_user_input:
+                    # Validate that element_id is provided
+                    if decision.element_id is None:
+                        print(f"\n⚠️  Claude asked for user input but didn't specify element_id")
+                        print(f"   Field label: {decision.field_label}")
+                        print(f"   ⏭️  Skipping - Claude should navigate to the form first and identify the element ID\n")
+                        continue
+                    
+                    print(f"\n📝 Claude needs information to proceed")
+                    print(f"   Field [{decision.element_id}]: {decision.field_label}")
+                    
+                    field_value = input(f"   Enter value for [{decision.element_id}] {decision.field_label}: ").strip()
+                    
+                    if field_value:
+                        # Store this value in collected credentials for Claude to use later
+                        self.collected_credentials[str(decision.element_id)] = field_value
+                        print(f"   ✅ Value received. Claude will now fill this field.\n")
+                        
+                        # Tell Claude to type the value in the field
+                        decision.action = "type"
+                        decision.value = field_value
+                    else:
+                        print(f"   ⏭️  Skipping this field\n")
+                        continue
                 
                 # Check if done
                 if decision.action == "done" or decision.status == "done":
@@ -146,6 +188,45 @@ class Orchestrator:
                 # Record the action
                 action_description = self._format_action_description(decision, result)
                 self.action_history.append(action_description)
+                
+                # Check for loops (same element clicked multiple times)
+                loop_detected, loop_count = self._check_for_loop(decision)
+                if loop_detected:
+                    print(f"\n⚠️  LOOP DETECTED: Clicked element {decision.element_id} {loop_count} times without progress")
+                    print(f"    The system seems stuck. Let me ask for clarification...\n")
+                    
+                    # Ask user for help
+                    new_instruction = self._ask_user_for_instruction()
+                    if new_instruction:
+                        # Update goal with user's instruction
+                        goal = new_instruction
+                        print(f"\n✅ New instruction received: {goal}")
+                        print(f"   Continuing with updated goal...\n")
+                        # Continue to next iteration with new goal
+                        continue
+                    else:
+                        # User chose to cancel
+                        return self._generate_report(
+                            success=False,
+                            error="User cancelled test due to system being stuck"
+                        )
+                
+                # Also record detailed step narrative for human-readable report
+                from test_modes import ReportGenerator
+                
+                # Get observation from elements we saw
+                observation = self._get_observation_text(element_profiles)
+                
+                # Record step details
+                ReportGenerator.add_step_detail(
+                    step_number=self.step_count,
+                    observation=observation,
+                    decision=decision.thought,
+                    action_taken=self._get_action_text(decision, result),
+                    result=result.get("message", "Action completed"),
+                    success=result.get("success", False),
+                    error=result.get("error") if not result.get("success") else None
+                )
                 
                 print(f"   📝 {action_description}")
             
@@ -300,6 +381,39 @@ class Orchestrator:
         # Not at threshold yet, return original failure
         return result
     
+    def _build_auto_fill_goal(self, form_values: Dict[str, str], input_fields: Dict[str, str]) -> str:
+        """
+        Build a form-filling goal from collected values.
+        Works for ANY form (login, contact, feedback, registration, etc).
+        
+        Args:
+            form_values: Dictionary of {field_id: value} collected from user
+            input_fields: Dictionary of {field_id: field_label}
+            
+        Returns:
+            Goal string for the agent to fill the form
+        """
+        instructions = ["FILL THE FORM WITH PROVIDED VALUES:"]
+        
+        for field_id, value in form_values.items():
+            field_label = input_fields.get(field_id, f"Field {field_id}")
+            instructions.append(f"- Fill field [{field_id}] '{field_label}' with: '{value}' (type exactly as provided)")
+        
+        instructions.append("- Look for and click the Submit button (could be named 'Submit', 'Send', 'Login', 'Register', 'Continue', 'Next', etc.)")
+        instructions.append("- Wait for the form to be processed and navigate to the next page")
+        
+        return "\n".join(instructions)
+    
+    def _build_auto_login_goal(self, credentials: Dict[str, str], element_profiles: Dict) -> str:
+        """
+        DEPRECATED: Use _build_auto_fill_goal instead.
+        Kept for backward compatibility.
+        """
+        return self._build_auto_fill_goal(
+            credentials,
+            {k: k.title() for k, v in credentials.items()}  # Create simple field labels
+        )
+    
     def _format_action_description(self, decision: AgentDecision, result: Dict) -> str:
         """Format an action into a readable description."""
         success_emoji = "✅" if result.get("success") else "❌"
@@ -314,6 +428,140 @@ class Orchestrator:
             return f"Step {self.step_count}: 📜 Scrolled down the page"
         else:
             return f"Step {self.step_count}: {decision.action}"
+    
+    def _get_observation_text(self, element_profiles: Dict[str, ElementProfile]) -> str:
+        """
+        Generate human-readable observation of what Claude saw on the page.
+        
+        Args:
+            element_profiles: Dictionary of element profiles
+            
+        Returns:
+            Human-readable observation text
+        """
+        if not element_profiles:
+            return "Page has no interactive elements detected."
+        
+        # Count and categorize elements
+        buttons = []
+        inputs = []
+        links = []
+        
+        for elem_id, profile in element_profiles.items():
+            tag = profile.tag.lower()
+            text = profile.text.strip()[:50]  # Truncate long text
+            
+            if tag == 'button' or profile.attributes.get('role') == 'button':
+                buttons.append(text)
+            elif tag in ['input', 'textarea', 'select']:
+                field_type = profile.attributes.get('type', 'text')
+                inputs.append(f"{text} (type: {field_type})")
+            elif tag == 'a':
+                links.append(text)
+        
+        observations = []
+        if buttons:
+            observations.append(f"Buttons: {', '.join(buttons[:3])}")
+        if inputs:
+            observations.append(f"Form fields: {', '.join(inputs[:3])}")
+        if links:
+            observations.append(f"Links: {', '.join(links[:3])}")
+        
+        if not observations:
+            observations.append(f"Found {len(element_profiles)} interactive elements on page")
+        
+        return " | ".join(observations)
+    
+    def _get_action_text(self, decision: AgentDecision, result: Dict) -> str:
+        """
+        Generate human-readable description of what action was taken.
+        
+        Args:
+            decision: The AgentDecision from Claude
+            result: Result of executing the action
+            
+        Returns:
+            Human-readable action description
+        """
+        action = decision.action
+        
+        if action == "click":
+            return f"Clicked on element {decision.element_id}"
+        elif action == "type":
+            masked_value = decision.value if len(decision.value) < 20 else decision.value[:20] + "..."
+            return f"Typed '{masked_value}' in element {decision.element_id}"
+        elif action == "wait":
+            if decision.need_user_input:
+                return f"Requested user input for field {decision.element_id} ({decision.field_label})"
+            return "Waited for page to load"
+        elif action == "scroll":
+            return "Scrolled page"
+        elif action == "done":
+            return "Marked test as done"
+        else:
+            return f"Performed action: {action}"
+    
+    def _check_for_loop(self, decision: AgentDecision) -> tuple:
+        """
+        Check if the system is stuck in a loop (clicking same element repeatedly).
+        
+        Args:
+            decision: The AgentDecision just executed
+            
+        Returns:
+            Tuple of (loop_detected: bool, loop_count: int)
+        """
+        # Only track click actions on elements
+        if decision.action == "click" and decision.element_id:
+            action_key = (str(decision.element_id), "click")
+            
+            # Add to recent actions (keep last N)
+            self.recent_actions.append(action_key)
+            if len(self.recent_actions) > 10:
+                self.recent_actions.pop(0)
+            
+            # Count consecutive occurrences of this action
+            count = 0
+            for recent_action in reversed(self.recent_actions):
+                if recent_action == action_key:
+                    count += 1
+                else:
+                    break
+            
+            # If clicked same element 4+ times, loop detected
+            if count >= self.LOOP_THRESHOLD:
+                return (True, count)
+        
+        return (False, 0)
+    
+    def _ask_user_for_instruction(self) -> str:
+        """
+        Ask user to provide a more detailed instruction or goal clarification.
+        Called when system detects it's stuck in a loop.
+        
+        Returns:
+            New instruction from user, or empty string if cancelled
+        """
+        print("\n" + "="*70)
+        print("🆘 HELP NEEDED - SYSTEM STUCK IN LOOP")
+        print("="*70)
+        print("\nThe system appears to be clicking the same element repeatedly")
+        print("without making progress. This usually means:")
+        print("  - The goal is unclear or too vague")
+        print("  - A form field or input is required but not detected")
+        print("  - The system is on the wrong page\n")
+        
+        print("Options:")
+        print("  1. Provide a more specific instruction/goal")
+        print("  2. Describe what you see on screen and what you want to do next")
+        print("  3. Type 'cancel' to stop the test\n")
+        
+        instruction = input("📝 Enter new instruction or 'cancel': ").strip()
+        
+        if instruction.lower() == 'cancel':
+            return ""
+        
+        return instruction
     
     def _generate_report(self, success: bool, error: str = None) -> Dict:
         """
