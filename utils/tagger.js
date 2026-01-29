@@ -1,16 +1,19 @@
-// tagger.js - VERSION 3.0 - DATA-DRIVEN DETERMINISM
-// NEW IN V3.0:
-// - Extracts "Ground Truth" profiles for each element
-// - Returns: {selector, text, tag, attributes} instead of just selector
-// - Eliminates visual guessing by providing exact DOM data
-// PRESERVED FROM V2.0:
+// tagger.js - VERSION 4.0 - CONTEXT-AWARE SELECTORS (PRODUCTION)
+// 
+// KEY IMPROVEMENTS:
+// 1. Parent context: Uses parent text to disambiguate identical elements
+// 2. Position-based selectors: Uses nth-child relative to unique parents
+// 3. Enhanced ElementProfile: Captures parent/sibling context for repair selectors
+//
+// PRESERVED FROM V3.0:
 // - Shadow DOM Support
 // - DOM Stabilization
 // - Dropdown Option Support
+// - Ground Truth data extraction
 
 (function() {
     // ============================================
-    // PHASE 2: DOM STABILIZATION
+    // PHASE 1: DOM STABILIZATION
     // Wait for the page to stop changing before tagging
     // ============================================
     return new Promise((resolve) => {
@@ -19,7 +22,7 @@
         // Failsafe: If page never settles after 3 seconds, tag anyway
         const maxWaitTimer = setTimeout(() => {
             if (observer) observer.disconnect();
-            console.log('[Tagger v3.0] Failsafe triggered: Page still changing after 3s, tagging anyway');
+            console.log('[Tagger v4.0] Failsafe triggered: Page still changing after 3s, tagging anyway');
             resolve(performTagging());
         }, 3000);
 
@@ -32,7 +35,7 @@
                 // DOM has been stable for 300ms!
                 clearTimeout(maxWaitTimer); // Cancel failsafe
                 observer.disconnect();
-                console.log('[Tagger v3.0] DOM stable for 300ms, starting tagging');
+                console.log('[Tagger v4.0] DOM stable for 300ms, starting tagging');
                 resolve(performTagging());
             }, 300);
         });
@@ -48,7 +51,7 @@
         stabilityTimer = setTimeout(() => {
             clearTimeout(maxWaitTimer);
             observer.disconnect();
-            console.log('[Tagger v3.0] Page was already stable, starting tagging');
+            console.log('[Tagger v4.0] Page was already stable, starting tagging');
             resolve(performTagging());
         }, 300);
     });
@@ -62,7 +65,7 @@
         existingTags.forEach(tag => tag.remove());
 
         // ============================================
-        // PHASE 1: SHADOW DOM SUPPORT
+        // SHADOW DOM SUPPORT
         // Recursive function to find ALL elements, including inside shadow roots
         // ============================================
         function getAllElementsIncludingShadow(root) {
@@ -89,8 +92,7 @@
             const allNodes = root.querySelectorAll('*');
             allNodes.forEach(node => {
                 if (node.shadowRoot) {
-                    console.log('[Tagger v3.0] Found shadow root in:', node.tagName);
-                    // Recursively get elements from this shadow root
+                    console.log('[Tagger v4.0] Found shadow root in:', node.tagName);
                     const shadowElements = getAllElementsIncludingShadow(node.shadowRoot);
                     elements = elements.concat(shadowElements);
                 }
@@ -100,15 +102,320 @@
         }
 
         // ============================================
-        // NEW IN V3.0: EXTRACT ELEMENT PROFILE
-        // Returns complete "Ground Truth" data about an element
+        // HELPER FUNCTIONS
+        // ============================================
+        
+        // Get direct text content (excluding children)
+        function getDirectText(el) {
+            if (!el) return '';
+            
+            let text = '';
+            for (let node of el.childNodes) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    text += node.textContent.trim();
+                }
+            }
+            // Normalize whitespace
+            return text.trim().replace(/\s+/g, ' ');
+        }
+
+        // Check if selector is unique
+        function isUnique(selector) {
+            try {
+                const matches = document.querySelectorAll(selector);
+                return matches.length === 1;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // Check if Playwright-style selector is unique
+        function isPlaywrightSelectorUnique(selector) {
+            try {
+                // Simple heuristic: if it contains '>>' it's a chained selector
+                // We'll trust it's unique if it was constructed with parent context
+                if (selector.includes('>>')) {
+                    return true;
+                }
+                
+                // For text-based selectors, try to evaluate uniqueness
+                if (selector.includes(':has-text(')) {
+                    const matches = document.querySelectorAll(selector.split(':has-text(')[0]);
+                    return matches.length === 1;
+                }
+                
+                return isUnique(selector);
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // Get nth-child index
+        function getNthChildIndex(el) {
+            let index = 1;
+            let sibling = el.previousElementSibling;
+            while (sibling) {
+                index++;
+                sibling = sibling.previousElementSibling;
+            }
+            return index;
+        }
+
+        // ============================================
+        // NEW V4.0: EXTRACT CONTEXT (Parent/Sibling)
+        // ============================================
+        function extractContext(el) {
+            const context = {
+                parent_text: '',
+                parent_tag: '',
+                parent_classes: '',
+                sibling_text: '',
+                container_id: '',
+                aria_context: ''
+            };
+            
+            // 1. Find parent with meaningful text (search up to 5 levels)
+            let parent = el.parentElement;
+            let depth = 0;
+            
+            while (parent && depth < 5) {
+                const parentText = getDirectText(parent);
+                
+                // Found parent with text that's different from element's text
+                if (parentText && parentText.length > 0 && parentText !== getDirectText(el)) {
+                    context.parent_text = parentText;
+                    context.parent_tag = parent.tagName.toLowerCase();
+                    context.parent_classes = parent.className;
+                    
+                    // Check for ID on this parent
+                    if (parent.id) {
+                        context.container_id = parent.id;
+                    }
+                    
+                    break;
+                }
+                
+                // Even without text, capture ID if present
+                if (!context.container_id && parent.id) {
+                    context.container_id = parent.id;
+                }
+                
+                parent = parent.parentElement;
+                depth++;
+            }
+            
+            // 2. Find preceding sibling with text (like a label or heading)
+            let sibling = el.previousElementSibling;
+            let siblingDepth = 0;
+            
+            while (sibling && siblingDepth < 3) {
+                const siblingText = getDirectText(sibling);
+                if (siblingText && siblingText.length > 0) {
+                    context.sibling_text = siblingText;
+                    break;
+                }
+                sibling = sibling.previousElementSibling;
+                siblingDepth++;
+            }
+            
+            // 3. Check for ARIA context
+            const ariaLabel = el.getAttribute('aria-label');
+            const ariaLabelledby = el.getAttribute('aria-labelledby');
+            if (ariaLabel) {
+                context.aria_context = ariaLabel;
+            } else if (ariaLabelledby) {
+                const labelElement = document.getElementById(ariaLabelledby);
+                if (labelElement) {
+                    context.aria_context = getDirectText(labelElement);
+                }
+            }
+            
+            return context;
+        }
+
+        // ============================================
+        // NEW V4.0: BUILD CONTEXTUAL SELECTOR
+        // Uses parent text to create unique selector when element text alone isn't unique
+        // ============================================
+        function buildContextualSelector(el, elementText) {
+            const tagName = el.tagName.toLowerCase();
+            const escapedText = elementText.replace(/"/g, '\\"');
+            
+            // Strategy 1: Use parent text with Playwright chaining
+            let parent = el.parentElement;
+            let depth = 0;
+            
+            while (parent && depth < 5) {
+                const parentText = getDirectText(parent);
+                const parentTag = parent.tagName.toLowerCase();
+                
+                if (parentText && parentText !== elementText && parentText.length > 0) {
+                    const escapedParentText = parentText.replace(/"/g, '\\"');
+                    
+                    // Create chained Playwright selector
+                    // Format: parent:has-text("parent text") >> child:has-text("child text")
+                    const contextSelector = `${parentTag}:has-text("${escapedParentText}") >> ${tagName}:has-text("${escapedText}")`;
+                    
+                    console.log(`[Tagger v4.0] Testing contextual selector: ${contextSelector}`);
+                    
+                    // This is unique by construction (parent text + child text)
+                    return contextSelector;
+                }
+                
+                // Strategy 2: Use parent with ID
+                if (parent.id) {
+                    const contextSelector = `#${parent.id} >> ${tagName}:has-text("${escapedText}")`;
+                    console.log(`[Tagger v4.0] Using parent ID selector: ${contextSelector}`);
+                    return contextSelector;
+                }
+                
+                parent = parent.parentElement;
+                depth++;
+            }
+            
+            // Strategy 3: Position-based selector (relative to unique parent)
+            return buildPositionBasedSelector(el);
+        }
+
+        // ============================================
+        // NEW V4.0: BUILD POSITION-BASED SELECTOR
+        // Uses nth-child relative to a unique parent
+        // ============================================
+        function buildPositionBasedSelector(el) {
+            const path = [];
+            let current = el;
+            let depth = 0;
+            const maxDepth = 5;
+
+            while (current && current.nodeType === Node.ELEMENT_NODE && depth < maxDepth) {
+                let selector = current.tagName.toLowerCase();
+                
+                // Add ID if present (makes it unique immediately)
+                if (current.id && /^[a-zA-Z][\w-]*$/.test(current.id)) {
+                    selector = `#${current.id}`;
+                    path.unshift(selector);
+                    break; // Stop here, we have uniqueness
+                }
+                
+                // Add nth-child for specificity
+                const nthIndex = getNthChildIndex(current);
+                selector += `:nth-child(${nthIndex})`;
+                
+                path.unshift(selector);
+                
+                current = current.parentElement;
+                depth++;
+                
+                // Stop at body or if we have a unique selector
+                if (current === document.body || isUnique(path.join(' > '))) {
+                    break;
+                }
+            }
+            
+            const finalSelector = path.join(' > ');
+            console.log(`[Tagger v4.0] Position-based selector: ${finalSelector}`);
+            return finalSelector;
+        }
+
+        // ============================================
+        // ENHANCED V4.0: UNIVERSAL SELECTOR GENERATION
+        // Now checks uniqueness and adds context when needed
+        // ============================================
+        function getUniversalSelector(el) {
+            const tagName = el.tagName.toLowerCase();
+            
+            // STRATEGY 1: ID (most reliable)
+            if (el.id && /^[a-zA-Z][\w-]*$/.test(el.id)) {
+                const selector = `#${el.id}`;
+                if (isUnique(selector)) {
+                    console.log(`[Tagger v4.0] Using ID: ${selector}`);
+                    return selector;
+                }
+            }
+
+            // STRATEGY 2: Unique name attribute
+            if (el.name) {
+                const selector = `[name="${el.name}"]`;
+                if (isUnique(selector)) {
+                    console.log(`[Tagger v4.0] Using name: ${selector}`);
+                    return selector;
+                }
+            }
+
+            // STRATEGY 3: Unique data attribute
+            for (let attr of el.attributes) {
+                if (attr.name.startsWith('data-') && attr.value) {
+                    const selector = `[${attr.name}="${attr.value}"]`;
+                    if (isUnique(selector)) {
+                        console.log(`[Tagger v4.0] Using data attribute: ${selector}`);
+                        return selector;
+                    }
+                }
+            }
+
+            // STRATEGY 4: Text content (NOW WITH UNIQUENESS CHECK!)
+            const text = getDirectText(el);
+            if (text && text.length > 0 && text.length < 100) {
+                if (tagName === 'button' || tagName === 'a') {
+                    const escapedText = text.replace(/"/g, '\\"');
+                    const textSelector = `${tagName}:has-text("${escapedText}")`;
+                    
+                    // ✅ CHECK IF UNIQUE
+                    if (isUnique(textSelector)) {
+                        console.log(`[Tagger v4.0] Using unique text: ${textSelector}`);
+                        return textSelector;
+                    } else {
+                        // ✅ NOT UNIQUE: Build contextual selector
+                        console.log(`[Tagger v4.0] Text not unique, building contextual selector for: "${text}"`);
+                        return buildContextualSelector(el, text);
+                    }
+                }
+            }
+
+            // STRATEGY 5: Type attribute
+            if (el.type && tagName !== 'div') {
+                const selector = `${tagName}[type="${el.type}"]`;
+                if (isUnique(selector)) {
+                    console.log(`[Tagger v4.0] Using type: ${selector}`);
+                    return selector;
+                }
+            }
+
+            // STRATEGY 6: Unique ARIA attributes
+            const ariaLabel = el.getAttribute('aria-label');
+            if (ariaLabel) {
+                const selector = `${tagName}[aria-label="${ariaLabel}"]`;
+                if (isUnique(selector)) {
+                    console.log(`[Tagger v4.0] Using aria-label: ${selector}`);
+                    return selector;
+                }
+            }
+
+            const ariaLabelledby = el.getAttribute('aria-labelledby');
+            if (ariaLabelledby) {
+                const selector = `${tagName}[aria-labelledby="${ariaLabelledby}"]`;
+                if (isUnique(selector)) {
+                    console.log(`[Tagger v4.0] Using aria-labelledby: ${selector}`);
+                    return selector;
+                }
+            }
+
+            // STRATEGY 7: Position-based selector (UNIVERSAL FALLBACK)
+            console.log(`[Tagger v4.0] Falling back to position-based selector`);
+            return buildPositionBasedSelector(el);
+        }
+
+        // ============================================
+        // ENHANCED V4.0: EXTRACT ELEMENT PROFILE
+        // Now includes context data for repair selectors
         // ============================================
         function extractElementProfile(el) {
             const profile = {
                 selector: null,  // Will be filled by getUniversalSelector()
                 text: '',
                 tag: el.tagName.toLowerCase(),
-                attributes: {}
+                attributes: {},
+                context: null  // ✅ NEW: Context data
             };
             
             // Extract text content (normalize whitespace)
@@ -118,16 +425,10 @@
             if (el.tagName.toLowerCase() === 'input' || el.tagName.toLowerCase() === 'textarea') {
                 textContent = el.placeholder || el.value || '';
             } else {
-                // Get direct text content (not from children)
-                for (let node of el.childNodes) {
-                    if (node.nodeType === Node.TEXT_NODE) {
-                        textContent += node.textContent;
-                    }
-                }
+                textContent = getDirectText(el);
             }
             
-            // Normalize whitespace: trim and replace multiple spaces with single space
-            profile.text = textContent.trim().replace(/\s+/g, ' ');
+            profile.text = textContent;
             
             // Extract key attributes
             const keyAttributes = [
@@ -150,134 +451,18 @@
                 }
             });
             
+            // ✅ NEW V4.0: Extract context
+            profile.context = extractContext(el);
+            
             return profile;
         }
 
         // Get ALL interactive elements (including shadow DOM)
         const elements = getAllElementsIncludingShadow(document);
-        console.log(`[Tagger v3.0] Found ${elements.length} total interactive elements (including shadow DOM)`);
+        console.log(`[Tagger v4.0] Found ${elements.length} total interactive elements (including shadow DOM)`);
 
         const elementMap = {};
         let idCounter = 1;
-
-        // ============================================
-        // HELPER FUNCTIONS
-        // ============================================
-        
-        // Get text content (excluding children)
-        function getDirectText(el) {
-            let text = '';
-            for (let node of el.childNodes) {
-                if (node.nodeType === Node.TEXT_NODE) {
-                    text += node.textContent.trim();
-                }
-            }
-            return text;
-        }
-
-        // Check if selector is unique
-        function isUnique(selector) {
-            try {
-                return document.querySelectorAll(selector).length === 1;
-            } catch (e) {
-                return false;
-            }
-        }
-
-        // Get nth-child index
-        function getNthChildIndex(el) {
-            let index = 1;
-            let sibling = el.previousElementSibling;
-            while (sibling) {
-                index++;
-                sibling = sibling.previousElementSibling;
-            }
-            return index;
-        }
-
-        // Build a CSS path using nth-child
-        function buildCSSPath(el, maxDepth = 5) {
-            const path = [];
-            let current = el;
-            let depth = 0;
-
-            while (current && current.nodeType === Node.ELEMENT_NODE && depth < maxDepth) {
-                let selector = current.tagName.toLowerCase();
-                
-                // Add nth-child for specificity
-                const nthIndex = getNthChildIndex(current);
-                selector += `:nth-child(${nthIndex})`;
-                
-                path.unshift(selector);
-                
-                current = current.parentElement;
-                depth++;
-                
-                // Stop at body or if we have a unique selector
-                if (current === document.body || isUnique(path.join(' > '))) {
-                    break;
-                }
-            }
-            
-            return path.join(' > ');
-        }
-
-        // ============================================
-        // SELECTOR GENERATION (Universal Strategy)
-        // ============================================
-        function getUniversalSelector(el) {
-            // STRATEGY 1: ID (most reliable)
-            if (el.id && /^[a-zA-Z][\w-]*$/.test(el.id)) {
-                const selector = `#${el.id}`;
-                if (isUnique(selector)) return selector;
-            }
-
-            // STRATEGY 2: Unique name attribute
-            if (el.name) {
-                const selector = `[name="${el.name}"]`;
-                if (isUnique(selector)) return selector;
-            }
-
-            // STRATEGY 3: Unique data attribute
-            for (let attr of el.attributes) {
-                if (attr.name.startsWith('data-') && attr.value) {
-                    const selector = `[${attr.name}="${attr.value}"]`;
-                    if (isUnique(selector)) return selector;
-                }
-            }
-
-            // STRATEGY 4: Text content (for buttons/links)
-            const text = getDirectText(el);
-            if (text && text.length > 0 && text.length < 100) {
-                const tagName = el.tagName.toLowerCase();
-                if (tagName === 'button' || tagName === 'a') {
-                    // Use text-based selector (Playwright supports this)
-                    return `${tagName}:has-text("${text.replace(/"/g, '\\"')}")`;
-                }
-            }
-
-            // STRATEGY 5: Type attribute (unique)
-            if (el.type && el.tagName.toLowerCase() !== 'div') {
-                const selector = `${el.tagName.toLowerCase()}[type="${el.type}"]`;
-                if (isUnique(selector)) return selector;
-            }
-
-            // STRATEGY 6: Unique combination of tag + aria attributes
-            const ariaLabel = el.getAttribute('aria-label');
-            if (ariaLabel) {
-                const selector = `${el.tagName.toLowerCase()}[aria-label="${ariaLabel}"]`;
-                if (isUnique(selector)) return selector;
-            }
-
-            const ariaLabelledby = el.getAttribute('aria-labelledby');
-            if (ariaLabelledby) {
-                const selector = `${el.tagName.toLowerCase()}[aria-labelledby="${ariaLabelledby}"]`;
-                if (isUnique(selector)) return selector;
-            }
-
-            // STRATEGY 7: CSS path with nth-child (UNIVERSAL FALLBACK)
-            return buildCSSPath(el);
-        }
 
         // ============================================
         // STEP 1: Tag all regular interactive elements
@@ -297,15 +482,15 @@
 
             if (!isVisible) return;
 
-            // NEW V3.0: Extract complete profile
+            // Extract complete profile with context
             const profile = extractElementProfile(element);
             
-            // Generate selector
+            // Generate selector (now context-aware!)
             profile.selector = getUniversalSelector(element);
             
             const elementId = idCounter++;
 
-            // Store profile (not just selector!)
+            // Store profile
             elementMap[elementId] = profile;
 
             // Create visual tag
@@ -350,9 +535,7 @@
 
         // ============================================
         // STEP 2: Handle <select> dropdown options
-        // NEW V3.0: Extract option text AND value
         // ============================================
-        
         const selectElements = document.querySelectorAll('select');
         
         selectElements.forEach(selectElement => {
@@ -380,11 +563,11 @@
                 }
             }
 
-            if (!selectId) return; // Skip if select wasn't tagged
+            if (!selectId) return;
 
-            // Now tag each <option> inside this <select>
+            // Tag each <option> inside this <select>
             const options = selectElement.querySelectorAll('option');
-            let validOptionIndex = 0; // Counter for valid options only
+            let validOptionIndex = 0;
             
             options.forEach((option) => {
                 // Skip empty, disabled, or placeholder options
@@ -396,28 +579,33 @@
                     return;
                 }
                 
-                // Create a unique ID for this option (e.g., "10a", "10b", "10c")
-                const optionLetter = String.fromCharCode(97 + validOptionIndex); // 97 = 'a'
+                // Create unique ID for this option (e.g., "10a", "10b")
+                const optionLetter = String.fromCharCode(97 + validOptionIndex);
                 const optionId = `${selectId}${optionLetter}`;
                 
                 // Create selector for this specific option
                 const optionSelector = `${selectSelector} option[value="${option.value}"]`;
                 
-                // NEW V3.0: Extract option profile with text AND value
+                // Extract option profile with context
                 const optionProfile = {
                     selector: optionSelector,
-                    text: option.textContent.trim().replace(/\s+/g, ' '), // Normalized text
+                    text: option.textContent.trim().replace(/\s+/g, ' '),
                     tag: 'option',
                     attributes: {
                         value: option.value,
                         'parent-select': selectSelector
+                    },
+                    context: {
+                        parent_text: getDirectText(selectElement.parentElement),
+                        parent_tag: 'select',
+                        container_id: selectElement.id || ''
                     }
                 };
                 
-                // Store profile in element map
+                // Store in element map
                 elementMap[optionId] = optionProfile;
                 
-                // Create visual indicator (blue badge next to the select)
+                // Create visual indicator
                 const optionBadge = document.createElement('div');
                 optionBadge.className = 'robo-tester-tag';
                 optionBadge.style.cssText = `
@@ -434,15 +622,13 @@
                     white-space: nowrap;
                 `;
                 
-                // Position it next to the select element
+                // Position next to select element
                 const scrollX = window.scrollX || window.pageXOffset;
                 const scrollY = window.scrollY || window.pageYOffset;
                 
-                // Stack option badges vertically next to the select
                 optionBadge.style.left = (selectRect.right + scrollX + 5) + 'px';
                 optionBadge.style.top = (selectRect.top + scrollY + (validOptionIndex * 20)) + 'px';
                 
-                // Show option ID and text
                 const displayText = optionProfile.text.length > 20 ? 
                     optionProfile.text.substring(0, 20) + '...' : 
                     optionProfile.text;
@@ -454,9 +640,10 @@
             });
         });
 
-        console.log(`[Tagger v3.0] Tagged ${Object.keys(elementMap).length} total elements with Ground Truth profiles`);
+        console.log(`[Tagger v4.0] Tagged ${Object.keys(elementMap).length} total elements with context-aware selectors`);
+        console.log(`[Tagger v4.0] Element map:`, elementMap);
         
-        // Return the mapping as a JSON string
+        // Return the mapping as JSON string
         return JSON.stringify(elementMap);
     }
 })();
