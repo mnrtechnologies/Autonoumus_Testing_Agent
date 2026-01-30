@@ -100,7 +100,7 @@ class VisionEngine:
                 print(f"   📊 Sample {elem_id}: {profile}")
             
             # Step 2: Take the screenshot with tags visible
-            screenshot_bytes = page.screenshot(full_page=False)
+            screenshot_bytes = page.screenshot(timeout=5000,full_page=False)
             
             # Step 3: Remove the tags immediately
             page.evaluate("""

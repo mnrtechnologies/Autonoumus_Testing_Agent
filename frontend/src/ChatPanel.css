@@ -1,0 +1,32 @@
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  height: 100vh;
+  background: #0b0f14;
+  color: white;
+}
+
+.chat-panel {
+  border-left: 1px solid #222;
+  padding: 16px;
+}
+
+.chat-messages {
+  height: 80%;
+  overflow-y: auto;
+}
+
+.bot {
+  background: #1e293b;
+  padding: 8px;
+  margin: 6px 0;
+  border-radius: 6px;
+}
+
+.user {
+  background: #2563eb;
+  padding: 8px;
+  margin: 6px 0;
+  border-radius: 6px;
+  text-align: right;
+}

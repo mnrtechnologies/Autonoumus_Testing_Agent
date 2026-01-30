@@ -37,6 +37,10 @@ class Orchestrator:
         self.step_count = 0
         self.max_steps = 50  # Safety limit
         self.current_url = ""  # Track current URL for memory
+        self.latest_screenshot = None # For Realtime Streaming
+        self.waiting_for_input = False
+        self.waiting_input_payload = None
+
         
         # Diagnostic Loop constants
         self.FAILURE_THRESHOLD = 2  # Trigger diagnostic after 2 failures
@@ -46,7 +50,9 @@ class Orchestrator:
         self.login_page_url = None  # Track which URL we asked for credentials on
         self.collected_credentials = {}  # Store the credentials we collected
         self.login_goal_in_progress = False  # Are we executing a login goal?
-        
+        self.waiting_for_input = False
+        self.waiting_input_payload = None
+
         # Loop detection - prevent clicking same element repeatedly
         self.recent_actions: List[tuple] = []  # Track (element_id, action_type) tuples
         self.LOOP_THRESHOLD = 4  # If same element clicked 4+ times, ask user for help
@@ -102,6 +108,8 @@ class Orchestrator:
                 
                 try:
                     screenshot_path, element_profiles = self.vision.capture_state(page)
+                    self.latest_screenshot = screenshot_path
+
                 except Exception as capture_error:
                     print(f"❌ Error capturing state: {str(capture_error)}")
                     import traceback
@@ -144,30 +152,28 @@ class Orchestrator:
                 
                 # Check if Claude is asking for user input for a form field
                 if decision.need_user_input:
-                    # Validate that element_id is provided
-                    if decision.element_id is None:
-                        print(f"\n⚠️  Claude asked for user input but didn't specify element_id")
-                        print(f"   Field label: {decision.field_label}")
-                        print(f"   ⏭️  Skipping - Claude should navigate to the form first and identify the element ID\n")
-                        continue
+                    self.waiting_for_input = True
+
+                    self.waiting_input_payload = {
+                        "type": "form_input",
+                        "element_id": str(decision.element_id),
+                        "field_label": decision.field_label,
+                        "step": self.step_count
+                    }
+
+                    print("⏸️ Waiting for user input via API...")
+
+                    # BLOCK HERE (do NOT return)
+                    import time
+                    while self.waiting_for_input:
+                        time.sleep(0.2)
+
+                    # After input is received, tell Claude to type
+                    decision.action = "type"
+                    decision.value = self.collected_credentials.get(str(decision.element_id))
+
                     
-                    print(f"\n📝 Claude needs information to proceed")
-                    print(f"   Field [{decision.element_id}]: {decision.field_label}")
-                    
-                    field_value = input(f"   Enter value for [{decision.element_id}] {decision.field_label}: ").strip()
-                    
-                    if field_value:
-                        # Store this value in collected credentials for Claude to use later
-                        self.collected_credentials[str(decision.element_id)] = field_value
-                        print(f"   ✅ Value received. Claude will now fill this field.\n")
-                        
-                        # Tell Claude to type the value in the field
-                        decision.action = "type"
-                        decision.value = field_value
-                    else:
-                        print(f"   ⏭️  Skipping this field\n")
-                        continue
-                
+
                 # Check if done
                 if decision.action == "done" or decision.status == "done":
                     print(f"\n✅ Testing complete! Reason: {decision.thought}")
@@ -556,7 +562,6 @@ class Orchestrator:
         print("  2. Describe what you see on screen and what you want to do next")
         print("  3. Type 'cancel' to stop the test\n")
         
-        instruction = input("📝 Enter new instruction or 'cancel': ").strip()
         
         if instruction.lower() == 'cancel':
             return ""

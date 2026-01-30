@@ -1,0 +1,5 @@
+browser_session/
+venv/
+node_modules/
+screenshots/
+.env
