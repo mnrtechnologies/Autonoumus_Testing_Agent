@@ -44,6 +44,8 @@ class TestStatusResponse(BaseModel):
     current_step: int
     max_steps: int
     last_action: Optional[str]
+    assertions: List[str] = [] 
+    summary: Optional[str] = None
 
 class UserInputRequest(BaseModel):
     element_id: str
@@ -140,19 +142,24 @@ def start_test(payload: StartTestRequest):
 # Get Test Status (Live Progress)
 # =====================================================================
 
+# app.py
+
 @app.get("/tests/{test_id}/status", response_model=TestStatusResponse)
 def get_test_status(test_id: str):
     if test_id not in TESTS:
         raise HTTPException(status_code=404, detail="Test not found")
 
     orch: Orchestrator = TESTS[test_id]["orchestrator"]
+    status = TESTS[test_id]["status"]
 
     return TestStatusResponse(
         test_id=test_id,
-        status=TESTS[test_id]["status"],
+        status=status,
         current_step=orch.step_count,
         max_steps=orch.max_steps,
-        last_action=orch.action_history[-1] if orch.action_history else None
+        last_action=orch.action_history[-1] if orch.action_history else None,
+        assertions=orch.assertions,
+        summary=orch.summary if status == "completed" else None
     )
 
 # =====================================================================

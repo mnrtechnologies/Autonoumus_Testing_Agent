@@ -15,7 +15,7 @@ class ElementProfile:
     Data class representing the complete "Ground Truth" profile of an element.
     This eliminates visual guessing by providing exact DOM data.
     """
-    def __init__(self, profile_dict: dict):
+    def __init__(self,profile_dict: dict):
         self.selector = profile_dict.get('selector', '')
         self.text = profile_dict.get('text', '')
         self.tag = profile_dict.get('tag', '')
@@ -34,6 +34,14 @@ class ElementProfile:
         text_part = f' text="{self.text}"' if self.text else ''
         attr_part = f' [{attrs_str}]' if attrs_str else ''
         return f"<{self.tag}>{text_part}{attr_part}"
+    
+    def to_dict(self):
+        return {
+            "tag": self.tag,
+            "text": self.text,
+            "attributes": self.attributes,
+            "selector": self.get_selector()
+        }
 
 
 class VisionEngine:
@@ -147,3 +155,4 @@ class VisionEngine:
             """)
         except Exception as e:
             print(f"⚠️  Warning: Could not remove tags: {str(e)}")
+

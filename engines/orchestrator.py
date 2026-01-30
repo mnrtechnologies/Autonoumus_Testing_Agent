@@ -12,6 +12,8 @@ from typing import List, Dict
 import json
 from datetime import datetime
 from pathlib import Path
+from engines.assertion_engine import AssertionEngine
+import os
 
 
 class Orchestrator:
@@ -40,8 +42,15 @@ class Orchestrator:
         self.latest_screenshot = None # For Realtime Streaming
         self.waiting_for_input = False
         self.waiting_input_payload = None
+        self.assertions: List[str] = []
+        self.summary: str = ""
 
-        
+
+        self.assertion_engine = AssertionEngine(
+            api_key=os.getenv("OPENAI_API_KEY")
+        )
+        self.events: List[Dict] = []
+
         # Diagnostic Loop constants
         self.FAILURE_THRESHOLD = 2  # Trigger diagnostic after 2 failures
         
@@ -195,6 +204,25 @@ class Orchestrator:
                 action_description = self._format_action_description(decision, result)
                 self.action_history.append(action_description)
                 
+
+                self.events.append({
+                    "step": self.step_count,
+                    "action": decision.action,
+                    "element": (
+                        element_profiles.get(str(decision.element_id)).to_dict()
+                        if decision.element_id and str(decision.element_id) in element_profiles
+                        else None
+                    ),
+                    "page_url": page.url,
+                    "goal": goal,
+                    "thought": decision.thought,
+                    "success": result.get("success", False)
+                })
+
+                if self.step_count % 3 == 0:
+                    print(f"🔄 Updating live assertions for UI...")
+                    self.update_live_assertions()
+
                 # Check for loops (same element clicked multiple times)
                 loop_detected, loop_count = self._check_for_loop(decision)
                 if loop_detected:
@@ -256,6 +284,15 @@ class Orchestrator:
         finally:
             # Clean up
             print("Keep-alive: Browser remains open for the next task.")
+
+
+    def update_live_assertions(self):
+            if len(self.events) > 0:
+                try:
+                    # Get the latest human-readable version of events
+                    self.assertions = self.assertion_engine.generate_assertions(self.events)
+                except Exception as e:
+                    print(f"⚠️ Live assertion update failed: {e}")
     
     def _execute_with_diagnostic_loop(self, 
                                      decision: AgentDecision, 
@@ -562,52 +599,45 @@ class Orchestrator:
         print("  2. Describe what you see on screen and what you want to do next")
         print("  3. Type 'cancel' to stop the test\n")
         
-        
-        if instruction.lower() == 'cancel':
-            return ""
-        
-        return instruction
     
     def _generate_report(self, success: bool, error: str = None) -> Dict:
-        """
-        Generate a final test report.
-        
-        Args:
-            success: Whether the test succeeded
-            error: Error message if failed
+            # 1. Initialize with default values
+            assertions = []
+            summary = "No actions were recorded during the test."
             
-        Returns:
-            Report dictionary
-        """
-        report = {
-            "timestamp": datetime.now().isoformat(),
-            "success": success,
-            "total_steps": self.step_count,
-            "max_steps": self.max_steps,
-            "action_history": self.action_history,
-        }
-        
-        if error:
-            report["error"] = error
-        
-        # Add memory stats
-        stats = self.memory.get_stats()
-        report["memory_stats"] = stats
-        
-        # Save report to file
-        report_path = Path("test_report.json")
-        with open(report_path, "w") as f:
-            json.dump(report, f, indent=2)
-        
-        print(f"\n{'='*60}")
-        print("📊 TEST REPORT")
-        print('='*60)
-        print(f"Status: {'✅ SUCCESS' if success else '❌ FAILED'}")
-        print(f"Steps taken: {self.step_count}/{self.max_steps}")
-        print(f"Memory: {stats['total_selectors']} selectors across {stats['total_domains']} domains")
-        if error:
-            print(f"Error: {error}")
-        print(f"\n📄 Full report saved to: {report_path}")
-        print('='*60)
-        
-        return report
+            # 2. Generate actual data if events exist
+            if self.events:
+                try:
+                    # Use the correct method names from assertion_engine.py
+                    assertions = self.assertion_engine.generate_assertions(self.events)
+                    summary = self.assertion_engine.generate_summary(assertions)
+                except Exception as e:
+                    print(f"⚠️ Assertion Engine failed: {e}")
+                    summary = f"Test finished, but summary generation failed: {str(e)}"
+
+            # 3. Create the report dictionary AFTER data is ready
+            report = {
+                "timestamp": datetime.now().isoformat(),
+                "success": success,
+                "total_steps": self.step_count,
+                "max_steps": self.max_steps,
+                "assertions": assertions,
+                "summary": summary,
+                "memory_stats": self.memory.get_stats()
+            }
+
+            if error:
+                report["error"] = error
+
+            # 4. Save and Print
+            report_path = Path("test_report.json")
+            with open(report_path, "w") as f:
+                json.dump(report, f, indent=2)
+
+            print(f"\n{'='*60}")
+            print("📊 TEST REPORT")
+            print('='*60)
+            print(summary)
+            print('='*60)
+
+            return report
