@@ -1,0 +1,46 @@
+{
+  "session_id": "20260219_174146",
+  "generated_at": "2026-02-19T17:42:48.119207",
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0
+  },
+  "stories": [
+    {
+      "story_id": "STORY-174212-001",
+      "url": "https://staging.isalaam.me/sign-in",
+      "context_name": "User Sign In",
+      "user_persona": "A user trying to access their account in the Isalaam system.",
+      "description": "The user has navigated to the Isalaam sign-in page to log into their account. They need to enter their registered email to receive a verification code for access.",
+      "field_values": {
+        "Masukan Email yang terdaftar di Isalaam": "example.user@example.com"
+      },
+      "status": "passed",
+      "failure_reason": null,
+      "started_at": "2026-02-19T17:42:12.852716",
+      "finished_at": "2026-02-19T17:42:48.107387",
+      "steps": [
+        {
+          "step": 1,
+          "action": "fill",
+          "target": "Masukan Email yang terdaftar di Isalaam",
+          "value": "example.user@example.com",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-19T17:42:20.184641"
+        },
+        {
+          "step": 2,
+          "action": "click",
+          "target": "Kirim kode verifikasi ke Email",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-19T17:42:38.643043"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "session_summary": {
+    "total_actions_asserted": 0,
+    "total_assertions": 0,
+    "passed": 0,
+    "failed": 0,
+    "warnings": 0,
+    "pass_rate": "N/A"
+  },
+  "failed_actions": [],
+  "all_reports": []
+}

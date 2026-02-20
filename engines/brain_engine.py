@@ -4,7 +4,7 @@ NOW: Sends exact element text/attributes to Claude (no more guessing from pixels
 INCLUDES: Repair selector generation for failed actions
 UPGRADED v3.1: Login page detection and credential collection support
 """
-from anthropic import Anthropic
+from openai import OpenAI
 from pydantic import BaseModel, Field
 from typing import Optional, List, Dict, Union, Tuple
 import json
@@ -52,8 +52,8 @@ class BrainEngine:
         Args:
             api_key: Anthropic API key
         """
-        self.client = Anthropic(api_key=api_key)
-        self.model = "claude-sonnet-4-20250514"
+        self.client = OpenAI(api_key=api_key)
+        self.model = "gpt-5.2-2025-12-11"
         self.login_detected = False
         self.credentials_needed = {}
     
@@ -95,18 +95,19 @@ class BrainEngine:
             print(f"🧠 Asking Claude to decide next action (using Ground Truth data)...")
             
             # Call Claude API
-            response = self.client.messages.create(
+            response = self.client.chat.completions.create(
                 model=self.model,
-                max_tokens=2000,
-                system=system_prompt,
                 messages=[
+                    {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_message}
-                ]
+                ],
+                response_format={"type": "json_object"}, # Ensure structured output
+                max_completion_tokens=2000,
+                temperature=0
             )
             
-            # Extract the text response
-            response_text = response.content[0].text
-            print(f"   Claude's response: {response_text[:200]}...")
+            response_text = response.choices[0].message.content
+            print(f"   Open AI's response: {response_text[:200]}...")
             
             # Parse JSON response
             decision_data = json.loads(response_text)
@@ -347,39 +348,23 @@ Remember: Your ENTIRE response must be valid JSON and nothing else."""
         # Format history
         history_text = format_action_history(action_history) if action_history else "No previous actions"
         
-        # Build the message
-        content = [
+        # OpenAI Vision Format: A list of content blocks
+        return [
             {
-                "type": "image",
-                "source": {
-                    "type": "base64",
-                    "media_type": "image/png",
-                    "data": image_base64
+                "type": "text", 
+                "text": f"AVAILABLE ELEMENTS (Ground Truth Data):\n{elements_text}\n\nPREVIOUS ACTIONS:\n{history_text}"
+            },
+            {
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/png;base64,{image_base64}"
                 }
             },
             {
-                "type": "text",
-                "text": f"""Here is the current state of the webpage.
-
-AVAILABLE ELEMENTS (Ground Truth Data):
-The screenshot shows red numbered boxes. Here is the EXACT data for each element:
-
-{elements_text}
-
-IMPORTANT: 
-- Use the EXACT text shown above, not what you see in the screenshot!
-For example, if ID 14 shows 'text="Class 10"', the actual text is "Class 10" (with space).
-- If you see multiple elements with the same text in the list above, do not use a generic selector. 
-Pick the specific element_id that corresponds to the correct item (e.g., if you want the first experiment, pick the ID of its specific button).
-
-PREVIOUS ACTIONS:
-{history_text}
-
-What should I do next to achieve the goal? Respond with JSON only."""
+                "type": "text", 
+                "text": "What should I do next to achieve the goal? Respond with JSON only."
             }
-        ]
-        
-        return content
+        ]    
     
     def detect_input_form(self, 
                          element_profiles: Dict[str, ElementProfile],

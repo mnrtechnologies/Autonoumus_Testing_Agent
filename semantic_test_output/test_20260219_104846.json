@@ -1,0 +1,500 @@
+{
+  "session_id": "20260219_104846",
+  "timestamp": "2026-02-19T11:00:19.132855",
+  "total_steps": 39,
+  "history": [
+    {
+      "step": 2,
+      "decision": {
+        "action": "select",
+        "target_name": "Tujuan Sedekah",
+        "element_type": "custom-select",
+        "test_value": "Default",
+        "reasoning": "The test story specifies filling the 'Tujuan Sedekah' field with 'Default' before any button actions."
+      },
+      "result": {
+        "success": true,
+        "action": "select",
+        "error": null,
+        "selected_value": "Fakir Miskin",
+        "all_options": [
+          "Fakir Miskin",
+          "Yatim Piatu",
+          "Panti Lansia",
+          "Kesejahteraan Takmir Masjid",
+          "Renovasi Masjid",
+          "Beasiswa Pendidikan",
+          "Bantuan Kaum Dhuafa",
+          "Layanan Kesehatan",
+          "Layanan Jenazah",
+          "Bantuan Bencana Alam",
+          "Bantuan Sosial Kemanusiaan",
+          "Jumat Berkah",
+          "Wakaf Produktif",
+          "Mualaf",
+          "Program Produktif"
+        ],
+        "formcontrolname": ""
+      },
+      "all_options": [
+        "Fakir Miskin",
+        "Yatim Piatu",
+        "Panti Lansia",
+        "Kesejahteraan Takmir Masjid",
+        "Renovasi Masjid",
+        "Beasiswa Pendidikan",
+        "Bantuan Kaum Dhuafa",
+        "Layanan Kesehatan",
+        "Layanan Jenazah",
+        "Bantuan Bencana Alam",
+        "Bantuan Sosial Kemanusiaan",
+        "Jumat Berkah",
+        "Wakaf Produktif",
+        "Mualaf",
+        "Program Produktif"
+      ],
+      "timestamp": "2026-02-19T10:50:12.306332"
+    },
+    {
+      "step": 8,
+      "decision": {
+        "action": "click",
+        "target_name": "Kalkulator Zakat",
+        "element_type": "button",
+        "reasoning": "Fallback"
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:51:56.061153"
+    },
+    {
+      "step": 9,
+      "decision": {
+        "action": "click",
+        "target_name": "Perhitungan Baru",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The mandatory rule requires interacting with newly appeared elements first, and 'Perhitungan Baru' is one of them."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:52:09.430193"
+    },
+    {
+      "step": 10,
+      "decision": {
+        "action": "fill",
+        "target_name": "Uang Tunai",
+        "element_type": "input",
+        "test_value": "150000",
+        "reasoning": "Start by filling the 'Uang Tunai' field as it is the first mandatory field according to the rules."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:52:37.580823"
+    },
+    {
+      "step": 11,
+      "decision": {
+        "action": "fill",
+        "target_name": "Uang di Rekening Bank",
+        "element_type": "input",
+        "test_value": "100000",
+        "reasoning": "Start by filling the first required field to proceed with the form completion."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:52:52.612726"
+    },
+    {
+      "step": 12,
+      "decision": {
+        "action": "fill",
+        "target_name": "Pensiun",
+        "element_type": "input",
+        "test_value": "100000",
+        "reasoning": "Start with filling the 'Pensiun' field as it is the first in the list of mandatory fields."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:53:07.443734"
+    },
+    {
+      "step": 13,
+      "decision": {
+        "action": "fill",
+        "target_name": "Aset Lainnya",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Following the order, 'Aset Lainnya' is the first untested field that needs to be filled."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:53:24.058168"
+    },
+    {
+      "step": 14,
+      "decision": {
+        "action": "fill",
+        "target_name": "24 Karat",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Start by filling the '24 Karat' field as it is the first in the list of mandatory fields."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:53:41.497880"
+    },
+    {
+      "step": 15,
+      "decision": {
+        "action": "fill",
+        "target_name": "22 Karat",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Following the order of fields to be filled, starting with '22 Karat' as specified."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:53:54.727818"
+    },
+    {
+      "step": 16,
+      "decision": {
+        "action": "fill",
+        "target_name": "18 Karat",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Following the order of fields to be filled as per the instructions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:54:10.601173"
+    },
+    {
+      "step": 17,
+      "decision": {
+        "action": "fill",
+        "target_name": "Perak",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Start by filling the 'Perak' field as it is the first mandatory field in the list."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:54:25.089204"
+    },
+    {
+      "step": 18,
+      "decision": {
+        "action": "fill",
+        "target_name": "Saham",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "The first untested mandatory field is 'Saham', so I will fill it with a realistic value."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:54:39.255666"
+    },
+    {
+      "step": 19,
+      "decision": {
+        "action": "fill",
+        "target_name": "Investasi Lainnya",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Start by filling the first untested mandatory field to proceed with the form completion."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:54:53.505902"
+    },
+    {
+      "step": 20,
+      "decision": {
+        "action": "fill",
+        "target_name": "Pendapatan Sewa",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Pendapatan Sewa is the first mandatory field to fill before any button actions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:55:07.539841"
+    },
+    {
+      "step": 21,
+      "decision": {
+        "action": "fill",
+        "target_name": "Nilai Properti",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Start by filling the 'Nilai Properti' field as it's the first mandatory field in the list."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:55:22.351744"
+    },
+    {
+      "step": 22,
+      "decision": {
+        "action": "fill",
+        "target_name": "Uang Tunai Bisnis",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Start by filling the first mandatory field as per the instructions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:55:37.296083"
+    },
+    {
+      "step": 23,
+      "decision": {
+        "action": "fill",
+        "target_name": "Stok Barang",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Following the order, 'Stok Barang' is the first untested input field that must be filled."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:55:53.428082"
+    },
+    {
+      "step": 24,
+      "decision": {
+        "action": "fill",
+        "target_name": "Batu Mulia",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "The test story requires filling all fields before any button click, starting with 'Batu Mulia'."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:56:08.749953"
+    },
+    {
+      "step": 25,
+      "decision": {
+        "action": "fill",
+        "target_name": "Pembayaran Bisnis",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Start by filling the first mandatory field as per the instructions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:56:23.659255"
+    },
+    {
+      "step": 26,
+      "decision": {
+        "action": "fill",
+        "target_name": "Pembayaran Rumah",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Start with the first mandatory field 'Pembayaran Rumah' as per the instructions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:56:39.405872"
+    },
+    {
+      "step": 27,
+      "decision": {
+        "action": "fill",
+        "target_name": "Pembayaran Mobil",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Following the order of mandatory fields, start by filling 'Pembayaran Mobil'."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:56:55.164132"
+    },
+    {
+      "step": 28,
+      "decision": {
+        "action": "fill",
+        "target_name": "Pinjaman Pribadi",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Start by filling the 'Pinjaman Pribadi' field as it is the first mandatory input."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:57:13.670263"
+    },
+    {
+      "step": 29,
+      "decision": {
+        "action": "fill",
+        "target_name": "Pembayaran Kartu Kredit",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "The test story requires filling 'Pembayaran Kartu Kredit' before any button actions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:57:27.926970"
+    },
+    {
+      "step": 30,
+      "decision": {
+        "action": "fill",
+        "target_name": "Utang Pribadi",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "The 'Utang Pribadi' field is untested and must be filled before any button is clicked."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:57:42.010114"
+    },
+    {
+      "step": 31,
+      "decision": {
+        "action": "click",
+        "target_name": "Sedekah Sekarang",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Sedekah Sekarang' button is an untested submit button, and submit actions should be tested before cancel actions."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:57:56.134631"
+    },
+    {
+      "step": 32,
+      "decision": {
+        "action": "click",
+        "target_name": "Riwayat Transaksi",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Riwayat Transaksi' button is one of the newly appeared elements and must be interacted with first according to the mandatory rule."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:58:20.461571"
+    },
+    {
+      "step": 33,
+      "decision": {
+        "action": "click",
+        "target_name": "Sedekah Sekarang",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The mandatory rule requires interacting with the newly appeared element 'Sedekah Sekarang' first."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-19T10:58:35.787500"
+    }
+  ]
+}

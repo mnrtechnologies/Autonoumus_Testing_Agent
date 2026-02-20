@@ -3,3 +3,10 @@ venv/
 node_modules/
 screenshots/
 .env
+exploration_output/
+output/
+logs/
+screenshots/
+llm_test_output/
+jit_test_output/
+*/__pycache__/*

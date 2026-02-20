@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Story Report — 20260219_173521</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f172a; color: #e2e8f0; padding: 24px;
+    }
+    h1 { font-size: 1.8rem; color: #38bdf8; margin-bottom: 4px; }
+    .subtitle { color: #94a3b8; font-size: 0.9rem; margin-bottom: 24px; }
+
+    .summary-bar {
+      display: flex; gap: 16px; margin-bottom: 28px; flex-wrap: wrap;
+    }
+    .stat {
+      background: #1e293b; border-radius: 10px; padding: 16px 24px;
+      border: 1px solid #334155; min-width: 120px; text-align: center;
+    }
+    .stat .num { font-size: 2rem; font-weight: 700; }
+    .stat .lbl { font-size: 0.8rem; color: #94a3b8; margin-top: 4px; }
+    .stat.pass { border-color: #22c55e; }
+    .stat.pass .num { color: #22c55e; }
+    .stat.fail { border-color: #ef4444; }
+    .stat.fail .num { color: #ef4444; }
+    .stat.total { border-color: #38bdf8; }
+    .stat.total .num { color: #38bdf8; }
+
+    .progress-bar {
+      background: #1e293b; border-radius: 999px; height: 10px;
+      margin-bottom: 28px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: linear-gradient(90deg, #22c55e, #16a34a);
+      border-radius: 999px; transition: width 0.5s;
+      width: 100%;
+    }
+
+    table {
+      width: 100%; border-collapse: collapse; background: #1e293b;
+      border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    th {
+      background: #0f172a; color: #94a3b8; font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 12px 16px; text-align: left; border-bottom: 1px solid #334155;
+    }
+    td { padding: 14px 16px; border-bottom: 1px solid #1e293b; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    .row-pass { border-left: 3px solid #22c55e; }
+    .row-fail { border-left: 3px solid #ef4444; }
+    .row-skip { border-left: 3px solid #f59e0b; }
+    tr:hover td { background: #172033; }
+
+    .badge {
+      display: inline-block; padding: 4px 10px; border-radius: 999px;
+      font-size: 0.75rem; font-weight: 700;
+    }
+    .badge.pass { background: #166534; color: #4ade80; }
+    .badge.fail { background: #7f1d1d; color: #f87171; }
+    .badge.skip { background: #78350f; color: #fcd34d; }
+
+    code { background: #0f172a; padding: 2px 6px; border-radius: 4px;
+             font-size: 0.8rem; color: #7dd3fc; }
+
+    .scenario { font-size: 0.85rem; color: #94a3b8; margin-bottom: 8px; }
+    .fail-reason {
+      background: #3b1212; border: 1px solid #ef4444; border-radius: 6px;
+      padding: 6px 10px; font-size: 0.8rem; color: #f87171;
+      margin-bottom: 8px;
+    }
+
+    details { margin-top: 6px; }
+    summary {
+      cursor: pointer; font-size: 0.8rem; color: #7dd3fc;
+      padding: 4px 0; user-select: none;
+    }
+    summary:hover { color: #38bdf8; }
+
+    .steps-detail, .fv-detail {
+      background: #0f172a; border-radius: 6px; padding: 10px;
+      margin-top: 6px; font-size: 0.8rem;
+    }
+    .step { padding: 3px 0; border-bottom: 1px solid #1e293b; }
+    .step:last-child { border-bottom: none; }
+    .err { color: #f87171; }
+
+    .fv { padding: 2px 0; }
+    .fk { color: #94a3b8; }
+    .fv-val { color: #4ade80; }
+
+    .footer {
+      margin-top: 24px; text-align: center;
+      font-size: 0.75rem; color: #475569;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 Test Story Report</h1>
+  <div class="subtitle">Session: 20260219_173521 &nbsp;·&nbsp;
+    Generated: 2026-02-19 17:37:50</div>
+
+  <div class="summary-bar">
+    <div class="stat total"><div class="num">1</div><div class="lbl">Total</div></div>
+    <div class="stat pass"><div class="num">1</div><div class="lbl">Passed</div></div>
+    <div class="stat fail"><div class="num">0</div><div class="lbl">Failed</div></div>
+    <div class="stat total"><div class="num">100%</div><div class="lbl">Pass Rate</div></div>
+  </div>
+
+  <div class="progress-bar"><div class="progress-fill"></div></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>Story ID</th>
+        <th>Context</th>
+        <th>Persona</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+            <tr class="row-pass">
+              <td><span class="badge pass">✅ PASSED</span></td>
+              <td><code>STORY-173717-001</code></td>
+              <td><b>User Sign-In</b></td>
+              <td>A user attempting to access their Isalaam account.</td>
+              <td>
+                <div class="scenario">The user is on the sign-in page of the Isalaam application, trying to log in with their registered email. They need to enter their email address to receive a verification code.</div>
+                
+                <details>
+                  <summary>2/2 steps</summary>
+                  <div class="steps-detail"><div class="step">✅ <b>fill</b> → Masukan Email yang terdaftar di Isalaam = <code>user@example.com</code></div><div class="step">✅ <b>click</b> → Kirim kode verifikasi ke Email</div></div>
+                </details>
+                <details>
+                  <summary>Field values (1)</summary>
+                  <div class="fv-detail"><div class="fv"><span class="fk">Masukan Email yang terdaftar di Isalaam</span>: <span class="fv-val">user@example.com</span></div></div>
+                </details>
+              </td>
+            </tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    Generated by Semantic Test Engine &nbsp;·&nbsp; 2026
+  </div>
+</body>
+</html>
