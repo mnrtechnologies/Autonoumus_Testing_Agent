@@ -1,0 +1,678 @@
+{
+  "session_id": "20260220_214109",
+  "page_url": "https://staging.isalaam.me/gallery",
+  "generated_at": "2026-02-20T21:52:07.549630",
+  "execution_history": [
+    {
+      "step": 1,
+      "action": "click",
+      "target": "Unggah Beberapa Halaman Sampul",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 2,
+      "action": "upload",
+      "target": "Browse",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 3,
+      "action": "click",
+      "target": "Simpan & Tutup",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 4,
+      "action": "click",
+      "target": "delete",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 5,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 6,
+      "action": "click",
+      "target": "Unggah Profil",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 7,
+      "action": "click",
+      "target": "Simpan & Tutup",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 8,
+      "action": "click",
+      "target": "Batal",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 9,
+      "action": "click",
+      "target": "Lihat Semua Galeri",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 10,
+      "action": "click",
+      "target": "Tambahkan Gambar",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 11,
+      "action": "upload",
+      "target": "Browse",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 12,
+      "action": "click",
+      "target": "Simpan & Tutup",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 13,
+      "action": "click",
+      "target": "Gambar",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 14,
+      "action": "click",
+      "target": "Video",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 15,
+      "action": "click",
+      "target": "Tambahkan Video",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 16,
+      "action": "fill",
+      "target": "videoUri",
+      "value": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 17,
+      "action": "click",
+      "target": "Tambahkan",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 18,
+      "action": "click",
+      "target": "Saluran",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 19,
+      "action": "click",
+      "target": "Tambahkan Saluran",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 20,
+      "action": "fill",
+      "target": "channelId",
+      "value": "UC1234567890",
+      "success": true,
+      "error": null,
+      "options": null
+    }
+  ],
+  "dropdown_options": {},
+  "forms_discovered": {
+    "form_1": [
+      {
+        "name": "Unggah Beberapa Halaman Sampul",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Unggah Profil",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      }
+    ],
+    "confirmation_2": [
+      {
+        "name": "delete",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Sedekah Sekarang",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Unggah Beberapa Halaman Sampul delete",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Unggah Profil",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Lihat Semua Galeri",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      }
+    ],
+    "form_3": [
+      {
+        "name": "Unggah Beberapa Halaman Sampul",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Unggah Profil",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Lihat Semua Galeri",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      }
+    ],
+    "form_4": [
+      {
+        "name": "Tambahkan Gambar",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Gambar",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      },
+      {
+        "name": "Video",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      },
+      {
+        "name": "Saluran",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      },
+      {
+        "name": "Kutipan",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      },
+      {
+        "name": "Kartu Ucapan",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      }
+    ],
+    "form_5": [
+      {
+        "name": "Tambahkan Video",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Gambar",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      },
+      {
+        "name": "Video",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      },
+      {
+        "name": "Saluran",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      },
+      {
+        "name": "Kutipan",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      },
+      {
+        "name": "Kartu Ucapan",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      }
+    ],
+    "form_6": [
+      {
+        "name": "Tambahkan Saluran",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Menghapus",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Batalkan",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Gambar",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      },
+      {
+        "name": "Video",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      },
+      {
+        "name": "Saluran",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      },
+      {
+        "name": "Kutipan",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      },
+      {
+        "name": "Kartu Ucapan",
+        "type": "tab",
+        "input_type": "tab",
+        "required": false
+      }
+    ]
+  },
+  "stories_generated": 5,
+  "stories": [
+    {
+      "story_id": "STORY-001",
+      "context_name": "Upload and Delete Cover Pages",
+      "user_persona": "Super Admin managing gallery",
+      "description": "The Super Admin uploads multiple cover pages to the gallery and then deletes them to ensure the upload and delete functionalities work correctly.",
+      "field_values": {},
+      "expected_outcome": "Cover pages are uploaded and then successfully deleted from the gallery.\n\nVALIDATION: Assert: cover pages appear in gallery after upload. Assert: cover pages are removed from gallery after deletion.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Unggah Beberapa Halaman Sampul'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Upload files using 'Browse'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'Simpan & Tutup'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify cover pages appear in gallery",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Click 'delete'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 6,
+          "action": "explore",
+          "target": "Step 6: Confirm deletion by clicking 'Ok'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 7,
+          "action": "explore",
+          "target": "Step 7: Verify cover pages are removed from gallery",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-002",
+      "context_name": "Upload Profile Picture",
+      "user_persona": "Super Admin updating profile",
+      "description": "The Super Admin uploads a profile picture to ensure the profile update functionality works correctly.",
+      "field_values": {},
+      "expected_outcome": "Profile picture is uploaded and displayed correctly.\n\nVALIDATION: Assert: profile picture appears in profile section after upload.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Unggah Profil'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Upload file using 'Browse'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'Simpan & Tutup'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify profile picture appears in profile section",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-003",
+      "context_name": "Add and View Image in Gallery",
+      "user_persona": "Super Admin managing gallery",
+      "description": "The Super Admin adds an image to the gallery and verifies it is displayed correctly.",
+      "field_values": {},
+      "expected_outcome": "Image is added to the gallery and displayed correctly.\n\nVALIDATION: Assert: image appears in gallery after addition.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Lihat Semua Galeri'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'Tambahkan Gambar'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Upload image using 'Browse'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Click 'Simpan & Tutup'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Verify image appears in gallery",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-004",
+      "context_name": "Add Video to Gallery",
+      "user_persona": "Super Admin managing gallery",
+      "description": "The Super Admin adds a video to the gallery using a YouTube link to ensure video addition functionality works correctly.",
+      "field_values": {
+        "videoUri": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      },
+      "expected_outcome": "Video is added to the gallery and displayed correctly.\n\nVALIDATION: Assert: video appears in gallery after addition.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Video' tab",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'Tambahkan Video'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Fill 'videoUri' with 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Click 'Tambahkan'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Verify video appears in gallery",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-005",
+      "context_name": "Add Channel to Gallery",
+      "user_persona": "Super Admin managing gallery",
+      "description": "The Super Admin adds a channel to the gallery using a channel ID to ensure channel addition functionality works correctly.",
+      "field_values": {
+        "channelId": "UC1234567890"
+      },
+      "expected_outcome": "Channel is added to the gallery and displayed correctly.\n\nVALIDATION: Assert: channel appears in gallery after addition.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Saluran' tab",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'Tambahkan Saluran'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Fill 'channelId' with 'UC1234567890'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Click 'Tambahkan'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Verify channel appears in gallery",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:52:07.549630"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1485 @@
+{
+  "session_id": "20260220_214109",
+  "timestamp": "2026-02-20T21:51:39.762841",
+  "total_steps": 21,
+  "history": [
+    {
+      "step": 1,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Unggah Beberapa Halaman Sampul",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The first step of exploration requires testing untested elements, and this button is enabled and untested."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:42:07.935854",
+      "state_before": {
+        "page_title": "Lembaga Profil",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Unggah Cover Gambar",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 2,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "upload",
+        "target_name": "Browse",
+        "element_type": "file",
+        "test_value": "",
+        "reasoning": "According to the mandatory rule, I must interact with the newly appeared elements first, and 'Browse' is one of them."
+      },
+      "result": {
+        "success": true,
+        "action": "upload",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:42:31.539377",
+      "state_before": {
+        "page_title": "Lembaga Profil Masjid Assalaam",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unggah Cover Gambar",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Lembaga Profil Masjid Assalaam",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 3,
+        "visible_rows": [
+          "Anggota Utama",
+          "Anggota Utama",
+          "Anggota Utama"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "UNGGAH COVER GAMBAR",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [],
+          "after": [
+            "Anggota Utama"
+          ],
+          "added": [
+            "Anggota Utama"
+          ],
+          "removed": []
+        },
+        "row_count_changed": {
+          "from": 0,
+          "to": 3
+        },
+        "modal_changed": {
+          "from": "Unggah Cover Gambar",
+          "to": "UNGGAH COVER GAMBAR"
+        }
+      }
+    },
+    {
+      "step": 3,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Simpan & Tutup",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Submit actions should be tested before cancel actions in forms."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:42:54.885150",
+      "state_before": {
+        "page_title": "Lembaga Profil",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 3,
+        "visible_rows": [
+          "Anggota Utama",
+          "Anggota Utama",
+          "Anggota Utama"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "UNGGAH COVER GAMBAR",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Lembaga Profil",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 4,
+        "visible_rows": [
+          "Muhammad Rizky ...",
+          "Muhammad Dhana ...",
+          "Raden Arsy\u0430 Milen...",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Success\nMosque cover photos uploaded.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "Anggota Utama"
+          ],
+          "after": [
+            "Raden Arsy\u0430 Milen...",
+            "Muhammad Dhana ...",
+            "Muhammad Rizky ...",
+            "Test Name"
+          ],
+          "added": [
+            "Test Name",
+            "Muhammad Dhana ...",
+            "Muhammad Rizky ...",
+            "Raden Arsy\u0430 Milen..."
+          ],
+          "removed": [
+            "Anggota Utama"
+          ]
+        },
+        "row_count_changed": {
+          "from": 3,
+          "to": 4
+        },
+        "toast_appeared": "Success\nMosque cover photos uploaded.",
+        "modal_changed": {
+          "from": "UNGGAH COVER GAMBAR",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 4,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "delete",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the mandatory rule to interact with newly appeared elements first."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:43:28.818554",
+      "state_before": {
+        "page_title": "Lembaga Profil",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 4,
+        "visible_rows": [
+          "Muhammad Rizky ...",
+          "Muhammad Dhana ...",
+          "Raden Arsyan Milen...",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": null,
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 3,
+        "visible_rows": [
+          "Muhammad Rizky ...",
+          "Muhammad Dhana ...",
+          "Raden ArsyA Milen..."
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Delete",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "Test Name",
+            "Muhammad Dhana ...",
+            "Raden Arsyan Milen...",
+            "Muhammad Rizky ..."
+          ],
+          "after": [
+            "Muhammad Dhana ...",
+            "Raden ArsyA Milen...",
+            "Muhammad Rizky ..."
+          ],
+          "added": [
+            "Raden ArsyA Milen..."
+          ],
+          "removed": [
+            "Raden Arsyan Milen...",
+            "Test Name"
+          ]
+        },
+        "row_count_changed": {
+          "from": 4,
+          "to": 3
+        },
+        "modal_changed": {
+          "from": null,
+          "to": "Delete"
+        }
+      }
+    },
+    {
+      "step": 5,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button should be clicked to confirm the delete action as per the confirmation dialog context."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:43:50.315321",
+      "state_before": {
+        "page_title": "Profil Organisasi",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 3,
+        "visible_rows": [
+          "Muhammad Rizky ...",
+          "Muhammad Dhana ...",
+          "Raden ArsyA Milen..."
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Delete",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Masjid Assalaam",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 3,
+        "visible_rows": [
+          "Anggota Utama",
+          "Anggota Utama",
+          "Anggota Utama"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Success\nMosque cover photo deleted.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "Muhammad Dhana ...",
+            "Raden ArsyA Milen...",
+            "Muhammad Rizky ..."
+          ],
+          "after": [
+            "Anggota Utama"
+          ],
+          "added": [
+            "Anggota Utama"
+          ],
+          "removed": [
+            "Muhammad Dhana ...",
+            "Raden ArsyA Milen...",
+            "Muhammad Rizky ..."
+          ]
+        },
+        "toast_appeared": "Success\nMosque cover photo deleted.",
+        "modal_changed": {
+          "from": "Delete",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 6,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Unggah Profil",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the mandatory rule to interact with newly appeared elements first."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:44:30.074170",
+      "state_before": {
+        "page_title": "Lembaga Profil",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Lembaga Profil",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unggah Profil Gambar",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "modal_changed": {
+          "from": null,
+          "to": "Unggah Profil Gambar"
+        }
+      }
+    },
+    {
+      "step": 7,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Simpan & Tutup",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the rule to interact with newly appeared elements first, and 'Simpan & Tutup' is a submit action which should be tested before cancel actions."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:44:53.497770",
+      "state_before": {
+        "page_title": "Lembaga Profil",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unggah Profile Gambar",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Lembaga Profil Masjid Assalaam",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Validation error",
+        "modal_open": "Unggah Profile Gambar",
+        "error_message": "Please upload an Image to save",
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Validation error",
+        "error_appeared": "Please upload an Image to save"
+      }
+    },
+    {
+      "step": 8,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Batal",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Batal' button is an untested element and should be tested to ensure it cancels the action as expected."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:45:17.871884",
+      "state_before": {
+        "page_title": "Lembaga Profil Masjid Assalaam",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unggah Profile Gambar",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Lembaga Profil",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "modal_changed": {
+          "from": "Unggah Profile Gambar",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 9,
+      "url": "https://staging.isalaam.me/gallery",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Lihat Semua Galeri",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "This is the only untested element from the newly appeared elements list, and it must be interacted with first according to the mandatory rule."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:45:52.112626",
+      "state_before": {
+        "page_title": "Lembaga Profil",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": 1,
+        "total_pages": 3,
+        "pagination_text": "1",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "Tambahkan Gambar",
+          "Image 1",
+          "Image 2",
+          "Image 3",
+          "Image 4"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": null,
+          "to": 1
+        },
+        "rows_changed": {
+          "before": [],
+          "after": [
+            "Image 4",
+            "Image 2",
+            "Image 1",
+            "Tambahkan Gambar",
+            "Image 3"
+          ],
+          "added": [
+            "Tambahkan Gambar",
+            "Image 3",
+            "Image 4",
+            "Image 2",
+            "Image 1"
+          ],
+          "removed": []
+        },
+        "row_count_changed": {
+          "from": 0,
+          "to": 5
+        }
+      }
+    },
+    {
+      "step": 10,
+      "url": "https://staging.isalaam.me/gallery",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Tambahkan Gambar",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the mandatory rule to interact with newly appeared elements first."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:46:23.273779",
+      "state_before": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": 1,
+        "total_pages": 3,
+        "pagination_text": "1",
+        "visible_row_count": 6,
+        "visible_rows": [
+          "Gambar 1",
+          "Gambar 2",
+          "Gambar 3",
+          "Gambar 4",
+          "Gambar 5"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unggah GALLERY GAMBAR",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": 1,
+          "to": null
+        },
+        "rows_changed": {
+          "before": [
+            "Gambar 3",
+            "Gambar 2",
+            "Gambar 5",
+            "Gambar 4",
+            "Gambar 1"
+          ],
+          "after": [],
+          "added": [],
+          "removed": [
+            "Gambar 3",
+            "Gambar 5",
+            "Gambar 4",
+            "Gambar 1",
+            "Gambar 2"
+          ]
+        },
+        "row_count_changed": {
+          "from": 6,
+          "to": 0
+        },
+        "modal_changed": {
+          "from": null,
+          "to": "Unggah GALLERY GAMBAR"
+        }
+      }
+    },
+    {
+      "step": 11,
+      "url": "https://staging.isalaam.me/gallery",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "upload",
+        "target_name": "Browse",
+        "element_type": "file",
+        "test_value": "",
+        "reasoning": "The 'Browse' button is one of the newly appeared elements and must be interacted with first according to the mandatory rule."
+      },
+      "result": {
+        "success": true,
+        "action": "upload",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:46:43.381027",
+      "state_before": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unggah Gallery Gambar",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "UNGGAH GALLERY GAMBAR",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "modal_changed": {
+          "from": "Unggah Gallery Gambar",
+          "to": "UNGGAH GALLERY GAMBAR"
+        }
+      }
+    },
+    {
+      "step": 12,
+      "url": "https://staging.isalaam.me/gallery",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Simpan & Tutup",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The submit button 'Simpan & Tutup' should be tested before the cancel button 'Batal'."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:47:11.095479",
+      "state_before": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "UNGGAH GALLERY GAMBAR",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": 1,
+        "total_pages": 3,
+        "pagination_text": "1",
+        "visible_row_count": 6,
+        "visible_rows": [
+          "Tambahkan Gambar",
+          "Image 1",
+          "Image 2",
+          "Image 3",
+          "Image 4"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Media berhasil diunggah",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": null,
+          "to": 1
+        },
+        "rows_changed": {
+          "before": [],
+          "after": [
+            "Image 4",
+            "Image 2",
+            "Image 1",
+            "Tambahkan Gambar",
+            "Image 3"
+          ],
+          "added": [
+            "Tambahkan Gambar",
+            "Image 3",
+            "Image 4",
+            "Image 2",
+            "Image 1"
+          ],
+          "removed": []
+        },
+        "row_count_changed": {
+          "from": 0,
+          "to": 6
+        },
+        "toast_appeared": "Media berhasil diunggah",
+        "modal_changed": {
+          "from": "UNGGAH GALLERY GAMBAR",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 13,
+      "url": "https://staging.isalaam.me/gallery",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Gambar",
+        "element_type": "tab",
+        "test_value": "",
+        "reasoning": "The 'Gambar' tab is one of the newly appeared elements and must be interacted with first according to the mandatory rule."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:47:42.568462",
+      "state_before": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": 1,
+        "total_pages": 3,
+        "pagination_text": "1",
+        "visible_row_count": 6,
+        "visible_rows": [
+          "Image 1",
+          "Image 2",
+          "Image 3",
+          "Image 4",
+          "Image 5"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": 1,
+        "total_pages": 3,
+        "pagination_text": "1",
+        "visible_row_count": 6,
+        "visible_rows": [
+          "Tambahkan Gambar",
+          "Image 1",
+          "Image 2",
+          "Image 3",
+          "Image 4"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "Image 4",
+            "Image 2",
+            "Image 1",
+            "Image 3",
+            "Image 5"
+          ],
+          "after": [
+            "Image 4",
+            "Image 2",
+            "Image 1",
+            "Tambahkan Gambar",
+            "Image 3"
+          ],
+          "added": [
+            "Tambahkan Gambar"
+          ],
+          "removed": [
+            "Image 5"
+          ]
+        }
+      }
+    },
+    {
+      "step": 14,
+      "url": "https://staging.isalaam.me/gallery",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Video",
+        "element_type": "tab",
+        "test_value": "",
+        "reasoning": "The 'Video' tab is an untested element and should be explored next."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:48:14.271785",
+      "state_before": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": 1,
+        "total_pages": 3,
+        "pagination_text": "1",
+        "visible_row_count": 6,
+        "visible_rows": [
+          "Gambar 1",
+          "Gambar 2",
+          "Gambar 3",
+          "Gambar 4",
+          "Gambar 5"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 2",
+        "visible_row_count": 6,
+        "visible_rows": [
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Nuroh Alduwaihi",
+          "Hari Puji",
+          "Sekretariat Presiden"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "Gambar 3",
+            "Gambar 2",
+            "Gambar 5",
+            "Gambar 4",
+            "Gambar 1"
+          ],
+          "after": [
+            "Masjid Nuroh Alduwaihi",
+            "Hari Puji",
+            "Sekretariat Presiden",
+            "Masjid Al-Barokah"
+          ],
+          "added": [
+            "Masjid Nuroh Alduwaihi",
+            "Hari Puji",
+            "Sekretariat Presiden",
+            "Masjid Al-Barokah"
+          ],
+          "removed": [
+            "Gambar 3",
+            "Gambar 2",
+            "Gambar 5",
+            "Gambar 4",
+            "Gambar 1"
+          ]
+        }
+      }
+    },
+    {
+      "step": 15,
+      "url": "https://staging.isalaam.me/gallery",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Tambahkan Video",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The mandatory rule requires interacting with newly appeared elements first, and 'Tambahkan Video' appeared directly due to the last action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:48:47.174889",
+      "state_before": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "Previous 1 2 Next",
+        "visible_row_count": 8,
+        "visible_rows": [
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Nuroh Aldwaihi",
+          "Hari Puji",
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Sekretariat Presiden"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 5,
+        "visible_rows": [
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Sekretariat Presiden"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambahkan Video",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": 1,
+          "to": null
+        },
+        "rows_changed": {
+          "before": [
+            "Hari Puji",
+            "Sekretariat Presiden",
+            "Masjid Nuroh Aldwaihi",
+            "Masjid Al-Barokah"
+          ],
+          "after": [
+            "Sekretariat Presiden",
+            "Masjid Al-Barokah"
+          ],
+          "added": [],
+          "removed": [
+            "Hari Puji",
+            "Masjid Nuroh Aldwaihi"
+          ]
+        },
+        "row_count_changed": {
+          "from": 8,
+          "to": 5
+        },
+        "modal_changed": {
+          "from": null,
+          "to": "Tambahkan Video"
+        }
+      }
+    },
+    {
+      "step": 16,
+      "url": "https://staging.isalaam.me/gallery",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "videoUri",
+        "element_type": "input",
+        "test_value": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "reasoning": "The 'videoUri' input is required and must be filled before any other action can be taken."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:49:10.006225",
+      "state_before": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 5,
+        "visible_rows": [
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Sekretariat Presiden"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambahkan Video",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 5,
+        "visible_rows": [
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Sekretariat Presiden"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambahkan Video",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 17,
+      "url": "https://staging.isalaam.me/gallery",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Tambahkan",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The submit button 'Tambahkan' should be tested before the cancel button to ensure the form submission works correctly."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:49:42.978675",
+      "state_before": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 5,
+        "visible_rows": [
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Sekretariat Presiden"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambahkan Video",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 6,
+        "visible_rows": [
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Nuroh Aldwaihi",
+          "Hari Puji",
+          "Sekretariat Presiden"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Success",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "Sekretariat Presiden",
+            "Masjid Al-Barokah"
+          ],
+          "after": [
+            "Hari Puji",
+            "Sekretariat Presiden",
+            "Masjid Nuroh Aldwaihi",
+            "Masjid Al-Barokah"
+          ],
+          "added": [
+            "Hari Puji",
+            "Masjid Nuroh Aldwaihi"
+          ],
+          "removed": []
+        },
+        "row_count_changed": {
+          "from": 5,
+          "to": 6
+        },
+        "toast_appeared": "Success",
+        "modal_changed": {
+          "from": "Tambahkan Video",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 18,
+      "url": "https://staging.isalaam.me/gallery",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Saluran",
+        "element_type": "tab",
+        "test_value": "",
+        "reasoning": "Following the mandatory rule to interact with newly appeared elements first, I will click on the 'Saluran' tab."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:50:18.130803",
+      "state_before": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 2",
+        "visible_row_count": 6,
+        "visible_rows": [
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Al-Barokah",
+          "Masjid Nuroh Aldwaihi",
+          "Hari Puji",
+          "Sekretariat Presiden"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 2,
+        "visible_rows": [
+          "Baa Baa Black Sheep muslim version | islami...",
+          "Muslim Twinkle Twinkle | Islamic lullaby Vers..."
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": 1,
+          "to": null
+        },
+        "rows_changed": {
+          "before": [
+            "Hari Puji",
+            "Sekretariat Presiden",
+            "Masjid Nuroh Aldwaihi",
+            "Masjid Al-Barokah"
+          ],
+          "after": [
+            "Baa Baa Black Sheep muslim version | islami...",
+            "Muslim Twinkle Twinkle | Islamic lullaby Vers..."
+          ],
+          "added": [
+            "Baa Baa Black Sheep muslim version | islami...",
+            "Muslim Twinkle Twinkle | Islamic lullaby Vers..."
+          ],
+          "removed": [
+            "Hari Puji",
+            "Sekretariat Presiden",
+            "Masjid Nuroh Aldwaihi",
+            "Masjid Al-Barokah"
+          ]
+        },
+        "row_count_changed": {
+          "from": 6,
+          "to": 2
+        }
+      }
+    },
+    {
+      "step": 19,
+      "url": "https://staging.isalaam.me/gallery",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Tambahkan Saluran",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the mandatory rule to interact with newly appeared elements first."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:50:51.373854",
+      "state_before": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambahkan Saluran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "modal_changed": {
+          "from": null,
+          "to": "Tambahkan Saluran"
+        }
+      }
+    },
+    {
+      "step": 20,
+      "url": "https://staging.isalaam.me/gallery",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "channelId",
+        "element_type": "input",
+        "test_value": "UC1234567890",
+        "reasoning": "The 'channelId' field is required and must be filled before any other action."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T21:51:18.005740",
+      "state_before": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambahkan Saluran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Galeri",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambahkan Saluran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    }
+  ]
+}

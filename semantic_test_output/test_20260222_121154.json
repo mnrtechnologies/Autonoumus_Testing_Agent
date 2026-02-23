@@ -1,0 +1,968 @@
+{
+  "session_id": "20260222_121154",
+  "timestamp": "2026-02-22T12:17:32.059903",
+  "total_steps": 12,
+  "history": [
+    {
+      "step": 1,
+      "url": "https://staging.isalaam.me/users/menumapping",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "more_vert",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the rule to start by clicking the three-dot menu before any other action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T12:12:55.451447",
+      "state_before": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "13",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": "13",
+          "to": 13
+        }
+      }
+    },
+    {
+      "step": 2,
+      "url": "https://staging.isalaam.me/users/menumapping",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Tindakan",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Tindakan' button appeared directly due to the last action and must be interacted with first according to the rules."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T12:13:23.105532",
+      "state_before": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "13",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "12",
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "Mosque Admin",
+            "Ministry Admin",
+            "Super Admin",
+            "Support Team",
+            "Office Bearer",
+            "Mosque Assistant",
+            "Imam",
+            "Developer",
+            "Super Mosque Admin",
+            "Member"
+          ],
+          "after": [
+            "Master Data",
+            "Reports",
+            "Mosque Administration",
+            "Ask Imam",
+            "Islamic Events",
+            "Media Gallery",
+            "Identity & Access",
+            "Mosque Management",
+            "Donations",
+            "Dashboard"
+          ],
+          "added": [
+            "Master Data",
+            "Reports",
+            "Ask Imam",
+            "Mosque Administration",
+            "Islamic Events",
+            "Media Gallery",
+            "Identity & Access",
+            "Mosque Management",
+            "Donations",
+            "Dashboard"
+          ],
+          "removed": [
+            "Mosque Admin",
+            "Ministry Admin",
+            "Super Admin",
+            "Support Team",
+            "Office Bearer",
+            "Mosque Assistant",
+            "Imam",
+            "Developer",
+            "Super Mosque Admin",
+            "Member"
+          ]
+        },
+        "total_records_changed": {
+          "from": "13",
+          "to": "12"
+        }
+      }
+    },
+    {
+      "step": 3,
+      "url": "https://staging.isalaam.me/users/menumapping",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "mat-mdc-slide-toggle-0",
+        "element_type": "toggle",
+        "test_value": "",
+        "reasoning": "Following the mandatory rule to interact with newly appeared elements first."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T12:13:52.074966",
+      "state_before": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "12",
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "12",
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unassign",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "modal_changed": {
+          "from": null,
+          "to": "Unassign"
+        }
+      }
+    },
+    {
+      "step": 4,
+      "url": "https://staging.isalaam.me/users/menumapping",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button is part of the newly appeared elements after the last action and should be interacted with first according to the mandatory rule."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T12:14:13.680959",
+      "state_before": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "12",
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unassign",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": 12,
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Tindakan menu peran berhasil dihapus",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": "12",
+          "to": 12
+        },
+        "toast_appeared": "Tindakan menu peran berhasil dihapus",
+        "modal_changed": {
+          "from": "Unassign",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 5,
+      "url": "https://staging.isalaam.me/users/menumapping",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "mat-mdc-slide-toggle-11-button",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the mandatory rule to interact with newly appeared elements first."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T12:14:42.464133",
+      "state_before": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "12",
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "12",
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unassign",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "modal_changed": {
+          "from": null,
+          "to": "Unassign"
+        }
+      }
+    },
+    {
+      "step": 6,
+      "url": "https://staging.isalaam.me/users/menumapping",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "In a confirmation dialog, the 'Ok' button should be tested first to confirm the action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T12:15:03.497050",
+      "state_before": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "12",
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unassign",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": 12,
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Tindakan menu peran berhasil dihapus",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": "12",
+          "to": 12
+        },
+        "toast_appeared": "Tindakan menu peran berhasil dihapus",
+        "modal_changed": {
+          "from": "Unassign",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 7,
+      "url": "https://staging.isalaam.me/users/menumapping",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "Cari",
+        "element_type": "input",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T12:15:33.659182",
+      "state_before": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "12",
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": 12,
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {
+          "Cari": "TestValue"
+        },
+        "search_value": "TestValue",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": "12",
+          "to": 12
+        },
+        "search_changed": {
+          "from": null,
+          "to": "TestValue"
+        },
+        "filters_changed": {
+          "from": {},
+          "to": {
+            "Cari": "TestValue"
+          }
+        }
+      }
+    },
+    {
+      "step": 8,
+      "url": "https://staging.isalaam.me/users/menumapping",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "mat-mdc-slide-toggle-23-button",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Selecting an untested toggle button to verify its functionality."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T12:16:02.740148",
+      "state_before": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "12",
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": "TestValue",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "12",
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": "TestValue",
+        "toast_message": null,
+        "modal_open": "Unassign",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "modal_changed": {
+          "from": null,
+          "to": "Unassign"
+        }
+      }
+    },
+    {
+      "step": 9,
+      "url": "https://staging.isalaam.me/users/menumapping",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button is part of the newly appeared elements and should be interacted with first according to the mandatory rule."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T12:16:25.703868",
+      "state_before": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "12",
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": "TestValue",
+        "toast_message": null,
+        "modal_open": "Unassign",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": 12,
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1-10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {
+          "Cari": "TestValue"
+        },
+        "search_value": "TestValue",
+        "toast_message": "Tindakan menu peran berhasil dihapus",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": "12",
+          "to": 12
+        },
+        "filters_changed": {
+          "from": {},
+          "to": {
+            "Cari": "TestValue"
+          }
+        },
+        "toast_appeared": "Tindakan menu peran berhasil dihapus",
+        "modal_changed": {
+          "from": "Unassign",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 10,
+      "url": "https://staging.isalaam.me/users/menumapping",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "1",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": false,
+        "action": "click",
+        "error": "Button remained disabled"
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T12:16:53.525814",
+      "state_before": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "12",
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": "TestValue",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "12",
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": "TestValue",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 11,
+      "url": "https://staging.isalaam.me/users/menumapping",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "2",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The button with text '2' is untested and should be clicked to navigate to the next page."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T12:17:19.235715",
+      "state_before": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": "12",
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1 - 10 of 12",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Master Data",
+          "Identity & Access",
+          "Dashboard",
+          "Mosque Administration",
+          "Mosque Management",
+          "Islamic Events",
+          "Media Gallery",
+          "Donations",
+          "Ask Imam",
+          "Reports"
+        ],
+        "active_filters": {},
+        "search_value": "TestValue",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran, Menu & Tindakan",
+        "total_records": 12,
+        "current_page": 2,
+        "total_pages": null,
+        "pagination_text": "11 - 12 of 12",
+        "visible_row_count": 2,
+        "visible_rows": [
+          "Tech Support",
+          "Management Hub"
+        ],
+        "active_filters": {},
+        "search_value": "TestValue",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": 1,
+          "to": 2
+        },
+        "rows_changed": {
+          "before": [
+            "Master Data",
+            "Reports",
+            "Mosque Administration",
+            "Ask Imam",
+            "Islamic Events",
+            "Media Gallery",
+            "Identity & Access",
+            "Mosque Management",
+            "Donations",
+            "Dashboard"
+          ],
+          "after": [
+            "Management Hub",
+            "Tech Support"
+          ],
+          "added": [
+            "Management Hub",
+            "Tech Support"
+          ],
+          "removed": [
+            "Master Data",
+            "Reports",
+            "Ask Imam",
+            "Mosque Administration",
+            "Islamic Events",
+            "Media Gallery",
+            "Identity & Access",
+            "Mosque Management",
+            "Donations",
+            "Dashboard"
+          ]
+        },
+        "row_count_changed": {
+          "from": 10,
+          "to": 2
+        },
+        "total_records_changed": {
+          "from": "12",
+          "to": 12
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "session_id": "20260220_210928",
+  "page_url": "https://staging.isalaam.me/ministry/ministryprofile",
+  "generated_at": "2026-02-20T21:13:46.098557",
+  "execution_history": [
+    {
+      "step": 1,
+      "action": "click",
+      "target": "Unggah Beberapa Halaman Sampul",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 2,
+      "action": "click",
+      "target": "Simpan & Tutup",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 3,
+      "action": "click",
+      "target": "Batal",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 4,
+      "action": "click",
+      "target": "Unggah Profil",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 5,
+      "action": "click",
+      "target": "Simpan & Tutup",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 6,
+      "action": "upload",
+      "target": "Browse",
+      "value": "",
+      "success": false,
+      "error": "Timeout 3000ms exceeded.",
+      "options": null
+    },
+    {
+      "step": 7,
+      "action": "click",
+      "target": "Batal",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    }
+  ],
+  "dropdown_options": {},
+  "forms_discovered": {
+    "form_1": [
+      {
+        "name": "Unggah Beberapa Halaman Sampul",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Unggah Profil",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      }
+    ],
+    "form_2": [
+      {
+        "name": "Unggah Beberapa Halaman Sampul",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Unggah Profil",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Lihat Semua Galeri",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      }
+    ]
+  },
+  "stories_generated": 4,
+  "stories": [
+    {
+      "story_id": "STORY-001",
+      "context_name": "Upload and Save Cover Pages",
+      "user_persona": "Ministry Admin managing profile",
+      "description": "The Ministry Admin uploads multiple cover pages for the ministry profile and saves the changes. This ensures the profile visually represents the ministry's identity.",
+      "field_values": {},
+      "expected_outcome": "Cover pages are uploaded and saved successfully, and the profile reflects the new images.\n\nVALIDATION: Assert: Cover images appear on the profile page. Assert: Success message appears.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Unggah Beberapa Halaman Sampul'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.097242"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Upload cover images via 'Browse'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.097242"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'Simpan & Tutup'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.097242"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify cover images appear on the profile page",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.097242"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-002",
+      "context_name": "Upload and Cancel Profile Image",
+      "user_persona": "Ministry Admin managing profile",
+      "description": "The Ministry Admin attempts to upload a profile image but decides to cancel the operation. This tests the cancel functionality to ensure no changes are made.",
+      "field_values": {},
+      "expected_outcome": "The profile image upload is canceled, and no changes are made to the profile.\n\nVALIDATION: Assert: No new profile image appears. Assert: No changes are saved.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Unggah Profil'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.098005"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Attempt to upload an image via 'Browse'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.098005"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'Batal'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.098005"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify no changes to the profile image",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.098005"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-003",
+      "context_name": "Attempt to Upload with Timeout",
+      "user_persona": "Ministry Admin managing profile",
+      "description": "The Ministry Admin attempts to upload a file, but the operation times out. This tests the system's handling of upload timeouts.",
+      "field_values": {},
+      "expected_outcome": "The upload operation times out, and an error message is displayed.\n\nVALIDATION: Assert: Error message 'Timeout 3000ms exceeded.' appears.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Unggah Beberapa Halaman Sampul'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.098005"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Attempt to upload a file via 'Browse'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.098005"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Wait for timeout",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.098005"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify error message appears",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.098005"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-004",
+      "context_name": "View and Exit Gallery",
+      "user_persona": "Ministry Admin exploring media",
+      "description": "The Ministry Admin views the gallery and exits without making changes. This ensures the gallery can be accessed and exited smoothly.",
+      "field_values": {},
+      "expected_outcome": "The gallery is viewed and exited without issues.\n\nVALIDATION: Assert: Gallery opens and closes without errors.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Lihat Semua Galeri'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.098557"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: View gallery contents",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.098557"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'Batal' or close button",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.098557"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify return to previous page",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-20T21:13:46.098557"
+        }
+      ]
+    }
+  ]
+}

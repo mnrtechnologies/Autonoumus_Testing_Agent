@@ -1,0 +1,2470 @@
+{
+  "session_id": "20260222_103033",
+  "page_url": "https://staging.isalaam.me/master/suppliers",
+  "generated_at": "2026-02-22T10:58:44.712724",
+  "execution_history": [
+    {
+      "step": 1,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 2,
+      "action": "click",
+      "target": "Mengedit",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 3,
+      "action": "fill",
+      "target": "supplierName",
+      "value": "aifamart",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 4,
+      "action": "fill",
+      "target": "supplierAddress",
+      "value": "123 Test Street",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 5,
+      "action": "fill",
+      "target": "Nomor HP",
+      "value": "08774353678",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 6,
+      "action": "fill",
+      "target": "Surel",
+      "value": "test@example.com",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 7,
+      "action": "click",
+      "target": "Perbarui",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 8,
+      "action": "fill",
+      "target": "supplierName",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 9,
+      "action": "fill",
+      "target": "phoneNumber",
+      "value": "08774353678",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 10,
+      "action": "select",
+      "target": "supplierStatus",
+      "value": "Active",
+      "success": true,
+      "error": null,
+      "options": [
+        "Active",
+        "Inactive"
+      ]
+    },
+    {
+      "step": 11,
+      "action": "click",
+      "target": "Cari",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 12,
+      "action": "click",
+      "target": "mat-mdc-slide-toggle-10-button",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 13,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 14,
+      "action": "click",
+      "target": "Atur Ulang",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 15,
+      "action": "click",
+      "target": "mat-mdc-slide-toggle-20-button",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 16,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 17,
+      "action": "click",
+      "target": "Tambah",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 18,
+      "action": "fill",
+      "target": "supplierName",
+      "value": "Test Name",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 19,
+      "action": "fill",
+      "target": "supplierAddress",
+      "value": "123 Test Street",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 20,
+      "action": "fill",
+      "target": "Nomor HP",
+      "value": "08123456789",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 21,
+      "action": "fill",
+      "target": "Surel",
+      "value": "test@example.com",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 22,
+      "action": "click",
+      "target": "Tambahkan",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 23,
+      "action": "click",
+      "target": "Batalkan",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 24,
+      "action": "click",
+      "target": "First page",
+      "value": "",
+      "success": false,
+      "error": "Button remained disabled",
+      "options": null
+    },
+    {
+      "step": 25,
+      "action": "click",
+      "target": "mat-mdc-slide-toggle-25-button",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 26,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 27,
+      "action": "check",
+      "target": "mat-mdc-slide-toggle-30",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 28,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 29,
+      "action": "check",
+      "target": "mat-mdc-slide-toggle-35",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 30,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 31,
+      "action": "check",
+      "target": "mat-mdc-slide-toggle-40",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 32,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 33,
+      "action": "check",
+      "target": "mat-mdc-slide-toggle-45",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 34,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 35,
+      "action": "check",
+      "target": "mat-mdc-slide-toggle-50",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 36,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 37,
+      "action": "check",
+      "target": "mat-mdc-slide-toggle-55",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 38,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 39,
+      "action": "check",
+      "target": "mat-mdc-slide-toggle-60-button",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 40,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 41,
+      "action": "check",
+      "target": "mat-mdc-slide-toggle-65",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 42,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 43,
+      "action": "check",
+      "target": "mat-mdc-slide-toggle-70",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 44,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 45,
+      "action": "check",
+      "target": "mat-mdc-slide-toggle-75",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 46,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 47,
+      "action": "check",
+      "target": "mat-mdc-slide-toggle-80",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 48,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 49,
+      "action": "check",
+      "target": "mat-mdc-slide-toggle-85",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 50,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    }
+  ],
+  "dropdown_options": {
+    "supplierStatus": [
+      "Active",
+      "Inactive"
+    ]
+  },
+  "forms_discovered": {
+    "form_1": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Mengedit",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-0-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-1-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-2-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-3-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-4-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_2": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "First page",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Previous page",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Next page",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Last page",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-10",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-10-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-11",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-11-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-12",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-12-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-13",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-13-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-14",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-14-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "Active",
+        "type": "combobox",
+        "input_type": "combobox",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_3": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-20",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-20-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-21",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-21-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-22",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-22-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-23",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-23-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-24",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-24-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "form_4": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-25",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-25-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-26",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-26-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-27",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-27-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-28",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-28-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-29",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-29-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_5": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-25-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-26-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-27-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-28-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-29-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_6": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-30",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-30-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-31",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-31-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-32",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-32-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-33",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-33-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-34",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-34-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_7": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-35",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-35-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-36",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-36-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-37",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-37-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-38",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-38-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-39",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-39-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_8": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-40",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-40-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-41",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-41-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-42",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-42-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-43",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-43-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-44",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-44-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_9": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-45",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-45-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-46",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-46-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-47",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-47-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-48",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-48-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-49",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-49-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_10": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-50",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-50-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-51",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-51-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-52",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-52-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-53",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-53-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-54",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-54-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_11": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-55",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-55-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-56",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-56-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-57",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-57-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-58",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-58-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-59",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-59-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_12": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-60-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-61-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-62-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-63-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-64-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_13": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-65",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-65-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-66",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-66-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-67",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-67-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-68",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-68-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-69",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-69-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_14": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-70",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-70-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-71",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-71-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-72",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-72-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-73",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-73-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-74",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-74-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_15": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-75",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-75-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-76",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-76-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-77",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-77-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-78",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-78-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-79",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-79-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_16": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-80",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-80-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-81",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-81-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-82",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-82-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-83",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-83-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-84",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-84-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ],
+    "confirmation_17": [
+      {
+        "name": "Cari",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Atur Ulang",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "supplierName",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-85",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-85-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-86",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-86-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-87",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-87-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-88",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-88-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-89",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-89-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "supplierStatus",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": false
+      }
+    ]
+  },
+  "stories_generated": 5,
+  "stories": [
+    {
+      "story_id": "STORY-001",
+      "context_name": "Edit Supplier Details",
+      "user_persona": "Super Admin editing supplier information",
+      "description": "The Super Admin updates the details of an existing supplier to ensure the information is current and accurate.",
+      "field_values": {
+        "supplierName": "aifamart",
+        "supplierAddress": "123 Test Street",
+        "Nomor HP": "08774353678",
+        "Surel": "test@example.com"
+      },
+      "expected_outcome": "Success toast message appears: 'Data berhasil diperbarui'\n\nVALIDATION: Assert: toast message contains 'berhasil'. Assert: modal closes after save",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'more_vert' on the supplier row",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'Mengedit'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Fill 'supplierName' with 'aifamart'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Fill 'supplierAddress' with '123 Test Street'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Fill 'Nomor HP' with '08774353678'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 6,
+          "action": "explore",
+          "target": "Step 6: Fill 'Surel' with 'test@example.com'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 7,
+          "action": "explore",
+          "target": "Step 7: Click 'Perbarui'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 8,
+          "action": "explore",
+          "target": "Step 8: Verify success message and modal closure",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-002",
+      "context_name": "Search and Filter Suppliers",
+      "user_persona": "Super Admin searching for active suppliers",
+      "description": "The Super Admin filters the supplier list to view only active suppliers and verify the search functionality.",
+      "field_values": {
+        "supplierStatus": "Active"
+      },
+      "expected_outcome": "Table refreshes and shows only suppliers with status 'Active'\n\nVALIDATION: Assert: table row count changes after search. Assert: supplierStatus filter shows 'Active'",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Select 'supplierStatus' as 'Active'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'Cari'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Verify table updates to show only active suppliers",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-003",
+      "context_name": "Add New Supplier",
+      "user_persona": "Super Admin adding a new supplier",
+      "description": "The Super Admin adds a new supplier to the system to expand the supplier database.",
+      "field_values": {
+        "supplierName": "Test Name",
+        "supplierAddress": "123 Test Street",
+        "Nomor HP": "08123456789",
+        "Surel": "test@example.com"
+      },
+      "expected_outcome": "New supplier appears in the supplier list with correct details\n\nVALIDATION: Assert: new supplier 'Test Name' is listed with correct details",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Tambah'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Fill 'supplierName' with 'Test Name'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Fill 'supplierAddress' with '123 Test Street'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Fill 'Nomor HP' with '08123456789'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Fill 'Surel' with 'test@example.com'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 6,
+          "action": "explore",
+          "target": "Step 6: Click 'Tambahkan'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 7,
+          "action": "explore",
+          "target": "Step 7: Verify new supplier is listed",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-004",
+      "context_name": "Toggle Supplier Active Status",
+      "user_persona": "Super Admin changing supplier status",
+      "description": "The Super Admin toggles the active status of a supplier to manage supplier availability.",
+      "field_values": {
+        "toggle": "mat-mdc-slide-toggle-10-button"
+      },
+      "expected_outcome": "Supplier status changes and confirmation dialog appears\n\nVALIDATION: Assert: status toggle changes. Assert: confirmation dialog appears",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click toggle 'mat-mdc-slide-toggle-10-button'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'Ok' on confirmation dialog",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Verify status change and confirmation",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-005",
+      "context_name": "Reset Supplier Filters",
+      "user_persona": "Super Admin resetting search filters",
+      "description": "The Super Admin resets all search filters to view the complete list of suppliers.",
+      "field_values": {},
+      "expected_outcome": "All filter fields reset to empty/default state and table shows all suppliers\n\nVALIDATION: Assert: all filters are cleared. Assert: table shows complete supplier list",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Atur Ulang'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Verify all filters are cleared",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Verify table shows all suppliers",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T10:58:44.712724"
+        }
+      ]
+    }
+  ]
+}

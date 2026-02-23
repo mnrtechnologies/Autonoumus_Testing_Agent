@@ -1,0 +1,3785 @@
+{
+  "session_id": "20260222_103033",
+  "timestamp": "2026-02-22T10:58:25.542898",
+  "total_steps": 50,
+  "history": [
+    {
+      "step": 1,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "more_vert",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the rule to start by clicking the three-dot menu before any other action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:31:14.269998",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1-5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 2,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Mengedit",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Mengedit' button appeared as a direct result of the last action and must be interacted with first according to the rules."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:31:48.163255",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": 5,
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": "5",
+          "to": 5
+        },
+        "modal_changed": {
+          "from": null,
+          "to": "Perbarui Vendor"
+        }
+      }
+    },
+    {
+      "step": 3,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "supplierName",
+        "element_type": "input",
+        "test_value": "aifamart",
+        "reasoning": "Start by filling the 'supplierName' field as it is the first mandatory field according to the rules."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:32:11.009494",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": 5,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": 1,
+          "to": null
+        },
+        "total_records_changed": {
+          "from": "5",
+          "to": 5
+        }
+      }
+    },
+    {
+      "step": 4,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "supplierAddress",
+        "element_type": "input",
+        "test_value": "123 Test Street",
+        "reasoning": "The first step is to fill the 'supplierAddress' field as per the instructions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:32:32.397208",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 5,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "Nomor HP",
+        "element_type": "input",
+        "test_value": "08774353678",
+        "reasoning": "The 'Nomor HP' field is required and must be filled before any button actions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:32:53.698819",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 6,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "Surel",
+        "element_type": "input",
+        "test_value": "test@example.com",
+        "reasoning": "The 'Surel' field is untested and must be filled before any button actions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:33:14.085474",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": 5,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Politron Electronics",
+            "Informa",
+            "Test Name"
+          ],
+          "after": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "added": [
+            "Poltron Electronics"
+          ],
+          "removed": [
+            "Politron Electronics"
+          ]
+        },
+        "total_records_changed": {
+          "from": "5",
+          "to": 5
+        }
+      }
+    },
+    {
+      "step": 7,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Perbarui",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "In forms, always test the submit button before the cancel button."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:33:34.756247",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": 5,
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 \u2013 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Rincian pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Politron Electronics",
+            "Informa",
+            "Test Name"
+          ],
+          "after": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "added": [
+            "Poltron Electronics"
+          ],
+          "removed": [
+            "Politron Electronics"
+          ]
+        },
+        "total_records_changed": {
+          "from": "5",
+          "to": 5
+        },
+        "toast_appeared": "Rincian pemasok berhasil diperbarui.",
+        "modal_changed": {
+          "from": "Perbarui Vendor",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 8,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "supplierName",
+        "element_type": "input",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:34:08.750489",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name",
+          "Test Value"
+        ],
+        "active_filters": {},
+        "search_value": "TestValue",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "after": [
+            "aifamart",
+            "Test Name",
+            "Informa",
+            "Poltron Electronics",
+            "Test Value"
+          ],
+          "added": [
+            "Test Value"
+          ],
+          "removed": []
+        },
+        "search_changed": {
+          "from": null,
+          "to": "TestValue"
+        }
+      }
+    },
+    {
+      "step": 9,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "phoneNumber",
+        "element_type": "input",
+        "test_value": "08774353678",
+        "reasoning": "The 'phoneNumber' field is mandatory and must be filled before any button actions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:34:42.447159",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": "TestValue",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1-5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": "08774353678",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "after": [
+            "aifamart",
+            "Politron Electronics",
+            "Informa",
+            "Test Name"
+          ],
+          "added": [
+            "Politron Electronics"
+          ],
+          "removed": [
+            "Poltron Electronics"
+          ]
+        },
+        "search_changed": {
+          "from": "TestValue",
+          "to": "08774353678"
+        }
+      }
+    },
+    {
+      "step": 10,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "select",
+        "target_name": "supplierStatus",
+        "element_type": "custom-select",
+        "test_value": "Active",
+        "reasoning": "The 'supplierStatus' field is mandatory and must be filled before any button actions."
+      },
+      "result": {
+        "success": true,
+        "action": "select",
+        "error": null,
+        "selected_value": "Active",
+        "all_options": [
+          "Active",
+          "Inactive"
+        ],
+        "formcontrolname": "supplierStatus"
+      },
+      "all_options": [
+        "Active",
+        "Inactive"
+      ],
+      "timestamp": "2026-02-22T10:35:14.185249",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {
+          "supplierStatus": "Active"
+        },
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "filters_changed": {
+          "from": {},
+          "to": {
+            "supplierStatus": "Active"
+          }
+        }
+      }
+    },
+    {
+      "step": 11,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Cari",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:35:42.556663",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": 5,
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1-5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": "TestValue",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": "5",
+          "to": 5
+        },
+        "search_changed": {
+          "from": null,
+          "to": "TestValue"
+        }
+      }
+    },
+    {
+      "step": 12,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "mat-mdc-slide-toggle-10-button",
+        "element_type": "toggle",
+        "test_value": "",
+        "reasoning": "Interacting with the first newly appeared toggle element as per the mandatory rule."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:36:10.201954",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": 1,
+          "to": null
+        },
+        "modal_changed": {
+          "from": null,
+          "to": "InActive"
+        }
+      }
+    },
+    {
+      "step": 13,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button is part of the newly appeared elements and should be interacted with first according to the mandatory rule."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:36:29.063428",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "InActive",
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Politron Electronics",
+            "Informa",
+            "Test Name"
+          ],
+          "after": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "added": [
+            "Poltron Electronics"
+          ],
+          "removed": [
+            "Politron Electronics"
+          ]
+        },
+        "toast_appeared": "Status pemasok berhasil diperbarui.",
+        "modal_changed": {
+          "from": "InActive",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 14,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Atur Ulang",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:36:57.617552",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name",
+          "TestValue"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "TestValue",
+            "Test Name",
+            "Politron Electronics",
+            "Informa"
+          ],
+          "after": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "added": [
+            "Poltron Electronics"
+          ],
+          "removed": [
+            "TestValue",
+            "Politron Electronics"
+          ]
+        }
+      }
+    },
+    {
+      "step": 15,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "mat-mdc-slide-toggle-20-button",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The element 'mat-mdc-slide-toggle-20-button' appeared directly due to the last action and must be interacted with first."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:37:29.985557",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Active",
+        "modal_open": "Active",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Active",
+        "modal_changed": {
+          "from": null,
+          "to": "Active"
+        }
+      }
+    },
+    {
+      "step": 16,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "In a confirmation dialog, the 'Ok' button should be tested first to confirm the action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:37:49.215168",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Active",
+        "modal_open": "Active",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Status pemasok berhasil diperbarui.",
+        "modal_changed": {
+          "from": "Active",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 17,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Tambah",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:38:17.276970",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": 5,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambah Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": 1,
+          "to": null
+        },
+        "total_records_changed": {
+          "from": "5",
+          "to": 5
+        },
+        "modal_changed": {
+          "from": null,
+          "to": "Tambah Vendor"
+        }
+      }
+    },
+    {
+      "step": 18,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "supplierName",
+        "element_type": "input",
+        "test_value": "Test Name",
+        "reasoning": "The 'supplierName' field is mandatory and must be filled first according to the rules."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:38:37.456517",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "afamart",
+          "afamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambah Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "afamart",
+          "afamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambah Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 19,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "supplierAddress",
+        "element_type": "input",
+        "test_value": "123 Test Street",
+        "reasoning": "The story requires filling the 'supplierAddress' field first before any button actions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:38:59.233579",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "afamart",
+          "afamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambahkan Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "afiamart",
+          "afiamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambahkan Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "Test Name",
+            "afamart",
+            "Informa",
+            "Poltron Electronics"
+          ],
+          "after": [
+            "Test Name",
+            "Informa",
+            "afiamart",
+            "Poltron Electronics"
+          ],
+          "added": [
+            "afiamart"
+          ],
+          "removed": [
+            "afamart"
+          ]
+        }
+      }
+    },
+    {
+      "step": 20,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "Nomor HP",
+        "element_type": "input",
+        "test_value": "08123456789",
+        "reasoning": "The 'Nomor HP' field is required and untested, so it must be filled before any button actions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:39:19.937222",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "afiamart",
+          "Informasi",
+          "Politron Electronics",
+          "Test Name",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambah Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambah Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": null,
+          "to": 1
+        },
+        "rows_changed": {
+          "before": [
+            "Politron Electronics",
+            "Informasi",
+            "afiamart",
+            "Test Name"
+          ],
+          "after": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "added": [
+            "aifamart",
+            "Informa",
+            "Poltron Electronics"
+          ],
+          "removed": [
+            "Politron Electronics",
+            "afiamart",
+            "Informasi"
+          ]
+        }
+      }
+    },
+    {
+      "step": 21,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "Surel",
+        "element_type": "input",
+        "test_value": "test@example.com",
+        "reasoning": "The 'Surel' field is untested and must be filled before any button actions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:39:41.130494",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambah Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": 5,
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambah Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": "5",
+          "to": 5
+        }
+      }
+    },
+    {
+      "step": 22,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Tambahkan",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Submit the form after filling all required fields."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:40:01.302244",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambah Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informasi",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Validation error Pemasok sudah terdaftar",
+        "modal_open": "Tambahkan Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": 1,
+          "to": null
+        },
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "after": [
+            "aifamart",
+            "Informasi",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "added": [
+            "Informasi"
+          ],
+          "removed": [
+            "Informa"
+          ]
+        },
+        "toast_appeared": "Validation error Pemasok sudah terdaftar",
+        "modal_changed": {
+          "from": "Tambah Vendor",
+          "to": "Tambahkan Vendor"
+        }
+      }
+    },
+    {
+      "step": 23,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Batalkan",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Batalkan' button is the only untested element remaining, and it should be tested after the submit action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:40:20.377325",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifmart",
+          "aifmart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Tambah Vendor",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": 5,
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "Politron Electronics",
+            "Informa",
+            "aifmart",
+            "Test Name"
+          ],
+          "after": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "added": [
+            "aifamart",
+            "Poltron Electronics"
+          ],
+          "removed": [
+            "Politron Electronics",
+            "aifmart"
+          ]
+        },
+        "total_records_changed": {
+          "from": "5",
+          "to": 5
+        },
+        "modal_changed": {
+          "from": "Tambah Vendor",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 24,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "First page",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": false,
+        "action": "click",
+        "error": "Button remained disabled"
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:40:50.162414",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 25,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "mat-mdc-slide-toggle-25-button",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The toggle button is an untested element and should be clicked to test its functionality."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:41:24.457559",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": 1,
+          "to": null
+        },
+        "modal_changed": {
+          "from": null,
+          "to": "InActive"
+        }
+      }
+    },
+    {
+      "step": 26,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button is part of the newly appeared elements and should be tested first according to the mandatory rule."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:41:44.437577",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "InActive",
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": null,
+          "to": 1
+        },
+        "toast_appeared": "Status pemasok berhasil diperbarui.",
+        "modal_changed": {
+          "from": "InActive",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 27,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "check",
+        "target_name": "mat-mdc-slide-toggle-30",
+        "element_type": "toggle",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "check",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:42:17.707049",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Active",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": 1,
+          "to": null
+        },
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "after": [
+            "aifamart",
+            "Politron Electronics",
+            "Informa",
+            "Test Name"
+          ],
+          "added": [
+            "Politron Electronics"
+          ],
+          "removed": [
+            "Poltron Electronics"
+          ]
+        },
+        "modal_changed": {
+          "from": null,
+          "to": "Active"
+        }
+      }
+    },
+    {
+      "step": 28,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button must be clicked first as it appeared directly due to the last action performed."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:42:38.775999",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Active",
+        "modal_open": "Active",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Politron Electronics",
+            "Informa",
+            "Test Name"
+          ],
+          "after": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "added": [
+            "Poltron Electronics"
+          ],
+          "removed": [
+            "Politron Electronics"
+          ]
+        },
+        "toast_appeared": "Status pemasok berhasil diperbarui.",
+        "modal_changed": {
+          "from": "Active",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 29,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "check",
+        "target_name": "mat-mdc-slide-toggle-35",
+        "element_type": "toggle",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "check",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:43:07.158927",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "after": [
+            "aifamart",
+            "Politron Electronics",
+            "Informa",
+            "Test Name"
+          ],
+          "added": [
+            "Politron Electronics"
+          ],
+          "removed": [
+            "Poltron Electronics"
+          ]
+        },
+        "modal_changed": {
+          "from": null,
+          "to": "InActive"
+        }
+      }
+    },
+    {
+      "step": 30,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button is part of the newly appeared elements and must be interacted with first according to the mandatory rule."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:43:26.322524",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1-5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Politron Electronics",
+            "Informa",
+            "Test Name"
+          ],
+          "after": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "added": [
+            "Poltron Electronics"
+          ],
+          "removed": [
+            "Politron Electronics"
+          ]
+        },
+        "toast_appeared": "Status pemasok berhasil diperbarui.",
+        "modal_changed": {
+          "from": "InActive",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 31,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "check",
+        "target_name": "mat-mdc-slide-toggle-40",
+        "element_type": "toggle",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "check",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:43:53.666527",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Active",
+        "modal_open": "Active",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Active",
+        "modal_changed": {
+          "from": null,
+          "to": "Active"
+        }
+      }
+    },
+    {
+      "step": 32,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button must be clicked first as it is a newly appeared element due to the last action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:44:11.881857",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Active",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Status pemasok berhasil diperbarui."
+      }
+    },
+    {
+      "step": 33,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "check",
+        "target_name": "mat-mdc-slide-toggle-45",
+        "element_type": "toggle",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "check",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:44:42.706212",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": 5,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": "5",
+          "to": 5
+        },
+        "modal_changed": {
+          "from": null,
+          "to": "InActive"
+        }
+      }
+    },
+    {
+      "step": 34,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button must be clicked first as it is part of the newly appeared elements due to the last action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:45:02.273081",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "InActive",
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Status pemasok berhasil diperbarui.",
+        "modal_changed": {
+          "from": "InActive",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 35,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "check",
+        "target_name": "mat-mdc-slide-toggle-50",
+        "element_type": "toggle",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "check",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:45:33.807572",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Active",
+        "modal_open": "Active",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Active",
+        "modal_changed": {
+          "from": null,
+          "to": "Active"
+        }
+      }
+    },
+    {
+      "step": 36,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the mandatory rule to interact with newly appeared elements first, clicking 'Ok' confirms the action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:45:52.275528",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Active",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 \u2013 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Status pemasok berhasil diperbarui."
+      }
+    },
+    {
+      "step": 37,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "check",
+        "target_name": "mat-mdc-slide-toggle-55",
+        "element_type": "toggle",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "check",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:46:18.647387",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "InActive",
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "after": [
+            "aifamart",
+            "Politron Electronics",
+            "Informa",
+            "Test Name"
+          ],
+          "added": [
+            "Politron Electronics"
+          ],
+          "removed": [
+            "Poltron Electronics"
+          ]
+        },
+        "toast_appeared": "InActive",
+        "modal_changed": {
+          "from": null,
+          "to": "InActive"
+        }
+      }
+    },
+    {
+      "step": 38,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button must be clicked first as it is one of the newly appeared elements after the last action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:46:37.396437",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Status pemasok berhasil diperbarui.",
+        "modal_changed": {
+          "from": "InActive",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 39,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "check",
+        "target_name": "mat-mdc-slide-toggle-60-button",
+        "element_type": "toggle",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "check",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:47:05.817798",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Active",
+        "modal_open": "Active",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "after": [
+            "aifamart",
+            "Politron Electronics",
+            "Informa",
+            "Test Name"
+          ],
+          "added": [
+            "Politron Electronics"
+          ],
+          "removed": [
+            "Poltron Electronics"
+          ]
+        },
+        "toast_appeared": "Active",
+        "modal_changed": {
+          "from": null,
+          "to": "Active"
+        }
+      }
+    },
+    {
+      "step": 40,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "According to the mandatory rule, I must interact with the newly appeared 'Ok' button first."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:47:24.616756",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Active\nAre you sure, you want to Active supplier",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Status pemasok berhasil diperbarui."
+      }
+    },
+    {
+      "step": 41,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "check",
+        "target_name": "mat-mdc-slide-toggle-65",
+        "element_type": "toggle",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "check",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:47:50.194902",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "modal_changed": {
+          "from": null,
+          "to": "InActive"
+        }
+      }
+    },
+    {
+      "step": 42,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button is part of the newly appeared elements due to the last action and must be interacted with first according to the mandatory rule."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:48:08.626759",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Status pemasok berhasil diperbarui.",
+        "modal_changed": {
+          "from": "InActive",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 43,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "check",
+        "target_name": "mat-mdc-slide-toggle-70",
+        "element_type": "toggle",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "check",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:48:35.105289",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Active\nAre you sure, you want to Active supplier",
+        "modal_open": "Active",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Active\nAre you sure, you want to Active supplier",
+        "modal_changed": {
+          "from": null,
+          "to": "Active"
+        }
+      }
+    },
+    {
+      "step": 44,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button must be clicked first as it is part of the newly appeared elements after the last action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:48:57.054943",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Active\nAre you sure, you want to Active supplier",
+        "modal_open": "Active",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Status pemasok berhasil diperbarui.",
+        "modal_changed": {
+          "from": "Active",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 45,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "check",
+        "target_name": "mat-mdc-slide-toggle-75",
+        "element_type": "toggle",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "check",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:56:30.989839",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "InActive",
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "after": [
+            "aifamart",
+            "Politron Electronics",
+            "Informa",
+            "Test Name"
+          ],
+          "added": [
+            "Politron Electronics"
+          ],
+          "removed": [
+            "Poltron Electronics"
+          ]
+        },
+        "toast_appeared": "InActive",
+        "modal_changed": {
+          "from": null,
+          "to": "InActive"
+        }
+      }
+    },
+    {
+      "step": 46,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button is part of the newly appeared elements and should be interacted with first according to the mandatory rule."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:56:51.287572",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "InActive",
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": null,
+          "to": 1
+        },
+        "toast_appeared": "Status pemasok berhasil diperbarui.",
+        "modal_changed": {
+          "from": "InActive",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 47,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "check",
+        "target_name": "mat-mdc-slide-toggle-80",
+        "element_type": "toggle",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "check",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:57:19.413445",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Active\nAre you sure, you want to Active supplier",
+        "modal_open": "Active",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "after": [
+            "aifamart",
+            "Politron Electronics",
+            "Informa",
+            "Test Name"
+          ],
+          "added": [
+            "Politron Electronics"
+          ],
+          "removed": [
+            "Poltron Electronics"
+          ]
+        },
+        "toast_appeared": "Active\nAre you sure, you want to Active supplier",
+        "modal_changed": {
+          "from": null,
+          "to": "Active"
+        }
+      }
+    },
+    {
+      "step": 48,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button must be clicked first as it is a newly appeared element due to the last action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:57:39.187677",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Active",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Status pemasok berhasil diperbarui.",
+        "modal_changed": {
+          "from": "Active",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 49,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "check",
+        "target_name": "mat-mdc-slide-toggle-85",
+        "element_type": "toggle",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "check",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:58:05.495433",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Poltron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": 1,
+          "to": null
+        },
+        "rows_changed": {
+          "before": [
+            "aifamart",
+            "Informa",
+            "Test Name",
+            "Poltron Electronics"
+          ],
+          "after": [
+            "aifamart",
+            "Politron Electronics",
+            "Informa",
+            "Test Name"
+          ],
+          "added": [
+            "Politron Electronics"
+          ],
+          "removed": [
+            "Poltron Electronics"
+          ]
+        },
+        "modal_changed": {
+          "from": null,
+          "to": "InActive"
+        }
+      }
+    },
+    {
+      "step": 50,
+      "url": "https://staging.isalaam.me/master/suppliers",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Ok",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Ok' button is part of the newly appeared elements and should be interacted with first according to the mandatory rule."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-22T10:58:24.539260",
+      "state_before": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "InActive",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Vendor",
+        "total_records": "5",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 5 of 5",
+        "visible_row_count": 5,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Status pemasok berhasil diperbarui.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Status pemasok berhasil diperbarui.",
+        "modal_changed": {
+          "from": "InActive",
+          "to": null
+        }
+      }
+    }
+  ]
+}

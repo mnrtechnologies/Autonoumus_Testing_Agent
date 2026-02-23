@@ -1,0 +1,446 @@
+{
+  "session_id": "20260220_232458",
+  "timestamp": "2026-02-20T23:29:10.005494",
+  "total_steps": 9,
+  "history": [
+    {
+      "step": 1,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Unggah Beberapa Halaman Sampul",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The first step is to test the functionality of the 'Unggah Beberapa Halaman Sampul' button as it is one of the untested elements."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T23:26:01.175549",
+      "state_before": {
+        "page_title": "Lembaga Profil",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "UNGGAH COVER GAMBAR",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 2,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Simpan & Tutup",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the rule to interact with newly appeared elements first, and prioritizing submit actions before cancel."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T23:26:26.945683",
+      "state_before": {
+        "page_title": "Lembaga Profil Masjid Assalaam",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unggah Cover Gambar",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Lembaga Profil Masjid Assalaam",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Please upload an Image to save",
+        "modal_open": "Unggah Cover Gambar",
+        "error_message": "Validation error",
+        "empty_state": null
+      },
+      "state_diff": {
+        "toast_appeared": "Please upload an Image to save",
+        "error_appeared": "Validation error"
+      }
+    },
+    {
+      "step": 3,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "upload",
+        "target_name": "Browse",
+        "element_type": "file",
+        "test_value": "",
+        "reasoning": "The input element of type 'file' needs to be tested by selecting a file to upload."
+      },
+      "result": {
+        "success": true,
+        "action": "upload",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T23:26:51.415635",
+      "state_before": {
+        "page_title": "Lembaga Profil Masjid Assalaam",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unggah Cover Gambar",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Lembaga Profil Masjid Assalaam",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 3,
+        "visible_rows": [
+          "Anggota Utama",
+          "Anggota Utama",
+          "Anggota Utama"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "UNGGAH COVER GAMBAR",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [],
+          "after": [
+            "Anggota Utama"
+          ],
+          "added": [
+            "Anggota Utama"
+          ],
+          "removed": []
+        },
+        "row_count_changed": {
+          "from": 0,
+          "to": 3
+        },
+        "modal_changed": {
+          "from": "Unggah Cover Gambar",
+          "to": "UNGGAH COVER GAMBAR"
+        }
+      }
+    },
+    {
+      "step": 4,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Batal",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Batal' button is the only untested element remaining, and it should be tested after the submit button."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T23:27:16.106983",
+      "state_before": {
+        "page_title": "Lembaga Profil Masjid Assalaam",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 3,
+        "visible_rows": [
+          "Anggota Utama",
+          "Anggota Utama",
+          "Anggota Utama"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "UNGGAH COVER GAMBAR",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Lembaga Profil",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 3,
+        "visible_rows": [
+          "Anggota Utama",
+          "Anggota Utama",
+          "Anggota Utama"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "modal_changed": {
+          "from": "UNGGAH COVER GAMBAR",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 5,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Unggah Profil",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the mandatory rule to interact with newly appeared elements first."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T23:27:49.235607",
+      "state_before": {
+        "page_title": "Lembaga Profil",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Lembaga Profil",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unggah Profil Gambar",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "modal_changed": {
+          "from": null,
+          "to": "Unggah Profil Gambar"
+        }
+      }
+    },
+    {
+      "step": 6,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Simpan & Tutup",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the rule to test submit/save buttons before cancel/close buttons in forms/modals."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T23:28:14.430626",
+      "state_before": {
+        "page_title": "Lembaga Profil Masjid Assalaam",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 4,
+        "visible_rows": [
+          "Anggota Utama",
+          "Anggota Utama",
+          "Anggota Utama",
+          "Anggota Utama"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unggah Profile Gambar",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Lembaga Profil Masjid Assalaam",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Validation error",
+        "modal_open": "Unggah Profile Gambar",
+        "error_message": "Please upload an Image to save",
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "Anggota Utama"
+          ],
+          "after": [],
+          "added": [],
+          "removed": [
+            "Anggota Utama"
+          ]
+        },
+        "row_count_changed": {
+          "from": 4,
+          "to": 0
+        },
+        "toast_appeared": "Validation error",
+        "error_appeared": "Please upload an Image to save"
+      }
+    },
+    {
+      "step": 7,
+      "url": "https://staging.isalaam.me/ministry/ministryprofile",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Batal",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Batal' button is untested and should be clicked to verify its functionality."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-20T23:28:38.804986",
+      "state_before": {
+        "page_title": "Lembaga Profil Masjid Assalaam",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 3,
+        "visible_rows": [
+          "Anggota Utama",
+          "Anggota Utama",
+          "Anggota Utama"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Unggah Profile Gambar",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Lembaga Profil",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "Anggota Utama"
+          ],
+          "after": [],
+          "added": [],
+          "removed": [
+            "Anggota Utama"
+          ]
+        },
+        "row_count_changed": {
+          "from": 3,
+          "to": 0
+        },
+        "modal_changed": {
+          "from": "Unggah Profile Gambar",
+          "to": null
+        }
+      }
+    }
+  ]
+}

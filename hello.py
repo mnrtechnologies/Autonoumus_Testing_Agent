@@ -39,15 +39,16 @@ from datetime import datetime
 from typing import Optional, Dict, List, Any, Tuple, Set
 from urllib.parse import urlparse, urljoin
 from dataclasses import dataclass, field
+from knowledge_harvester import KnowledgeHarvester
 from enum import Enum
-import anthropic
+# import anthropic
 from element_filter import ElementFilter
 from story_aware_decider import StoryAwareDecider, build_story_tester
 from test_story_engine   import TestStoryTracker, ReportGenerator
 
 from playwright.async_api import async_playwright, Page, Locator, FrameLocator
 from openai import OpenAI
-
+from page_state_extractor import PageStateExtractor, diff_states
 
 # ═══════════════════════════════════════════════════════════════
 #  CORE DATA MODELS
@@ -104,19 +105,32 @@ class GlobalMemory:
             else:
                 any_tested = any(
                     self.is_tested(identifier, a)
-                    for a in ['click', 'fill', 'select', 'check']
+                    for a in ['click', 'fill', 'select', 'check','upload']
                 )
                 if not any_tested:
                     untested.append(elem)
         return untested
 
     def _get_identifier(self, element: Dict) -> str:
-        """
-        CRITICAL: This method defines how we identify elements.
-        Must be used consistently everywhere in the codebase.
-        """
         is_in_overlay = element.get('in_overlay', False)
         context_prefix = 'overlay:' if is_in_overlay else 'page:'
+
+        if element.get("element_type") == "toggle":
+            # Use X/Y position instead of ID
+            x = element.get("x")
+            y = element.get("y")
+
+            # Snap Y to row band (e.g., 50px buckets)
+            row_bucket = int(y / 50)
+
+            return f"{context_prefix}toggle:row{row_bucket}:col{x}"
+
+        # ✅ File first (after prefix is defined)
+        if element.get('element_type') == 'file':
+            formcontrol = element.get('formcontrolname', '')
+            if formcontrol:
+                return f"{context_prefix}file:{formcontrol}"
+            return f"{context_prefix}file:{element.get('id') or element.get('name') or element.get('text')}"
 
         formcontrol = element.get('formcontrolname', '')
         if formcontrol:
@@ -128,15 +142,16 @@ class GlobalMemory:
 
         text = element.get('text', '').strip()
         elem_type = element.get('element_type', element.get('tag', ''))
+
         if text:
-            return f"{context_prefix}{elem_type}:{text[:50]}"
+            y = element.get('y')
+            return f"{context_prefix}{elem_type}:{text[:50]}:{y}"
 
         id_attr = element.get('id', '')
         if id_attr:
             return f"{context_prefix}{elem_type}:#{id_attr}"
 
         return f"{context_prefix}{elem_type}:unknown"
-
 
 # ═══════════════════════════════════════════════════════════════
 #  SCOPE MANAGER
@@ -307,24 +322,27 @@ class Observer:
             // ── Helper: is element truly interactive? ────────────────────────
             function isTrulyInteractive(el) {{
                 const rect = el.getBoundingClientRect();
+                const tag = el.tagName.toLowerCase();
+                const type = el.type || '';
+
+                // ✅ ALWAYS allow file inputs (even if hidden / 0x0)
+                if (tag === 'input' && type === 'file') {{
+                    return true;
+                }}
+
                 if (rect.width === 0 || rect.height === 0) return false;
 
                 const style = window.getComputedStyle(el);
                 if (style.display === 'none' || style.visibility === 'hidden') return false;
                 if (style.opacity === '0') return false;
 
-                // Don't filter out disabled elements - we'll mark them as disabled instead
-                // This allows us to see submit buttons that become enabled after form fills
-
-                const tag = el.tagName.toLowerCase();
-                const type = el.type || '';
                 if ((tag === 'input' || tag === 'textarea') &&
-                    type !== 'checkbox' && type !== 'radio' &&
+                    type !== 'checkbox' &&
+                    type !== 'radio' &&
                     el.readOnly) return false;
 
                 return true;
             }}
-
             // ── Helper: is element disabled? ─────────────────────────────────
             function isDisabled(el) {{
                 if (el.disabled) return true;
@@ -368,7 +386,7 @@ class Observer:
                 if (!text) return;
 
                 const contextPrefix = isInOverlay ? 'overlay:' : 'page:';
-                const key = `${{contextPrefix}}button:${{text}}:${{el.id}}`;
+                const key = `${{contextPrefix}}button:${{text}}:${{Math.round(rect.y)}}`;
                 if (seen.has(key)) return;
                 seen.add(key);
 
@@ -414,46 +432,86 @@ class Observer:
                 }});
             }});
 
-            // ── Collect inputs ────────────────────────────────────────────────
-            document.querySelectorAll(strictSelectors.inputs).forEach(el => {{
-                if (!isTrulyInteractive(el)) return;
+        // ── Collect inputs ────────────────────────────────────────────────
+        document.querySelectorAll(strictSelectors.inputs).forEach(el => {{
+            if (!isTrulyInteractive(el)) return;
 
-                const rect = el.getBoundingClientRect();
-                const isInOverlay = activeOverlay ? activeOverlay.contains(el) : false;
-                const isBlocked   = activeOverlay && !isInOverlay;
+            const rect = el.getBoundingClientRect();
+            const isInOverlay = activeOverlay ? activeOverlay.contains(el) : false;
+            const isBlocked   = activeOverlay && !isInOverlay;
 
+            const type             = (el.type || '').toLowerCase();
+            const placeholder      = el.placeholder || '';
+            const ariaLabel        = el.getAttribute('aria-label') || '';
+            const nameAttr         = el.getAttribute('name') || '';
+            const formControlName  = el.getAttribute('formcontrolname') || '';
+            const id               = el.id || '';
 
+            let label = placeholder || ariaLabel || formControlName || nameAttr;
 
-                const placeholder      = el.placeholder || '';
-                const ariaLabel        = el.getAttribute('aria-label') || '';
-                const nameAttr         = el.getAttribute('name') || '';
-                const formControlName  = el.getAttribute('formcontrolname') || '';
-                const id               = el.id || '';
+            if (!label && id) {{
+                const labelEl = document.querySelector(`label[for="${{id}}"]`);
+                if (labelEl) label = labelEl.innerText.trim();
+            }}
 
-                let label = placeholder || ariaLabel || formControlName || nameAttr;
-                if (!label && id) {{
-                    const labelEl = document.querySelector(`label[for="${{id}}"]`);
-                    if (labelEl) label = labelEl.innerText.trim();
-                }}
-                if (!label) label = `${{el.type || 'text'}} input`;
+            if (!label) label = `${{type || 'text'}} input`;
 
-                const contextPrefix = isInOverlay ? 'overlay:' : 'page:';
-                const key = `${{contextPrefix}}input:${{el.type}}:${{label}}:${{id}}`;
+            const contextPrefix = isInOverlay ? 'overlay:' : 'page:';
+
+            // 🔥 FILE INPUT HANDLING
+            if (type === 'file') {{
+
+                const key = `${{contextPrefix}}file:${{label}}:${{id}}`;
                 if (seen.has(key)) return;
                 seen.add(key);
 
                 interactive.push({{
-                    tag: 'input', type: el.type || 'text', role: 'textbox',
-                    text: label, id, name: nameAttr,
+                    tag: 'input',
+                    type: 'file',
+                    role: 'button',
+                    text: label || 'file-upload',
+                    id,
+                    name: nameAttr,
                     classes: Array.from(el.classList).slice(0, 5),
-                    href: '', required: el.hasAttribute('required'),
-                    enabled: true, blocked: isBlocked, in_overlay: isInOverlay,
-                    x: Math.round(rect.x), y: Math.round(rect.y),
-                    element_type: 'input',
-                    placeholder, formcontrolname: formControlName
+                    href: '',
+                    required: el.hasAttribute('required'),
+                    enabled: true,
+                    blocked: isBlocked,
+                    in_overlay: isInOverlay,
+                    x: Math.round(rect.x),
+                    y: Math.round(rect.y),
+                    element_type: 'file',
+                    placeholder: '',
+                    formcontrolname: formControlName
                 }});
-            }});
 
+                return;
+            }}
+
+            const key = `${{contextPrefix}}input:${{type}}:${{label}}:${{id}}`;
+            if (seen.has(key)) return;
+            seen.add(key);
+
+            interactive.push({{
+                tag: 'input',
+                type: type || 'text',
+                role: 'textbox',
+                text: label,
+                id,
+                name: nameAttr,
+                classes: Array.from(el.classList).slice(0, 5),
+                href: '',
+                required: el.hasAttribute('required'),
+                enabled: true,
+                blocked: isBlocked,
+                in_overlay: isInOverlay,
+                x: Math.round(rect.x),
+                y: Math.round(rect.y),
+                element_type: 'input',
+                placeholder,
+                formcontrolname: formControlName
+            }});
+        }});
             // ── Collect selects ───────────────────────────────────────────────
             document.querySelectorAll(strictSelectors.selects).forEach(el => {{
                 if (!isTrulyInteractive(el)) return;
@@ -519,6 +577,64 @@ class Observer:
                 }});
             }});
 
+            
+        // ── Collect toggle switches ───────────────────────────────────
+        document.querySelectorAll(`
+            input[type="checkbox"],
+            mat-slide-toggle,
+            [role="switch"],
+            .mat-mdc-slide-toggle,
+            .toggle,
+            .switch
+        `).forEach(el => {{
+            if (!isTrulyInteractive(el)) return;
+
+            const rect = el.getBoundingClientRect();
+            const isInOverlay = activeOverlay ? activeOverlay.contains(el) : false;
+            const isBlocked   = activeOverlay && !isInOverlay;
+
+            let checked = false;
+
+            if (el.tagName.toLowerCase() === 'input') {{
+                checked = el.checked;
+            }} else {{
+                checked =
+                    el.getAttribute('aria-checked') === 'true' ||
+                    el.classList.contains('mat-mdc-slide-toggle-checked');
+            }}
+
+            const label =
+                el.getAttribute('aria-label') ||
+                el.getAttribute('name') ||
+                el.getAttribute('formcontrolname') ||
+                el.id ||
+                'toggle';
+
+            const contextPrefix = isInOverlay ? 'overlay:' : 'page:';
+            const key = `${{contextPrefix}}toggle:${{label}}:${{checked}}`;
+            if (seen.has(key)) return;
+            seen.add(key);
+
+            interactive.push({{
+                tag: el.tagName.toLowerCase(),
+                type: 'toggle',
+                role: 'switch',
+                text: label,
+                id: el.id || '',
+                name: el.getAttribute('name') || '',
+                classes: Array.from(el.classList).slice(0,5),
+                href: '',
+                required: false,
+                enabled: !isDisabled(el),
+                blocked: isBlocked,
+                in_overlay: isInOverlay,
+                x: Math.round(rect.x),
+                y: Math.round(rect.y),
+                element_type: 'toggle',
+                checked: checked
+            }});
+        }});
+            
             // ── Collect ARIA interactive elements (tabs, custom buttons) ──────
             const ariaSelectors = [
     '[role="tab"]',
@@ -563,6 +679,54 @@ class Observer:
                 }});
             }});
 
+
+            // ── Collect clickable divs/spans (JS handlers) ───────────────
+            document.querySelectorAll('div, span').forEach(el => {{
+                if (!isTrulyInteractive(el)) return;
+
+                const rect = el.getBoundingClientRect();
+                const isInOverlay = activeOverlay ? activeOverlay.contains(el) : false;
+                const isBlocked   = activeOverlay && !isInOverlay;
+
+                const hasClickHandler =
+                    el.onclick ||
+                    el.getAttribute('onclick') ||
+                    el.getAttribute('role') === 'button' ||
+                    el.classList.contains('cursor-pointer');
+
+                if (!hasClickHandler) return;
+
+                const text = (
+                    el.innerText ||
+                    el.getAttribute('aria-label') ||
+                    ''
+                ).trim().replace(/\s+/g, ' ').slice(0,150);
+
+                if (!text) return;
+
+                const contextPrefix = isInOverlay ? 'overlay:' : 'page:';
+                const key = `${{contextPrefix}}divbutton:${{text}}:${{el.id}}`;
+                if (seen.has(key)) return;
+                seen.add(key);
+
+                interactive.push({{
+                    tag: el.tagName.toLowerCase(),
+                    type: 'button',
+                    role: 'button',
+                    text,
+                    id: el.id || '',
+                    name: '',
+                    classes: Array.from(el.classList).slice(0,5),
+                    href: '',
+                    required: false,
+                    enabled: true,
+                    blocked: isBlocked,
+                    in_overlay: isInOverlay,
+                    x: Math.round(rect.x),
+                    y: Math.round(rect.y),
+                    element_type: 'button'
+                }});
+            }});
             // ── Collect CUSTOM SELECT components ──────────────────────────────
             const customSelectSelectors = [
     'mat-form-field [role="combobox"]:not(input):not(select)',
@@ -794,6 +958,8 @@ class Decider:
         prompt = self._build_prompt(context_frame.context_type, elements)
 
         try:
+            diff_summary = self._summarise_state_diffs()
+            print(f"\n🔍 STATE DIFF SUMMARY BEING SENT TO GPT:\n{diff_summary}\n")
             response = self.openai.chat.completions.create(
                 model="gpt-4o",
                 messages=[{
@@ -891,6 +1057,7 @@ MOST IMPORTANT RULE — READ THE SCREENSHOT CAREFULLY:
 
 2. CORRECT ACTION PER ELEMENT TYPE (CRITICAL - Follow element_type from list above)
    - element_type "input" or "textarea"  → action = "fill"
+   - element_type "file" → action = "upload"
    - element_type "select"               → action = "select", test_value = a valid option
    - element_type "custom-select"        → action = "select", test_value = a valid option
      (custom-select = Angular mat-select, ng-select, PrimeNG, Ant Design, Vue-select,
@@ -960,7 +1127,7 @@ MOST IMPORTANT RULE — READ THE SCREENSHOT CAREFULLY:
         prompt += """
 Return ONLY valid JSON, no markdown:
 {
-  "action": "click|fill|select|check",
+  "action": "click|fill|select|check|upload",
   "target_name": "exact text or formcontrolname from the list",
   "element_type": "button|input|link|select|textarea|custom-select",
   "test_value": "value if filling/selecting, empty string for clicks",
@@ -1022,6 +1189,12 @@ class Controller:
         #     loc = await self._by_role(target, elem_type, root)
         #     if loc:
         #         return loc, "role"
+
+        if elem_type == 'file':
+            loc = root.locator('input[type="file"]')
+            if await loc.count() > 0:
+                print("    ✓ Found file input")
+                return loc.first, "file"
 
         loc = await self._by_role(target, elem_type, root)
         if loc:
@@ -1103,6 +1276,8 @@ class Controller:
             pass
 
         return None
+    
+    
 
     async def _by_role(self, name: str, role: str, root) -> Optional[Locator]:
         try:
@@ -1156,27 +1331,35 @@ class Controller:
 
     async def _by_text_interactive(self, text: str, elem_type: str, root) -> Optional[Locator]:
         tag_map = {
-            'button': 'button', 'link': 'a',
-            'input': 'input', 'select': 'select', 'textarea': 'textarea'
+            'button': ['button', 'div', 'span'],
+            'link': ['a'],
+            'input': ['input'],
+            'select': ['select'],
+            'textarea': ['textarea']
         }
-        tag = tag_map.get(elem_type, '')
+
+        tags = tag_map.get(elem_type, ['button', 'div'])
+
         try:
-            if tag:
-                loc = root.locator(tag).filter(has_text=text)
-                if await loc.count() > 0:
-                    return loc.first
-            else:
-                role_loc = root.locator(f'[role="{elem_type}"]').filter(has_text=text)
-                if await role_loc.count() > 0:
-                    return role_loc.first
-                # Then fall back to common tags
-                for t in ['button', 'a', 'input', 'select', 'textarea']:
-                    loc = root.locator(t).filter(has_text=text)
-                    if await loc.count() > 0:
-                        return loc.first
+            loc = root.get_by_text(text, exact=True)
+            if await loc.count() > 0:
+                print("    ✓ Found by get_by_text")
+                return loc.first
         except Exception:
             pass
+
         return None
+
+        # try:
+        #     for tag in tags:
+        #         loc = root.locator(tag).filter(has_text=text)
+        #         if await loc.count() > 0:
+        #             print(f"    ✓ Found by text in <{tag}>")
+        #             return loc.first
+        # except Exception:
+        #     pass
+
+        # return None
 
     async def _by_id(self, id_value: str, root) -> Optional[Locator]:
         try:
@@ -1226,59 +1409,82 @@ class Executor:
         result = {"success": False, "action": action, "error": None}
 
         try:
-            await locator.wait_for(state="visible", timeout=3000)
+            if action == "upload":
+                # Only need it attached
+                await locator.wait_for(state="attached", timeout=5000)
 
-            if action == "click":
-                # Check if button is disabled
-                is_disabled = await locator.evaluate("""
-                    el => el.disabled ||
-                          el.getAttribute('aria-disabled') === 'true' ||
-                          el.classList.contains('mat-mdc-button-disabled')
-                """)
+                upload_dir = Path("test_upload_files")
+                upload_dir.mkdir(exist_ok=True)
 
-                if is_disabled:
-                    print(f"    ⏳ Button is disabled, waiting for it to enable...")
-                    # Wait up to 3 seconds for button to become enabled
-                    for i in range(6):
-                        await asyncio.sleep(0.5)
-                        is_disabled = await locator.evaluate("""
-                            el => el.disabled ||
-                                  el.getAttribute('aria-disabled') === 'true' ||
-                                  el.classList.contains('mat-mdc-button-disabled')
-                        """)
-                        if not is_disabled:
-                            print(f"    ✓ Button enabled after {(i+1)*0.5}s")
-                            break
+                test_file = upload_dir / "test_image.png"
+
+                if not test_file.exists():
+                    from PIL import Image
+                    img = Image.new("RGB", (300, 300), color=(120, 150, 200))
+                    img.save(test_file)
+
+                await locator.set_input_files(str(test_file), timeout=10000)
+                print(f"    ✓ Uploaded file: {test_file}")
+            else:
+            
+                await locator.wait_for(state="visible", timeout=3000)
+
+                if action == "click":
+                    # Check if button is disabled
+                    is_disabled = await locator.evaluate("""
+                        el => el.disabled ||
+                            el.getAttribute('aria-disabled') === 'true' ||
+                            el.classList.contains('mat-mdc-button-disabled')
+                    """)
 
                     if is_disabled:
-                        result["error"] = "Button remained disabled"
-                        print(f"    ⚠️  Button still disabled after 3s - skipping")
-                        return result
+                        print(f"    ⏳ Button is disabled, waiting for it to enable...")
+                        # Wait up to 3 seconds for button to become enabled
+                        for i in range(6):
+                            await asyncio.sleep(0.5)
+                            is_disabled = await locator.evaluate("""
+                                el => el.disabled ||
+                                    el.getAttribute('aria-disabled') === 'true' ||
+                                    el.classList.contains('mat-mdc-button-disabled')
+                            """)
+                            if not is_disabled:
+                                print(f"    ✓ Button enabled after {(i+1)*0.5}s")
+                                break
 
-                await locator.scroll_into_view_if_needed(timeout=5000)
-                await locator.click(timeout=5000)
-                print(f"    ✓ Clicked")
+                        if is_disabled:
+                            result["error"] = "Button remained disabled"
+                            print(f"    ⚠️  Button still disabled after 3s - skipping")
+                            return result
 
-            elif action == "fill":
-                await locator.fill(value or "TestValue", timeout=5000)
-                print(f"    ✓ Filled: {value}")
-                await asyncio.sleep(1)
+                    await locator.scroll_into_view_if_needed(timeout=5000)
+                    await locator.click(timeout=5000)
+                    print(f"    ✓ Clicked")
+            
+                elif action == "fill":
+                    await locator.fill(value or "TestValue", timeout=5000)
+                    print(f"    ✓ Filled: {value}")
+                    await asyncio.sleep(1)
 
-            elif action == "select":
-                tag = await locator.evaluate("el => el.tagName.toLowerCase()")
-                if tag == 'select':
-                    await locator.select_option(label=value or "", timeout=5000)
-                    print(f"    ✓ Selected (native): {value}")
-                else:
-                    # Use improved custom dropdown handler
-                    dropdown_result = await self._select_custom_dropdown(locator, value or "")
-                    result["selected_value"]  = dropdown_result["selected"]
-                    result["all_options"]     = dropdown_result["all_options"]
-                    result["formcontrolname"] = dropdown_result.get("formcontrolname", "")
+                elif action == "check" and elem_type == "toggle":
+                    await locator.scroll_into_view_if_needed(timeout=5000)
+                    await locator.click(timeout=5000)
+                    print("    ✓ Toggled")
 
-            elif action == "check":
-                await locator.check(timeout=5000)
-                print(f"    ✓ Checked")
+                elif action == "select":
+                    tag = await locator.evaluate("el => el.tagName.toLowerCase()")
+                    if tag == 'select':
+                        await locator.select_option(label=value or "", timeout=5000)
+                        print(f"    ✓ Selected (native): {value}")
+                    else:
+                        # Use improved custom dropdown handler
+                        dropdown_result = await self._select_custom_dropdown(locator, value or "")
+                        result["selected_value"]  = dropdown_result["selected"]
+                        result["all_options"]     = dropdown_result["all_options"]
+                        result["formcontrolname"] = dropdown_result.get("formcontrolname", "")
+
+                elif action == "check":
+                    await locator.check(timeout=5000)
+                    print(f"    ✓ Checked")
 
             await asyncio.sleep(1.5)
             result["success"] = True
@@ -1507,11 +1713,21 @@ class SemanticTester:
         self.loop_detector = LoopDetector()
         self.global_memory = GlobalMemory()
         self.element_filter = ElementFilter(self.openai)
+        self.harvester = KnowledgeHarvester(
+            output_dir=self.output_dir,
+            session_id=self.session_id,
+            openai_client=self.openai
+        )
+        self.state_extractor = PageStateExtractor(self.openai)
         self.scope:      Optional[ScopeManager] = None
         self.decider:    Optional[Decider]      = None
         self.controller: Optional[Controller]   = None
         self.executor:   Optional[Executor]     = None
-
+    #     self.harvester = KnowledgeHarvester(
+    #     output_dir=self.output_dir,
+    #     session_id=self.session_id,
+    #     openai_client=self.openai
+    # )
         self.history: List[Dict] = []
         self.step = 0
         self.story_tracker, self.report_gen, self.story_gen = build_story_tester(self.openai, self.output_dir, self.session_id)
@@ -1578,10 +1794,88 @@ class SemanticTester:
                 traceback.print_exc()
 
             finally:
-                self._save_results()
+                # self._save_results()
+                await self._save_results()
                 if getattr(self, '_interactive', True):
                     input("\n👁️  Press Enter to close...")
                 await browser.close()
+
+    def _validate_decision(self, decision: Dict, untested: List[Dict]) -> Dict:
+        """Enforce that LLM can only pick from the untested list. No hallucination allowed."""
+        target = decision.get('target_name', '').strip()
+
+        # Special handling for file inputs
+        # --- Special handling for file inputs ---
+        for elem in untested:
+            if elem.get('element_type') == 'file':
+                if (
+                    target == elem.get('formcontrolname', '').strip() or
+                    target == elem.get('text', '').strip() or
+                    target == elem.get('id', '').strip()
+                ):
+                    print("  🔧 Normalizing file interaction → upload")
+
+                    # Force correct action for file input
+                    decision['action'] = 'upload'
+                    decision['element_type'] = 'file'
+                    decision['test_value'] = ''   # Ignore GPT file path
+
+                    return decision
+
+        # Check if decision target exists in untested list
+        for elem in untested:
+            if (elem.get('formcontrolname', '').strip() == target or
+                elem.get('text', '').strip() == target or
+                elem.get('name', '').strip() == target):
+                return decision  # ✅ Valid choice
+            # Partial match
+            elem_text = elem.get('text', '').strip()
+            if elem_text and (target in elem_text or elem_text in target):
+                return decision
+
+        # ❌ LLM hallucinated — override with best choice from untested
+        print(f"  🚨 VALIDATION OVERRIDE: '{target}' not in untested list!")
+        print(f"     Available: {[e.get('formcontrolname') or e.get('text') for e in untested]}")
+
+        # Priority 1: inputs/selects/textareas (fill before submit)
+        for elem in untested:
+            if elem.get('element_type') in ['file', 'input', 'textarea', 'select', 'custom-select', 'combobox']:
+                return self._elem_to_decision(elem)
+
+        # Priority 2: non-cancel buttons
+        cancel_keywords = ['batal', 'cancel', 'tutup', 'close', 'kembali', 'back']
+        for elem in untested:
+            text = (elem.get('text') or '').lower()
+            if elem.get('element_type') == 'button' and not any(k in text for k in cancel_keywords):
+                return self._elem_to_decision(elem)
+
+        # Priority 3: anything remaining
+        return self._elem_to_decision(untested[0])
+
+    def _elem_to_decision(self, elem: Dict) -> Dict:
+        """Convert an element dict into a decision dict."""
+        elem_type = elem.get('element_type', 'button')
+        action_map = {
+            'input': 'fill',
+            'textarea': 'fill',
+            'file': 'upload',
+            'select': 'select',
+            'custom-select': 'select',
+            'button': 'click',
+            'link': 'click',
+            'checkbox': 'check',
+            'radio': 'check',
+            'toggle': 'check'
+        }
+        target = elem.get('formcontrolname') or elem.get('text', '')
+        print(f"  🔄 Forced to: {action_map.get(elem_type, 'click')} → '{target}'")
+        return {
+            'action': action_map.get(elem_type, 'click'),
+            'target_name': target,
+            'element_type': elem_type,
+            'test_value': '',
+            'reasoning': 'Validation override — LLM picked element outside untested list'
+        }
 
     async def _test_loop(self, page: Page):
         max_iter  = 50
@@ -1601,6 +1895,8 @@ class SemanticTester:
             print("\n[OBSERVE]")
             screenshot    = await self._screenshot(page, f"step_{self.step}")
             elements_data = await self.observer.get_elements(page)
+            # self.harvester.harvest_page(page.url, screenshot, elements_data)
+            # self.harvester.harvest_actions(active_elements)
             print(f"DEBUG overlay detected: {elements_data.get('has_overlay')}")
             print(f"DEBUG overlay selector: {elements_data.get('overlay_selector')}")
             for e in elements_data.get('active_elements', []):
@@ -1640,6 +1936,12 @@ class SemanticTester:
                     )
              self.context_stack.push(new_frame)
              current = self.context_stack.current()
+             self.harvester.harvest_form(
+        overlay_type=elements_data.get("overlay_type"),
+        fields=active_elements,
+        screenshot_b64=screenshot
+    )
+
 
             elif not has_overlay_now and was_in_overlay:
                 print("DEBUG overlay closing, current overlay memory:")
@@ -1647,7 +1949,7 @@ class SemanticTester:
                     if e.startswith('overlay:'):
                         print(f"  {e}")
                 toast_text = await self._detect_toast(page)      # ← ADD
-                self.story_tracker.complete_story(toast_text)
+                # self.story_tracker.complete_story(toast_text)
                 self.context_stack.pop()
                 current = self.context_stack.current()
                 current.dom_hash         = dom_hash
@@ -1666,6 +1968,11 @@ class SemanticTester:
                 url=page.url,
                 context_type=current.context_type.value
             )
+            for e in active_elements:
+                if e.get('element_type') == 'file':
+                    print("🔥 FILE STILL PRESENT AFTER FILTER")
+            self.harvester.harvest_page(page.url, screenshot, elements_data)
+            self.harvester.harvest_actions(active_elements)
             scoped_elements = []
 
             for elem in active_elements:
@@ -1683,7 +1990,7 @@ class SemanticTester:
             for elem in scoped_elements:
                 identifier = self.global_memory._get_identifier(elem)
                 if any(self.global_memory.is_tested(identifier, a)
-                    for a in ['click', 'fill', 'select', 'check']):
+                    for a in ['click', 'fill', 'select', 'check','upload']):
                     tested_positions.add((elem.get('x'), elem.get('y')))
 
 
@@ -1693,12 +2000,12 @@ class SemanticTester:
             ]
             print(f"{untested} second this is untested logs")
             full_screenshot = await self._full_screenshot(page, f"story_gen_{self.step}")
-            await self.decider.maybe_generate_story(
-                page=page, elements=scoped_elements,
-                screenshot_b64=screenshot,
-                context_type=current.context_type.value,
-                url=page.url
-            )
+            # await self.decider.maybe_generate_story(
+            #     page=page, elements=scoped_elements,
+            #     screenshot_b64=screenshot,
+            #     context_type=current.context_type.value,
+            #     url=page.url
+            # )
 
             if len(scoped_elements) > len(untested):
                 print(f"  ✅ Global memory working:")
@@ -1746,6 +2053,7 @@ class SemanticTester:
 
             if decision.get('action') == 'done':
                 break
+            decision = self._validate_decision(decision, untested)
 
             print(f"  Action: {decision.get('action')}")
             print(f"  Target: {decision.get('target_name')}")
@@ -1811,6 +2119,12 @@ class SemanticTester:
 
             # ── EXECUTE ──────────────────────────────────────────────────────
             print("\n[EXECUTE]")
+            state_before = await self.state_extractor.extract(
+                screenshot_b64=screenshot,
+                url=page.url
+            )
+            state_after = {}
+            state_diff = {}
 
             # Find matching element for proper identification
             # Use same matching logic as loop handler
@@ -1860,12 +2174,47 @@ class SemanticTester:
                 decision.get('test_value'),
                 elem_type=decision.get('element_type', '')
             )
+            print(f"  🔍 state_diff stored: {state_diff}")
+            if result.get("all_options"):
+                self.harvester.harvest_dropdown(
+                    field_name=decision.get("target_name"),
+                    options=result.get("all_options")
+                )
+            screenshot_after = await self._screenshot(page, f"after_step_{self.step}")
+            state_after = await self.state_extractor.extract(
+                screenshot_b64=screenshot_after,
+                url=page.url,
+                action_context=f"{decision.get('action')} '{decision.get('target_name')}'"
+            )
+            state_diff = diff_states(state_before, state_after)
+            print(f"  🔍 state_diff stored: {state_diff}")
 
+            if state_diff:
+                print(f"  📸 State diff: {state_diff}")
             # FIX 4: Only mark as tested if execution was successful
+            is_submit = any(
+                kw in decision.get("target_name", "").lower()
+                for kw in ["simpan", "save", "submit", "tambah", "perbarui", "update"]
+            )
+
+            validation_failed = (
+                state_diff.get("error_appeared") is not None
+                or (
+                    state_diff.get("toast_appeared")
+                    and "validation" in state_diff["toast_appeared"].lower()
+                )
+            )
+
             if matching_elem:
                 identifier = self.global_memory._get_identifier(matching_elem)
-                if result.get('success') and matching_elem:
-                    # identifier = self.global_memory._get_identifier(matching_elem)
+
+                if result.get("success"):
+
+                    if is_submit and validation_failed:
+                        print("⚠️ Submit failed validation — NOT marking as tested")
+                    else:
+                        self.global_memory.mark_tested(identifier, decision.get("action"))
+                        print(f"✅ Marked as tested: {identifier}")                    # identifier = self.global_memory._get_identifier(matching_elem)
                     self.global_memory.mark_tested(identifier, decision.get('action'))
                     print(f"  ✅ Marked as tested: {identifier}")
                     # print(f"  ✅ Marked as tested: {identifier}")
@@ -1889,18 +2238,23 @@ class SemanticTester:
                 for kw in ["simpan","save","submit","tambah","perbarui","update"])
             if is_submit and not result.get("success"):
                 self.story_tracker.mark_submit_failed(decision.get("target_name",""), result.get("error",""))
-            else:
-                self.story_tracker.record_action(
-                    action=decision.get("action",""), target=decision.get("target_name",""),
-                    value=decision.get("test_value",""), success=result.get("success",False),
-                    error=result.get("error") if not result.get("success") else None
-                )
+            # else:
+            #     self.story_tracker.record_action(
+            #         action=decision.get("action",""), target=decision.get("target_name",""),
+            #         value=decision.get("test_value",""), success=result.get("success",False),
+            #         error=result.get("error") if not result.get("success") else None
+            #     )
             self.history.append({
                 "step":        self.step,
+                "url":        page.url,
+                "page_title": await page.title(),
                 "decision":    decision,
                 "result":      result,
                 "all_options": result.get("all_options"),
-                "timestamp":   datetime.now().isoformat()
+                "timestamp":   datetime.now().isoformat(),
+                "state_before": state_before,
+                "state_after":  state_after,
+                "state_diff":   state_diff,
             })
 
             print(f"  Success: {result.get('success')}")
@@ -1968,7 +2322,7 @@ class SemanticTester:
             pass
         return ""
 
-    def _save_results(self):
+    async def _save_results(self):
         results = {
             "session_id":  self.session_id,
             "timestamp":   datetime.now().isoformat(),
@@ -1986,13 +2340,9 @@ class SemanticTester:
         print(f"  Total:   {len(self.history)}")
         print(f"  Success: {success}")
         print(f"  Failed:  {len(self.history) - success}")
+        await self.harvester.generate_stories(history=self.history)
 
-        if self.story_tracker.active_story:
-            self.story_tracker.abandon_story("Session ended")
-        if self.story_tracker.stories:
-            self.report_gen.generate_all(self.story_tracker.stories)
-        else:
-            print("  ⚠️  No stories recorded")
+
 
 
 # ═══════════════════════════════════════════════════════════════

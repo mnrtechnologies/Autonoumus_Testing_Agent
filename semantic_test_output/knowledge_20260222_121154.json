@@ -1,0 +1,752 @@
+{
+  "session_id": "20260222_121154",
+  "page_url": "https://staging.isalaam.me/users/menumapping",
+  "generated_at": "2026-02-22T12:17:48.616613",
+  "execution_history": [
+    {
+      "step": 1,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 2,
+      "action": "click",
+      "target": "Tindakan",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 3,
+      "action": "click",
+      "target": "mat-mdc-slide-toggle-0",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 4,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 5,
+      "action": "click",
+      "target": "mat-mdc-slide-toggle-11-button",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 6,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 7,
+      "action": "fill",
+      "target": "Cari",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 8,
+      "action": "click",
+      "target": "mat-mdc-slide-toggle-23-button",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 9,
+      "action": "click",
+      "target": "Ok",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 10,
+      "action": "click",
+      "target": "1",
+      "value": "",
+      "success": false,
+      "error": "Button remained disabled",
+      "options": null
+    },
+    {
+      "step": 11,
+      "action": "click",
+      "target": "2",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    }
+  ],
+  "dropdown_options": {},
+  "forms_discovered": {
+    "confirmation_1": [
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-0",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-0-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-1",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-1-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-2",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-2-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-3",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-3-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-4",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-4-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-5",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-5-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-6",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-6-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-7",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-7-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-8",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-8-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-9",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-9-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      }
+    ],
+    "confirmation_2": [
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-10",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-10-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-11",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-11-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-12",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-12-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-13",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-13-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-14",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-14-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-15",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-15-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-16",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-16-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-17",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-17-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-18",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-18-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-19",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-19-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      }
+    ],
+    "confirmation_3": [
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-20",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-20-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-21",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-21-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-22",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-22-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-23",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-23-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-24",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-24-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-25",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-25-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-26",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-26-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-27",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-27-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-28",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-28-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-29",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      },
+      {
+        "name": "mat-mdc-slide-toggle-29-button",
+        "type": "toggle",
+        "input_type": "toggle",
+        "required": false
+      }
+    ]
+  },
+  "stories_generated": 5,
+  "stories": [
+    {
+      "story_id": "STORY-001",
+      "context_name": "Toggle Menu Activation",
+      "user_persona": "Super Admin",
+      "description": "Super Admin toggles the activation status of a menu item and confirms the change. This ensures that the menu item is correctly activated or deactivated as needed.",
+      "field_values": {
+        "toggleName": "mat-mdc-slide-toggle-0"
+      },
+      "expected_outcome": "Menu item activation status changes and confirmation dialog appears.\n\nVALIDATION: Assert: toggle state changes. Assert: confirmation dialog shows 'Ok' button.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'more_vert' to open actions menu.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.611819"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'Tindakan' to select an action.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.611819"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'mat-mdc-slide-toggle-0' to change activation status.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.611819"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Click 'Ok' to confirm the action.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.611819"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Verify toggle state and confirmation dialog.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.611819"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-002",
+      "context_name": "Search and Navigate Pages",
+      "user_persona": "Ministry Admin",
+      "description": "Ministry Admin searches for specific data using the search field and navigates through pages to find relevant information.",
+      "field_values": {
+        "searchField": "Cari",
+        "searchValue": ""
+      },
+      "expected_outcome": "Search results are displayed and navigation buttons are functional.\n\nVALIDATION: Assert: search results appear. Assert: 'Next page' and 'Previous page' buttons are enabled.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Fill 'Cari' with search criteria.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.611819"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'Next page' to navigate.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.611819"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Verify search results and navigation functionality.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.611819"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-003",
+      "context_name": "Toggle Multiple Menu Items",
+      "user_persona": "Mosque Admin",
+      "description": "Mosque Admin toggles multiple menu items to manage their activation status efficiently.",
+      "field_values": {
+        "toggleNames": [
+          "mat-mdc-slide-toggle-11-button",
+          "mat-mdc-slide-toggle-23-button"
+        ]
+      },
+      "expected_outcome": "Multiple menu items' activation statuses are updated successfully.\n\nVALIDATION: Assert: each toggle state changes. Assert: 'Ok' button confirms each action.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'mat-mdc-slide-toggle-11-button' to change status.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.616613"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'Ok' to confirm.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.616613"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'mat-mdc-slide-toggle-23-button' to change status.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.616613"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Click 'Ok' to confirm.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.616613"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Verify toggle states.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.616613"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-004",
+      "context_name": "Navigate and Verify Page Buttons",
+      "user_persona": "Super Admin",
+      "description": "Super Admin navigates through pages using pagination buttons and verifies their functionality.",
+      "field_values": {},
+      "expected_outcome": "Pagination buttons work correctly, allowing navigation through pages.\n\nVALIDATION: Assert: 'Next page', 'Previous page', and 'Last page' buttons navigate correctly.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Next page' to move forward.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.616613"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'Previous page' to move backward.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.616613"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'Last page' to navigate to the last page.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.616613"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify correct page navigation.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.616613"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-005",
+      "context_name": "Attempt Disabled Button Click",
+      "user_persona": "Ministry Admin",
+      "description": "Ministry Admin attempts to click a disabled button to verify system response and error handling.",
+      "field_values": {
+        "buttonName": "1"
+      },
+      "expected_outcome": "System prevents interaction with disabled button and provides appropriate feedback.\n\nVALIDATION: Assert: button remains disabled. Assert: error message or no action occurs.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Attempt to click disabled button '1'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.616613"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Verify button remains disabled and no action occurs.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-22T12:17:48.616613"
+        }
+      ]
+    }
+  ]
+}

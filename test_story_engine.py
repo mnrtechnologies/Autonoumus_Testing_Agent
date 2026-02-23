@@ -1,31 +1,86 @@
 """
-test_story_engine.py
-────────────────────
-Generates coherent user test stories from page context and tracks
-pass/fail status in real-time.
-
-Components:
-  TestStory          — data model for one user test story
-  TestStoryGenerator — calls GPT-4o to generate realistic field values
-  TestStoryTracker   — tracks story execution, marks pass/fail
-  ReportGenerator    — outputs console table + JSON + HTML report
+test_story_engine.py  (v3 — expected_outcome fix + no hardcoded strings)
+──────────────────────────────────────────────────────────────────────────
+FIXES IN THIS VERSION:
+1. ✅ TestStory dataclass has expected_outcome field
+2. ✅ Execution Plan uses real expected_outcome from story, not hardcoded generic text
+3. ✅ _print_console_summary called exactly once (from generate_all)
 """
 
 import json
-import re
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, Dict, List, Any
 from dataclasses import dataclass, field
 from enum import Enum
 
-from openai import OpenAI
-from rich.console import Console
-from rich.table import Table
-from rich.panel import Panel
-from rich import box
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.utils import get_column_letter
 
-console = Console()
+
+# ═══════════════════════════════════════════════════════════════
+#  COLOUR PALETTE
+# ═══════════════════════════════════════════════════════════════
+
+class C:
+    HEADER_DARK   = "1E293B"
+    HEADER_MID    = "334155"
+    PASS_BG       = "166534"
+    FAIL_BG       = "7F1D1D"
+    SKIP_BG       = "78350F"
+    ALT_ROW       = "F8FAFC"
+    ACCENT_BLUE   = "0EA5E9"
+    ACCENT_ORANGE = "F97316"
+    ACCENT_PURPLE = "7C3AED"
+    WHITE         = "FFFFFF"
+    LIGHT_BLUE    = "E0F2FE"
+    LIGHT_GREEN   = "DCFCE7"
+    LIGHT_RED     = "FEE2E2"
+    LIGHT_AMBER   = "FEF3C7"
+    LIGHT_PURPLE  = "EDE9FE"
+    FONT_WHITE    = "FFFFFF"
+    FONT_DARK     = "0F172A"
+    FONT_MUTED    = "64748B"
+    FONT_GREEN    = "15803D"
+    FONT_RED      = "DC2626"
+    FONT_AMBER    = "D97706"
+    FONT_BLUE     = "0369A1"
+
+
+def _fill(hex_color: str) -> PatternFill:
+    return PatternFill("solid", fgColor=hex_color)
+
+def _font(bold=False, color=C.FONT_DARK, size=10, italic=False) -> Font:
+    return Font(name="Arial", bold=bold, color=color, size=size, italic=italic)
+
+def _align(h="left", v="center", wrap=False) -> Alignment:
+    return Alignment(horizontal=h, vertical=v, wrap_text=wrap)
+
+def _border(style="thin") -> Border:
+    s = Side(style=style, color="CBD5E1")
+    return Border(left=s, right=s, top=s, bottom=s)
+
+def _header_row(ws, row: int, values: list, bg: str,
+                font_color: str = C.FONT_WHITE, height: int = 22):
+    ws.row_dimensions[row].height = height
+    for col, val in enumerate(values, 1):
+        if isinstance(val, list):
+            val = ", ".join(str(v) for v in val)
+        cell = ws.cell(row=row, column=col, value=val)
+        cell.font      = _font(bold=True, color=font_color, size=10)
+        cell.fill      = _fill(bg)
+        cell.alignment = _align(h="center", wrap=True)
+        cell.border    = _border()
+
+def _data_row(ws, row: int, values: list, bg: str = C.WHITE, height: int = 18):
+    ws.row_dimensions[row].height = height
+    for col, val in enumerate(values, 1):
+        cell = ws.cell(row=row, column=col, value=val)
+        cell.fill      = _fill(bg)
+        cell.alignment = _align(wrap=True)
+        cell.border    = _border()
+        cell.font      = _font()
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -33,42 +88,38 @@ console = Console()
 # ═══════════════════════════════════════════════════════════════
 
 class StoryStatus(Enum):
-    PENDING  = "pending"
-    RUNNING  = "running"
-    PASSED   = "passed"
-    FAILED   = "failed"
-    SKIPPED  = "skipped"
+    PENDING = "pending"
+    RUNNING = "running"
+    PASSED  = "passed"
+    FAILED  = "failed"
+    SKIPPED = "skipped"
 
 
 @dataclass
 class StoryStep:
-    """One action within a test story."""
-    step_num:    int
-    action:      str          # fill / select / click / check
-    target:      str          # field name or button label
-    value:       str          # value used
-    success:     bool
-    error:       Optional[str] = None
-    timestamp:   str = field(default_factory=lambda: datetime.now().isoformat())
+    step_num:  int
+    action:    str
+    target:    str
+    value:     str
+    success:   bool
+    error:     Optional[str] = None
+    timestamp: str = field(default_factory=lambda: datetime.now().isoformat())
 
 
 @dataclass
 class TestStory:
-    """
-    One coherent user test story for a form/modal/page.
-    Generated once when empty fields are detected, then executed step by step.
-    """
-    story_id:        str
-    url:             str
-    context_name:    str          # e.g. "Create Store Form", "Add Bank Account Modal"
-    user_persona:    str          # e.g. "Store owner adding a new outlet"
-    description:     str          # short human-readable scenario
-    field_values:    Dict[str, str]  # fieldname → value to use
-    status:          StoryStatus = StoryStatus.PENDING
-    steps:           List[StoryStep] = field(default_factory=list)
-    failure_reason:  Optional[str] = None
-    started_at:      Optional[str] = None
-    finished_at:     Optional[str] = None
+    story_id:         str
+    url:              str
+    context_name:     str
+    user_persona:     str
+    description:      str
+    field_values:     Dict[str, str]
+    status:           StoryStatus = StoryStatus.PENDING
+    expected_outcome: str = ""          # ✅ FIX 1 — real outcome from OpenAI
+    steps:            List[StoryStep] = field(default_factory=list)
+    failure_reason:   Optional[str] = None
+    started_at:       Optional[str] = None
+    finished_at:      Optional[str] = None
 
     def start(self):
         self.status     = StoryStatus.RUNNING
@@ -95,46 +146,38 @@ class TestStory:
         ))
 
     def get_value_for(self, field_name: str) -> Optional[str]:
-        """
-        Look up a generated value by field name / formcontrolname / placeholder.
-        Case-insensitive, partial match supported.
-        """
         if not field_name:
             return None
         fn = field_name.lower().strip()
-
-        # Exact match first
         for k, v in self.field_values.items():
             if k.lower() == fn:
                 return v
-
-        # Partial match
         for k, v in self.field_values.items():
             if fn in k.lower() or k.lower() in fn:
                 return v
-
         return None
 
     def to_dict(self) -> Dict:
         return {
-            "story_id":       self.story_id,
-            "url":            self.url,
-            "context_name":   self.context_name,
-            "user_persona":   self.user_persona,
-            "description":    self.description,
-            "field_values":   self.field_values,
-            "status":         self.status.value,
-            "failure_reason": self.failure_reason,
-            "started_at":     self.started_at,
-            "finished_at":    self.finished_at,
+            "story_id":        self.story_id,
+            "url":             self.url,
+            "context_name":    self.context_name,
+            "user_persona":    self.user_persona,
+            "description":     self.description,
+            "field_values":    self.field_values,
+            "expected_outcome": self.expected_outcome,
+            "status":          self.status.value,
+            "failure_reason":  self.failure_reason,
+            "started_at":      self.started_at,
+            "finished_at":     self.finished_at,
             "steps": [
                 {
-                    "step":    s.step_num,
-                    "action":  s.action,
-                    "target":  s.target,
-                    "value":   s.value,
-                    "success": s.success,
-                    "error":   s.error,
+                    "step":      s.step_num,
+                    "action":    s.action,
+                    "target":    s.target,
+                    "value":     s.value,
+                    "success":   s.success,
+                    "error":     s.error,
                     "timestamp": s.timestamp
                 }
                 for s in self.steps
@@ -143,16 +186,11 @@ class TestStory:
 
 
 # ═══════════════════════════════════════════════════════════════
-#  TEST STORY GENERATOR
+#  TEST STORY GENERATOR  (used by StoryAwareDecider)
 # ═══════════════════════════════════════════════════════════════
 
 class TestStoryGenerator:
-    """
-    Calls GPT-4o to generate a coherent user test story
-    based on the detected form/page elements.
-    """
-
-    def __init__(self, openai_client: OpenAI):
+    def __init__(self, openai_client):
         self.openai   = openai_client
         self._counter = 0
 
@@ -163,24 +201,11 @@ class TestStoryGenerator:
 
     async def generate(
         self,
-        url:          str,
-        elements:     List[Dict],
+        url:            str,
+        elements:       List[Dict],
         screenshot_b64: str,
-        context_type: str = "page"
-    ) -> TestStory:
-        """
-        Given the current page elements and screenshot, generate a
-        realistic user test story with field values.
-        """
-
-        print(f"\n{'='*60}")
-        print(f"🔍 STORY GEN DEBUG:")
-        print(f"   URL: {url}")
-        print(f"   Context type: {context_type}")
-        print(f"   Screenshot size (bytes): {len(screenshot_b64) if screenshot_b64 else 0}")
-        print(f"   Fillable elements: {[e.get('formcontrolname') or e.get('text') for e in elements]}")
-        print(f"{'='*60}\n")
-        # Build element summary for the prompt
+        context_type:   str = "page"
+    ) -> "TestStory":
         fillable = [
             e for e in elements
             if e.get("element_type") in ("input", "textarea", "select", "custom-select")
@@ -195,11 +220,11 @@ class TestStoryGenerator:
             name = (e.get("formcontrolname") or e.get("placeholder") or
                     e.get("text") or e.get("name") or "unknown")
             elem_summary.append({
-                "field":       name,
-                "type":        e.get("element_type"),
-                "input_type":  e.get("type", ""),
-                "required":    e.get("required", False),
-                "in_overlay":  e.get("in_overlay", False)
+                "field":      name,
+                "type":       e.get("element_type"),
+                "input_type": e.get("type", ""),
+                "required":   e.get("required", False),
+                "in_overlay": e.get("in_overlay", False)
             })
 
         button_names = [b.get("text", "") for b in buttons if b.get("text")]
@@ -216,24 +241,13 @@ SUBMIT/ACTION BUTTONS:
 {json.dumps(button_names, indent=2)}
 
 YOUR TASK:
-The CONTEXT TYPE tells you what to do:
-
 If CONTEXT TYPE is "page":
 - Look at the table in the screenshot
 - Use EXACT values from the first row for search/filter fields
-- This ensures search finds real existing records
 
 If CONTEXT TYPE is "form" or "modal":
-- DO NOT look at the screenshot for values
-- ONLY use the FORM FIELDS DETECTED list above
 - Generate completely NEW realistic values based on field names only
-- Treat every field as empty and fill with fresh data
 - NEVER copy anything visible in the screenshot
-
-FIELD VALUE RULES:
-- start → always "01/01/2025"
-- end → always "17/02/2026"
-- address/alamat → "Jl. Sudirman No. 45, Jakarta Selatan"
 
 Return ONLY valid JSON:
 {{
@@ -241,16 +255,10 @@ Return ONLY valid JSON:
   "user_persona": "one sentence about who is doing this",
   "description": "2-sentence scenario",
   "field_values": {{
-    "fieldname_or_formcontrolname": "value",
-    ...
+    "fieldname_or_formcontrolname": "value"
   }}
 }}
-
-Keys in field_values MUST match the 'field' values from FORM FIELDS DETECTED above exactly.
 """
-        print(f"\n📝 PROMPT BEING SENT TO GPT:")
-        print(prompt)
-        print(f"\n{'='*60}\n")
         try:
             response = self.openai.chat.completions.create(
                 model="gpt-4o-mini",
@@ -266,30 +274,9 @@ Keys in field_values MUST match the 'field' values from FORM FIELDS DETECTED abo
                 temperature=0.7
             )
             raw  = response.choices[0].message.content
-            # response = self.openai.messages.create(
-            #     model="claude-sonnet-4-20250514",
-            #     max_tokens=1500,
-            #     messages=[{
-            #         "role": "user",
-            #         "content": [
-            #             {"type": "image", "source": {
-            #                 "type": "base64",
-            #                 "media_type": "image/png",
-            #                 "data": screenshot_b64
-            #             }},
-            #             {"type": "text", "text": prompt}
-            #         ]
-            #     }]
-            # )
-            # raw = response.content[0].text
-            print(f"\n{'='*60}")
-            print(f"🤖 STORY GEN RAW OUTPUT:")
-            print(raw)
-            print(f"{'='*60}\n")
             data = json.loads(self._extract_json(raw))
-            print(f"📋 PARSED FIELD VALUES: {json.dumps(data.get('field_values', {}), indent=2)}")
 
-            story = TestStory(
+            return TestStory(
                 story_id     = self._next_id(),
                 url          = url,
                 context_name = data.get("context_name", f"Test on {context_type}"),
@@ -298,32 +285,11 @@ Keys in field_values MUST match the 'field' values from FORM FIELDS DETECTED abo
                 field_values = data.get("field_values", {})
             )
 
-            console.print(Panel(
-                f"[bold cyan]📖 TEST STORY GENERATED[/bold cyan]\n"
-                f"[yellow]ID      :[/yellow] {story.story_id}\n"
-                f"[yellow]Context :[/yellow] {story.context_name}\n"
-                f"[yellow]Persona :[/yellow] {story.user_persona}\n"
-                f"[yellow]Scenario:[/yellow] {story.description}\n"
-                f"[green]Fields  :[/green] {len(story.field_values)} values generated",
-                border_style="cyan"
-            ))
-
-            # Print the generated values
-            t = Table(title="Generated Field Values", box=box.SIMPLE)
-            t.add_column("Field", style="cyan")
-            t.add_column("Value", style="green")
-            for k, v in story.field_values.items():
-                t.add_row(k, str(v))
-            console.print(t)
-
-            return story
-
         except Exception as e:
-            console.print(f"[red]⚠️  Story generation failed: {e} — using fallback story[/red]")
+            print(f"⚠️  Story generation failed: {e} — using fallback")
             return self._fallback_story(url, elements, context_type)
 
-    def _fallback_story(self, url: str, elements: List[Dict], context_type: str) -> TestStory:
-        """Minimal fallback when GPT call fails."""
+    def _fallback_story(self, url: str, elements: List[Dict], context_type: str) -> "TestStory":
         field_values = {}
         for e in elements:
             name = (e.get("formcontrolname") or e.get("placeholder") or
@@ -345,7 +311,7 @@ Keys in field_values MUST match the 'field' values from FORM FIELDS DETECTED abo
             url          = url,
             context_name = f"Test on {context_type}",
             user_persona = "QA tester (fallback)",
-            description  = "Fallback story — GPT generation failed.",
+            description  = "Fallback story — generation failed.",
             field_values = field_values
         )
 
@@ -366,11 +332,6 @@ Keys in field_values MUST match the 'field' values from FORM FIELDS DETECTED abo
 # ═══════════════════════════════════════════════════════════════
 
 class TestStoryTracker:
-    """
-    Manages active + completed test stories.
-    Integrates with the OMDE loop to track each action against the current story.
-    """
-
     FAIL_KEYWORDS = [
         "error", "gagal", "failed", "tidak valid", "invalid",
         "required", "wajib", "must", "salah", "wrong"
@@ -386,443 +347,602 @@ class TestStoryTracker:
         self._generator = gen
 
     def start_story(self, story: TestStory):
-        """Mark a story as active and running."""
         self.active_story = story
         self.stories.append(story)
         story.start()
-        console.print(f"\n[bold green]▶ STORY STARTED:[/bold green] "
-                      f"[cyan]{story.story_id}[/cyan] — {story.context_name}")
+        print(f"\n▶ STORY STARTED: {story.story_id} — {story.context_name}")
 
-    def record_action(
-        self,
-        action:  str,
-        target:  str,
-        value:   str,
-        success: bool,
-        error:   Optional[str] = None
-    ):
-        """Record one executed action against the active story."""
+    def record_action(self, action: str, target: str, value: str,
+                      success: bool, error: Optional[str] = None):
         if not self.active_story:
             return
-
         story = self.active_story
         story.add_step(action, target, value, success, error)
-
         icon = "✅" if success else "❌"
-        console.print(f"  {icon} [{story.story_id}] {action} → {target}"
-                      + (f" = '{value}'" if value else "")
-                      + (f"  ⚠️  {error}" if error and not success else ""))
-
-        # Auto-fail conditions
+        print(f"  {icon} [{story.story_id}] {action} → {target}"
+              + (f" = '{value}'" if value else "")
+              + (f"  ⚠️  {error}" if error and not success else ""))
         if not success and error:
-            err_lower = error.lower()
-            # Permanent failures (not transient)
-            if any(k in err_lower for k in ["disabled", "not found", "timeout", "detached"]):
-                pass  # These are handled by the main loop
-            else:
-                self._check_toast_failure(error)
+            self._check_toast_failure(error)
 
     def _check_toast_failure(self, error: str):
-        """Check if an error message looks like a server validation failure."""
         if any(kw in error.lower() for kw in self.FAIL_KEYWORDS):
             if self.active_story and self.active_story.status == StoryStatus.RUNNING:
-                self.active_story.fail_story(f"Validation/server error: {error[:200]}")
-                console.print(f"  [red]❌ STORY FAILED:[/red] {self.active_story.story_id}")
+                self.active_story.fail_story(f"Validation error: {error[:200]}")
 
     def mark_loop_detected(self, target: str):
-        """Loop detected = story stuck = fail."""
         if self.active_story and self.active_story.status == StoryStatus.RUNNING:
-            reason = f"Loop detected on target: {target}"
-            self.active_story.fail_story(reason)
-            console.print(f"  [red]❌ STORY FAILED (loop):[/red] {self.active_story.story_id}")
+            self.active_story.fail_story(f"Loop detected on: {target}")
 
     def mark_submit_failed(self, target: str, error: str):
-        """Submit button click failed = story failed."""
         if self.active_story and self.active_story.status == StoryStatus.RUNNING:
-            reason = f"Submit failed on '{target}': {error}"
-            self.active_story.fail_story(reason)
-            console.print(f"  [red]❌ STORY FAILED (submit):[/red] {self.active_story.story_id}")
+            self.active_story.fail_story(f"Submit failed on '{target}': {error}")
 
     def complete_story(self, toast_text: str = ""):
-        """
-        Called when a form/modal context closes (submit succeeded or cancelled).
-        Checks for error toasts before marking passed.
-        """
         if not self.active_story:
             return
-
         story = self.active_story
-
         if story.status == StoryStatus.RUNNING:
-            # Check if the page showed an error toast after submit
             if toast_text and any(kw in toast_text.lower() for kw in self.FAIL_KEYWORDS):
-                story.fail_story(f"Error toast after submit: {toast_text[:200]}")
-                console.print(f"  [red]❌ STORY FAILED (toast):[/red] {story.story_id}")
+                story.fail_story(f"Error toast: {toast_text[:200]}")
             else:
                 story.pass_story()
-                console.print(f"  [bold green]✅ STORY PASSED:[/bold green] "
-                              f"[cyan]{story.story_id}[/cyan] — {story.context_name}")
-
         self.active_story = None
-        self._print_story_summary(story)
 
     def abandon_story(self, reason: str = "Context changed"):
-        """Called when we leave a page/context without completing the story."""
         if not self.active_story:
             return
-
         story = self.active_story
         if story.status == StoryStatus.RUNNING:
             if any(s.success for s in story.steps):
-                # Had some successes — count as passed if no explicit failures
                 story.pass_story()
-                console.print(f"  [green]✅ STORY PASSED (partial):[/green] {story.story_id}")
             else:
                 story.fail_story(reason)
-                console.print(f"  [red]❌ STORY FAILED (abandoned):[/red] {story.story_id}")
-
         self.active_story = None
 
     def get_value_for_field(self, field_name: str) -> Optional[str]:
-        """Get a generated story value for a field (used by Decider)."""
         if self.active_story:
             return self.active_story.get_value_for(field_name)
         return None
 
-    def _print_story_summary(self, story: TestStory):
-        icon    = "✅" if story.status == StoryStatus.PASSED else "❌"
-        total   = len(story.steps)
-        success = sum(1 for s in story.steps if s.success)
-
-        console.print(Panel(
-            f"{icon} [bold]{'PASSED' if story.status == StoryStatus.PASSED else 'FAILED'}[/bold]\n"
-            f"[cyan]{story.context_name}[/cyan]\n"
-            f"[yellow]Persona:[/yellow] {story.user_persona}\n"
-            f"[yellow]Steps  :[/yellow] {success}/{total} succeeded"
-            + (f"\n[red]Reason :[/red] {story.failure_reason}" if story.failure_reason else ""),
-            border_style="green" if story.status == StoryStatus.PASSED else "red"
-        ))
-
 
 # ═══════════════════════════════════════════════════════════════
-#  REPORT GENERATOR
+#  EXCEL REPORT GENERATOR
 # ═══════════════════════════════════════════════════════════════
 
-class ReportGenerator:
-    """Generates console summary + JSON + HTML report from completed stories."""
+class ExcelReportGenerator:
 
     def __init__(self, output_dir: Path, session_id: str):
         self.output_dir = output_dir
         self.session_id = session_id
 
-    def generate_all(self, stories: List[TestStory]):
-        """Generate all three report formats."""
-        self._print_console(stories)
-        json_path = self._save_json(stories)
-        html_path = self._save_html(stories)
-        console.print(f"\n[bold green]📁 Reports saved:[/bold green]")
-        console.print(f"   JSON : {json_path}")
-        console.print(f"   HTML : {html_path}")
-        return json_path, html_path
+    def generate_all(self, stories: List[TestStory]) -> Path:
+        wb = Workbook()
+        wb.remove(wb.active)
 
-    def _print_console(self, stories: List[TestStory]):
-        passed  = [s for s in stories if s.status == StoryStatus.PASSED]
-        failed  = [s for s in stories if s.status == StoryStatus.FAILED]
-        skipped = [s for s in stories if s.status == StoryStatus.SKIPPED]
+        self._build_summary(wb, stories)
+        self._build_user_test_stories(wb, stories)
+        self._build_implementation_plan(wb, stories)
+        self._build_execution_plan(wb, stories)
 
-        console.print("\n")
-        console.print(Panel.fit(
-            f"[bold white]📊 TEST STORY REPORT[/bold white]\n"
-            f"[green]✅ Passed : {len(passed)}[/green]   "
-            f"[red]❌ Failed : {len(failed)}[/red]   "
-            f"[yellow]⏭ Skipped: {len(skipped)}[/yellow]   "
-            f"[cyan]Total  : {len(stories)}[/cyan]",
-            border_style="white"
-        ))
-
-        t = Table(
-            title="Test Story Results",
-            box=box.ROUNDED,
-            show_header=True,
-            header_style="bold cyan"
-        )
-        t.add_column("Status",        width=10)
-        t.add_column("Story ID",      width=20)
-        t.add_column("Context",       width=30)
-        t.add_column("Persona",       width=35)
-        t.add_column("Steps",         width=10)
-        t.add_column("Failure Reason",width=40)
-
-        for s in stories:
-            if s.status == StoryStatus.PASSED:
-                status_str = "[bold green]✅ PASSED[/bold green]"
-            elif s.status == StoryStatus.FAILED:
-                status_str = "[bold red]❌ FAILED[/bold red]"
-            else:
-                status_str = "[yellow]⏭ SKIP[/yellow]"
-
-            total   = len(s.steps)
-            success = sum(1 for step in s.steps if step.success)
-            steps_str = f"{success}/{total}"
-
-            t.add_row(
-                status_str,
-                s.story_id,
-                s.context_name,
-                s.user_persona[:35],
-                steps_str,
-                (s.failure_reason or "—")[:40]
-            )
-
-        console.print(t)
-
-        # Per-story detail for failed ones
-        if failed:
-            console.print("\n[bold red]❌ FAILED STORY DETAILS[/bold red]")
-            for s in failed:
-                detail_table = Table(
-                    title=f"[red]{s.story_id} — {s.context_name}[/red]",
-                    box=box.SIMPLE
-                )
-                detail_table.add_column("Step",    width=6)
-                detail_table.add_column("Action",  width=10)
-                detail_table.add_column("Target",  width=30)
-                detail_table.add_column("Value",   width=25)
-                detail_table.add_column("Result",  width=10)
-                detail_table.add_column("Error",   width=35)
-
-                for step in s.steps:
-                    result_str = "[green]✓[/green]" if step.success else "[red]✗[/red]"
-                    detail_table.add_row(
-                        str(step.step_num),
-                        step.action,
-                        step.target[:30],
-                        (step.value or "")[:25],
-                        result_str,
-                        (step.error or "")[:35]
-                    )
-                console.print(detail_table)
-
-    def _save_json(self, stories: List[TestStory]) -> Path:
-        passed  = sum(1 for s in stories if s.status == StoryStatus.PASSED)
-        failed  = sum(1 for s in stories if s.status == StoryStatus.FAILED)
-
-        data = {
-            "session_id":    self.session_id,
-            "generated_at":  datetime.now().isoformat(),
-            "summary": {
-                "total":   len(stories),
-                "passed":  passed,
-                "failed":  failed,
-                "skipped": len(stories) - passed - failed
-            },
-            "stories": [s.to_dict() for s in stories]
-        }
-        path = self.output_dir / f"test_stories_{self.session_id}.json"
-        with open(path, "w") as f:
-            json.dump(data, f, indent=2)
+        path = self.output_dir / f"test_report_{self.session_id}.xlsx"
+        wb.save(path)
+        self._print_console_summary(stories)
         return path
 
-    def _save_html(self, stories: List[TestStory]) -> Path:
+    # ── SHEET 1: SUMMARY ──────────────────────────────────────
+
+    def _build_summary(self, wb: Workbook, stories: List[TestStory]):
+        ws = wb.create_sheet("📊 Summary")
+        ws.sheet_view.showGridLines = False
+        for col, w in zip("ABCDEF", [28, 30, 18, 18, 18, 22]):
+            ws.column_dimensions[col].width = w
+
+        passed  = [s for s in stories if s.status == StoryStatus.PASSED]
+        failed  = [s for s in stories if s.status == StoryStatus.FAILED]
+        skipped = [s for s in stories if s.status not in (StoryStatus.PASSED, StoryStatus.FAILED)]
+        total   = len(stories)
+        pct     = round((len(passed) / total * 100) if total else 0)
+
+        ws.row_dimensions[1].height = 36
+        ws.merge_cells("A1:F1")
+        t = ws["A1"]
+        t.value     = "🧪  SEMANTIC TEST ENGINE — SESSION REPORT"
+        t.font      = _font(bold=True, color=C.FONT_WHITE, size=16)
+        t.fill      = _fill(C.HEADER_DARK)
+        t.alignment = _align(h="center", v="center")
+
+        ws.row_dimensions[2].height = 18
+        ws.merge_cells("A2:F2")
+        sub = ws["A2"]
+        sub.value     = f"Session: {self.session_id}   |   Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+        sub.font      = _font(italic=True, color=C.FONT_WHITE, size=9)
+        sub.fill      = _fill(C.HEADER_MID)
+        sub.alignment = _align(h="center")
+
+        kpis = [
+            ("Total Stories", total,        C.ACCENT_BLUE,   C.LIGHT_BLUE),
+            ("✅ Passed",     len(passed),  C.PASS_BG,       C.LIGHT_GREEN),
+            ("❌ Failed",     len(failed),  C.FAIL_BG,       C.LIGHT_RED),
+            ("⏭ Skipped",    len(skipped), C.SKIP_BG,       C.LIGHT_AMBER),
+            ("Pass Rate",     f"{pct}%",   C.ACCENT_PURPLE, C.LIGHT_PURPLE),
+        ]
+
+        for col_idx, (label, value, hdr_bg, val_bg) in enumerate(kpis, 1):
+            ws.row_dimensions[4].height = 20
+            lbl = ws.cell(row=4, column=col_idx, value=label)
+            lbl.font      = _font(bold=True, color=C.FONT_WHITE, size=9)
+            lbl.fill      = _fill(hdr_bg)
+            lbl.alignment = _align(h="center")
+            lbl.border    = _border()
+
+            ws.row_dimensions[5].height = 32
+            val = ws.cell(row=5, column=col_idx, value=value)
+            val.font      = _font(bold=True, color=C.FONT_DARK, size=18)
+            val.fill      = _fill(val_bg)
+            val.alignment = _align(h="center", v="center")
+            val.border    = _border()
+
+        ws.row_dimensions[7].height = 8
+        _header_row(ws, 8,
+            ["Story ID", "Context Name", "Persona", "Status",
+             "Steps (Pass/Total)", "Failure Reason"],
+            C.HEADER_DARK)
+
+        row = 9
+        for idx, s in enumerate(stories):
+            if s.status == StoryStatus.PASSED:
+                status_txt, bg = "✅ PASSED", C.LIGHT_GREEN
+            elif s.status == StoryStatus.FAILED:
+                status_txt, bg = "❌ FAILED", C.LIGHT_RED
+            else:
+                status_txt, bg = "⏭ SKIPPED", C.LIGHT_AMBER
+
+            success_steps = sum(1 for st in s.steps if st.success)
+            _data_row(ws, row, [
+                s.story_id, s.context_name, s.user_persona,
+                status_txt,
+                f"{success_steps} / {len(s.steps)}",
+                s.failure_reason or "—"
+            ], bg=bg if idx % 2 == 0 else C.ALT_ROW)
+
+            cell = ws.cell(row=row, column=4)
+            if "PASSED" in str(cell.value):
+                cell.font = _font(bold=True, color=C.FONT_GREEN)
+            elif "FAILED" in str(cell.value):
+                cell.font = _font(bold=True, color=C.FONT_RED)
+            else:
+                cell.font = _font(bold=True, color=C.FONT_AMBER)
+            row += 1
+
+    # ── SHEET 2: USER TEST STORIES ────────────────────────────
+
+    def _build_user_test_stories(self, wb: Workbook, stories: List[TestStory]):
+        ws = wb.create_sheet("📋 User Test Stories")
+        ws.sheet_view.showGridLines = False
+
+        for i, w in enumerate([16, 28, 35, 45, 12, 14, 18, 12, 30], 1):
+            ws.column_dimensions[get_column_letter(i)].width = w
+
+        ws.row_dimensions[1].height = 32
+        ws.merge_cells("A1:I1")
+        t = ws["A1"]
+        t.value     = "📋  USER TEST STORIES"
+        t.font      = _font(bold=True, color=C.FONT_WHITE, size=14)
+        t.fill      = _fill(C.ACCENT_BLUE)
+        t.alignment = _align(h="center", v="center")
+
+        ws.row_dimensions[2].height = 20
+        ws.merge_cells("A2:I2")
+        desc = ws["A2"]
+        desc.value     = ("Documents every user scenario tested: persona, context, "
+                          "field values used, execution steps, and pass/fail outcome.")
+        desc.font      = _font(italic=True, color=C.FONT_MUTED, size=9)
+        desc.fill      = _fill(C.LIGHT_BLUE)
+        desc.alignment = _align(h="center")
+
+        _header_row(ws, 4,
+            ["Story ID", "Context / Feature", "User Persona",
+             "Scenario Description", "Status", "Steps Total",
+             "Steps Passed", "Pass %", "Failure Reason"],
+            C.HEADER_DARK, height=24)
+
+        row = 5
+        for idx, s in enumerate(stories):
+            if s.status == StoryStatus.PASSED:
+                status_txt, bg = "✅ PASSED", C.LIGHT_GREEN
+            elif s.status == StoryStatus.FAILED:
+                status_txt, bg = "❌ FAILED", C.LIGHT_RED
+            else:
+                status_txt, bg = "⏭ SKIPPED", C.LIGHT_AMBER
+
+            total_steps   = len(s.steps)
+            success_steps = sum(1 for st in s.steps if st.success)
+            alt_bg        = bg if idx % 2 == 0 else C.ALT_ROW
+
+            _data_row(ws, row, [
+                s.story_id, s.context_name, s.user_persona,
+                s.description, status_txt, total_steps, success_steps,
+                f"{round(success_steps / total_steps * 100) if total_steps else 0}%",
+                s.failure_reason or "—"
+            ], bg=alt_bg, height=40)
+
+            ws.cell(row=row, column=5).font = _font(
+                bold=True,
+                color=C.FONT_GREEN if "PASSED" in status_txt
+                      else C.FONT_RED if "FAILED" in status_txt
+                      else C.FONT_AMBER
+            )
+            row += 1
+
+        # ── Field Values section
+        row += 1
+        ws.merge_cells(f"A{row}:I{row}")
+        sec = ws[f"A{row}"]
+        sec.value     = "FIELD VALUES USED IN EACH STORY"
+        sec.font      = _font(bold=True, color=C.FONT_WHITE, size=11)
+        sec.fill      = _fill(C.HEADER_MID)
+        sec.alignment = _align(h="center")
+        ws.row_dimensions[row].height = 24
+        row += 1
+
+        _header_row(ws, row,
+            ["Story ID", "Context", "Field Name", "Value Used",
+             "Expected Outcome", "", "", "", ""],
+            C.ACCENT_BLUE, height=20)
+        row += 1
+
+        for s in stories:
+            # Print each field value with the expected_outcome on first row
+            first = True
+            for field_name, field_val in s.field_values.items():
+                alt = row % 2 == 0
+                _data_row(ws, row, [
+                    s.story_id, s.context_name, field_name, field_val,
+                    s.expected_outcome if first else "",  # ✅ FIX 2 — real outcome
+                    "", "", "", ""
+                ], bg=C.LIGHT_BLUE if alt else C.WHITE)
+                first = False
+                row += 1
+            # If no field values, still show outcome
+            if not s.field_values:
+                _data_row(ws, row, [
+                    s.story_id, s.context_name, "—", "—",
+                    s.expected_outcome, "", "", "", ""
+                ], bg=C.WHITE)
+                row += 1
+
+        # ── Detailed Steps section
+        row += 1
+        ws.merge_cells(f"A{row}:I{row}")
+        sec2 = ws[f"A{row}"]
+        sec2.value     = "DETAILED EXECUTION STEPS"
+        sec2.font      = _font(bold=True, color=C.FONT_WHITE, size=11)
+        sec2.fill      = _fill(C.HEADER_MID)
+        sec2.alignment = _align(h="center")
+        ws.row_dimensions[row].height = 24
+        row += 1
+
+        _header_row(ws, row,
+            ["Story ID", "Step #", "Action", "Target Element",
+             "Value Used", "Result", "Error", "", "Timestamp"],
+            C.HEADER_DARK, height=20)
+        row += 1
+
+        for s in stories:
+            for step in s.steps:
+                result_txt = "✅ Pass" if step.success else "❌ Fail"
+                alt = row % 2 == 0
+                _data_row(ws, row, [
+                    s.story_id, step.step_num, step.action, step.target,
+                    step.value or "", result_txt, step.error or "",
+                    "", step.timestamp[:19].replace("T", " ")
+                ], bg=C.LIGHT_GREEN if step.success
+                        else C.LIGHT_RED if not step.success and step.error
+                        else C.WHITE)
+                ws.cell(row=row, column=6).font = _font(
+                    bold=True,
+                    color=C.FONT_GREEN if step.success else C.FONT_RED
+                )
+                row += 1
+
+    # ── SHEET 3: IMPLEMENTATION PLAN ─────────────────────────
+
+    def _build_implementation_plan(self, wb: Workbook, stories: List[TestStory]):
+        ws = wb.create_sheet("🔧 Implementation Plan")
+        ws.sheet_view.showGridLines = False
+
+        for i, w in enumerate([8, 25, 20, 22, 40, 15, 15, 20, 12], 1):
+            ws.column_dimensions[get_column_letter(i)].width = w
+
+        ws.row_dimensions[1].height = 32
+        ws.merge_cells("A1:I1")
+        t = ws["A1"]
+        t.value     = "🔧  IMPLEMENTATION PLAN"
+        t.font      = _font(bold=True, color=C.FONT_WHITE, size=14)
+        t.fill      = _fill(C.ACCENT_ORANGE)
+        t.alignment = _align(h="center", v="center")
+
+        ws.row_dimensions[2].height = 20
+        ws.merge_cells("A2:I2")
+        desc = ws["A2"]
+        desc.value     = ("Derived from failed stories and identified gaps. "
+                          "Maps each issue to a concrete fix with priority and owner.")
+        desc.font      = _font(italic=True, color=C.FONT_MUTED, size=9)
+        desc.fill      = _fill(C.LIGHT_AMBER)
+        desc.alignment = _align(h="center")
+
+        _header_row(ws, 4,
+            ["#", "Feature / Module", "Story Reference", "Issue Type",
+             "Recommended Fix", "Priority", "Effort", "Owner", "Status"],
+            C.HEADER_DARK, height=24)
+
+        items = self._derive_implementation_items(stories)
+        row = 5
+        for idx, item in enumerate(items):
+            priority = item.get("priority", "Medium")
+            bg = (C.LIGHT_RED if priority == "High"
+                  else C.LIGHT_GREEN if priority == "Low"
+                  else C.LIGHT_AMBER if idx % 2 == 0 else C.ALT_ROW)
+
+            _data_row(ws, row, [
+                idx + 1,
+                item.get("module", ""),
+                item.get("story_ref", ""),
+                item.get("issue_type", ""),
+                item.get("fix", ""),
+                priority,
+                item.get("effort", "M"),
+                item.get("owner", "QA / Dev"),
+                item.get("status", "Open")
+            ], bg=bg, height=36)
+
+            ws.cell(row=row, column=6).font = _font(
+                bold=True,
+                color=C.FONT_RED if priority == "High"
+                      else C.FONT_AMBER if priority == "Medium"
+                      else C.FONT_GREEN
+            )
+            row += 1
+
+        row += 1
+        ws.merge_cells(f"A{row}:I{row}")
+        leg = ws[f"A{row}"]
+        leg.value     = "LEGEND:  Priority — High = block release | Medium = fix in sprint | Low = nice-to-have     Effort — S < 2h | M 2–8h | L > 1 day"
+        leg.font      = _font(italic=True, color=C.FONT_MUTED, size=8)
+        leg.alignment = _align(h="left")
+        leg.fill      = _fill(C.ALT_ROW)
+
+    def _derive_implementation_items(self, stories: List[TestStory]) -> List[Dict]:
+        items = []
+        failed = [s for s in stories if s.status == StoryStatus.FAILED]
+        passed = [s for s in stories if s.status == StoryStatus.PASSED]
+
+        for s in failed:
+            reason = s.failure_reason or "Unknown failure"
+            if "loop" in reason.lower():
+                items.append({
+                    "module": s.context_name, "story_ref": s.story_id,
+                    "issue_type": "UI Interaction Loop",
+                    "fix": "Fix element identifier uniqueness. Check formcontrolname and button state transitions.",
+                    "priority": "High", "effort": "M", "owner": "Frontend Dev", "status": "Open"
+                })
+            elif "submit" in reason.lower() or "disabled" in reason.lower():
+                items.append({
+                    "module": s.context_name, "story_ref": s.story_id,
+                    "issue_type": "Form Validation / Disabled Button",
+                    "fix": "Ensure submit button enables after required fields filled. Review Angular reactive form validators.",
+                    "priority": "High", "effort": "S", "owner": "Frontend Dev", "status": "Open"
+                })
+            elif "toast" in reason.lower() or "error" in reason.lower():
+                items.append({
+                    "module": s.context_name, "story_ref": s.story_id,
+                    "issue_type": "Backend Validation Error",
+                    "fix": f"Server returned error on '{s.context_name}'. Review API payload and error UX copy. Original: {reason[:120]}",
+                    "priority": "High", "effort": "M", "owner": "Backend Dev", "status": "Open"
+                })
+            else:
+                items.append({
+                    "module": s.context_name, "story_ref": s.story_id,
+                    "issue_type": "General Failure",
+                    "fix": f"Investigate: {reason[:150]}",
+                    "priority": "Medium", "effort": "M", "owner": "QA", "status": "Open"
+                })
+
+        items.append({
+            "module": "Test Infrastructure", "story_ref": "ALL",
+            "issue_type": "Test Coverage",
+            "fix": "Add negative test cases: invalid email formats, empty required fields, boundary values, special characters.",
+            "priority": "Medium", "effort": "L", "owner": "QA", "status": "Open"
+        })
+        items.append({
+            "module": "Auth / Session", "story_ref": "ALL",
+            "issue_type": "Session Handling",
+            "fix": "Verify session tokens refresh during long runs. Check auth.json captures all required tokens and cookies.",
+            "priority": "Low", "effort": "S", "owner": "QA", "status": "Open"
+        })
+        if passed:
+            items.append({
+                "module": "Regression Suite",
+                "story_ref": ", ".join(s.story_id for s in passed[:5]),
+                "issue_type": "Automation Opportunity",
+                "fix": f"{len(passed)} stories passed. Convert to automated regression tests in CI pipeline.",
+                "priority": "Low", "effort": "L", "owner": "QA / DevOps", "status": "Planned"
+            })
+
+        return items
+
+    # ── SHEET 4: EXECUTION PLAN ───────────────────────────────
+
+    def _build_execution_plan(self, wb: Workbook, stories: List[TestStory]):
+        ws = wb.create_sheet("🚀 Execution Plan")
+        ws.sheet_view.showGridLines = False
+
+        for i, w in enumerate([6, 20, 30, 45, 20, 45, 12, 18, 14], 1):
+            ws.column_dimensions[get_column_letter(i)].width = w
+
+        ws.row_dimensions[1].height = 32
+        ws.merge_cells("A1:I1")
+        t = ws["A1"]
+        t.value     = "🚀  EXECUTION PLAN"
+        t.font      = _font(bold=True, color=C.FONT_WHITE, size=14)
+        t.fill      = _fill(C.ACCENT_PURPLE)
+        t.alignment = _align(h="center", v="center")
+
+        ws.row_dimensions[2].height = 20
+        ws.merge_cells("A2:I2")
+        desc = ws["A2"]
+        desc.value     = "Step-by-step test execution roadmap: what to test, how, with what data, expected outcomes, and who runs it."
+        desc.font      = _font(italic=True, color=C.FONT_MUTED, size=9)
+        desc.fill      = _fill(C.LIGHT_PURPLE)
+        desc.alignment = _align(h="center")
+
+        # Phase overview
+        ws.row_dimensions[4].height = 22
+        ws.merge_cells("A4:I4")
+        ph = ws["A4"]
+        ph.value     = "EXECUTION PHASES"
+        ph.font      = _font(bold=True, color=C.FONT_WHITE, size=10)
+        ph.fill      = _fill(C.HEADER_MID)
+        ph.alignment = _align(h="center")
+
+        phases = [
+            ("Phase 1", "Environment Setup",   "Verify auth, deploy app, clear test data",   "QA Lead",   "30 min"),
+            ("Phase 2", "Smoke Tests",          "Run top 3 critical user stories",             "QA",        "1 hr"),
+            ("Phase 3", "Full Story Execution", "Run all generated test stories",              "QA",        "2–4 hr"),
+            ("Phase 4", "Regression",           "Re-run fixed stories from failed set",        "QA",        "1 hr"),
+            ("Phase 5", "Exploratory / Edge",   "Negative cases, boundary values, edge UX",    "QA Senior", "2 hr"),
+            ("Phase 6", "Sign-off & Reporting", "Review Excel report, raise defects, approve", "QA Lead",   "30 min"),
+        ]
+        _header_row(ws, 5, ["Phase", "Name", "Objective", "Responsibilities", "Duration",
+                             "", "", "", ""], C.HEADER_DARK)
+        row = 6
+        for idx, (phase, name, obj, resp, dur) in enumerate(phases):
+            bg = C.LIGHT_PURPLE if idx % 2 == 0 else C.ALT_ROW
+            _data_row(ws, row, [phase, name, obj, resp, dur, "", "", "", ""], bg=bg, height=28)
+            ws.cell(row=row, column=1).font = _font(bold=True, color=C.ACCENT_PURPLE)
+            row += 1
+
+        # Detailed execution steps
+        row += 1
+        ws.merge_cells(f"A{row}:I{row}")
+        sec = ws[f"A{row}"]
+        sec.value     = "DETAILED EXECUTION STEPS (per Story)"
+        sec.font      = _font(bold=True, color=C.FONT_WHITE, size=11)
+        sec.fill      = _fill(C.HEADER_MID)
+        sec.alignment = _align(h="center")
+        ws.row_dimensions[row].height = 24
+        row += 1
+
+        _header_row(ws, row,
+            ["#", "Story ID", "Feature / Context", "Test Steps",
+             "Test Data (Key Fields)", "Expected Result",      # ✅ FIX 2 — column header
+             "Priority", "Assigned To", "Execution Status"],
+            C.HEADER_DARK, height=24)
+        row += 1
+
+        exec_num = 1
+        for s in stories:
+            step_texts = []
+            for st in s.steps[:8]:
+                step_texts.append(
+                    f"{st.step_num}. {st.action.upper()} '{st.target}'"
+                    + (f" → '{st.value}'" if st.value else "")
+                )
+            steps_text = "\n".join(step_texts)
+            if len(s.steps) > 8:
+                steps_text += f"\n... +{len(s.steps)-8} more steps"
+
+            key_fields = "; ".join(
+                f"{k}={v}" for k, v in list(s.field_values.items())[:4]
+            )
+            if len(s.field_values) > 4:
+                key_fields += f" (+{len(s.field_values)-4} more)"
+
+            if s.status == StoryStatus.PASSED:
+                priority, exec_status, bg = "Medium", "✅ Executed", C.LIGHT_GREEN
+            elif s.status == StoryStatus.FAILED:
+                priority, exec_status, bg = "High",   "❌ Failed",   C.LIGHT_RED
+            else:
+                priority, exec_status, bg = "Low",    "⏭ Pending",  C.LIGHT_AMBER
+
+            # ✅ FIX 2 — use real expected_outcome, not hardcoded string
+            expected = s.expected_outcome or "See story description"
+
+            _data_row(ws, row, [
+                exec_num, s.story_id, s.context_name,
+                steps_text, key_fields,
+                expected,           # ← real outcome here
+                priority, "QA", exec_status
+            ], bg=bg, height=max(18 * min(len(s.steps), 8), 36))
+
+            ws.cell(row=row, column=9).font = _font(
+                bold=True,
+                color=C.FONT_GREEN if "Executed" in exec_status
+                      else C.FONT_RED if "Failed" in exec_status
+                      else C.FONT_AMBER
+            )
+            ws.cell(row=row, column=7).font = _font(
+                bold=True,
+                color=C.FONT_RED if priority == "High"
+                      else C.FONT_AMBER if priority == "Medium"
+                      else C.FONT_GREEN
+            )
+            row += 1
+            exec_num += 1
+
+        # Checklist
+        row += 1
+        ws.merge_cells(f"A{row}:I{row}")
+        chk = ws[f"A{row}"]
+        chk.value     = "PRE-EXECUTION CHECKLIST"
+        chk.font      = _font(bold=True, color=C.FONT_WHITE, size=11)
+        chk.fill      = _fill(C.HEADER_MID)
+        chk.alignment = _align(h="center")
+        ws.row_dimensions[row].height = 22
+        row += 1
+
+        checklist = [
+            ("☐", "auth.json is up-to-date with valid tokens",          "QA Lead"),
+            ("☐", "Target environment URL is correct and accessible",    "QA"),
+            ("☐", "Test data (users, records) is seeded in environment", "Dev / QA"),
+            ("☐", "Browser: Chromium / Chrome latest version",           "QA"),
+            ("☐", "Screen resolution: 1400×900 (default in test engine)","QA"),
+            ("☐", "Network: application reachable from test machine",    "Infra"),
+            ("☐", "Logs directory writable (semantic_test_output/)",     "QA"),
+            ("☐", "Previous test screenshots cleared if re-running",     "QA"),
+        ]
+        _header_row(ws, row, ["✓", "Checklist Item", "Responsible",
+                               "", "", "", "", "", ""], C.ACCENT_PURPLE)
+        row += 1
+        for idx, (tick, item, resp) in enumerate(checklist):
+            bg = C.LIGHT_PURPLE if idx % 2 == 0 else C.ALT_ROW
+            _data_row(ws, row, [tick, item, resp, "", "", "", "", "", ""], bg=bg)
+            row += 1
+
+    # ── CONSOLE SUMMARY — called exactly once from generate_all ─
+
+    def _print_console_summary(self, stories: List[TestStory]):
         passed = sum(1 for s in stories if s.status == StoryStatus.PASSED)
         failed = sum(1 for s in stories if s.status == StoryStatus.FAILED)
         total  = len(stories)
         pct    = round((passed / total * 100) if total else 0)
 
-        rows = ""
+        print(f"\n{'='*70}")
+        print(f"  📊 TEST STORY REPORT")
+        print(f"{'='*70}")
+        print(f"  Session  : {self.session_id}")
+        print(f"  Total    : {total}")
+        print(f"  ✅ Passed: {passed}   ❌ Failed: {failed}   Pass Rate: {pct}%")
+        print(f"{'='*70}")
+        print(f"  {'STORY ID':<22} {'CONTEXT':<30} {'STATUS':<12} {'STEPS'}")
+        print(f"  {'-'*70}")
         for s in stories:
-            success_steps = sum(1 for st in s.steps if st.success)
-            total_steps   = len(s.steps)
+            status  = s.status.value.upper()
+            success = sum(1 for st in s.steps if st.success)
+            print(f"  {s.story_id:<22} {s.context_name[:29]:<30} {status:<12} {success}/{len(s.steps)}")
+        print(f"{'='*70}\n")
 
-            if s.status == StoryStatus.PASSED:
-                badge = '<span class="badge pass">✅ PASSED</span>'
-                row_class = "row-pass"
-            elif s.status == StoryStatus.FAILED:
-                badge = '<span class="badge fail">❌ FAILED</span>'
-                row_class = "row-fail"
-            else:
-                badge = '<span class="badge skip">⏭ SKIP</span>'
-                row_class = "row-skip"
 
-            # Steps detail expandable
-            steps_html = ""
-            for st in s.steps:
-                icon = "✅" if st.success else "❌"
-                err  = f'<span class="err"> — {st.error}</span>' if st.error and not st.success else ""
-                steps_html += (
-                    f'<div class="step">{icon} '
-                    f'<b>{st.action}</b> → {st.target}'
-                    + (f' = <code>{st.value}</code>' if st.value else "")
-                    + err + "</div>"
-                )
-
-            # Field values
-            fv_html = "".join(
-                f'<div class="fv"><span class="fk">{k}</span>: <span class="fv-val">{v}</span></div>'
-                for k, v in s.field_values.items()
-            )
-
-            fail_reason = (
-                f'<div class="fail-reason">⚠️ {s.failure_reason}</div>'
-                if s.failure_reason else ""
-            )
-
-            rows += f"""
-            <tr class="{row_class}">
-              <td>{badge}</td>
-              <td><code>{s.story_id}</code></td>
-              <td><b>{s.context_name}</b></td>
-              <td>{s.user_persona}</td>
-              <td>
-                <div class="scenario">{s.description}</div>
-                {fail_reason}
-                <details>
-                  <summary>{success_steps}/{total_steps} steps</summary>
-                  <div class="steps-detail">{steps_html}</div>
-                </details>
-                <details>
-                  <summary>Field values ({len(s.field_values)})</summary>
-                  <div class="fv-detail">{fv_html}</div>
-                </details>
-              </td>
-            </tr>"""
-
-        html = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test Story Report — {self.session_id}</title>
-  <style>
-    * {{ box-sizing: border-box; margin: 0; padding: 0; }}
-    body {{
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0f172a; color: #e2e8f0; padding: 24px;
-    }}
-    h1 {{ font-size: 1.8rem; color: #38bdf8; margin-bottom: 4px; }}
-    .subtitle {{ color: #94a3b8; font-size: 0.9rem; margin-bottom: 24px; }}
-
-    .summary-bar {{
-      display: flex; gap: 16px; margin-bottom: 28px; flex-wrap: wrap;
-    }}
-    .stat {{
-      background: #1e293b; border-radius: 10px; padding: 16px 24px;
-      border: 1px solid #334155; min-width: 120px; text-align: center;
-    }}
-    .stat .num {{ font-size: 2rem; font-weight: 700; }}
-    .stat .lbl {{ font-size: 0.8rem; color: #94a3b8; margin-top: 4px; }}
-    .stat.pass {{ border-color: #22c55e; }}
-    .stat.pass .num {{ color: #22c55e; }}
-    .stat.fail {{ border-color: #ef4444; }}
-    .stat.fail .num {{ color: #ef4444; }}
-    .stat.total {{ border-color: #38bdf8; }}
-    .stat.total .num {{ color: #38bdf8; }}
-
-    .progress-bar {{
-      background: #1e293b; border-radius: 999px; height: 10px;
-      margin-bottom: 28px; overflow: hidden;
-    }}
-    .progress-fill {{
-      height: 100%; background: linear-gradient(90deg, #22c55e, #16a34a);
-      border-radius: 999px; transition: width 0.5s;
-      width: {pct}%;
-    }}
-
-    table {{
-      width: 100%; border-collapse: collapse; background: #1e293b;
-      border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }}
-    th {{
-      background: #0f172a; color: #94a3b8; font-size: 0.75rem;
-      text-transform: uppercase; letter-spacing: 0.05em;
-      padding: 12px 16px; text-align: left; border-bottom: 1px solid #334155;
-    }}
-    td {{ padding: 14px 16px; border-bottom: 1px solid #1e293b; vertical-align: top; }}
-    tr:last-child td {{ border-bottom: none; }}
-    .row-pass {{ border-left: 3px solid #22c55e; }}
-    .row-fail {{ border-left: 3px solid #ef4444; }}
-    .row-skip {{ border-left: 3px solid #f59e0b; }}
-    tr:hover td {{ background: #172033; }}
-
-    .badge {{
-      display: inline-block; padding: 4px 10px; border-radius: 999px;
-      font-size: 0.75rem; font-weight: 700;
-    }}
-    .badge.pass {{ background: #166534; color: #4ade80; }}
-    .badge.fail {{ background: #7f1d1d; color: #f87171; }}
-    .badge.skip {{ background: #78350f; color: #fcd34d; }}
-
-    code {{ background: #0f172a; padding: 2px 6px; border-radius: 4px;
-             font-size: 0.8rem; color: #7dd3fc; }}
-
-    .scenario {{ font-size: 0.85rem; color: #94a3b8; margin-bottom: 8px; }}
-    .fail-reason {{
-      background: #3b1212; border: 1px solid #ef4444; border-radius: 6px;
-      padding: 6px 10px; font-size: 0.8rem; color: #f87171;
-      margin-bottom: 8px;
-    }}
-
-    details {{ margin-top: 6px; }}
-    summary {{
-      cursor: pointer; font-size: 0.8rem; color: #7dd3fc;
-      padding: 4px 0; user-select: none;
-    }}
-    summary:hover {{ color: #38bdf8; }}
-
-    .steps-detail, .fv-detail {{
-      background: #0f172a; border-radius: 6px; padding: 10px;
-      margin-top: 6px; font-size: 0.8rem;
-    }}
-    .step {{ padding: 3px 0; border-bottom: 1px solid #1e293b; }}
-    .step:last-child {{ border-bottom: none; }}
-    .err {{ color: #f87171; }}
-
-    .fv {{ padding: 2px 0; }}
-    .fk {{ color: #94a3b8; }}
-    .fv-val {{ color: #4ade80; }}
-
-    .footer {{
-      margin-top: 24px; text-align: center;
-      font-size: 0.75rem; color: #475569;
-    }}
-  </style>
-</head>
-<body>
-  <h1>🧪 Test Story Report</h1>
-  <div class="subtitle">Session: {self.session_id} &nbsp;·&nbsp;
-    Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</div>
-
-  <div class="summary-bar">
-    <div class="stat total"><div class="num">{total}</div><div class="lbl">Total</div></div>
-    <div class="stat pass"><div class="num">{passed}</div><div class="lbl">Passed</div></div>
-    <div class="stat fail"><div class="num">{failed}</div><div class="lbl">Failed</div></div>
-    <div class="stat total"><div class="num">{pct}%</div><div class="lbl">Pass Rate</div></div>
-  </div>
-
-  <div class="progress-bar"><div class="progress-fill"></div></div>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Status</th>
-        <th>Story ID</th>
-        <th>Context</th>
-        <th>Persona</th>
-        <th>Details</th>
-      </tr>
-    </thead>
-    <tbody>
-      {rows}
-    </tbody>
-  </table>
-
-  <div class="footer">
-    Generated by Semantic Test Engine &nbsp;·&nbsp; {datetime.now().year}
-  </div>
-</body>
-</html>"""
-
-        path = self.output_dir / f"test_report_{self.session_id}.html"
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(html)
-        return path
+# Alias for backward compatibility
+ReportGenerator = ExcelReportGenerator

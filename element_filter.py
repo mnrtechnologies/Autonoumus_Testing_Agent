@@ -50,6 +50,8 @@ class ElementFilter:
 
         prompt = f"""You are a QA engineer reviewing interactive elements detected on a web page.
 Your job is to filter out elements that should NOT be tested.
+The testing scope is strictly limited to the current page and its modals.
+DO NOT keep elements that cause full page navigation or route changes.
 
 URL: {url}
 CONTEXT: {context_type}
@@ -70,6 +72,13 @@ more_vert — ALWAYS KEEP, no exceptions, regardless of context
 
 
 REMOVE these elements:
+- Buttons that navigate to different modules or sections of the application
+  and are not part of the current form being tested
+- Feature entry buttons that load a different workflow (e.g., Sedekah Sekarang,
+  Kalkulator Zakat, Riwayat Transaksi) when the current goal is testing
+  the ministry profile page
+- Any button that visually appears as a feature card or module entry
+  rather than part of the current editable form
 - Google Maps controls: Map, Satellite, Terrain, Toggle fullscreen,
   Map camera controls, Zoom in, Zoom out, Pegman/Street view
 - Any element with classes containing: gm-control, gm-fullscreen,
