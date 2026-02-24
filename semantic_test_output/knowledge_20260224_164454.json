@@ -1,0 +1,386 @@
+{
+  "session_id": "20260224_164454",
+  "page_url": "https://staging.isalaam.me/mosque/inventory/inventorytransactions/17cd788c-4380-4a37-9a61-3927081eadbe",
+  "generated_at": "2026-02-24T16:50:46.964271",
+  "execution_history": [
+    {
+      "step": 1,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 2,
+      "action": "click",
+      "target": "Transaksi",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 3,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    }
+  ],
+  "dropdown_options": {},
+  "forms_discovered": {
+    "info_1": [
+      {
+        "name": "Stok Masuk",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "Inactive",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Active",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      }
+    ],
+    "info_2": [
+      {
+        "name": "Kembali",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      }
+    ]
+  },
+  "stories_generated": 5,
+  "stories": [
+    {
+      "story_id": "STORY-001",
+      "context_name": "Activate Inventory Item",
+      "user_persona": "Super Admin",
+      "description": "Super Admin activates an inactive inventory item to make it available for transactions.",
+      "field_values": {},
+      "expected_outcome": "The status of the selected inventory item changes to 'Active'.\n\nVALIDATION: Assert: Status column for the item shows 'Active'.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.961618"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click on the 'more_vert' button next to an inactive item.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.961618"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'Mengaktifkan'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.961618"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify the status changes to 'Active'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.961618"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-002",
+      "context_name": "Deactivate Inventory Item",
+      "user_persona": "Super Admin",
+      "description": "Super Admin deactivates an active inventory item to prevent further transactions.",
+      "field_values": {},
+      "expected_outcome": "The status of the selected inventory item changes to 'Inactive'.\n\nVALIDATION: Assert: Status column for the item shows 'Inactive'.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.961618"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click on the 'more_vert' button next to an active item.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.961618"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'Stok Habis'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.961618"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify the status changes to 'Inactive'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.961618"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-003",
+      "context_name": "Search Inventory Items",
+      "user_persona": "Super Admin",
+      "description": "Super Admin searches for specific inventory items using the search functionality.",
+      "field_values": {
+        "Cari": "Peci"
+      },
+      "expected_outcome": "The table refreshes to show only items matching the search criteria.\n\nVALIDATION: Assert: Table displays items with 'Nama Produk' containing 'Peci'.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.962152"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Enter 'Peci' in the 'Cari' input field.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.962693"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Press Enter or click the search icon.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.962693"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify the table displays the correct search results.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.962693"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-004",
+      "context_name": "View Inventory Transaction Details",
+      "user_persona": "Super Admin",
+      "description": "Super Admin views detailed information about a specific inventory transaction.",
+      "field_values": {},
+      "expected_outcome": "The transaction details modal displays with complete information.\n\nVALIDATION: Assert: Modal displays transaction details including date and status.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.962693"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click on the 'more_vert' button next to an item.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.962693"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'Transaksi'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.962693"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify the transaction details modal appears with correct information.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.962693"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-005",
+      "context_name": "Paginate Inventory Items",
+      "user_persona": "Super Admin",
+      "description": "Super Admin navigates through multiple pages of inventory items using pagination controls.",
+      "field_values": {},
+      "expected_outcome": "The table updates to show items for the selected page.\n\nVALIDATION: Assert: Table updates to show items for page 2.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.963359"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'Next page' button.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.963939"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Verify the table updates to show items for the next page.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T16:50:46.963939"
+        }
+      ]
+    }
+  ]
+}

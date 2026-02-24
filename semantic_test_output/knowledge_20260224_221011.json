@@ -1,0 +1,552 @@
+{
+  "session_id": "20260224_221011",
+  "page_url": "https://staging.isalaam.me/master/roles",
+  "generated_at": "2026-02-24T22:19:16.519217",
+  "execution_history": [
+    {
+      "step": 1,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 2,
+      "action": "click",
+      "target": "Sunting",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 3,
+      "action": "fill",
+      "target": "name",
+      "value": "Super Admin",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 4,
+      "action": "select",
+      "target": "accessId",
+      "value": "Ministry",
+      "success": true,
+      "error": null,
+      "options": [
+        "Ministry",
+        "Mosque"
+      ]
+    },
+    {
+      "step": 5,
+      "action": "fill",
+      "target": "description",
+      "value": "This is a test description",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 6,
+      "action": "fill",
+      "target": "priorityIndex",
+      "value": "1",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 7,
+      "action": "click",
+      "target": "Perbarui",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 8,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 9,
+      "action": "fill",
+      "target": "Cari",
+      "value": "Super Admin",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 10,
+      "action": "click",
+      "target": "Tambah",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 11,
+      "action": "fill",
+      "target": "name",
+      "value": "Test Name",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 12,
+      "action": "fill",
+      "target": "description",
+      "value": "This is a test description",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 13,
+      "action": "fill",
+      "target": "priorityIndex",
+      "value": "1",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 14,
+      "action": "select",
+      "target": "accessId",
+      "value": "Super Admin",
+      "success": true,
+      "error": null,
+      "options": [
+        "Ministry",
+        "Mosque"
+      ]
+    },
+    {
+      "step": 15,
+      "action": "click",
+      "target": "Tambahkan",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    }
+  ],
+  "dropdown_options": {
+    "accessId": [
+      "Ministry",
+      "Mosque"
+    ]
+  },
+  "forms_discovered": {
+    "info_1": [
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      }
+    ],
+    "form_2": [
+      {
+        "name": "Tambah",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      }
+    ]
+  },
+  "stories_generated": 4,
+  "stories": [
+    {
+      "story_id": "STORY-001",
+      "context_name": "Edit Role and Verify Update",
+      "user_persona": "Super Admin editing role details",
+      "description": "A Super Admin edits the details of an existing role to update its name, description, and access level, ensuring the changes are reflected in the system.",
+      "field_values": {
+        "name": "Super Admin",
+        "description": "This is a test description",
+        "accessId": "Ministry",
+        "priorityIndex": "1"
+      },
+      "expected_outcome": "Success toast message appears: 'Data berhasil diperbarui'\n\nVALIDATION: Assert: toast message contains 'berhasil'. Assert: table updates with new role details",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'more_vert' on the role to edit",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'Sunting' to open the edit form",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Fill 'name' with 'Super Admin'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Select 'accessId' as 'Ministry'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Fill 'description' with 'This is a test description'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        },
+        {
+          "step_num": 6,
+          "action": "explore",
+          "target": "Step 6: Fill 'priorityIndex' with '1'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        },
+        {
+          "step_num": 7,
+          "action": "explore",
+          "target": "Step 7: Click 'Perbarui'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        },
+        {
+          "step_num": 8,
+          "action": "explore",
+          "target": "Step 8: Verify success toast message and updated table",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-002",
+      "context_name": "Add New Role and Confirm Addition",
+      "user_persona": "Super Admin adding a new role",
+      "description": "A Super Admin adds a new role to the system, filling out all necessary fields and confirming the role is added successfully.",
+      "field_values": {
+        "name": "Test Name",
+        "description": "This is a test description",
+        "accessId": "Super Admin",
+        "priorityIndex": "1"
+      },
+      "expected_outcome": "New role appears in the roles table with correct details\n\nVALIDATION: Assert: new role 'Test Name' is present in the table with correct 'description' and 'accessId'",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Tambah' to open the add role form",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Fill 'name' with 'Test Name'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Fill 'description' with 'This is a test description'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Fill 'priorityIndex' with '1'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Select 'accessId' as 'Super Admin'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        },
+        {
+          "step_num": 6,
+          "action": "explore",
+          "target": "Step 6: Click 'Tambahkan'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        },
+        {
+          "step_num": 7,
+          "action": "explore",
+          "target": "Step 7: Verify new role appears in the table",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-003",
+      "context_name": "Search and Verify Role",
+      "user_persona": "Super Admin searching for a specific role",
+      "description": "A Super Admin searches for a specific role using the search functionality to quickly locate and verify role details.",
+      "field_values": {
+        "Cari": "Super Admin"
+      },
+      "expected_outcome": "Table refreshes and shows only roles matching 'Super Admin'\n\nVALIDATION: Assert: table row count changes after search. Assert: role 'Super Admin' is visible",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Fill 'Cari' with 'Super Admin'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Verify table updates to show only matching roles",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.503315"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-004",
+      "context_name": "Navigate and Verify Role List Pagination",
+      "user_persona": "Super Admin navigating through role list",
+      "description": "A Super Admin navigates through the paginated list of roles to verify that pagination works correctly and all roles are accessible.",
+      "field_values": {},
+      "expected_outcome": "User can navigate through all pages and view roles correctly\n\nVALIDATION: Assert: 'Next page' and 'Previous page' buttons navigate correctly. Assert: roles display correctly on each page",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Next page' to navigate to the next set of roles",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.519217"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Verify roles display correctly",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.519217"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'Previous page' to navigate back",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.519217"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify roles display correctly",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T22:19:16.519217"
+        }
+      ]
+    }
+  ]
+}

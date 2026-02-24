@@ -1,0 +1,579 @@
+{
+  "session_id": "20260224_213751",
+  "page_url": "https://staging.isalaam.me/mosque/inventory/inventorytransactions/17cd788c-4380-4a37-9a61-3927081eadbe",
+  "generated_at": "2026-02-24T21:44:23.163064",
+  "execution_history": [
+    {
+      "step": 1,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 2,
+      "action": "click",
+      "target": "Transaksi",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 3,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 5,
+      "action": "fill",
+      "target": "Cari",
+      "value": "aifamart",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 6,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 8,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    }
+  ],
+  "dropdown_options": {},
+  "forms_discovered": {
+    "info_1": [
+      {
+        "name": "Stok Masuk",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "Inactive",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Active",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      }
+    ],
+    "info_2": [
+      {
+        "name": "Kembali",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      }
+    ],
+    "info_3": [
+      {
+        "name": "Kembali",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      }
+    ],
+    "info_4": [
+      {
+        "name": "Kembali",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      }
+    ]
+  },
+  "stories_generated": 5,
+  "stories": [
+    {
+      "story_id": "STORY-001",
+      "context_name": "Search Inventory by Vendor",
+      "user_persona": "Mosque Admin searching inventory items",
+      "description": "The Mosque Admin searches for inventory items supplied by a specific vendor to manage stock levels effectively.",
+      "field_values": {
+        "Cari": "aifamart"
+      },
+      "expected_outcome": "The inventory table displays only items supplied by 'aifamart'.\n\nVALIDATION: Assert: table rows contain 'aifamart' in the 'Nama Vendor' column.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Fill Cari with 'aifamart'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click Transaksi button",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify table displays only items from 'aifamart'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-002",
+      "context_name": "Activate Inventory Item",
+      "user_persona": "Super Admin managing inventory status",
+      "description": "The Super Admin activates an inactive inventory item to make it available for transactions.",
+      "field_values": {},
+      "expected_outcome": "The status of the selected inventory item changes to 'Active'.\n\nVALIDATION: Assert: selected item shows 'Active' in the Status column.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click more_vert on an inactive item",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click Mengaktifkan",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify item status changes to 'Active'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-003",
+      "context_name": "Deactivate Inventory Item",
+      "user_persona": "Super Admin managing inventory status",
+      "description": "The Super Admin deactivates an active inventory item to prevent further transactions.",
+      "field_values": {},
+      "expected_outcome": "The status of the selected inventory item changes to 'Inactive'.\n\nVALIDATION: Assert: selected item shows 'Inactive' in the Status column.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click more_vert on an active item",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click Inactive",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify item status changes to 'Inactive'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-004",
+      "context_name": "Mark Inventory Item as Out of Stock",
+      "user_persona": "Mosque Admin managing inventory levels",
+      "description": "The Mosque Admin marks an inventory item as out of stock to update inventory records accurately.",
+      "field_values": {},
+      "expected_outcome": "The selected inventory item is marked as 'Stok Habis'.\n\nVALIDATION: Assert: selected item shows 'Stok Habis' in the Status column.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click more_vert on an item",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click Stok Habis",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify item status changes to 'Stok Habis'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-005",
+      "context_name": "Navigate and Return from Inventory Details",
+      "user_persona": "Ministry Admin reviewing inventory details",
+      "description": "The Ministry Admin navigates to an inventory item's details and returns to the main inventory list.",
+      "field_values": {},
+      "expected_outcome": "The user is able to view item details and successfully return to the main inventory list.\n\nVALIDATION: Assert: main inventory list is displayed after returning.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click more_vert on an item",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click Transaksi",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Click Kembali",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Verify main inventory list is displayed",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T21:44:23.163064"
+        }
+      ]
+    }
+  ]
+}

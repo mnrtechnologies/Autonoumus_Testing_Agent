@@ -115,6 +115,10 @@ class BrainEngine:
             
             print(f"   💭 Thought: {decision.thought}")
             print(f"   🎯 Action: {decision.action}")
+            print(f"   📌 Target Element: {decision.element_id}")
+            print(f"   📦 Value: {decision.value}")
+            print(f"   🏁 Status: {decision.status}")
+            print("=" * 60)
             
             return decision
             
@@ -276,15 +280,20 @@ RESPONSE FORMAT (strict JSON only):
     "need_user_input": false
 }}
 
-⚠️  SPECIAL: ASK FOR USER INPUT BEFORE FILLING ANY FORM FIELD:
-- NEVER fill text fields, textareas, otp, or dropdowns without user input
-- FIRST: Identify the field (get its element_id and label)
-- THEN: Ask the user what to fill
-- THEN: Use their response to fill the field
-- Examples of correct flow:
-  1. See Name field (element 10) → Ask "What is your name?"
-  2. See Message textarea (element 15) → Ask "What message do you want to send?"
-  3. See Service dropdown (element 14) → Ask "Which service are you interested in?"
+📝 FORM HANDLING PRIORITY RULES (STRICT ORDER):
+
+1. FIRST: Check if the goal explicitly provides a value for this field.
+2. If YES → Type that exact value directly (do NOT ask the user).
+3. If NO → Ask the user what value to enter.
+4. Never guess, invent, or auto-fill values.
+5. Never ask the user if the value is already clearly provided in the goal.
+
+Correct behavior example:
+- Goal says: "Fill miniThreshold with 10"
+  → Type 10 directly (do NOT ask).
+
+- Goal does NOT mention the value:
+  → Ask the user what to enter using need_user_input: true.
   
 Correct response when encountering a form field:
 {{
@@ -310,11 +319,10 @@ RULES:
 3. Set status to "done" when you've completed the task
 4. NAVIGATE FIRST: Click navigation links to get to the right page - this is your priority
 5. After navigating, WAIT for page to load (wait action), then capture the new state
-6. ⭐ ALWAYS ask user for input before filling ANY form field:
-   - Text fields → Ask what to enter
-   - Textareas → Ask what message to send
-   - Dropdowns/Select → Ask which option to select
-   - DO NOT auto-fill or guess values
+6. ⭐ FORM FIELD RULE:
+   - If the goal provides the value → Type it directly.
+   - If the goal does NOT provide the value → Ask the user.
+   - Never guess or auto-fill values.
 7. Only fill form fields with values that the user provided
 8. If an element is covered or not clickable, try a different approach
 9. Be patient - wait for pages to load when needed
@@ -324,6 +332,18 @@ RULES:
 13. Don't fill form fields until you have explicitly asked the user and received their input
 14. FOR CREDENTIAL FIELDS: When typing passwords or sensitive data, always use the EXACT value from the goal
 15. FLOW: Navigate → Wait → Observe Form → Ask for Each Field → Fill with User Values → Submit
+16. IMPORTANT – DO NOT SELF-VERIFY SUCCESS:
+   - After clicking Submit / Save / Update / Delete / Login buttons,
+     DO NOT try to confirm success manually.
+   - Do NOT wait for toast messages.
+   - Do NOT re-click the same button to verify.
+   - The system automatically detects success using state comparison.
+
+17. After submitting a form or completing an action,
+    immediately proceed naturally without re-checking the same UI state.
+
+18. Never repeat the same action unless there is a clear visible change
+    requiring it (e.g., validation error message).
 
 Remember: Your ENTIRE response must be valid JSON and nothing else."""
 

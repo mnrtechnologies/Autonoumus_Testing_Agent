@@ -1,0 +1,911 @@
+{
+  "session_id": "20260224_193802",
+  "page_url": "https://staging.isalaam.me/mosque/inventory/inventorytransactions/17cd788c-4380-4a37-9a61-3927081eadbe",
+  "generated_at": "2026-02-24T19:51:44.623717",
+  "execution_history": [
+    {
+      "step": 1,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 2,
+      "action": "click",
+      "target": "Transaksi",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 3,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 5,
+      "action": "fill",
+      "target": "Cari",
+      "value": "aifamart",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 6,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 8,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 11,
+      "action": "click",
+      "target": "Kembali",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 12,
+      "action": "click",
+      "target": "Stok Masuk",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 13,
+      "action": "fill",
+      "target": "quantity",
+      "value": "100",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 14,
+      "action": "fill",
+      "target": "purchasePrice",
+      "value": "1000",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 15,
+      "action": "fill",
+      "target": "warrentyThru",
+      "value": "19/02/2026, 17:25",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 16,
+      "action": "select",
+      "target": "categoryId",
+      "value": "General",
+      "success": true,
+      "error": null,
+      "options": [
+        "Perlengkapan Ibadah",
+        "Audio & Media",
+        "Furnitur Masjid",
+        "Kebersihan & Sanitasi",
+        "Wudhu & Toilet",
+        "Listrik & Teknis",
+        "Administrasi",
+        "Keamanan & Kenyamanan",
+        "Kegiatan Masjid",
+        "Layanan Jamaah",
+        "Arsitektur & Interior",
+        "Transportasi Masjid"
+      ]
+    },
+    {
+      "step": 18,
+      "action": "upload",
+      "target": "file",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 19,
+      "action": "select",
+      "target": "subCategoryId",
+      "value": "General",
+      "success": true,
+      "error": null,
+      "options": [
+        "Pria",
+        "Wanita",
+        "Balita",
+        "Shalat",
+        "Al-Qur'an",
+        "Buku",
+        "Penunjang",
+        "Donasi",
+        "Jenazah"
+      ]
+    },
+    {
+      "step": 20,
+      "action": "select",
+      "target": "productId",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": [
+        "Peci",
+        "Sarung Dewasa",
+        "Tasbih Digital"
+      ]
+    },
+    {
+      "step": 21,
+      "action": "select",
+      "target": "supplierId",
+      "value": "Default Supplier",
+      "success": true,
+      "error": null,
+      "options": [
+        "aifamart",
+        "alfamart",
+        "Informa",
+        "Politron Electronics",
+        "Test Name"
+      ]
+    },
+    {
+      "step": 22,
+      "action": "select",
+      "target": "aifamart",
+      "value": "aifamart",
+      "success": true,
+      "error": null,
+      "options": [
+        "aifamart",
+        "alfamart",
+        "Informa",
+        "Politron Electronics",
+        "Test Name"
+      ]
+    },
+    {
+      "step": 23,
+      "action": "click",
+      "target": "Open calendar",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 24,
+      "action": "click",
+      "target": "Tambahkan",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 25,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 26,
+      "action": "click",
+      "target": "Transaksi",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    }
+  ],
+  "dropdown_options": {
+    "categoryId": [
+      "Perlengkapan Ibadah",
+      "Audio & Media",
+      "Furnitur Masjid",
+      "Kebersihan & Sanitasi",
+      "Wudhu & Toilet",
+      "Listrik & Teknis",
+      "Administrasi",
+      "Keamanan & Kenyamanan",
+      "Kegiatan Masjid",
+      "Layanan Jamaah",
+      "Arsitektur & Interior",
+      "Transportasi Masjid"
+    ],
+    "subCategoryId": [
+      "Pria",
+      "Wanita",
+      "Balita",
+      "Shalat",
+      "Al-Qur'an",
+      "Buku",
+      "Penunjang",
+      "Donasi",
+      "Jenazah"
+    ],
+    "productId": [
+      "Peci",
+      "Sarung Dewasa",
+      "Tasbih Digital"
+    ],
+    "supplierId": [
+      "aifamart",
+      "alfamart",
+      "Informa",
+      "Politron Electronics",
+      "Test Name"
+    ],
+    "aifamart": [
+      "aifamart",
+      "alfamart",
+      "Informa",
+      "Politron Electronics",
+      "Test Name"
+    ]
+  },
+  "forms_discovered": {
+    "info_1": [
+      {
+        "name": "Stok Masuk",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "Inactive",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Active",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      }
+    ],
+    "info_2": [
+      {
+        "name": "Kembali",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      }
+    ],
+    "info_3": [
+      {
+        "name": "Kembali",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      }
+    ],
+    "info_4": [
+      {
+        "name": "Kembali",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      }
+    ],
+    "form_5": [
+      {
+        "name": "Stok Masuk",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "Inactive",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Active",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      }
+    ],
+    "info_6": [
+      {
+        "name": "Stok Masuk",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "Inactive",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Active",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      }
+    ]
+  },
+  "stories_generated": 5,
+  "stories": [
+    {
+      "story_id": "STORY-001",
+      "context_name": "Add New Inventory Transaction",
+      "user_persona": "Mosque Admin adding new inventory",
+      "description": "The Mosque Admin adds a new inventory transaction to update the stock of a product. This ensures that the inventory system reflects the current stock levels.",
+      "field_values": {
+        "Cari": "aifamart",
+        "quantity": "100",
+        "purchasePrice": "1000",
+        "warrentyThru": "19/02/2026, 17:25",
+        "categoryId": "General",
+        "subCategoryId": "General",
+        "productId": "Peci",
+        "supplierId": "aifamart"
+      },
+      "expected_outcome": "The inventory table updates to show the new transaction with the correct details and stock levels.\n\nVALIDATION: Assert: new row appears in inventory table with product 'Peci' and quantity '100'. Assert: supplier is 'aifamart'.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Stok Masuk' button",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Fill 'quantity' with '100'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Fill 'purchasePrice' with '1000'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Fill 'warrentyThru' with '19/02/2026, 17:25'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Select 'categoryId' as 'General'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 6,
+          "action": "explore",
+          "target": "Step 6: Select 'subCategoryId' as 'General'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 7,
+          "action": "explore",
+          "target": "Step 7: Select 'productId' as 'Peci'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 8,
+          "action": "explore",
+          "target": "Step 8: Select 'supplierId' as 'aifamart'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 9,
+          "action": "explore",
+          "target": "Step 9: Click 'Tambahkan' button",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 10,
+          "action": "explore",
+          "target": "Step 10: Verify inventory table updates with new transaction",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-002",
+      "context_name": "Search and Verify Inventory",
+      "user_persona": "Super Admin searching inventory",
+      "description": "The Super Admin searches for inventory items using the search function to verify the presence and details of specific products.",
+      "field_values": {
+        "Cari": "aifamart"
+      },
+      "expected_outcome": "The inventory table displays only items supplied by 'aifamart'.\n\nVALIDATION: Assert: all visible rows in inventory table have 'Nama Vendor' as 'aifamart'.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Fill 'Cari' with 'aifamart'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'Cari' button",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Verify inventory table shows only items from 'aifamart'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-003",
+      "context_name": "Filter by Category and Subcategory",
+      "user_persona": "Mosque Admin filtering inventory",
+      "description": "The Mosque Admin filters inventory items by category and subcategory to manage specific types of products more efficiently.",
+      "field_values": {
+        "categoryId": "Perlengkapan Ibadah",
+        "subCategoryId": "Shalat"
+      },
+      "expected_outcome": "The inventory table displays only items that match the selected category and subcategory.\n\nVALIDATION: Assert: table rows match 'categoryId' as 'Perlengkapan Ibadah' and 'subCategoryId' as 'Shalat'.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Select 'categoryId' as 'Perlengkapan Ibadah'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Select 'subCategoryId' as 'Shalat'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Verify inventory table updates with filtered items",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-004",
+      "context_name": "Update Inventory Status",
+      "user_persona": "Mosque Admin updating inventory status",
+      "description": "The Mosque Admin changes the status of an inventory item to 'Active' to reflect its availability for use.",
+      "field_values": {
+        "productId": "Sarung Dewasa"
+      },
+      "expected_outcome": "The status of the selected inventory item changes to 'Active'.\n\nVALIDATION: Assert: status column for 'Sarung Dewasa' shows 'Active'.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'more_vert' next to 'Sarung Dewasa'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'Mengaktifkan'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Verify status changes to 'Active'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-005",
+      "context_name": "Upload Inventory Document",
+      "user_persona": "Mosque Admin uploading documents",
+      "description": "The Mosque Admin uploads a document related to an inventory transaction to maintain records and compliance.",
+      "field_values": {
+        "file": "document.pdf"
+      },
+      "expected_outcome": "The document uploads successfully and is associated with the correct inventory transaction.\n\nVALIDATION: Assert: document appears in the transaction details with correct filename.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Upload' button",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Select 'document.pdf' for upload",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Verify document appears in transaction details",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T19:51:44.623717"
+        }
+      ]
+    }
+  ]
+}

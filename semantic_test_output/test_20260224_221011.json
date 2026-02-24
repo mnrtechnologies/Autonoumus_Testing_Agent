@@ -1,0 +1,1288 @@
+{
+  "session_id": "20260224_221011",
+  "timestamp": "2026-02-24T22:18:42.439497",
+  "total_steps": 16,
+  "history": [
+    {
+      "step": 1,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "more_vert",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the rule to start by clicking the three-dot menu before any other action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T22:12:00.848848",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 2,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Sunting",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The mandatory rule requires interacting with newly appeared elements first, and 'Sunting' is the only untested element."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T22:12:23.920906",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "modal_changed": {
+          "from": null,
+          "to": "Perbarui Peran"
+        }
+      }
+    },
+    {
+      "step": 3,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "name",
+        "element_type": "input",
+        "test_value": "Super Admin",
+        "reasoning": "The 'name' field is mandatory and needs to be filled first according to the rules."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T22:12:47.176544",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 4,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "select",
+        "target_name": "accessId",
+        "element_type": "custom-select",
+        "test_value": "Ministry",
+        "reasoning": "The 'accessId' field is required and must be filled before any submit action."
+      },
+      "result": {
+        "success": true,
+        "action": "select",
+        "error": null,
+        "selected_value": "Ministry",
+        "all_options": [
+          "Ministry",
+          "Mosque"
+        ],
+        "formcontrolname": "accessId"
+      },
+      "all_options": [
+        "Ministry",
+        "Mosque"
+      ],
+      "timestamp": "2026-02-24T22:13:09.986210",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "Member",
+            "Super Admin",
+            "Mosque Admin",
+            "Ministry Admin",
+            "Imam"
+          ],
+          "after": [
+            "Support Team",
+            "Office Bearer",
+            "Member",
+            "Mosque Assistant",
+            "Super Admin",
+            "Mosque Admin",
+            "Ministry Admin",
+            "Developer",
+            "Super Mosque Admin",
+            "Imam"
+          ],
+          "added": [
+            "Support Team",
+            "Office Bearer",
+            "Mosque Assistant",
+            "Developer",
+            "Super Mosque Admin"
+          ],
+          "removed": []
+        }
+      }
+    },
+    {
+      "step": 5,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "description",
+        "element_type": "input",
+        "test_value": "This is a test description",
+        "reasoning": "The 'description' field is untested and must be filled before any button actions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T22:13:35.799296",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 6,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "priorityIndex",
+        "element_type": "input",
+        "test_value": "1",
+        "reasoning": "The 'priorityIndex' field is required and untested, so it must be filled before any button actions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T22:14:00.100687",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": "13",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": 13,
+          "to": "13"
+        }
+      }
+    },
+    {
+      "step": 7,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Perbarui",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The submit button 'Perbarui' should be tested before the cancel button to ensure the form submission works correctly."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T22:14:21.509113",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": "Perbarui Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Tindakan bisnis berhasil diperbarui",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "Member",
+            "Super Admin",
+            "Mosque Admin",
+            "Ministry Admin",
+            "Imam"
+          ],
+          "after": [
+            "Support Team",
+            "Office Bearer",
+            "Member",
+            "Mosque Assistant",
+            "Super Admin",
+            "Mosque Admin",
+            "Ministry Admin",
+            "Developer",
+            "Super Mosque Admin",
+            "Imam"
+          ],
+          "added": [
+            "Support Team",
+            "Office Bearer",
+            "Mosque Assistant",
+            "Developer",
+            "Super Mosque Admin"
+          ],
+          "removed": []
+        },
+        "toast_appeared": "Tindakan bisnis berhasil diperbarui",
+        "modal_changed": {
+          "from": "Perbarui Peran",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 8,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "more_vert",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the rule to start by clicking the three-dot menu before any other action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T22:15:02.281431",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 9,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "Cari",
+        "element_type": "input",
+        "test_value": "Super Admin",
+        "reasoning": "Following the screenshot data rule, I will fill the 'Cari' field with the first row's 'Nama Peran' value to test the search functionality."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T22:15:49.948732",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": 2,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": "13",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {
+          "Cari": "Super Admin"
+        },
+        "search_value": "Super Admin",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": 13,
+          "to": "13"
+        },
+        "search_changed": {
+          "from": null,
+          "to": "Super Admin"
+        },
+        "filters_changed": {
+          "from": {},
+          "to": {
+            "Cari": "Super Admin"
+          }
+        }
+      }
+    },
+    {
+      "step": 10,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Tambah",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Tambah' button is the only untested element remaining, and it is enabled for interaction."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T22:16:26.480189",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": "Super Admin",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {
+          "Cari": "Super Admin"
+        },
+        "search_value": "Super Admin",
+        "toast_message": null,
+        "modal_open": "Tambahkan Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "filters_changed": {
+          "from": {},
+          "to": {
+            "Cari": "Super Admin"
+          }
+        },
+        "modal_changed": {
+          "from": null,
+          "to": "Tambahkan Peran"
+        }
+      }
+    },
+    {
+      "step": 11,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "name",
+        "element_type": "input",
+        "test_value": "Test Name",
+        "reasoning": "The 'name' field is required and must be filled before any other action."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T22:16:50.160630",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": "13",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {
+          "Cari": "Super Admin"
+        },
+        "search_value": "Super Admin",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": "Super Admin",
+        "toast_message": null,
+        "modal_open": "Tambahkan Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": "13",
+          "to": 13
+        },
+        "filters_changed": {
+          "from": {
+            "Cari": "Super Admin"
+          },
+          "to": {}
+        },
+        "modal_changed": {
+          "from": null,
+          "to": "Tambahkan Peran"
+        }
+      }
+    },
+    {
+      "step": 12,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "description",
+        "element_type": "input",
+        "test_value": "This is a test description",
+        "reasoning": "The 'description' field is mandatory and must be filled before any button is clicked."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T22:17:14.306407",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": "13",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": "Super Admin",
+        "toast_message": null,
+        "modal_open": "Tambahkan Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": "Super Admin",
+        "toast_message": null,
+        "modal_open": "Tambahkan Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": "13",
+          "to": 13
+        }
+      }
+    },
+    {
+      "step": 13,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "priorityIndex",
+        "element_type": "input",
+        "test_value": "1",
+        "reasoning": "The 'priorityIndex' field is required and must be filled before any button actions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T22:17:37.385850",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {
+          "Cari": "Super Admin"
+        },
+        "search_value": "Super Admin",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": "13",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": "Super Admin",
+        "toast_message": null,
+        "modal_open": "Tambahkan Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": 13,
+          "to": "13"
+        },
+        "filters_changed": {
+          "from": {
+            "Cari": "Super Admin"
+          },
+          "to": {}
+        },
+        "modal_changed": {
+          "from": null,
+          "to": "Tambahkan Peran"
+        }
+      }
+    },
+    {
+      "step": 14,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "select",
+        "target_name": "accessId",
+        "element_type": "custom-select",
+        "test_value": "Super Admin",
+        "reasoning": "The 'accessId' field is required and must be filled before clicking the submit button."
+      },
+      "result": {
+        "success": true,
+        "action": "select",
+        "error": null,
+        "selected_value": "Ministry",
+        "all_options": [
+          "Ministry",
+          "Mosque"
+        ],
+        "formcontrolname": "accessId"
+      },
+      "all_options": [
+        "Ministry",
+        "Mosque"
+      ],
+      "timestamp": "2026-02-24T22:18:00.487535",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": "13",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": "Super Admin",
+        "toast_message": null,
+        "modal_open": "Tambahkan Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": 13,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1 - 10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": "Super Admin",
+        "toast_message": null,
+        "modal_open": "Tambahkan Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "total_records_changed": {
+          "from": "13",
+          "to": 13
+        }
+      }
+    },
+    {
+      "step": 15,
+      "url": "https://staging.isalaam.me/master/roles",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Tambahkan",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T22:18:23.238198",
+      "state_before": {
+        "page_title": "Peran",
+        "total_records": "13",
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 13",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Senior Mosque Admin",
+          "Developer",
+          "Support Team"
+        ],
+        "active_filters": {},
+        "search_value": "Super Admin",
+        "toast_message": null,
+        "modal_open": "Tambahkan Peran",
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peran",
+        "total_records": 14,
+        "current_page": 1,
+        "total_pages": null,
+        "pagination_text": "1-10 of 14",
+        "visible_row_count": 10,
+        "visible_rows": [
+          "Super Admin",
+          "Test Name",
+          "Ministry Admin",
+          "Mosque Admin",
+          "Member",
+          "Imam",
+          "Office Bearer",
+          "Mosque Assistant",
+          "Super Mosque Admin",
+          "Developer"
+        ],
+        "active_filters": {},
+        "search_value": "Super Admin",
+        "toast_message": "Peran berhasil dibuat",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "rows_changed": {
+          "before": [
+            "Support Team",
+            "Office Bearer",
+            "Member",
+            "Mosque Assistant",
+            "Super Admin",
+            "Senior Mosque Admin",
+            "Mosque Admin",
+            "Ministry Admin",
+            "Developer",
+            "Imam"
+          ],
+          "after": [
+            "Office Bearer",
+            "Imam",
+            "Member",
+            "Mosque Assistant",
+            "Super Admin",
+            "Mosque Admin",
+            "Ministry Admin",
+            "Developer",
+            "Super Mosque Admin",
+            "Test Name"
+          ],
+          "added": [
+            "Super Mosque Admin",
+            "Test Name"
+          ],
+          "removed": [
+            "Support Team",
+            "Senior Mosque Admin"
+          ]
+        },
+        "total_records_changed": {
+          "from": "13",
+          "to": 14
+        },
+        "toast_appeared": "Peran berhasil dibuat",
+        "modal_changed": {
+          "from": "Tambahkan Peran",
+          "to": null
+        }
+      }
+    }
+  ]
+}

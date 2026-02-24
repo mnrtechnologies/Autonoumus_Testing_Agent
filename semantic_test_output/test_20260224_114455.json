@@ -1,0 +1,62 @@
+{
+  "session_id": "20260224_114455",
+  "timestamp": "2026-02-24T11:46:18.283671",
+  "total_steps": 2,
+  "history": [
+    {
+      "step": 1,
+      "url": "https://staging.isalaam.me/sign-in",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "Masukan Email yang terdaftar di Isalaam",
+        "element_type": "input",
+        "test_value": "test@example.com",
+        "reasoning": "The input field for email must be filled before clicking the submit button."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T11:45:54.532415",
+      "state_before": {
+        "page_title": "Selamat Datang",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": "Authentication error\nYour session has expired. Please log in again.",
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Masuk ke Akun Anda",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": "test@example.com",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "search_changed": {
+          "from": null,
+          "to": "test@example.com"
+        }
+      }
+    }
+  ]
+}

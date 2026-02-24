@@ -94,11 +94,36 @@ class GlobalMemory:
     def is_tested(self, element_identifier: str, action: str) -> bool:
         signature = f"{action}:{element_identifier}"
         return signature in self.tested_elements
+    
+    def _get_identifier(self, element: Dict, current_url: str = "") -> str:
+        """Generates shared IDs scoped by normalized URL path, with global menu items."""
+        text = element.get('text', '').strip()
+        elem_type = element.get('element_type', '')
+        is_in_overlay = element.get('in_overlay', False)
+        
+        # 1. Normalize the path (The Firewall)
+        path = urlparse(current_url).path.rstrip('/') if current_url else "global"
 
-    def get_untested(self, elements: List[Dict], action_type: str = None) -> List[Dict]:
+        # ─── CASE A: MENU ITEMS (Global Features) ───
+        # If it's a menu item, we use a GLOBAL ID. 
+        # Once 'Transaksi' is tested once, we don't need to test it on every row.
+        if elem_type == "menuitem" or "mat-mdc-menu-item" in str(element.get("classes", [])):
+            return f"global:menuitem:{text}"
+
+        # ─── CASE B: SHARED TRIGGERS (Path-Scoped) ───
+        # All 3-dot buttons ON THE SAME PAGE share one ID to prevent row-by-row clicking.
+        if "more_vert" in text.lower() or "menu-trigger" in str(element.get("classes", [])):
+            return f"{path}:page:button:more_vert:shared"
+
+        # ─── CASE C: REGULAR BUTTONS & INPUTS (Path-Scoped) ───
+        # 'Kembali' or 'Stok Masuk' stay unique to their specific page.
+        context_prefix = 'overlay:' if is_in_overlay else 'page:'
+        return f"{path}:{context_prefix}{elem_type}:{text[:50]}"
+
+    def get_untested(self, elements: List[Dict], current_url: str = "", action_type: str = None) -> List[Dict]:
         untested = []
         for elem in elements:
-            identifier = self._get_identifier(elem)
+            identifier = self._get_identifier(elem, current_url)
             if action_type:
                 if not self.is_tested(identifier, action_type):
                     untested.append(elem)
@@ -110,49 +135,60 @@ class GlobalMemory:
                 if not any_tested:
                     untested.append(elem)
         return untested
+    
+    # def _get_identifier(self, element: Dict, current_url: str = "") -> str:
+    #     """Generates shared IDs scoped by normalized URL path."""
+    #     is_in_overlay = element.get('in_overlay', False)
+        
+    #     # Normalize path: remove trailing slashes and query params
+    #     path = urlparse(current_url).path.rstrip('/') if current_url else "global"
+    #     context_prefix = f'{path}:overlay:' if is_in_overlay else f'{path}:page:'
+        
+    #     text = element.get('text', '').strip()
+    #     elem_type = element.get('element_type', '')
+    #     formcontrol = element.get('formcontrolname', '')
 
-    def _get_identifier(self, element: Dict) -> str:
-        is_in_overlay = element.get('in_overlay', False)
-        context_prefix = 'overlay:' if is_in_overlay else 'page:'
+    #     if "more_vert" in text.lower() or "menu-trigger" in str(element.get("classes", [])):
+    #         return f"{context_prefix}button:more_vert:shared"
 
-        if element.get("element_type") == "toggle":
-            # Use X/Y position instead of ID
-            x = element.get("x")
-            y = element.get("y")
+    #     if elem_type == "button" and text:
+    #         common_actions = ['edit', 'delete', 'hapus', 'ubah', 'view', 'lihat']
+    #         if any(word in text.lower() for word in common_actions):
+    #             return f"{context_prefix}button:{text[:20]}:shared"
 
-            # Snap Y to row band (e.g., 50px buckets)
-            row_bucket = int(y / 50)
+    #     if elem_type == "toggle":
+    #         label = text or formcontrol or "switch"
+    #         return f"{context_prefix}toggle:{label}:shared"
 
-            return f"{context_prefix}toggle:row{row_bucket}:col{x}"
+    #     if elem_type == 'file':
+    #         return f"{context_prefix}file:{formcontrol or text or element.get('id')}"
 
-        # ✅ File first (after prefix is defined)
-        if element.get('element_type') == 'file':
-            formcontrol = element.get('formcontrolname', '')
-            if formcontrol:
-                return f"{context_prefix}file:{formcontrol}"
-            return f"{context_prefix}file:{element.get('id') or element.get('name') or element.get('text')}"
+    #     if formcontrol:
+    #         return f"{context_prefix}{element.get('tag', 'input')}:{formcontrol}"
 
-        formcontrol = element.get('formcontrolname', '')
-        if formcontrol:
-            return f"{context_prefix}{element.get('tag', 'input')}:{formcontrol}"
+    #     if text:
+    #         return f"{context_prefix}{elem_type}:{text[:50]}"
 
-        name_attr = element.get('name', '')
-        if name_attr:
-            return f"{context_prefix}{element.get('element_type', 'element')}:{name_attr}"
+    #     return f"{context_prefix}{elem_type}:#{element.get('id', 'unknown')}"
 
-        text = element.get('text', '').strip()
-        elem_type = element.get('element_type', element.get('tag', ''))
+    # def get_untested(self, elements: List[Dict], current_url: str = "", action_type: str = None) -> List[Dict]:
+    #     untested = []
+    #     for elem in elements:
+    #         # Pass the current_url to ensure path-scoping
+    #         identifier = self._get_identifier(elem, current_url)
+    #         if action_type:
+    #             if not self.is_tested(identifier, action_type):
+    #                 untested.append(elem)
+    #         else:
+    #             any_tested = any(
+    #                 self.is_tested(identifier, a)
+    #                 for a in ['click', 'fill', 'select', 'check','upload']
+    #             )
+    #             if not any_tested:
+    #                 untested.append(elem)
+    #     return untested
 
-        if text:
-            y = element.get('y')
-            return f"{context_prefix}{elem_type}:{text[:50]}:{y}"
-
-        id_attr = element.get('id', '')
-        if id_attr:
-            return f"{context_prefix}{elem_type}:#{id_attr}"
-
-        return f"{context_prefix}{elem_type}:unknown"
-
+    
 # ═══════════════════════════════════════════════════════════════
 #  SCOPE MANAGER
 # ═══════════════════════════════════════════════════════════════
@@ -261,6 +297,8 @@ class Observer:
         'mat-dialog-container',
         '[role="dialog"][aria-modal="true"]',
         '[role="alertdialog"]',
+        '.mat-mdc-menu-panel',  
+        '[role="menu"]',
         '.modal.show',
         '.modal.active',
         '.dialog.open',
@@ -1111,6 +1149,17 @@ MOST IMPORTANT RULE — READ THE SCREENSHOT CAREFULLY:
 
 7. ONLY choose from UNTESTED ELEMENTS list above - do not hallucinate elements.
 
+8. MENU ITEM PRIORITY:
+   - If elements with role="menuitem" are visible:
+   - FIRST: Test items that keep you on the same page (e.g., Change Status, Delete, Toggle).
+   - LAST: Test items that navigate to a new URL (e.g., Details, Transactions, Kembali).
+   - This ensures we exhaust all options before leaving the page.
+
+9. FILE UPLOAD PRIORITY:
+   - If an element_type "file" is present in the untested list, you MUST perform the "upload" action 
+     BEFORE clicking any "Simpan", "Save", or "Submit" buttons.
+   - A form is considered invalid until the file is uploaded.
+
 """
 
         if context_type == ContextType.CONFIRMATION:
@@ -1804,6 +1853,14 @@ class SemanticTester:
         """Enforce that LLM can only pick from the untested list. No hallucination allowed."""
         target = decision.get('target_name', '').strip()
 
+        # NEW: Absolute File Priority Check
+        file_elements = [e for e in untested if e.get('element_type') == 'file']
+        is_submit_action = any(kw in target.lower() for kw in ["simpan", "save", "submit"])
+        
+        if file_elements and is_submit_action:
+            print(f"  🚨 VALIDATION OVERRIDE: Cannot submit while file upload is untested!")
+            return self._elem_to_decision(file_elements[0])
+
         # Special handling for file inputs
         # --- Special handling for file inputs ---
         for elem in untested:
@@ -1984,7 +2041,33 @@ class SemanticTester:
 
             # ── GLOBAL MEMORY FILTER ─────────────────────────────────────────
             print(f"  🔍 Before get_untested, overlay keys: {[k for k in self.global_memory.tested_elements if k.startswith('overlay:')]}")
-            untested = self.global_memory.get_untested(scoped_elements)
+            untested = self.global_memory.get_untested(scoped_elements, page.url)
+
+            # --- PHYSICAL ESCAPE FOR EMPTY/FILTERED MENUS ---
+            if elements_data.get('has_overlay') and not untested:
+                print(f"  ⚠️ No actionable items in {elements_data.get('overlay_selector')}. Physically dismissing...")
+                await page.keyboard.press("Escape")
+                await asyncio.sleep(0.5)
+                
+                if self.context_stack.depth() > 1:
+                    self.context_stack.pop()
+                
+                # Check if we should retire the trigger now
+                if self.history:
+                    last_dec = self.history[-1].get('decision', {})
+                    if "more_vert" in last_dec.get('target_name', ''):
+                        # Construct shared ID to mark as tested
+                        shared_id = f"{'overlay:' if last_dec.get('in_overlay') else 'page:'}button:more_vert:shared"
+                        
+                        # Only retire if NO sub-menu items remain in global untested list
+                        menu_keywords = ["mengaktifkan", "stok habis", "transaksi", "lihat-tagihan"]
+                        remaining = [e for e in untested if any(k in (e.get('text') or '').lower() for k in menu_keywords)]
+                        
+                        if not remaining:
+                            self.global_memory.mark_tested(shared_id, "click")
+                            print(f"  ✅ Shared trigger {shared_id} retired (no actionable items left).")
+                continue
+
             print(f"{untested} this is untested logs")
             tested_positions = set()
             for elem in scoped_elements:
@@ -2065,9 +2148,15 @@ class SemanticTester:
             )
 
             is_loop, reason = self.loop_detector.is_looping()
-            if is_loop:
+            # Identify if the current target is a menu trigger
+            target_is_menu = "more_vert" in decision.get("target_name", "").lower()
+
+            if is_loop and not target_is_menu:
                 print(f"  🔁 Loop: {reason}")
-                self.story_tracker.mark_loop_detected(decision.get("target_name", ""))  # ← ADD
+                # ... rest of your loop recovery code ...
+            elif is_loop and target_is_menu:
+                # Do NOT retire the menu trigger. We need multiple clicks for deep exploration.
+                print(f"  ℹ️  Frequent menu access detected, allowing for deep exhaustion...")
 
                 # FIX 1: Find the actual element dict to get proper identifier
                 # Try multiple matching strategies
@@ -2107,7 +2196,7 @@ class SemanticTester:
 
                 if matching_elem:
                     # Use the SAME identifier method as GlobalMemory
-                    identifier = self.global_memory._get_identifier(matching_elem)
+                    identifier = self.global_memory._get_identifier(matching_elem, page.url)
                     self.global_memory.mark_tested(identifier, decision.get('action'))
                     print(f"     Marked as tested: {identifier}")
                 else:
@@ -2161,7 +2250,7 @@ class SemanticTester:
             if not locator:
                 print(f"  ❌ Not found")
                 if matching_elem:
-                    identifier = self.global_memory._get_identifier(matching_elem)
+                    identifier = self.global_memory._get_identifier(matching_elem, page.url)
                     self.global_memory.mark_tested(identifier, decision.get('action'))
                     print(f"     Marked as tested (not found): {identifier}")
                 continue
@@ -2207,32 +2296,87 @@ class SemanticTester:
 
             if matching_elem:
                 identifier = self.global_memory._get_identifier(matching_elem)
+                
+                # --- NEW: PHYSICAL ESCAPE FOR EMPTY/FILTERED MENUS ---
+                # If an overlay is open but we have 0 actionable items (tested or filtered),
+                # we must physically close it to prevent a context loop.
+                if elements_data.get('has_overlay') and not untested:
+                    print(f"  ⚠️ No actionable items in {elements_data.get('overlay_selector')}. Physically dismissing...")
+                    
+                    # 1. Physically close the menu/modal
+                    await page.keyboard.press("Escape")
+                    await asyncio.sleep(0.5)
+                    
+                    # 2. POP the context stack so memory matches the screen
+                    if self.context_stack.depth() > 1:
+                        self.context_stack.pop()
+                    
+                    # 3. Retire the trigger that opened this menu (prevent re-clicking)
+                    is_menu_trigger = "more_vert" in matching_elem.get("text", "").lower() or \
+                                      "mat-mdc-menu-trigger" in str(matching_elem.get("classes", []))
+                    
+                    if is_menu_trigger:
+                        self.global_memory.mark_tested(identifier, "click")
+                        print(f"  ✅ Shared trigger {identifier} retired (all children were filtered or tested).")
+                    
+                    continue # Restart loop with a clear screen
+
+            if matching_elem:
+                identifier = self.global_memory._get_identifier(matching_elem)
 
                 if result.get("success"):
+                    is_menu_trigger = "more_vert" in decision.get("target_name", "").lower() or \
+                                      "mat-mdc-menu-trigger" in str(matching_elem.get("classes", []))
 
                     if is_submit and validation_failed:
                         print("⚠️ Submit failed validation — NOT marking as tested")
+                    
+                    elif is_menu_trigger:
+                        print("    ⏳ Menu Trigger Detected. Waiting for render...")
+                        await asyncio.sleep(1.2) 
+                        
+                        # 1. Fresh Scan of the now-open menu
+                        fresh_scan = await self.observer.get_elements(page)
+                        menu_items = [e for e in fresh_scan.get('active_elements', []) 
+                                     if e.get('role') == 'menuitem' or 'mat-mdc-menu-item' in str(e.get('classes', []))]
+                        
+                        # 2. THE FIREWALL: Look at HISTORY for successful clicks (Any Path)
+                        already_done_labels = [
+                            str(h.get('decision', {}).get('target_name', ''))
+                            for h in self.history if h.get('result', {}).get('success')
+                        ]
+
+                        # 3. EXPLICIT FILTER: Remove labels that are already in the history
+                        untested_menu_items = [
+                            item for item in menu_items 
+                            if item.get('text') not in already_done_labels
+                        ]
+
+                        if menu_items and not untested_menu_items:
+                            # Every item visible in the menu is already recorded in history
+                            self.global_memory.mark_tested(identifier, "click")
+                            print(f"✅ Menu Fully Exhausted. Trigger {identifier} retired.")
+                            await page.keyboard.press("Escape")
+                        elif not menu_items:
+                            print(f"⚠️ Trigger {identifier} failed to reveal items. Retrying...")
+                            await page.keyboard.press("Escape")
+                        else:
+                            # CRITICAL: Overwrite the 'untested' list so the Decider only sees what is left
+                            untested = untested_menu_items 
+                            print(f"ℹ️ Trigger held open: {len(untested)} items left. (Filtered: {already_done_labels})")
+
                     else:
                         self.global_memory.mark_tested(identifier, decision.get("action"))
-                        print(f"✅ Marked as tested: {identifier}")                    # identifier = self.global_memory._get_identifier(matching_elem)
-                    self.global_memory.mark_tested(identifier, decision.get('action'))
-                    print(f"  ✅ Marked as tested: {identifier}")
-                    # print(f"  ✅ Marked as tested: {identifier}")
+                        print(f"✅ Marked as tested: {identifier}")
+                    
+                    # Original redundant call removed for cleanliness, logic preserved above
                 elif result.get('error') and 'disabled' in result.get('error', '').lower():
-                    # if matching_elem and result.get('error') and 'disabled' in result.get('error', '').lower():
-                        # identifier = self.global_memory._get_identifier(matching_elem)
-
-                        self.global_memory.mark_tested(identifier, decision.get('action'))
-                        print(f"  ⚠️  Marked as tested (disabled button): {identifier}")
-
-                    # print(f"  ⚠️  Execution failed - will retry this element")
-                # elif not matching_elem:
-                    # print(f"  ⚠️  Could not find matching element in list - cannot mark as tested")
+                    self.global_memory.mark_tested(identifier, decision.get('action'))
+                    print(f"  ⚠️  Marked as tested (disabled button): {identifier}")
                 else:
                     print(f"  ⚠️  Execution failed - will retry this element")
             else:
                 print(f"  ⚠️  Could not find matching element in list - cannot mark as tested")
-
 
             is_submit = any(kw in decision.get("target_name","").lower()
                 for kw in ["simpan","save","submit","tambah","perbarui","update"])

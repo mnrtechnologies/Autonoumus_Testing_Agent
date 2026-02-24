@@ -1,0 +1,1175 @@
+{
+  "session_id": "20260224_183723",
+  "timestamp": "2026-02-24T18:46:45.564276",
+  "total_steps": 22,
+  "history": [
+    {
+      "step": 1,
+      "url": "https://staging.isalaam.me/mosque/inventory",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "more_vert",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the rule to start by clicking the three-dot menu before any other action."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T18:38:31.461256",
+      "state_before": {
+        "page_title": "Inventaris",
+        "total_records": "3",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 3 of 3",
+        "visible_row_count": 3,
+        "visible_rows": [
+          "Peci",
+          "Sarung Dewasa",
+          "Meja Administrasi"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Inventaris",
+        "total_records": "3",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 \u2013 3 of 3",
+        "visible_row_count": 3,
+        "visible_rows": [
+          "Peci",
+          "Sarung Dewasa",
+          "Meja Administrasi"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 2,
+      "url": "https://staging.isalaam.me/mosque/inventory/inventorytransactions/17cd788c-4380-4a37-9a61-3927081eadbe",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Transaksi",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the mandatory rule to interact with newly appeared elements first."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T18:38:53.282812",
+      "state_before": {
+        "page_title": "Inventaris",
+        "total_records": "3",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 \u2013 3 of 3",
+        "visible_row_count": 3,
+        "visible_rows": [
+          "Peci",
+          "Sarung Dewasa",
+          "Meja Administrasi"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peci Transaksi",
+        "total_records": "12",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 8,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": 1,
+          "to": null
+        },
+        "rows_changed": {
+          "before": [
+            "Meja Administrasi",
+            "Peci",
+            "Sarung Dewasa"
+          ],
+          "after": [
+            "aifamart"
+          ],
+          "added": [
+            "aifamart"
+          ],
+          "removed": [
+            "Meja Administrasi",
+            "Peci",
+            "Sarung Dewasa"
+          ]
+        },
+        "row_count_changed": {
+          "from": 3,
+          "to": 8
+        },
+        "total_records_changed": {
+          "from": "3",
+          "to": "12"
+        }
+      }
+    },
+    {
+      "step": 3,
+      "url": "https://staging.isalaam.me/mosque/inventory/inventorytransactions/17cd788c-4380-4a37-9a61-3927081eadbe",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "Cari",
+        "element_type": "input",
+        "test_value": "aifamart",
+        "reasoning": "Following the screenshot data rule, I will use the first visible data in the table for the search field."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T18:39:45.426517",
+      "state_before": {
+        "page_title": "Peci Transaksi",
+        "total_records": "12",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 7,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peci Transaksi",
+        "total_records": "12",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 7,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart"
+        ],
+        "active_filters": {
+          "Cari": "aifamart"
+        },
+        "search_value": "aifamart",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "search_changed": {
+          "from": null,
+          "to": "aifamart"
+        },
+        "filters_changed": {
+          "from": {},
+          "to": {
+            "Cari": "aifamart"
+          }
+        }
+      }
+    },
+    {
+      "step": 4,
+      "url": "https://staging.isalaam.me/mosque/inventory/inventorytransactions/17cd788c-4380-4a37-9a61-3927081eadbe",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "more_vert",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the rule to start by clicking the three-dot menu if present."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T18:40:29.679854",
+      "state_before": {
+        "page_title": "Peci Transaksi",
+        "total_records": "12",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 7,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart"
+        ],
+        "active_filters": {},
+        "search_value": "aifamart",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peci Transaksi",
+        "total_records": "12",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 8,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart"
+        ],
+        "active_filters": {
+          "Cari": "aifamart"
+        },
+        "search_value": "aifamart",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "row_count_changed": {
+          "from": 7,
+          "to": 8
+        },
+        "filters_changed": {
+          "from": {},
+          "to": {
+            "Cari": "aifamart"
+          }
+        }
+      }
+    },
+    {
+      "step": 6,
+      "url": "https://staging.isalaam.me/mosque/inventory/inventorytransactions/17cd788c-4380-4a37-9a61-3927081eadbe",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "more_vert",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the rule to start by clicking the three-dot menu if present."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T18:41:20.893881",
+      "state_before": {
+        "page_title": "Peci Transaksi",
+        "total_records": "12",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 7,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart"
+        ],
+        "active_filters": {},
+        "search_value": "aifamart",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Peci Transaksi",
+        "total_records": "12",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 8,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart"
+        ],
+        "active_filters": {
+          "Nama Vendor": "aifamart"
+        },
+        "search_value": "aifamart",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "row_count_changed": {
+          "from": 7,
+          "to": 8
+        },
+        "filters_changed": {
+          "from": {},
+          "to": {
+            "Nama Vendor": "aifamart"
+          }
+        }
+      }
+    },
+    {
+      "step": 9,
+      "url": "https://staging.isalaam.me/mosque/inventory",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Kembali",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The 'Kembali' button is the only untested element remaining, so it should be clicked to complete the test."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T18:42:24.939291",
+      "state_before": {
+        "page_title": "Peci Transaksi",
+        "total_records": "12",
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 7,
+        "visible_rows": [
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart",
+          "aifamart"
+        ],
+        "active_filters": {},
+        "search_value": "aifamart",
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Inventaris",
+        "total_records": 3,
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 3 of 3",
+        "visible_row_count": 3,
+        "visible_rows": [
+          "Peci",
+          "Sarung Dewasa",
+          "Meja Administrasi"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": null,
+          "to": 1
+        },
+        "rows_changed": {
+          "before": [
+            "aifamart"
+          ],
+          "after": [
+            "Meja Administrasi",
+            "Peci",
+            "Sarung Dewasa"
+          ],
+          "added": [
+            "Meja Administrasi",
+            "Peci",
+            "Sarung Dewasa"
+          ],
+          "removed": [
+            "aifamart"
+          ]
+        },
+        "row_count_changed": {
+          "from": 7,
+          "to": 3
+        },
+        "total_records_changed": {
+          "from": "12",
+          "to": 3
+        },
+        "search_changed": {
+          "from": "aifamart",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 10,
+      "url": "https://staging.isalaam.me/mosque/inventory",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Stok Masuk",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "Following the mandatory rule to interact with newly appeared elements first."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T18:42:59.747467",
+      "state_before": {
+        "page_title": "Inventaris",
+        "total_records": "3",
+        "current_page": 1,
+        "total_pages": 1,
+        "pagination_text": "1 - 3 of 3",
+        "visible_row_count": 3,
+        "visible_rows": [
+          "Peci",
+          "Sarung Dewasa",
+          "Meja Administrasi"
+        ],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {
+        "page_changed": {
+          "from": 1,
+          "to": null
+        },
+        "rows_changed": {
+          "before": [
+            "Meja Administrasi",
+            "Peci",
+            "Sarung Dewasa"
+          ],
+          "after": [],
+          "added": [],
+          "removed": [
+            "Meja Administrasi",
+            "Peci",
+            "Sarung Dewasa"
+          ]
+        },
+        "row_count_changed": {
+          "from": 3,
+          "to": 0
+        },
+        "total_records_changed": {
+          "from": "3",
+          "to": null
+        }
+      }
+    },
+    {
+      "step": 11,
+      "url": "https://staging.isalaam.me/mosque/inventory",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "quantity",
+        "element_type": "input",
+        "test_value": "100",
+        "reasoning": "Start by filling the 'quantity' field as it is the first required field in the list."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T18:43:17.284295",
+      "state_before": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": "Nama kategori wajib diisi",
+        "empty_state": null
+      },
+      "state_diff": {
+        "error_appeared": "Nama kategori wajib diisi"
+      }
+    },
+    {
+      "step": 12,
+      "url": "https://staging.isalaam.me/mosque/inventory",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "purchasePrice",
+        "element_type": "input",
+        "test_value": "1000",
+        "reasoning": "The first mandatory field to fill is 'purchasePrice' as per the instructions."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T18:43:35.905090",
+      "state_before": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": "Nama kategori wajib diisi",
+        "empty_state": null
+      },
+      "state_diff": {
+        "error_appeared": "Nama kategori wajib diisi"
+      }
+    },
+    {
+      "step": 13,
+      "url": "https://staging.isalaam.me/mosque/inventory",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "fill",
+        "target_name": "warrentyThru",
+        "element_type": "input",
+        "test_value": "19/02/2026, 17:25",
+        "reasoning": "Start by filling the 'warrentyThru' field as it is the first mandatory field in the story."
+      },
+      "result": {
+        "success": true,
+        "action": "fill",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T18:43:56.113017",
+      "state_before": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": "Nama kategori wajib diisi",
+        "empty_state": null
+      },
+      "state_diff": {
+        "error_appeared": "Nama kategori wajib diisi"
+      }
+    },
+    {
+      "step": 14,
+      "url": "https://staging.isalaam.me/mosque/inventory",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "select",
+        "target_name": "categoryId",
+        "element_type": "custom-select",
+        "test_value": "General",
+        "reasoning": "The 'categoryId' field is required and must be filled first according to the instructions."
+      },
+      "result": {
+        "success": true,
+        "action": "select",
+        "error": null,
+        "selected_value": "Perlengkapan Ibadah",
+        "all_options": [
+          "Perlengkapan Ibadah",
+          "Audio & Media",
+          "Furnitur Masjid",
+          "Kebersihan & Sanitasi",
+          "Wudhu & Toilet",
+          "Listrik & Teknis",
+          "Administrasi",
+          "Keamanan & Kenyamanan",
+          "Kegiatan Masjid",
+          "Layanan Jamaah",
+          "Arsitektur & Interior",
+          "Transportasi Masjid"
+        ],
+        "formcontrolname": "categoryId"
+      },
+      "all_options": [
+        "Perlengkapan Ibadah",
+        "Audio & Media",
+        "Furnitur Masjid",
+        "Kebersihan & Sanitasi",
+        "Wudhu & Toilet",
+        "Listrik & Teknis",
+        "Administrasi",
+        "Keamanan & Kenyamanan",
+        "Kegiatan Masjid",
+        "Layanan Jamaah",
+        "Arsitektur & Interior",
+        "Transportasi Masjid"
+      ],
+      "timestamp": "2026-02-24T18:44:16.655092",
+      "state_before": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 16,
+      "url": "https://staging.isalaam.me/mosque/inventory",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "upload",
+        "target_name": "file",
+        "element_type": "file",
+        "test_value": "",
+        "reasoning": "Validation override \u2014 LLM picked element outside untested list"
+      },
+      "result": {
+        "success": true,
+        "action": "upload",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T18:44:52.188498",
+      "state_before": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 17,
+      "url": "https://staging.isalaam.me/mosque/inventory",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "select",
+        "target_name": "subCategoryId",
+        "element_type": "custom-select",
+        "test_value": "General",
+        "reasoning": "The subCategoryId field is mandatory and untested, so it should be filled first."
+      },
+      "result": {
+        "success": true,
+        "action": "select",
+        "error": null,
+        "selected_value": "Pria",
+        "all_options": [
+          "Pria",
+          "Wanita",
+          "Balita",
+          "Shalat",
+          "Al-Qur'an",
+          "Buku",
+          "Penunjang",
+          "Donasi",
+          "Jenazah"
+        ],
+        "formcontrolname": "subCategoryId"
+      },
+      "all_options": [
+        "Pria",
+        "Wanita",
+        "Balita",
+        "Shalat",
+        "Al-Qur'an",
+        "Buku",
+        "Penunjang",
+        "Donasi",
+        "Jenazah"
+      ],
+      "timestamp": "2026-02-24T18:45:12.034289",
+      "state_before": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 18,
+      "url": "https://staging.isalaam.me/mosque/inventory",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "select",
+        "target_name": "productId",
+        "element_type": "custom-select",
+        "test_value": "realistic default",
+        "reasoning": "The 'productId' field is mandatory and must be filled before interacting with other elements."
+      },
+      "result": {
+        "success": true,
+        "action": "select",
+        "error": null,
+        "selected_value": "Peci",
+        "all_options": [
+          "Peci",
+          "Sarung Dewasa",
+          "Tasbih Digital"
+        ],
+        "formcontrolname": "productId"
+      },
+      "all_options": [
+        "Peci",
+        "Sarung Dewasa",
+        "Tasbih Digital"
+      ],
+      "timestamp": "2026-02-24T18:45:34.345230",
+      "state_before": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 19,
+      "url": "https://staging.isalaam.me/mosque/inventory",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "select",
+        "target_name": "supplierId",
+        "element_type": "custom-select",
+        "test_value": "default",
+        "reasoning": "The 'supplierId' field is mandatory and untested, so it must be filled before any other action."
+      },
+      "result": {
+        "success": true,
+        "action": "select",
+        "error": null,
+        "selected_value": "aifamart",
+        "all_options": [
+          "aifamart",
+          "alfamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "formcontrolname": "supplierId"
+      },
+      "all_options": [
+        "aifamart",
+        "alfamart",
+        "Informa",
+        "Politron Electronics",
+        "Test Name"
+      ],
+      "timestamp": "2026-02-24T18:45:55.346724",
+      "state_before": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 20,
+      "url": "https://staging.isalaam.me/mosque/inventory",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "select",
+        "target_name": "aifamart",
+        "element_type": "custom-select",
+        "test_value": "aifamart",
+        "reasoning": "The element 'aifamart' appeared directly due to the last action and must be interacted with first."
+      },
+      "result": {
+        "success": true,
+        "action": "select",
+        "error": null,
+        "selected_value": "aifamart",
+        "all_options": [
+          "aifamart",
+          "alfamart",
+          "Informa",
+          "Politron Electronics",
+          "Test Name"
+        ],
+        "formcontrolname": "supplierId"
+      },
+      "all_options": [
+        "aifamart",
+        "alfamart",
+        "Informa",
+        "Politron Electronics",
+        "Test Name"
+      ],
+      "timestamp": "2026-02-24T18:46:16.161117",
+      "state_before": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    },
+    {
+      "step": 21,
+      "url": "https://staging.isalaam.me/mosque/inventory",
+      "page_title": "iSalaam MMS | Smart Mosque Management System",
+      "decision": {
+        "action": "click",
+        "target_name": "Open calendar",
+        "element_type": "button",
+        "test_value": "",
+        "reasoning": "The calendar button is the next untested element to interact with in the form."
+      },
+      "result": {
+        "success": true,
+        "action": "click",
+        "error": null
+      },
+      "all_options": null,
+      "timestamp": "2026-02-24T18:46:32.986476",
+      "state_before": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_after": {
+        "page_title": "Stok Masuk Inventaris",
+        "total_records": null,
+        "current_page": null,
+        "total_pages": null,
+        "pagination_text": null,
+        "visible_row_count": 0,
+        "visible_rows": [],
+        "active_filters": {},
+        "search_value": null,
+        "toast_message": null,
+        "modal_open": null,
+        "error_message": null,
+        "empty_state": null
+      },
+      "state_diff": {}
+    }
+  ]
+}

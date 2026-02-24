@@ -1,0 +1,1076 @@
+{
+  "session_id": "20260224_170546",
+  "page_url": "https://staging.isalaam.me/mosque/inventory",
+  "generated_at": "2026-02-24T17:26:52.922506",
+  "execution_history": [
+    {
+      "step": 1,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 2,
+      "action": "click",
+      "target": "Transaksi",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 3,
+      "action": "fill",
+      "target": "Cari",
+      "value": "aifamart",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 4,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 6,
+      "action": "click",
+      "target": "Kembali",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 7,
+      "action": "click",
+      "target": "Stok Masuk",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 8,
+      "action": "fill",
+      "target": "quantity",
+      "value": "100",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 9,
+      "action": "fill",
+      "target": "purchasePrice",
+      "value": "1000",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 10,
+      "action": "fill",
+      "target": "warrentyThru",
+      "value": "19/02/2026, 17:25",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 11,
+      "action": "select",
+      "target": "categoryId",
+      "value": "General",
+      "success": true,
+      "error": null,
+      "options": [
+        "Perlengkapan Ibadah",
+        "Audio & Media",
+        "Furnitur Masjid",
+        "Kebersihan & Sanitasi",
+        "Wudhu & Toilet",
+        "Listrik & Teknis",
+        "Administrasi",
+        "Keamanan & Kenyamanan",
+        "Kegiatan Masjid",
+        "Layanan Jamaah",
+        "Arsitektur & Interior",
+        "Transportasi Masjid"
+      ]
+    },
+    {
+      "step": 12,
+      "action": "upload",
+      "target": "file",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 13,
+      "action": "select",
+      "target": "subCategoryId",
+      "value": "General",
+      "success": true,
+      "error": null,
+      "options": [
+        "Pria",
+        "Wanita",
+        "Balita",
+        "Shalat",
+        "Al-Qur'an",
+        "Buku",
+        "Penunjang",
+        "Donasi",
+        "Jenazah"
+      ]
+    },
+    {
+      "step": 14,
+      "action": "select",
+      "target": "productId",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": [
+        "Peci",
+        "Sarung Dewasa",
+        "Tasbih Digital"
+      ]
+    },
+    {
+      "step": 15,
+      "action": "select",
+      "target": "supplierId",
+      "value": "Vendor",
+      "success": true,
+      "error": null,
+      "options": [
+        "aifamart",
+        "alfamart",
+        "Informa",
+        "Politron Electronics",
+        "Test Name"
+      ]
+    },
+    {
+      "step": 16,
+      "action": "select",
+      "target": "aifamart",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": [
+        "aifamart",
+        "alfamart",
+        "Informa",
+        "Politron Electronics",
+        "Test Name"
+      ]
+    },
+    {
+      "step": 17,
+      "action": "click",
+      "target": "Open calendar",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 18,
+      "action": "click",
+      "target": "Tambahkan",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Tambahkan\", exact=True).first\n    - locator resolved to <button mat-flat-button=\"\" _ngcontent-ng-c894024630=\"\" mat-ripple-loader-uninitialized=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 19,
+      "action": "click",
+      "target": "Tambahkan",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Tambahkan\", exact=True).first\n    - locator resolved to <button mat-flat-button=\"\" _ngcontent-ng-c894024630=\"\" mat-ripple-loader-uninitialized=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 21,
+      "action": "fill",
+      "target": "quantity",
+      "value": "100",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 22,
+      "action": "fill",
+      "target": "purchasePrice",
+      "value": "1000",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 23,
+      "action": "fill",
+      "target": "warrentyThru",
+      "value": "19/02/2026, 17:25",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 24,
+      "action": "select",
+      "target": "categoryId",
+      "value": "Perlengkapan Ibadah",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").locator(\"mat-select[formcontrolname='categoryId']\").first\n    - locator resolved to <mat-select required=\"\" tabindex=\"0\" role=\"combobox\" id=\"mat-select-13\" aria-required=\"true\" aria-invalid=\"false\" aria-expanded=\"false\" aria-disabled=\"false\" aria-haspopup=\"listbox\" _ngcontent-ng-c894024630=\"\" formcontrolname=\"categoryId\" aria-labelledby=\"mat-mdc-form-field-label-16\" class=\"mat-mdc-select mat-mdc-select-required ng-touched ng-dirty ng-valid\">…</mat-select>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 25,
+      "action": "select",
+      "target": "subCategoryId",
+      "value": "Pria",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").locator(\"mat-select[formcontrolname='subCategoryId']\").first\n    - locator resolved to <mat-select required=\"\" tabindex=\"0\" role=\"combobox\" id=\"mat-select-14\" aria-required=\"true\" aria-invalid=\"false\" aria-expanded=\"false\" aria-disabled=\"false\" aria-haspopup=\"listbox\" _ngcontent-ng-c894024630=\"\" formcontrolname=\"subCategoryId\" aria-labelledby=\"mat-mdc-form-field-label-17\" class=\"mat-mdc-select mat-mdc-select-required ng-touched ng-dirty ng-valid\">…</mat-select>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 26,
+      "action": "select",
+      "target": "productId",
+      "value": "Peci",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").locator(\"mat-select[formcontrolname='productId']\").first\n    - locator resolved to <mat-select tabindex=\"0\" role=\"combobox\" id=\"mat-select-15\" aria-required=\"true\" aria-invalid=\"false\" aria-expanded=\"false\" aria-disabled=\"false\" aria-haspopup=\"listbox\" _ngcontent-ng-c894024630=\"\" formcontrolname=\"productId\" aria-labelledby=\"mat-mdc-form-field-label-18\" class=\"mat-mdc-select mat-mdc-select-required ng-pristine ng-touched ng-valid\">…</mat-select>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 27,
+      "action": "select",
+      "target": "supplierId",
+      "value": "aifamart",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").locator(\"mat-select[formcontrolname='supplierId']\").first\n    - locator resolved to <mat-select tabindex=\"0\" role=\"combobox\" id=\"mat-select-16\" aria-required=\"true\" aria-invalid=\"false\" aria-expanded=\"false\" aria-disabled=\"false\" aria-haspopup=\"listbox\" _ngcontent-ng-c894024630=\"\" formcontrolname=\"supplierId\" aria-labelledby=\"mat-mdc-form-field-label-19\" class=\"mat-mdc-select mat-mdc-select-required ng-touched ng-dirty ng-valid\">…</mat-select>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 28,
+      "action": "click",
+      "target": "Open calendar",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Open calendar\", exact=True).first\n    - locator resolved to <button tabindex=\"0\" type=\"button\" mat-icon-button=\"\" aria-expanded=\"true\" aria-haspopup=\"dialog\" aria-label=\"Open calendar\" mat-ripple-loader-centered=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 29,
+      "action": "click",
+      "target": "Tambahkan",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Tambahkan\", exact=True).first\n    - locator resolved to <button mat-flat-button=\"\" _ngcontent-ng-c894024630=\"\" mat-ripple-loader-uninitialized=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 30,
+      "action": "click",
+      "target": "Batalkan",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Batalkan\", exact=True).first\n    - locator resolved to <button mat-button=\"\" matdialogclose=\"\" _ngcontent-ng-c894024630=\"\" mat-ripple-loader-uninitialized=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"ml-3 mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator\"> 27 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator\"> 27 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator\"> 27 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 32,
+      "action": "upload",
+      "target": "file",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 33,
+      "action": "click",
+      "target": "Batalkan",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Batalkan\", exact=True).first\n    - locator resolved to <button mat-button=\"\" matdialogclose=\"\" _ngcontent-ng-c894024630=\"\" mat-ripple-loader-uninitialized=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"ml-3 mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator\"> 27 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator\"> 27 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator\"> 27 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 34,
+      "action": "click",
+      "target": "Tambahkan",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Tambahkan\", exact=True).first\n    - locator resolved to <button mat-flat-button=\"\" _ngcontent-ng-c894024630=\"\" mat-ripple-loader-uninitialized=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 35,
+      "action": "click",
+      "target": "Open calendar",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Open calendar\", exact=True).first\n    - locator resolved to <button tabindex=\"0\" type=\"button\" mat-icon-button=\"\" aria-expanded=\"true\" aria-haspopup=\"dialog\" aria-label=\"Open calendar\" mat-ripple-loader-centered=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 36,
+      "action": "click",
+      "target": "Tambahkan",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Tambahkan\", exact=True).first\n    - locator resolved to <button mat-flat-button=\"\" _ngcontent-ng-c894024630=\"\" mat-ripple-loader-uninitialized=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 37,
+      "action": "click",
+      "target": "Open calendar",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Open calendar\", exact=True).first\n    - locator resolved to <button tabindex=\"0\" type=\"button\" mat-icon-button=\"\" aria-expanded=\"true\" aria-haspopup=\"dialog\" aria-label=\"Open calendar\" mat-ripple-loader-centered=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 38,
+      "action": "click",
+      "target": "Open calendar",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Open calendar\", exact=True).first\n    - locator resolved to <button tabindex=\"0\" type=\"button\" mat-icon-button=\"\" aria-expanded=\"true\" aria-haspopup=\"dialog\" aria-label=\"Open calendar\" mat-ripple-loader-centered=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 39,
+      "action": "click",
+      "target": "Batalkan",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Batalkan\", exact=True).first\n    - locator resolved to <button mat-button=\"\" matdialogclose=\"\" _ngcontent-ng-c894024630=\"\" mat-ripple-loader-uninitialized=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"ml-3 mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator\"> 27 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator\"> 27 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator\"> 27 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 40,
+      "action": "click",
+      "target": "Tambahkan",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Tambahkan\", exact=True).first\n    - locator resolved to <button mat-flat-button=\"\" _ngcontent-ng-c894024630=\"\" mat-ripple-loader-uninitialized=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 41,
+      "action": "click",
+      "target": "Open calendar",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Open calendar\", exact=True).first\n    - locator resolved to <button tabindex=\"0\" type=\"button\" mat-icon-button=\"\" aria-expanded=\"true\" aria-haspopup=\"dialog\" aria-label=\"Open calendar\" mat-ripple-loader-centered=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 42,
+      "action": "click",
+      "target": "Open calendar",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Open calendar\", exact=True).first\n    - locator resolved to <button tabindex=\"0\" type=\"button\" mat-icon-button=\"\" aria-expanded=\"true\" aria-haspopup=\"dialog\" aria-label=\"Open calendar\" mat-ripple-loader-centered=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 43,
+      "action": "click",
+      "target": "Tambahkan",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Tambahkan\", exact=True).first\n    - locator resolved to <button mat-flat-button=\"\" _ngcontent-ng-c894024630=\"\" mat-ripple-loader-uninitialized=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 44,
+      "action": "click",
+      "target": "Open calendar",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Open calendar\", exact=True).first\n    - locator resolved to <button tabindex=\"0\" type=\"button\" mat-icon-button=\"\" aria-expanded=\"true\" aria-haspopup=\"dialog\" aria-label=\"Open calendar\" mat-ripple-loader-centered=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 45,
+      "action": "click",
+      "target": "Batalkan",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Batalkan\", exact=True).first\n    - locator resolved to <button mat-button=\"\" matdialogclose=\"\" _ngcontent-ng-c894024630=\"\" mat-ripple-loader-uninitialized=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"ml-3 mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator\"> 27 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator\"> 27 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator\"> 27 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 46,
+      "action": "click",
+      "target": "Open calendar",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Open calendar\", exact=True).first\n    - locator resolved to <button tabindex=\"0\" type=\"button\" mat-icon-button=\"\" aria-expanded=\"true\" aria-haspopup=\"dialog\" aria-label=\"Open calendar\" mat-ripple-loader-centered=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 47,
+      "action": "click",
+      "target": "Open calendar",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Open calendar\", exact=True).first\n    - locator resolved to <button tabindex=\"0\" type=\"button\" mat-icon-button=\"\" aria-expanded=\"true\" aria-haspopup=\"dialog\" aria-label=\"Open calendar\" mat-ripple-loader-centered=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 48,
+      "action": "click",
+      "target": "Tambahkan",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Tambahkan\", exact=True).first\n    - locator resolved to <button mat-flat-button=\"\" _ngcontent-ng-c894024630=\"\" mat-ripple-loader-uninitialized=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 49,
+      "action": "click",
+      "target": "Open calendar",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Open calendar\", exact=True).first\n    - locator resolved to <button tabindex=\"0\" type=\"button\" mat-icon-button=\"\" aria-expanded=\"true\" aria-haspopup=\"dialog\" aria-label=\"Open calendar\" mat-ripple-loader-centered=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"cdk-overlay-backdrop mat-overlay-transparent-backdrop mat-datepicker-0-backdrop cdk-overlay-backdrop-showing\"></div> intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    },
+    {
+      "step": 50,
+      "action": "click",
+      "target": "Tambahkan",
+      "value": "",
+      "success": false,
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"mat-dialog-container\").get_by_role(\"button\", name=\"Tambahkan\", exact=True).first\n    - locator resolved to <button mat-flat-button=\"\" _ngcontent-ng-c894024630=\"\" mat-ripple-loader-uninitialized=\"\" mat-ripple-loader-class-name=\"mat-mdc-button-ripple\" class=\"mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span class=\"mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today\"> 24 </span> from <div dir=\"ltr\" class=\"cdk-overlay-connected-position-bounding-box\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n",
+      "options": null
+    }
+  ],
+  "dropdown_options": {
+    "categoryId": [
+      "Perlengkapan Ibadah",
+      "Audio & Media",
+      "Furnitur Masjid",
+      "Kebersihan & Sanitasi",
+      "Wudhu & Toilet",
+      "Listrik & Teknis",
+      "Administrasi",
+      "Keamanan & Kenyamanan",
+      "Kegiatan Masjid",
+      "Layanan Jamaah",
+      "Arsitektur & Interior",
+      "Transportasi Masjid"
+    ],
+    "subCategoryId": [
+      "Pria",
+      "Wanita",
+      "Balita",
+      "Shalat",
+      "Al-Qur'an",
+      "Buku",
+      "Penunjang",
+      "Donasi",
+      "Jenazah"
+    ],
+    "productId": [
+      "Peci",
+      "Sarung Dewasa",
+      "Tasbih Digital"
+    ],
+    "supplierId": [
+      "aifamart",
+      "alfamart",
+      "Informa",
+      "Politron Electronics",
+      "Test Name"
+    ],
+    "aifamart": [
+      "aifamart",
+      "alfamart",
+      "Informa",
+      "Politron Electronics",
+      "Test Name"
+    ]
+  },
+  "forms_discovered": {
+    "info_1": [
+      {
+        "name": "Stok Masuk",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "Inactive",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Active",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      }
+    ],
+    "info_2": [
+      {
+        "name": "Kembali",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      }
+    ],
+    "form_3": [
+      {
+        "name": "Stok Masuk",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "Inactive",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Active",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      }
+    ],
+    "form_4": [
+      {
+        "name": "Open calendar",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Tambahkan",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Batalkan",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "quantity",
+        "type": "input",
+        "input_type": "number",
+        "required": true
+      },
+      {
+        "name": "purchasePrice",
+        "type": "input",
+        "input_type": "text",
+        "required": true
+      },
+      {
+        "name": "warrentyThru",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "file",
+        "type": "file",
+        "input_type": "file",
+        "required": false
+      },
+      {
+        "name": "Perlengkapan Ibadah",
+        "type": "combobox",
+        "input_type": "combobox",
+        "required": false
+      },
+      {
+        "name": "Pria",
+        "type": "combobox",
+        "input_type": "combobox",
+        "required": false
+      },
+      {
+        "name": "Peci",
+        "type": "combobox",
+        "input_type": "combobox",
+        "required": false
+      },
+      {
+        "name": "aifamart",
+        "type": "combobox",
+        "input_type": "combobox",
+        "required": false
+      },
+      {
+        "name": "close Tutup",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "categoryId",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": true
+      },
+      {
+        "name": "subCategoryId",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": true
+      },
+      {
+        "name": "productId",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": true
+      },
+      {
+        "name": "supplierId",
+        "type": "custom-select",
+        "input_type": "custom-select",
+        "required": true
+      }
+    ]
+  },
+  "stories_generated": 5,
+  "stories": [
+    {
+      "story_id": "STORY-001",
+      "context_name": "Search and View Inventory",
+      "user_persona": "Mosque Admin searching inventory",
+      "description": "The Mosque Admin searches for inventory items using a specific vendor name to view the available stock details.",
+      "field_values": {
+        "Cari": "aifamart"
+      },
+      "expected_outcome": "The inventory table updates to show only items supplied by 'aifamart'.\n\nVALIDATION: Assert: table row count changes to show only items with 'Nama Vendor' as 'aifamart'.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Fill Cari with 'aifamart'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Verify table updates to show only items from 'aifamart'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-002",
+      "context_name": "Add New Stock Entry",
+      "user_persona": "Super Admin adding new stock",
+      "description": "The Super Admin adds a new stock entry to the inventory system, specifying details such as quantity, purchase price, warranty, and supplier.",
+      "field_values": {
+        "quantity": "100",
+        "purchasePrice": "1000",
+        "warrentyThru": "19/02/2026, 17:25",
+        "categoryId": "General",
+        "subCategoryId": "General",
+        "productId": "Peci",
+        "supplierId": "aifamart"
+      },
+      "expected_outcome": "A new stock entry is added to the inventory with the specified details.\n\nVALIDATION: Assert: new entry appears in the inventory table with 'Nama Produk' as 'Peci' and 'Nama Vendor' as 'aifamart'.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click Stok Masuk",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Fill quantity with '100'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Fill purchasePrice with '1000'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Fill warrentyThru with '19/02/2026, 17:25'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Select categoryId as 'General'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 6,
+          "action": "explore",
+          "target": "Step 6: Select subCategoryId as 'General'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 7,
+          "action": "explore",
+          "target": "Step 7: Select productId as 'Peci'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 8,
+          "action": "explore",
+          "target": "Step 8: Select supplierId as 'aifamart'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 9,
+          "action": "explore",
+          "target": "Step 9: Click Tambahkan",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 10,
+          "action": "explore",
+          "target": "Step 10: Verify new entry in inventory table",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-003",
+      "context_name": "Activate Inventory Item",
+      "user_persona": "Mosque Admin managing inventory status",
+      "description": "The Mosque Admin activates an inactive inventory item to make it available for transactions.",
+      "field_values": {
+        "itemStatus": "Inactive"
+      },
+      "expected_outcome": "The status of the selected inventory item changes to 'Active'.\n\nVALIDATION: Assert: status of the item changes to 'Active' in the inventory table.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click more_vert on an inactive item",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click Mengaktifkan",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify status changes to 'Active'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-004",
+      "context_name": "Filter and View by Category",
+      "user_persona": "Ministry Admin filtering inventory",
+      "description": "The Ministry Admin filters the inventory items by a specific category to view relevant stock details.",
+      "field_values": {
+        "categoryId": "Perlengkapan Ibadah"
+      },
+      "expected_outcome": "The inventory table displays only items under the 'Perlengkapan Ibadah' category.\n\nVALIDATION: Assert: table shows only items with 'categoryId' as 'Perlengkapan Ibadah'.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Select categoryId as 'Perlengkapan Ibadah'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Verify table updates to show only relevant items",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-005",
+      "context_name": "Upload Inventory Document",
+      "user_persona": "Super Admin uploading documents",
+      "description": "The Super Admin uploads a document related to a specific inventory item for record-keeping.",
+      "field_values": {
+        "file": "inventory_document.pdf"
+      },
+      "expected_outcome": "The document is successfully uploaded and linked to the inventory item.\n\nVALIDATION: Assert: uploaded document appears in the inventory item details.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click more_vert on an item",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click Upload Document",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Upload 'inventory_document.pdf'",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Verify document is linked to item",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:26:52.922506"
+        }
+      ]
+    }
+  ]
+}

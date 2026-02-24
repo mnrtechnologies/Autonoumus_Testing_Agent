@@ -1,0 +1,618 @@
+{
+  "session_id": "20260224_175008",
+  "page_url": "https://staging.isalaam.me/mosque/inventory",
+  "generated_at": "2026-02-24T17:56:40.238312",
+  "execution_history": [
+    {
+      "step": 1,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 2,
+      "action": "click",
+      "target": "Transaksi",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 3,
+      "action": "fill",
+      "target": "Cari",
+      "value": "aifamart",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 4,
+      "action": "click",
+      "target": "more_vert",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 6,
+      "action": "click",
+      "target": "Kembali",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 7,
+      "action": "click",
+      "target": "Stok Masuk",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 8,
+      "action": "fill",
+      "target": "quantity",
+      "value": "100",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 9,
+      "action": "fill",
+      "target": "purchasePrice",
+      "value": "1000",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 10,
+      "action": "fill",
+      "target": "warrentyThru",
+      "value": "19/02/2026, 17:25",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 11,
+      "action": "select",
+      "target": "categoryId",
+      "value": "General",
+      "success": true,
+      "error": null,
+      "options": [
+        "Perlengkapan Ibadah",
+        "Audio & Media",
+        "Furnitur Masjid",
+        "Kebersihan & Sanitasi",
+        "Wudhu & Toilet",
+        "Listrik & Teknis",
+        "Administrasi",
+        "Keamanan & Kenyamanan",
+        "Kegiatan Masjid",
+        "Layanan Jamaah",
+        "Arsitektur & Interior",
+        "Transportasi Masjid"
+      ]
+    },
+    {
+      "step": 12,
+      "action": "upload",
+      "target": "file",
+      "value": "",
+      "success": true,
+      "error": null,
+      "options": null
+    },
+    {
+      "step": 13,
+      "action": "select",
+      "target": "subCategoryId",
+      "value": "General",
+      "success": true,
+      "error": null,
+      "options": [
+        "Pria",
+        "Wanita",
+        "Balita",
+        "Shalat",
+        "Al-Qur'an",
+        "Buku",
+        "Penunjang",
+        "Donasi",
+        "Jenazah"
+      ]
+    }
+  ],
+  "dropdown_options": {
+    "categoryId": [
+      "Perlengkapan Ibadah",
+      "Audio & Media",
+      "Furnitur Masjid",
+      "Kebersihan & Sanitasi",
+      "Wudhu & Toilet",
+      "Listrik & Teknis",
+      "Administrasi",
+      "Keamanan & Kenyamanan",
+      "Kegiatan Masjid",
+      "Layanan Jamaah",
+      "Arsitektur & Interior",
+      "Transportasi Masjid"
+    ],
+    "subCategoryId": [
+      "Pria",
+      "Wanita",
+      "Balita",
+      "Shalat",
+      "Al-Qur'an",
+      "Buku",
+      "Penunjang",
+      "Donasi",
+      "Jenazah"
+    ],
+    "productId": [
+      "Peci",
+      "Sarung Dewasa",
+      "Tasbih Digital"
+    ]
+  },
+  "forms_discovered": {
+    "info_1": [
+      {
+        "name": "Stok Masuk",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "Inactive",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Active",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      }
+    ],
+    "info_2": [
+      {
+        "name": "Kembali",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      }
+    ],
+    "form_3": [
+      {
+        "name": "Stok Masuk",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "more_vert",
+        "type": "button",
+        "input_type": "submit",
+        "required": false
+      },
+      {
+        "name": "Cari",
+        "type": "input",
+        "input_type": "text",
+        "required": false
+      },
+      {
+        "name": "Inactive",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      },
+      {
+        "name": "Active",
+        "type": "button",
+        "input_type": "button",
+        "required": false
+      }
+    ]
+  },
+  "stories_generated": 5,
+  "stories": [
+    {
+      "story_id": "STORY-001",
+      "context_name": "Search and Filter Inventory",
+      "user_persona": "Mosque Admin searching inventory",
+      "description": "The Mosque Admin searches for a specific vendor in the inventory to quickly locate their products and manage stock levels.",
+      "field_values": {
+        "Cari": "aifamart"
+      },
+      "expected_outcome": "Inventory table refreshes to show only products from vendor 'aifamart'.\n\nVALIDATION: Assert: table displays only rows with 'Nama Vendor' as 'aifamart'.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Fill 'Cari' field with 'aifamart'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'Cari' button.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify table shows only products from 'aifamart'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-002",
+      "context_name": "Add New Stock Entry",
+      "user_persona": "Super Admin managing stock entries",
+      "description": "The Super Admin adds a new stock entry for a product to ensure inventory levels are accurately maintained.",
+      "field_values": {
+        "quantity": "100",
+        "purchasePrice": "1000",
+        "warrentyThru": "19/02/2026, 17:25",
+        "categoryId": "General",
+        "subCategoryId": "General"
+      },
+      "expected_outcome": "New stock entry is added and visible in the inventory list.\n\nVALIDATION: Assert: new row appears in table with quantity '100' and purchase price '1000'.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Click 'Stok Masuk' button.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Fill 'quantity' with '100'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Fill 'purchasePrice' with '1000'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Fill 'warrentyThru' with '19/02/2026, 17:25'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 5,
+          "action": "explore",
+          "target": "Step 5: Select 'categoryId' as 'General'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 6,
+          "action": "explore",
+          "target": "Step 6: Select 'subCategoryId' as 'General'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 7,
+          "action": "explore",
+          "target": "Step 7: Upload necessary file.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 8,
+          "action": "explore",
+          "target": "Step 8: Verify new stock entry is visible in the inventory list.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-003",
+      "context_name": "Activate Inactive Product",
+      "user_persona": "Mosque Admin managing product status",
+      "description": "The Mosque Admin activates an inactive product to make it available for transactions.",
+      "field_values": {},
+      "expected_outcome": "Product status changes to 'Active' and is reflected in the inventory list.\n\nVALIDATION: Assert: product status changes to 'Active' in the table.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'more_vert' next to an inactive product.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'Mengaktifkan'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify product status changes to 'Active'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-004",
+      "context_name": "Filter Products by Category",
+      "user_persona": "Super Admin filtering inventory by category",
+      "description": "The Super Admin filters products by category to manage inventory efficiently and ensure correct categorization.",
+      "field_values": {
+        "categoryId": "Perlengkapan Ibadah"
+      },
+      "expected_outcome": "Inventory table refreshes to show only products in the 'Perlengkapan Ibadah' category.\n\nVALIDATION: Assert: table displays only rows with 'categoryId' as 'Perlengkapan Ibadah'.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Select 'categoryId' as 'Perlengkapan Ibadah'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'Cari' button.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify table shows only products in 'Perlengkapan Ibadah' category.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        }
+      ]
+    },
+    {
+      "story_id": "STORY-005",
+      "context_name": "Deactivate Active Product",
+      "user_persona": "Mosque Admin managing product status",
+      "description": "The Mosque Admin deactivates an active product to temporarily remove it from available inventory.",
+      "field_values": {},
+      "expected_outcome": "Product status changes to 'Inactive' and is reflected in the inventory list.\n\nVALIDATION: Assert: product status changes to 'Inactive' in the table.",
+      "status": "pending",
+      "steps": [
+        {
+          "step_num": 1,
+          "action": "explore",
+          "target": "Step 1: Navigate to Inventaris page.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 2,
+          "action": "explore",
+          "target": "Step 2: Click 'more_vert' next to an active product.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 3,
+          "action": "explore",
+          "target": "Step 3: Click 'Stok Habis'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        },
+        {
+          "step_num": 4,
+          "action": "explore",
+          "target": "Step 4: Verify product status changes to 'Inactive'.",
+          "value": "",
+          "success": true,
+          "error": null,
+          "timestamp": "2026-02-24T17:56:40.238312"
+        }
+      ]
+    }
+  ]
+}
