@@ -1508,6 +1508,48 @@ class Executor:
                     await locator.scroll_into_view_if_needed(timeout=5000)
                     await locator.click(timeout=5000)
                     print(f"    ✓ Clicked")
+                
+
+                # AUTO-DATE SELECTION: If clicking a calendar trigger button, auto-select a date
+                button_text = ''
+                try:
+                    button_text = str(await locator.get_attribute('aria-label') or '').lower()
+                except:
+                    pass
+                
+                if any(x in button_text for x in ['calendar', 'date', 'pick', 'select']):
+                    print(f"    📅 Calendar trigger detected - auto-selecting date...")
+                    await self._auto_select_calendar_date()
+                
+                # CALENDAR HANDLING: After clicking a date button, wait for calendar to close
+                if elem_type == 'date-button':
+                    print(f"    📅 Date selected, waiting for calendar to close...")
+                    # Wait up to 3 seconds for calendar to close
+                    for i in range(6):
+                        await asyncio.sleep(0.5)
+                        calendar_visible = await self.page.evaluate("""() => {
+                            const cals = document.querySelectorAll(
+                                'mat-calendar, [class*="mat-calendar"], [class*="datepicker-calendar"]'
+                            );
+                            for (let cal of cals) {
+                                const rect = cal.getBoundingClientRect();
+                                if (rect.width > 0 && rect.height > 0) {
+                                    const style = window.getComputedStyle(cal);
+                                    if (style.display !== 'none' && style.visibility !== 'hidden') {
+                                        return true;
+                                    }
+                                }
+                            }
+                            return false;
+                        }""")
+                        
+                        if not calendar_visible:
+                            print(f"    ✅ Calendar closed after {(i+1)*0.5}s")
+                            break
+                    else:
+                        print(f"    ⚠️  Calendar still visible after 3s - pressing Escape to close")
+                        await self.page.keyboard.press("Escape")
+                        await asyncio.sleep(0.5)
             
                 elif action == "fill":
                     await locator.fill(value or "TestValue", timeout=5000)
@@ -1738,6 +1780,186 @@ class Executor:
             "all_options": all_options,
             "formcontrolname": formcontrolname
         }
+
+    async def _auto_select_calendar_date(self):
+        """
+        Automatically select a date from the opened calendar.
+        Waits for calendar to render, finds available dates, and clicks one.
+        """
+        print(f"    ⏳ Waiting for calendar to render...")
+        
+        # Wait for calendar content to appear
+        calendar_appeared = False
+        for attempt in range(10):
+            await asyncio.sleep(0.3)
+            
+            # Check if calendar is now visible
+            calendar_visible = await self.page.evaluate("""() => {
+                const cals = document.querySelectorAll(
+                    'mat-datepicker-content, mat-calendar, [class*="mat-calendar"], [class*="datepicker"]'
+                );
+                for (let cal of cals) {
+                    const rect = cal.getBoundingClientRect();
+                    if (rect.width > 0 && rect.height > 0) {
+                        const style = window.getComputedStyle(cal);
+                        if (style.display !== 'none' && style.visibility !== 'hidden') {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }""")
+            
+            if calendar_visible:
+                calendar_appeared = True
+                print(f"    ✅ Calendar appeared after {(attempt+1)*0.3:.1f}s")
+                break
+        
+        if not calendar_appeared:
+            print(f"    ⚠️  Calendar did not appear - skipping auto-select")
+            return
+        
+        # Now find and click a date from the calendar
+        print(f"    🔍 Finding available dates in calendar...")
+        
+        date_found = await self.page.evaluate("""() => {
+            // Find all date cells
+            const dateCells = document.querySelectorAll(
+                '.mat-calendar-body-cell, ' +
+                '[role="gridcell"][class*="calendar"], ' +
+                '.mat-calendar-body-cell-container'
+            );
+            
+            if (dateCells.length === 0) {
+                console.log('No date cells found');
+                return null;
+            }
+            
+            // Find an enabled date (prefer today or a middle date)
+            for (let cell of dateCells) {
+                // Skip disabled dates
+                const isDisabled = cell.hasAttribute('aria-disabled') ||
+                                 cell.getAttribute('aria-disabled') === 'true' ||
+                                 cell.classList.contains('mat-calendar-body-disabled-cell') ||
+                                 cell.classList.contains('mat-calendar-range-ignored') ||
+                                 cell.getAttribute('aria-disabled');
+                
+                if (isDisabled) continue;
+                
+                // Skip if not visible
+                const rect = cell.getBoundingClientRect();
+                if (rect.width === 0 || rect.height === 0) continue;
+                
+                // Get date text
+                const dateContent = cell.querySelector('.mat-calendar-body-cell-content');
+                const dateText = dateContent ? dateContent.innerText.trim() : cell.innerText.trim();
+                
+                if (!dateText || isNaN(parseInt(dateText))) continue;
+                
+                // Prefer today if available
+                if (cell.classList.contains('mat-calendar-body-today')) {
+                    return {
+                        date: dateText,
+                        x: Math.round((rect.left + rect.right) / 2),
+                        y: Math.round((rect.top + rect.bottom) / 2),
+                        isToday: true
+                    };
+                }
+            }
+            
+            // If no today, get the first available date
+            for (let cell of dateCells) {
+                const isDisabled = cell.hasAttribute('aria-disabled') ||
+                                 cell.getAttribute('aria-disabled') === 'true' ||
+                                 cell.classList.contains('mat-calendar-body-disabled-cell');
+                
+                if (isDisabled) continue;
+                
+                const rect = cell.getBoundingClientRect();
+                if (rect.width === 0 || rect.height === 0) continue;
+                
+                const dateContent = cell.querySelector('.mat-calendar-body-cell-content');
+                const dateText = dateContent ? dateContent.innerText.trim() : cell.innerText.trim();
+                
+                if (!dateText || isNaN(parseInt(dateText))) continue;
+                
+                // Found a valid date
+                return {
+                    date: dateText,
+                    x: Math.round((rect.left + rect.right) / 2),
+                    y: Math.round((rect.top + rect.bottom) / 2),
+                    isToday: false
+                };
+            }
+            
+            return null;
+        }""")
+        
+        if not date_found:
+            print(f"    ⚠️  No available dates found in calendar")
+            # Press Escape to close calendar
+            await self.page.keyboard.press("Escape")
+            return
+        
+        date_text = date_found.get('date', '?')
+        is_today = date_found.get('isToday', False)
+        
+        print(f"    📅 Clicking date: {date_text}{' (Today)' if is_today else ''}")
+        
+        # Click the date
+        try:
+            date_cells = self.page.locator('.mat-calendar-body-cell, [role="gridcell"][class*="calendar"]')
+            count = await date_cells.count()
+            
+            # Find the cell with this date text and click it
+            for i in range(count):
+                cell = date_cells.nth(i)
+                cell_text = (await cell.inner_text()).strip()
+                
+                # Extract just the number from the text
+                date_num = ''.join(c for c in date_text if c.isdigit())
+                cell_num = ''.join(c for c in cell_text if c.isdigit())
+                
+                if cell_num == date_num:
+                    # Check if not disabled
+                    is_disabled = await cell.evaluate('el => el.getAttribute("aria-disabled") === "true" || el.classList.contains("mat-calendar-body-disabled-cell")')
+                    
+                    if not is_disabled:
+                        await cell.click(timeout=3000)
+                        print(f"    ✓ Date clicked successfully")
+                        
+                        # Wait for calendar to close
+                        print(f"    ⏳ Waiting for calendar to close...")
+                        for i in range(8):
+                            await asyncio.sleep(0.3)
+                            calendar_visible = await self.page.evaluate("""() => {
+                                const cals = document.querySelectorAll('mat-datepicker-content, mat-calendar');
+                                for (let cal of cals) {
+                                    const rect = cal.getBoundingClientRect();
+                                    if (rect.width > 0 && rect.height > 0) {
+                                        const style = window.getComputedStyle(cal);
+                                        if (style.display !== 'none' && style.visibility !== 'hidden') return true;
+                                    }
+                                }
+                                return false;
+                            }""")
+                            
+                            if not calendar_visible:
+                                print(f"    ✅ Calendar closed")
+                                return
+                        
+                        print(f"    ⚠️  Calendar still open - pressing Escape")
+                        await self.page.keyboard.press("Escape")
+                        return
+            
+            print(f"    ⚠️  Could not find date {date_text} in calendar cells")
+            
+        except Exception as e:
+            print(f"    ❌ Error clicking date: {e}")
+            try:
+                await self.page.keyboard.press("Escape")
+            except:
+                pass
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -2082,6 +2304,15 @@ class SemanticTester:
                 if (e.get('x'), e.get('y')) not in tested_positions
             ]
             print(f"{untested} second this is untested logs")
+            
+            # CALENDAR FIX: Prioritize date-button elements (calendar dates) in untested list
+            date_buttons = [e for e in untested if e.get('element_type') == 'date-button']
+            other_elements = [e for e in untested if e.get('element_type') != 'date-button']
+            if date_buttons:
+                print(f"  📅 Date picker detected! Prioritizing {len(date_buttons)} date button(s)")
+                untested = date_buttons + other_elements
+
+
             full_screenshot = await self._full_screenshot(page, f"story_gen_{self.step}")
             # await self.decider.maybe_generate_story(
             #     page=page, elements=scoped_elements,
