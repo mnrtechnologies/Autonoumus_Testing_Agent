@@ -204,7 +204,7 @@ class HybridOrchestrator:
 
     async def run(self, start_url: str):
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=False)
+            browser = await p.chromium.launch(headless=True)
             context = await browser.new_context(viewport={'width': 1280, 'height': 800})
             page = await context.new_page()
             await self._inject_auth(page, context, start_url)

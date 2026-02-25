@@ -128,7 +128,7 @@ def health():
 def start_test(payload: StartTestRequest):
     orchestrator = Orchestrator(
         api_key=OPENAI_API_KEY,
-        headless=False
+        headless=True
     )
 
     test_id = create_test(orchestrator)

@@ -29,7 +29,7 @@ class Config:
     CRAWL_TIMEOUT = 30000  # milliseconds
     
     # Browser settings (for Operator agent)
-    BROWSER_HEADLESS = False
+    BROWSER_HEADLESS = True
     VIEWPORT_WIDTH = 1280
     VIEWPORT_HEIGHT = 720
     

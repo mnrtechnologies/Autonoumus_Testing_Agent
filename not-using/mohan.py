@@ -711,7 +711,7 @@ class UltimateWebCrawler:
         ))
 
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=False)
+            browser = await p.chromium.launch(headless=True)
             context = await browser.new_context(
                 viewport={'width': 1400, 'height': 900}
             )
