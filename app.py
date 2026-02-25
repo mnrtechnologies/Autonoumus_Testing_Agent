@@ -285,6 +285,26 @@ async def stream_browser(websocket: WebSocket, test_id: str):
 #====================================================================================================
 from checking import CheckingPipeline
 
+# @app.post("/checking/start")
+# def start_checking(payload: CheckingStartRequest):
+
+#     pipeline = CheckingPipeline(base_url=payload.base_url)
+#     job_id = create_checking_job(pipeline)
+
+#     def run_pipeline():
+#         try:
+#             asyncio.run(pipeline.run())
+#             CHECKING_JOBS[job_id]["status"] = pipeline.status
+#         except Exception as e:
+#             CHECKING_JOBS[job_id]["status"] = "failed"
+
+#     Thread(target=run_pipeline, daemon=True).start()
+
+#     return {
+#         "job_id": job_id,
+#         "status": "running"
+#     }
+
 @app.post("/checking/start")
 def start_checking(payload: CheckingStartRequest):
 
@@ -296,6 +316,8 @@ def start_checking(payload: CheckingStartRequest):
             asyncio.run(pipeline.run())
             CHECKING_JOBS[job_id]["status"] = pipeline.status
         except Exception as e:
+            pipeline.status = "failed"
+            pipeline.error = str(e)
             CHECKING_JOBS[job_id]["status"] = "failed"
 
     Thread(target=run_pipeline, daemon=True).start()
@@ -321,19 +343,94 @@ def checking_status(job_id: str):
         "error": pipeline.error
     }
 
+# @app.websocket("/ws/checking/{job_id}")
+# async def stream_checking_browser(websocket: WebSocket, job_id: str):
+#     await websocket.accept()
+
+#     if job_id not in CHECKING_JOBS:
+#         await websocket.send_json({"error": "Invalid job_id"})
+#         await websocket.close()
+#         return
+
+#     pipeline = CHECKING_JOBS[job_id]["pipeline"]
+
+#     try:
+#         while True:
+#             screenshot_path = getattr(pipeline, "latest_screenshot", None)
+
+#             if screenshot_path and os.path.exists(screenshot_path):
+#                 with open(screenshot_path, "rb") as f:
+#                     img_bytes = f.read()
+
+#                 await websocket.send_json({
+#                     "type": "frame",
+#                     "image": base64.b64encode(img_bytes).decode("utf-8"),
+#                     "current_url": pipeline.current_url,
+#                     "completed": pipeline.completed_urls,
+#                     "total": pipeline.total_urls
+#                 })
+
+#             await asyncio.sleep(0.3)
+
+#     except WebSocketDisconnect:
+#         print("🔌 Checking WebSocket disconnected")
+
 @app.websocket("/ws/checking/{job_id}")
 async def stream_checking_browser(websocket: WebSocket, job_id: str):
     await websocket.accept()
 
     if job_id not in CHECKING_JOBS:
-        await websocket.send_json({"error": "Invalid job_id"})
+        await websocket.send_json({
+            "type": "error",
+            "message": "Invalid job_id"
+        })
         await websocket.close()
         return
 
     pipeline = CHECKING_JOBS[job_id]["pipeline"]
 
+    # ✅ If pipeline already finished before WS connected
+    if pipeline.status == "completed":
+        await websocket.send_json({
+            "type": "done",
+            "message": "Exploration already completed",
+            "completed": pipeline.completed_urls,
+            "total": pipeline.total_urls
+        })
+        await websocket.close()
+        return
+
+    if pipeline.status == "failed":
+        await websocket.send_json({
+            "type": "error",
+            "message": pipeline.error or "Exploration failed"
+        })
+        await websocket.close()
+        return
+
     try:
         while True:
+
+            # 🔹 1️⃣ Always check lifecycle FIRST
+            if pipeline.status == "completed":
+                await websocket.send_json({
+                    "type": "done",
+                    "message": "Exploration completed successfully",
+                    "completed": pipeline.completed_urls,
+                    "total": pipeline.total_urls
+                })
+                await websocket.close()
+                break
+
+            if pipeline.status == "failed":
+                await websocket.send_json({
+                    "type": "error",
+                    "message": pipeline.error or "Exploration failed"
+                })
+                await websocket.close()
+                break
+
+            # 🔹 2️⃣ Send frame if available
             screenshot_path = getattr(pipeline, "latest_screenshot", None)
 
             if screenshot_path and os.path.exists(screenshot_path):
