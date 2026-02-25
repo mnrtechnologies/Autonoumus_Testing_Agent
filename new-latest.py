@@ -45,6 +45,11 @@ from rich.tree import Tree
 # OpenAI imports
 from openai import OpenAI
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 console = Console()
 
 
@@ -841,7 +846,7 @@ class TwoTierCrawler:
 
         # Initialize OpenAI client
         if openai_api_key:
-            self.openai = OpenAI(api_key="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")
+            self.openai = OpenAI(api_key="OPENAI_API_KEY")
         else:
             self.openai = OpenAI()
 
@@ -1504,7 +1509,7 @@ async def main():
         return
 
     # OpenAI API key
-    openai_key = "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"
+    openai_key = os.getenv('OPENAI_API_KEY')
     if not openai_key:
         console.print("[red]❌ OPENAI_API_KEY environment variable not set![/red]")
         return

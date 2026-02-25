@@ -13,9 +13,13 @@ from widget_handler import WidgetHandler
 from element_filter import ElementFilter
 from story_aware_decider import StoryAwareDecider, build_story_tester
 from test_story_engine   import TestStoryTracker, ReportGenerator
-
+import os
 from playwright.async_api import async_playwright, Page, Locator, FrameLocator
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 from core_phase2.global_memory import GlobalMemory
 from core_phase2.context_stack import ContextStack, ContextFrame, ContextType
@@ -523,7 +527,11 @@ async def main():
         print("❌ auth.json not found")
         return
 
-    key = "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"
+    key = os.getenv("OPENAI_API_KEY")
+    if not key:
+        print("❌ OPENAI_API_KEY not found")
+        return
+
 
     tester = SemanticTester(openai_api_key=key)
 

@@ -30,6 +30,11 @@ from executors.path_resolver import  PathResolver
 from executors.semantic_selector import SemanticSelector
 from planning.planner import TwoTierPlanner
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 console = Console()
 
 class TwoTierCrawler:
@@ -683,7 +688,7 @@ async def main():
         console.print("[red]❌ auth.json not found![/red]")
         return
 
-    openai_key = "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"
+    openai_key = os.getenv('OPENAI_API_KEY')
     if not openai_key:
         console.print("[red]❌ OPENAI_API_KEY not set[/red]")
         return

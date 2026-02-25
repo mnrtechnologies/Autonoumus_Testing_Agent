@@ -1,7 +1,4 @@
 """
-
-
-tousif use thi
 Semantic Driver - Production v1.4 [FIXED - Disabled Buttons]
 Architecture: Observer → Memory → Decider → Executor (OMDE Loop)
 
@@ -49,6 +46,9 @@ from test_story_engine   import TestStoryTracker, ReportGenerator
 from playwright.async_api import async_playwright, Page, Locator, FrameLocator
 from openai import OpenAI
 from page_state_extractor import PageStateExtractor, diff_states
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # ═══════════════════════════════════════════════════════════════
 #  CORE DATA MODELS
@@ -2678,7 +2678,7 @@ class SemanticTester:
 
             if self.external_pipeline_ref:
                 self.external_pipeline_ref.latest_screenshot = str(path)
-                
+
             with open(path, 'rb') as f:
                 return base64.b64encode(f.read()).decode()
         except Exception:
@@ -2737,7 +2737,10 @@ async def main():
         print("❌ auth.json not found")
         return
 
-    key ="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"
+    key = os.getenv("OPENAI_API_KEY")
+    if not key:
+        print("❌ OPENAI_API_KEY not set")
+        return
 
     tester = SemanticTester(openai_api_key=key)
     tester._interactive = True

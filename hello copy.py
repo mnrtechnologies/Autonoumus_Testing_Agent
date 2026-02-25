@@ -35,7 +35,7 @@ import base64
 import hashlib
 from pathlib import Path
 from datetime import datetime
-
+import os
 from typing import Optional, Dict, List, Any, Tuple, Set
 from urllib.parse import urlparse, urljoin
 from dataclasses import dataclass, field
@@ -49,7 +49,10 @@ from test_story_engine   import TestStoryTracker, ReportGenerator
 from playwright.async_api import async_playwright, Page, Locator, FrameLocator
 from openai import OpenAI
 from page_state_extractor import PageStateExtractor, diff_states
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 # ═══════════════════════════════════════════════════════════════
 #  CORE DATA MODELS
 # ═══════════════════════════════════════════════════════════════
@@ -2279,7 +2282,10 @@ async def main():
         print("❌ auth.json not found")
         return
 
-    key ="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"
+    key = os.getenv("OPENAI_API_KEY")
+    if not key:
+        print("❌ OPENAI_API_KEY not set")
+        return
 
     tester = SemanticTester(openai_api_key=key)
     tester._interactive = True

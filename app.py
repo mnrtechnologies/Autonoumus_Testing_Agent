@@ -107,10 +107,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-ANTHROPIC_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-if not ANTHROPIC_API_KEY:
-    print("⚠️  WARNING: ANTHROPIC_API_KEY not set")
+if not OPENAI_API_KEY:
+    print("⚠️  WARNING: OPENAI_API_KEY is not set")
 
 # =====================================================================
 # Health Check
@@ -127,7 +127,7 @@ def health():
 @app.post("/tests/start", response_model=StartTestResponse)
 def start_test(payload: StartTestRequest):
     orchestrator = Orchestrator(
-        api_key=ANTHROPIC_API_KEY,
+        api_key=OPENAI_API_KEY,
         headless=False
     )
 

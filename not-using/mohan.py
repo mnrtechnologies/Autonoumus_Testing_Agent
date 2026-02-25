@@ -30,6 +30,7 @@ from datetime import datetime, timedelta
 import random
 import string
 
+
 from playwright.async_api import async_playwright, Page, TimeoutError as PlaywrightTimeout
 from rich.console import Console
 from rich.panel import Panel
@@ -38,6 +39,11 @@ from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.tree import Tree
 
 from openai import OpenAI
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 console = Console()
 
@@ -1135,7 +1141,8 @@ async def main():
     openai_key = os.getenv('OPENAI_API_KEY')
     if not openai_key:
         # Fallback to hardcoded key (not recommended for production)
-        openai_key = "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"
+        openai_key = os.getenv('OPENAI_KEY')
+
 
     crawler = UltimateWebCrawler(
         base_url="https://staging.isalaam.me/dashboard",

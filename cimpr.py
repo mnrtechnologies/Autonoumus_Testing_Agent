@@ -16,10 +16,13 @@ from urllib.parse import urlparse
 from enum import Enum
 from dataclasses import dataclass, asdict
 from collections import deque
-
+import os
 from playwright.async_api import async_playwright, Page, Locator, BrowserContext
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 # ═══════════════════════════════════════════════════════════════
 #  DATA STRUCTURES
@@ -1039,7 +1042,10 @@ async def main():
         return
     
     # Configuration
-    openai_key = "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"
+    openai_key = os.getenv('OPENAI_API_KEY')
+    if not openai_key:
+        print("❌ OPENAI_API_KEY not set!")
+        return
     
     print("\n" + "="*80)
     print("🧠 SEMANTIC WEB EXPLORER")

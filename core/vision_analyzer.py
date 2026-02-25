@@ -11,7 +11,10 @@ from .logger import CrawlerLogger
 import anthropic
 from openai import OpenAI
 import base64
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 console = Console()
 

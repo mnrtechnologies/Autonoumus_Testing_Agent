@@ -18,10 +18,13 @@ from typing import Optional, Dict, List, Any, Tuple
 from urllib.parse import urlparse, urljoin
 from dataclasses import dataclass, field
 from enum import Enum
-
+import os
 from playwright.async_api import async_playwright, Page, Locator
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 # ═══════════════════════════════════════════════════════════════
 #  CORE DATA MODELS
@@ -846,7 +849,10 @@ async def main():
         print("❌ auth.json not found")
         return
     
-    key = "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"
+    key = os.getenv('OPENAI_API_KEY')
+    if not key:
+        print("❌ OPENAI_API_KEY not found")
+        return
     
     tester = SemanticTester(openai_api_key=key)
     

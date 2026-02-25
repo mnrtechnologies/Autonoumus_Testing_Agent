@@ -31,6 +31,7 @@ from urllib.parse import urlparse
 from datetime import datetime
 from io import BytesIO
 
+
 from playwright.async_api import async_playwright, Page
 from rich.console import Console
 from rich.panel import Panel
@@ -41,6 +42,10 @@ from rich.tree import Tree
 # LLM imports
 import anthropic
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 console = Console()
 
@@ -1265,9 +1270,8 @@ async def main():
         return
 
     # API keys
-    anthropic_key = os.getenv("ANTHROPIC_API_KEY", "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")
-    openai_key = "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"  # Optional
-
+    anthropic_key = os.getenv("ANTHROPIC_API_KEY")
+    openai_key = os.getenv("OPENAI_API_KEY")
     # Initialize crawler
     crawler = HybridVisionCrawler(
         base_url="https://staging.isalaam.me/dashboard",

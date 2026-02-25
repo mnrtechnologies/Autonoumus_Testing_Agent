@@ -10,6 +10,10 @@ from pathlib import Path
 from datetime import datetime
 from typing import Optional, Dict, List, Any, Tuple
 from urllib.parse import urlparse
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 from playwright.async_api import async_playwright, Page, Locator, BrowserContext
 from openai import OpenAI
@@ -266,7 +270,7 @@ class HybridOrchestrator:
         return base64.b64encode(ss).decode()
 
 if __name__ == "__main__":
-    API_KEY = "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"
+    API_KEY = os.getenv("OPENAI_API_KEY")
     TARGET = "https://staging.isalaam.me/dashboard"
     explorer = HybridOrchestrator(api_key=API_KEY)
     asyncio.run(explorer.run(TARGET))

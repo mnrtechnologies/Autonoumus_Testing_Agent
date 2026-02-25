@@ -14,8 +14,11 @@ from urllib.parse import urlparse
 
 from playwright.async_api import async_playwright, Page, Locator
 from openai import OpenAI
+import os
+from dotenv import load_dotenv
 
 
+load_dotenv()
 # ═══════════════════════════════════════════════════════════════
 #  LAYER 1: DOM SIMPLIFIER
 #  Converts messy HTML into clean interactive-only structure
@@ -861,7 +864,10 @@ async def main():
         print("❌ auth.json not found!")
         return
 
-    openai_key = "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"
+    openai_key = os.getenv("OPENAI_API_KEY")
+    if not openai_key:
+        print("❌ OPENAI_API_KEY not set!")
+        return
 
     tester = SemanticTester(openai_api_key=openai_key, auth_file="auth.json")
 

@@ -36,6 +36,10 @@ from pathlib import Path
 from typing import Optional, Dict, List, Any
 from urllib.parse import urlparse
 from datetime import datetime
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 from playwright.async_api import async_playwright, Page
 from openai import OpenAI
@@ -97,7 +101,8 @@ class TwoTierCrawler:
         with open(auth_file, "r") as f:
             self.auth_data = json.load(f)
 
-        openai_key  = "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"
+        openai_key  = os.getenv("OPENAI_API_KEY") or openai_api_key
+
         self.openai = OpenAI(api_key=openai_key)
 
         self.logger = CrawlerLogger(Path("output"))
@@ -1062,7 +1067,7 @@ async def main():
         console.print("[red]❌ auth.json not found![/red]")
         return
 
-    openai_key = "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"
+    openai_key = os.getenv("OPENAI_API_KEY")
     if not openai_key:
         console.print("[red]❌ OPENAI_API_KEY environment variable not set.[/red]")
         return

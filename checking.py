@@ -19,6 +19,7 @@ from dotenv import load_dotenv
 from rich.console import Console
 from rich.panel import Panel
 from openai import AsyncOpenAI
+import os
 # ── Phase 1 ──────────────────────────────────────────────────────────────────
 from main_phase1 import TwoTierCrawler   # exploration only (testing stripped out)
 
@@ -28,7 +29,7 @@ load_dotenv()
 
 console = Console()
 
-OPENAI_KEY = "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"
+OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 BASE_URL   = "https://staging.isalaam.me/dashboard"
 AUTH_FILE  = "auth.json"
 

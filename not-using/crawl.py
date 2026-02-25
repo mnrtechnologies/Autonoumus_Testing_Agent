@@ -1124,7 +1124,12 @@ async def main():
         return
 
     # Configure API key
-    api_key = "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"
+    api_key = os.getenv('OPENAI_API_KEY')
+    if not api_key:
+        console.print("[red]❌ OPENAI_API_KEY not set![/red]")
+        return
+
+    # Initialize crawler
 
     crawler = TagAndTrackCrawler(
         base_url="https://staging.isalaam.me/dashboard",

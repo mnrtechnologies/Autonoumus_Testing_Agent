@@ -18,6 +18,10 @@ from agents.architect import ArchitectAgent
 from agents.operator import OperatorAgent
 from agents.auth_handler import AuthHandler
 from config import Config
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 console = Console()
 
