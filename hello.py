@@ -2001,6 +2001,8 @@ class SemanticTester:
     # )
         self.history: List[Dict] = []
         self.step = 0
+        self.external_pipeline_ref = None
+        self.latest_screenshot = None
         self.story_tracker, self.report_gen, self.story_gen = build_story_tester(self.openai, self.output_dir, self.session_id)
 
         print(f"\n{'='*80}")
@@ -2671,6 +2673,12 @@ class SemanticTester:
         path = self.output_dir / f"{self.session_id}_{name}.png"
         try:
             await page.screenshot(path=path, full_page=False)
+
+            self.latest_screenshot = str(path)
+
+            if self.external_pipeline_ref:
+                self.external_pipeline_ref.latest_screenshot = str(path)
+                
             with open(path, 'rb') as f:
                 return base64.b64encode(f.read()).decode()
         except Exception:

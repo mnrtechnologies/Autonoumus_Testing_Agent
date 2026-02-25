@@ -37,7 +37,8 @@ AUTH_FILE  = "auth.json"
 #  STEP 1 -- Run Phase 1 exploration (testing stripped out of main.py)
 # -----------------------------------------------------------------------------
 
-async def run_phase1_exploration() -> Path:
+# async def run_phase1_exploration() -> Path:
+async def run_phase1_exploration(base_url: str) -> Path:
     """
     Runs Phase 1 crawler (exploration only).
     Returns the path to the latest saved action plan JSON.
@@ -49,7 +50,8 @@ async def run_phase1_exploration() -> Path:
     ))
 
     crawler = TwoTierCrawler(
-        base_url=BASE_URL,
+        # base_url=BASE_URL,
+        base_url=base_url,
         auth_file=AUTH_FILE,
         max_depth=2,
         openai_api_key=OPENAI_KEY
@@ -250,3 +252,43 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
+
+# For API Endpoints --------------
+class CheckingPipeline:
+
+    def __init__(self, base_url: str):
+        self.base_url = base_url
+        self.status = "running"
+        self.current_url = None
+        self.latest_screenshot = None
+        self.total_urls = 0
+        self.completed_urls = 0
+        self.error = None
+
+    async def run(self):
+        try:
+            plan_path = await run_phase1_exploration(self.base_url)
+            urls = extract_target_urls(plan_path)
+
+            self.total_urls = len(urls)
+
+            for i, url in enumerate(urls, 1):
+                self.current_url = url
+                tester = SemanticTester(
+                    openai_api_key=OPENAI_KEY,
+                    auth_file=AUTH_FILE
+                )
+
+                # IMPORTANT: attach screenshot hook
+                tester.external_pipeline_ref = self
+
+                await tester.run(url)
+
+                self.completed_urls += 1
+
+            self.status = "completed"
+
+        except Exception as e:
+            self.status = "failed"
+            self.error = str(e)

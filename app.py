@@ -20,10 +20,6 @@ import sys
 if sys.platform == 'win32':
     asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
 from engines.orchestrator import Orchestrator
-# from main import AIWebAgent
-import json
-import checking
-from checking import generate_goals_from_json
 
 load_dotenv()
 
@@ -32,12 +28,8 @@ load_dotenv()
 # Pydantic Schemas
 # =====================================================================
 
-class URLGoalPair(BaseModel):
-    url: str
-    goal: str
-
-class DiscoveryResponse(BaseModel):
-    url_goals: List[URLGoalPair]
+class CheckingStartRequest(BaseModel):
+    base_url: str
 
 class CheckingResponse(BaseModel):
     status: str
@@ -85,6 +77,16 @@ def create_test(orchestrator: Orchestrator) -> str:
         "report": None
     }
     return test_id
+
+CHECKING_JOBS: Dict[str, dict] = {}
+
+def create_checking_job(pipeline) -> str:
+    job_id = str(uuid4())
+    CHECKING_JOBS[job_id] = {
+        "pipeline": pipeline,
+        "status": "running"
+    }
+    return job_id
 
 # =====================================================================
 # FastAPI App
@@ -279,58 +281,74 @@ async def stream_browser(websocket: WebSocket, test_id: str):
         print("🔌 WebSocket disconnected")
 
 #==========================================================================
-@app.post("/tests/run-checking", response_model=CheckingResponse)
-async def trigger_checking_flow():
-    """
-    Triggers the Phase 1 (Exploration) and Phase 2 (Isolated Testing) 
-    logic defined in checking.py.
-    """
-    try:
-        # Check if auth file exists before starting
-        if not os.path.exists(checking.AUTH_FILE):
-            raise HTTPException(status_code=400, detail=f"{checking.AUTH_FILE} missing")
-
-        # Define the background worker
-        async def background_worker():
-            try:
-                # 1. Run Phase 1
-                plan_path = await checking.run_phase1_exploration()
-                
-                # 2. Extract URLs
-                urls = checking.extract_target_urls(plan_path)
-                
-                if not urls:
-                    print("⚠️ No URLs found to test.")
-                    return
-
-                # 3. Run Phase 2 (Sequential isolation)
-                for i, url in enumerate(urls, 1):
-                    await checking.run_phase2_for_url(url, index=i, total=len(urls))
-                
-                print("✅ Checking Flow Completed Successfully")
-            except Exception as e:
-                print(f"❌ Background Checking Flow Failed: {e}")
-
-        # Fire and forget the task so the API doesn't timeout
-        asyncio.create_task(background_worker())
-
-        return CheckingResponse(
-            status="started",
-            message="Phase 1 Exploration started. Phase 2 will follow automatically."
-        )
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+# CHECKING.PY ENDPOINTS
 #====================================================================================================
-@app.post("/tests/generate-summary", response_model=DiscoveryResponse)
-async def summarize_test_stories(payload: dict):
-    """
-    Receives a test_stories JSON and returns a list of URL-Goal pairs.
-    """
+from checking import CheckingPipeline
+
+@app.post("/checking/start")
+def start_checking(payload: CheckingStartRequest):
+
+    pipeline = CheckingPipeline(base_url=payload.base_url)
+    job_id = create_checking_job(pipeline)
+
+    def run_pipeline():
+        try:
+            asyncio.run(pipeline.run())
+            CHECKING_JOBS[job_id]["status"] = pipeline.status
+        except Exception as e:
+            CHECKING_JOBS[job_id]["status"] = "failed"
+
+    Thread(target=run_pipeline, daemon=True).start()
+
+    return {
+        "job_id": job_id,
+        "status": "running"
+    }
+
+
+@app.get("/checking/{job_id}/status")
+def checking_status(job_id: str):
+    if job_id not in CHECKING_JOBS:
+        raise HTTPException(status_code=404)
+
+    pipeline = CHECKING_JOBS[job_id]["pipeline"]
+
+    return {
+        "status": pipeline.status,
+        "current_url": pipeline.current_url,
+        "total_urls": pipeline.total_urls,
+        "completed_urls": pipeline.completed_urls,
+        "error": pipeline.error
+    }
+
+@app.websocket("/ws/checking/{job_id}")
+async def stream_checking_browser(websocket: WebSocket, job_id: str):
+    await websocket.accept()
+
+    if job_id not in CHECKING_JOBS:
+        await websocket.send_json({"error": "Invalid job_id"})
+        await websocket.close()
+        return
+
+    pipeline = CHECKING_JOBS[job_id]["pipeline"]
+
     try:
-        url_goals = await generate_goals_from_json(payload)
-        return {"url_goals": url_goals}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-    
-#=======================================================================================
+        while True:
+            screenshot_path = getattr(pipeline, "latest_screenshot", None)
+
+            if screenshot_path and os.path.exists(screenshot_path):
+                with open(screenshot_path, "rb") as f:
+                    img_bytes = f.read()
+
+                await websocket.send_json({
+                    "type": "frame",
+                    "image": base64.b64encode(img_bytes).decode("utf-8"),
+                    "current_url": pipeline.current_url,
+                    "completed": pipeline.completed_urls,
+                    "total": pipeline.total_urls
+                })
+
+            await asyncio.sleep(0.3)
+
+    except WebSocketDisconnect:
+        print("🔌 Checking WebSocket disconnected")
