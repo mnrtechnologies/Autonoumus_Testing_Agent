@@ -32,7 +32,8 @@ import base64
 import hashlib
 from pathlib import Path
 from datetime import datetime
-
+import pandas as pd
+import re
 from typing import Optional, Dict, List, Any, Tuple, Set
 from urllib.parse import urlparse, urljoin
 from dataclasses import dataclass, field
@@ -42,7 +43,6 @@ from enum import Enum
 from element_filter import ElementFilter
 from story_aware_decider import StoryAwareDecider, build_story_tester
 from test_story_engine   import TestStoryTracker, ReportGenerator
-
 from playwright.async_api import async_playwright, Page, Locator, FrameLocator
 from openai import OpenAI
 from page_state_extractor import PageStateExtractor, diff_states
@@ -999,7 +999,7 @@ class Decider:
             diff_summary = self._summarise_state_diffs()
             print(f"\n🔍 STATE DIFF SUMMARY BEING SENT TO GPT:\n{diff_summary}\n")
             response = self.openai.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-4o-mini",
                 messages=[{
                     "role": "user",
                     "content": [
@@ -2069,8 +2069,11 @@ class SemanticTester:
             finally:
                 # self._save_results()
                 await self._save_results()
-                if getattr(self, '_interactive', True):
-                    input("\n👁️  Press Enter to close...")
+
+                # 2. Print completion message instead of waiting for input
+                print("\n" + "="*40)
+                print(f"🎉 Phase2 Exploration Done for {target_url}")
+                print("="*40 + "\n")
                 await browser.close()
 
     def _validate_decision(self, decision: Dict, untested: List[Dict]) -> Dict:
@@ -2725,6 +2728,11 @@ class SemanticTester:
         print(f"  Failed:  {len(self.history) - success}")
         await self.harvester.generate_stories(history=self.history)
 
+    def read_excel_stories(file_path):
+        df = pd.read_excel(file_path)
+        # Map Excel columns back to Orchestrator inputs
+        return [{"url": row['URL'], "goal": row['Story']} for index, row in df.iterrows()]
+
 
 
 
@@ -2743,7 +2751,7 @@ async def main():
         return
 
     tester = SemanticTester(openai_api_key=key)
-    tester._interactive = True
+    tester._interactive = False
 
     url = input("\nEnter URL to test: ").strip()
     if not url:

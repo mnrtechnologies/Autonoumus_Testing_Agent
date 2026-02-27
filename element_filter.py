@@ -72,6 +72,7 @@ more_vert — ALWAYS KEEP, no exceptions, regardless of context
 
 
 REMOVE these elements:
+- Remove this url : 
 - Buttons that navigate to different modules or sections of the application
   and are not part of the current form being tested
 - Feature entry buttons that load a different workflow (e.g., Sedekah Sekarang,
@@ -113,7 +114,7 @@ keep_indices must be the exact index values from the DETECTED ELEMENTS list.
 
         try:
             response = self.openai.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-4o-mini",
                 messages=[{
                     "role": "user",
                     "content": [

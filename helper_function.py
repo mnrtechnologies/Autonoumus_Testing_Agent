@@ -21,7 +21,7 @@ def extract_target_urls(data: dict) -> list[str]:
 
 import json
 
-with open("output/session_20260216_115620/plans/main_action_plan_v8.json", "r", encoding="utf-8") as f:
+with open("semantic_test_output/session_20260216_115620/plans/main_action_plan_v8.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 links = extract_target_urls(data)

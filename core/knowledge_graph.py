@@ -12,7 +12,7 @@ class KnowledgeGraph:
         self.nodes: Dict[str, Dict] = {}
         self.edges: List[Dict] = []
         self.paths: Dict[str, List[Dict]] = {}
-        self.graph_file = Path('output') / 'knowledge_graph.json'
+        self.graph_file = Path('semantic_test_output') / 'knowledge_graph.json'
         self.logger = logger
 
     def add_node(

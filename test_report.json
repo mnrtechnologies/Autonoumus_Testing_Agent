@@ -1,26 +1,14 @@
 {
-  "timestamp": "2026-02-24T13:37:07.399214",
+  "timestamp": "2026-02-26T19:49:21.793527",
   "success": false,
-  "total_steps": 20,
+  "total_steps": 0,
   "max_steps": 50,
-  "assertions": [
-    "\u2714 The user can open the form to add a new product threshold by clicking the \"Tambah\" button on the Ambang Batas Produk page.",
-    "\u2714 The minimum quantity field accepts the value \"10\" when entered by the user.",
-    "\u2714 The maximum quantity field accepts the value \"100\" when entered by the user.",
-    "\u2714 The user can select \"General\" as the category in the category dropdown.",
-    "\u2714 The user can select \"Pria\" as the sub-category after selecting the category.",
-    "\u2714 The user can select \"Peci\" as the product from the product dropdown.",
-    "\u2714 The user can submit the new product threshold by clicking the \"Tambah\" button in the add form.",
-    "\u2714 After submission, the add form closes and the list of product thresholds refreshes.",
-    "\u2714 The newly added product threshold with minimum 10, maximum 100, category \"General\", sub-category \"Pria\", and product \"Peci\" appears in the list."
-  ],
-  "summary": "The user can successfully add a new product threshold by opening the form via the \"Tambah\" button, entering valid minimum and maximum quantities (10 and 100), and selecting the appropriate category (\"General\"), sub-category (\"Pria\"), and product (\"Peci\"). Upon submitting the form, it closes and the updated list displays the newly added threshold with the specified details.",
+  "assertions": [],
+  "summary": "No actions were recorded during the test.",
   "memory_stats": {
-    "total_domains": 1,
-    "total_selectors": 2,
-    "domains": [
-      "mnr-pst.com"
-    ]
+    "total_domains": 0,
+    "total_selectors": 0,
+    "domains": []
   },
-  "error": "User cancelled test due to system being stuck"
+  "error": "Failed to start browser"
 }

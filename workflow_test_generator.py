@@ -169,7 +169,7 @@ Identify all distinct workflows now:"""
         try:
             # Call OpenAI
             response = self.openai.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-4o-mini",
                 messages=[
                     {
                         "role": "system",

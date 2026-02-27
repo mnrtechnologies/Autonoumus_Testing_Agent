@@ -20,7 +20,7 @@ def encode_image_to_base64(image_path: str) -> str:
         return base64.b64encode(image_file.read()).decode('utf-8')
 
 
-def save_screenshot(screenshot_bytes: bytes, step_num: int, output_dir: str = "screenshots") -> str:
+def save_screenshot(screenshot_bytes: bytes, step_num: int, output_dir: str = "semantic_test_output/screenshots") -> str:
     """
     Save a screenshot to disk with timestamped filename.
     

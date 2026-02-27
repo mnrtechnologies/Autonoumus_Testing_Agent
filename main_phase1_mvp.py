@@ -5,7 +5,12 @@ from pathlib import Path
 from typing import Optional,Dict,List
 from urllib.parse import urlparse
 from datetime import datetime
-import base64
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+from anthropic import Anthropic
 from playwright.async_api import async_playwright, Page
 from rich.console import Console
 from rich.panel import Panel
@@ -25,11 +30,7 @@ from executors.dom_validator import  DOMStateValidator
 from executors.path_resolver import  PathResolver
 from executors.semantic_selector import SemanticSelector
 from planning.planner import TwoTierPlanner
-
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
+# from assertion_engine import AssertionEngine
 
 console = Console()
 
@@ -50,6 +51,7 @@ class TwoTierCrawler:
 
         if openai_api_key:
             self.openai = OpenAI(api_key=openai_api_key)
+            # self.openai = Anthropic(api_key=openai_api_key)
         else:
             self.openai = OpenAI()
 
@@ -66,6 +68,13 @@ class TwoTierCrawler:
         self.semantic_selector  = SemanticSelector(self.logger)
         self.planner            = TwoTierPlanner(self.logger)
         self.state_manager      = StateManager(self.logger)
+
+        # self.assertion_engine = AssertionEngine(
+        #     page          = None,           # set to actual page after browser launches
+        #     openai_client = self.openai,
+        #     output_dir    = Path('semantic_test_output/assertions'),
+        #     logger        = self.logger,
+        # )
 
         self.path_resolver = PathResolver(
             self.knowledge_graph,
@@ -93,9 +102,6 @@ class TwoTierCrawler:
         self.exploration_memory = self._load_memory()
 
         self.knowledge_graph.load()
-        self.external_pipeline_ref = None
-        self.step = 0
-        self.latest_screenshot = None
 
     async def _get_visible_sidebar_items(self, page: Page) -> List[str]:
         """
@@ -150,54 +156,6 @@ class TwoTierCrawler:
             json.dump(self.exploration_memory, f, indent=2)
         self.knowledge_graph.save()
 
-    async def _screenshot(self, page: Page, name: str) -> str:
-        """
-        Lifecycle-safe screenshot.
-        Never blocks crawler shutdown.
-        Never crashes if page is closing.
-        """
-        try:
-            # 1️⃣ Guard against closed page
-            if page.is_closed():
-                return ""
-
-            path = Path("semantic_test_output") / f"exploration_{name}.png"
-
-            # 2️⃣ Small stabilization wait (prevents race with navigation)
-            await asyncio.sleep(0)
-
-            # 3️⃣ Take screenshot safely
-            await page.screenshot(path=path, full_page=False)
-
-            self.latest_screenshot = str(path)
-
-            # 4️⃣ WebSocket push (non-critical, must not crash)
-            if (
-                self.external_pipeline_ref
-                and hasattr(self.external_pipeline_ref, "ws_messages")
-            ):
-                try:
-                    with open(path, "rb") as f:
-                        b64_string = base64.b64encode(f.read()).decode()
-
-                    self.external_pipeline_ref.latest_screenshot = str(path)
-                    self.external_pipeline_ref.ws_messages.append({
-                        "type": "frame",
-                        "image": b64_string,
-                        "step": self.step,
-                        "current_url": page.url if not page.is_closed() else None,
-                        "phase": "exploration",
-                    })
-                except Exception:
-                    # Websocket issues must NEVER affect crawler
-                    pass
-
-            return str(path)
-
-        except Exception:
-            # Screenshot must never interfere with crawler
-            return ""        
-
     async def run(self):
         console.print(Panel.fit(
             "[bold cyan]🔬 TWO-TIER CRAWLER + KNOWLEDGE GRAPH + COMPREHENSIVE LOGGING[/bold cyan]\n"
@@ -215,6 +173,10 @@ class TwoTierCrawler:
             browser = await p.chromium.launch(headless=True)
             context = await browser.new_context(viewport={'width': 1200, 'height': 700})
             page = await context.new_page()
+            # self.assertion_engine.page    = page
+            # self.assertion_engine.dom.page    = page
+            # self.assertion_engine.network.page    = page
+            # self.assertion_engine.visual.page = page
 
             try:
                 await self._setup_auth(page, context)
@@ -235,10 +197,7 @@ class TwoTierCrawler:
         # Return the latest plan path so the orchestrator can hand it to Phase 2
         plans_dir = self.logger.session_dir / "plans"
         plan_files = sorted(plans_dir.glob("main_action_plan_v*.json"))
-        console.print("[magenta]FINAL PLAN LENGTH:[/magenta]", 
-              len(self.planner.main_action_plan))
         return plan_files[-1] if plan_files else None
-
 
     async def _setup_auth(self, page: Page, context):
         console.print("\n[cyan]🔑 Setting up authentication...[/cyan]")
@@ -311,11 +270,6 @@ class TwoTierCrawler:
             return
 
         console.print("\n[bold yellow]🔍 INITIAL SCAN: Understanding page structure...[/bold yellow]")
-        await page.wait_for_load_state("networkidle")
-        self.step += 1
-        console.print("URL before screenshot:", page.url)
-        await self._screenshot(page, f"scan_depth{depth}_{self.step}")
-        console.print("URL after screenshot:", page.url)
         vision_analysis = await self.vision.analyze_page(page, current_url)
         self.stats['vision_calls'] += 1
 
@@ -347,14 +301,8 @@ class TwoTierCrawler:
         assumption_plan = self.planner.create_assumption_plan(
             containers, vision_analysis.get('discovery_strategy', {})
         )
-        #main_action_plan = self.planner.create_main_action_plan(features)
-        if depth == 0:
-            self.planner.create_main_action_plan(features)
-        else:
-            self.planner.add_discovered_features_to_main_plan(features)
-            
-        console.print("[magenta]PLAN LENGTH after creation:[/magenta]", 
-              len(self.planner.main_action_plan))
+        main_action_plan = self.planner.create_main_action_plan(features)
+
         console.print("\n" + "="*80)
         console.print("[bold green]🎯 PHASE 1: DISCOVERY — Executing Assumption Plan[/bold green]")
         console.print("="*80 + "\n")
@@ -362,14 +310,13 @@ class TwoTierCrawler:
 
         await self._execute_assumption_plan(page, assumption_plan, current_url, depth, breadcrumb)
 
-        console.print("\n" + "="*80)
-        console.print("[bold green]🎯 PHASE 2: TESTING — Executing Main Action Plan[/bold green]")
-        console.print("="*80 + "\n")
-        self.logger.log_info("Starting Phase 2: Testing")
-
-        await self._execute_main_action_plan(page, self.planner.main_action_plan, depth, breadcrumb)
-        console.print("[magenta]PLAN LENGTH before execution:[/magenta]", 
-              len(self.planner.main_action_plan))
+        # ----------------------------------------------------------------
+        # NOTE: Testing (Phase 2) has been moved to main_orchestrator.py.
+        # Exploration ends here. The orchestrator reads the saved plan
+        # and passes each URL to a fresh SemanticTester instance.
+        # ----------------------------------------------------------------
+        console.print("\n[bold green]Exploration complete for this depth.[/bold green]")
+        self.logger.log_info("Exploration complete — testing delegated to Phase 2 orchestrator")
 
     async def _execute_assumption_plan(
         self,
@@ -408,12 +355,7 @@ class TwoTierCrawler:
             await self.dom_observer.get_changes(page)
 
             clicked = await self.semantic_selector.click_element(page, container)
-            await asyncio.sleep(1.5)
-            await page.wait_for_load_state("networkidle")
-            self.step += 1
-            console.print("URL before screenshot:", page.url)
-            await self._screenshot(page, f"discovery_click_{self.step}")
-            console.print("URL after screenshot:", page.url)
+
             if not clicked:
                 console.print("[red]   Discovery failed — skipping[/red]")
                 self.logger.log_error("discovery_click_failed", f"Could not click {container['text']}", {
@@ -603,11 +545,6 @@ class TwoTierCrawler:
             url_before = page.url
 
             clicked = await self.semantic_selector.click_element(page, feature)
-            await page.wait_for_load_state("networkidle")
-            self.step += 1
-            console.print("URL before screenshot:", page.url)
-            await self._screenshot(page, f"test_click_{self.step}")
-            console.print("URL after screenshot:", page.url)
 
             if not clicked:
                 console.print("[red]   Test failed — could not click[/red]")
@@ -646,12 +583,6 @@ class TwoTierCrawler:
                     await self.dom_observer.inject_observer(page)
                     self.state_manager.signal_navigation()
                     self.logger.log_action("navigation_back", {"from_url": url_after, "to_url": url_before})
-                    await page.wait_for_load_state("networkidle")
-                    self.step += 1
-                    console.print("URL before screenshot:", page.url)
-                    await self._screenshot(page, f"nav_back_{self.step}")
-                    console.print("URL after screenshot:", page.url)
-                
                 except Exception as e:
                     console.print(f"[red]   Failed to go back: {e}[/red]")
                     self.logger.log_error("navigation_back_failed", str(e), {

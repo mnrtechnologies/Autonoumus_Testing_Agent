@@ -23,7 +23,7 @@ from rich.console import Console
 console = Console()
 
 
-def _find_latest_plan_file(output_dir: Path = Path("output")) -> Optional[Path]:
+def _find_latest_plan_file(output_dir: Path = Path("semantic_test_output")) -> Optional[Path]:
     """
     Walk all session_* subdirectories under output/ and return the
     plans/main_action_plan_vN.json with the highest version number.
@@ -83,14 +83,14 @@ def extract_target_urls(data: dict) -> List[str]:
 
 def get_urls_from_latest_plan(
     plan_path: Optional[str] = None,
-    output_dir: Path = Path("output")
+    output_dir: Path = Path("semantic_test_output")
 ) -> List[str]:
     """
     Main entry point.
 
     Args:
         plan_path:  Explicit path to a plan JSON file. If None, the latest
-                    main_action_plan_vN.json is auto-detected from output/.
+                    main_action_plan_vN.json is auto-detected from semantic_test_output/.
         output_dir: Root directory to search when plan_path is None.
 
     Returns:

@@ -995,7 +995,7 @@ class VisualAssertions:
                 img_b64 = base64.b64encode(f.read()).decode()
 
             response = self.openai.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-4o-mini",
                 max_tokens=300,
                 messages=[{
                     "role": "user",

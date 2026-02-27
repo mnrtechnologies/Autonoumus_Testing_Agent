@@ -21,13 +21,15 @@ from rich.panel import Panel
 from openai import AsyncOpenAI
 import os
 # ── Phase 1 ──────────────────────────────────────────────────────────────────
-from main_phase1 import TwoTierCrawler   # exploration only (testing stripped out)
+from main import TwoTierCrawler   # exploration only (testing stripped out)
 
 # ── Phase 2 ──────────────────────────────────────────────────────────────────
 from hello import SemanticTester   # per-URL tester
 load_dotenv()
 
 console = Console()
+
+BASE_API_URL = os.getenv("BASE_API_URL", "http://127.0.0.1:8000")
 
 OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 BASE_URL   = "https://staging.isalaam.me/dashboard"
@@ -39,7 +41,7 @@ AUTH_FILE  = "auth.json"
 # -----------------------------------------------------------------------------
 
 # async def run_phase1_exploration() -> Path:
-async def run_phase1_exploration(base_url: str) -> Path:
+async def run_phase1_exploration(base_url: str, pipeline_ref=None) -> Path:
     """
     Runs Phase 1 crawler (exploration only).
     Returns the path to the latest saved action plan JSON.
@@ -57,6 +59,10 @@ async def run_phase1_exploration(base_url: str) -> Path:
         max_depth=2,
         openai_api_key=OPENAI_KEY
     )
+
+    if pipeline_ref:
+        crawler.external_pipeline_ref = pipeline_ref
+
     latest_plan = await crawler.run()
 
     if not latest_plan:
@@ -68,26 +74,32 @@ async def run_phase1_exploration(base_url: str) -> Path:
 # -----------------------------------------------------------------------------
 #  STEP 2 -- Extract unique target URLs from the action plan
 # -----------------------------------------------------------------------------
-
 def extract_target_urls(plan_path: Path) -> List[str]:
     """
     Reads the action plan JSON and returns a deduplicated list of
-    target_url values found on steps where feature.type == 'link'.
+    URLs, checking multiple possible keys where the crawler might save them.
     """
+    import json
+    from rich.console import Console
+    console = Console()
+    
     with open(plan_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     seen = set()
     urls = []
 
-    for step in data.get("steps", []):
+    # Handle both cases: if data is a dict with "steps", or just a list directly
+    steps = data.get("steps", data) if isinstance(data, dict) else data
+
+    for step in steps:
         feature = step.get("feature", {})
 
-        if feature.get("type") != "link":
-            continue
+        # Check all possible keys where the crawler might have saved the deep link
+        target_url = feature.get("target_url") or feature.get("url") or feature.get("href")
 
-        target_url = feature.get("target_url")
-        if not target_url:
+        # Skip if no URL was found, or if it's not a valid http link
+        if not target_url or not str(target_url).startswith("http"):
             continue
 
         if target_url in seen:
@@ -101,7 +113,6 @@ def extract_target_urls(plan_path: Path) -> List[str]:
         console.print(f"   {i:>3}. {url}")
 
     return urls
-
 
 # -----------------------------------------------------------------------------
 #  STEP 3 -- Run Phase 2 testing, one URL at a time, fully isolated
@@ -141,118 +152,49 @@ def _log_url_failure(url: str, index: int, error: str):
     }
     with open(failures_file, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
-#=============================================================================
-async def generate_goals_from_json(stories_data: dict) -> List[dict]:
-    """
-    Parses raw technical stories and uses an LLM to generate 
-    professional QA goals for each unique URL in JSON format.
-    """
-    client = AsyncOpenAI(api_key=OPENAI_KEY)
-    
-    # Extract unique URLs and their technical steps to reduce token usage
-    simplified_context = []
-    seen_urls = set()
-    
-    for story in stories_data.get("stories", []):
-        url = story.get("url")
-        if url not in seen_urls:
-            steps_summary = [f"{s['action']} {s['target']}" for s in story.get('steps', [])]
-            simplified_context.append({
-                "url": url,
-                "technical_steps": steps_summary,
-                "description": story.get("description")
-            })
-            seen_urls.add(url)
-
-    # 1. Added "in JSON format" below to satisfy OpenAI requirements
-    # 2. Included a specific key-value structure instruction for better reliability
-    prompt = f"""
-    You are a Senior QA Strategist. Based on the following technical crawl data, 
-    generate a single, professional "goal" paragraph for each URL.
-
-    Return ONLY a JSON object with a single key "url_goals" whose value is a list of objects.
-    Each object must have exactly two keys: "url" (string) and "goal" (string).
-
-    Example format:
-    {{"url_goals": [{{"url": "https://example.com/page", "goal": "Navigate to..."}}]}}
-
-    The goal should:
-    1. Describe a comprehensive user journey.
-    2. Include navigation, element verification, and CRUD operations if applicable.
-    3. Be written as one continuous, professional instruction.
-
-    Input Data: {json.dumps(simplified_context)}
-    """
-
-    # response_format requires the prompt above to contain the word "json"
-    response = await client.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "user", "content": prompt}],
-        response_format={ "type": "json_object" } 
-    )
-    
-    # Parse the resulting JSON string back into a Python object
-    result = json.loads(response.choices[0].message.content)
-    
-    # Handle both list and object-wrapped-list return styles
-# Replace the last return line in generate_goals_from_json:
-    if isinstance(result, list):
-        return result
-    if isinstance(result, dict):
-        # Try common wrapper keys
-        for key in ("url_goals", "output", "goals", "data", "results"):
-            if key in result and isinstance(result[key], list):
-                return result[key]
-        # Last resort: find the first list value
-        for v in result.values():
-            if isinstance(v, list):
-                return v
-    raise ValueError(f"Unexpected response structure: {result}")
-
-#=============================================================================
-
+        
 # -----------------------------------------------------------------------------
 #  MAIN ENTRY POINT
 # -----------------------------------------------------------------------------
 
-async def main():
-    if not Path(AUTH_FILE).exists():
-        console.print(f"[red]{AUTH_FILE} not found[/red]")
-        return
+# async def main():
+#     if not Path(AUTH_FILE).exists():
+#         console.print(f"[red]{AUTH_FILE} not found[/red]")
+#         return
 
-    start = datetime.now()
+#     start = datetime.now()
 
-    # -- Phase 1: Explore -----------------------------------------------------
-    plan_path = await run_phase1_exploration()
+#     # -- Phase 1: Explore -----------------------------------------------------
+#     plan_path = await run_phase1_exploration()
 
-    # -- Extract URLs ---------------------------------------------------------
-    urls = extract_target_urls(plan_path)
+#     # -- Extract URLs ---------------------------------------------------------
+#     urls = extract_target_urls(plan_path)
 
-    if not urls:
-        console.print("[yellow]No testable URLs found in plan. Exiting.[/yellow]")
-        return
+#     if not urls:
+#         console.print("[yellow]No testable URLs found in plan. Exiting.[/yellow]")
+#         return
 
-    # -- Phase 2: Test each URL in isolation ----------------------------------
-    console.print(Panel.fit(
-        f"[bold green]PHASE 2 -- Starting {len(urls)} URL test sessions[/bold green]",
-        border_style="green"
-    ))
+#     # -- Phase 2: Test each URL in isolation ----------------------------------
+#     console.print(Panel.fit(
+#         f"[bold green]PHASE 2 -- Starting {len(urls)} URL test sessions[/bold green]",
+#         border_style="green"
+#     ))
 
-    for i, url in enumerate(urls, 1):
-        await run_phase2_for_url(url, index=i, total=len(urls))
+#     for i, url in enumerate(urls, 1):
+#         await run_phase2_for_url(url, index=i, total=len(urls))
 
-    # -- Summary --------------------------------------------------------------
-    elapsed = datetime.now() - start
-    console.print(Panel.fit(
-        f"[bold cyan]ALL DONE[/bold cyan]\n"
-        f"URLs tested : {len(urls)}\n"
-        f"Total time  : {elapsed}",
-        border_style="cyan"
-    ))
+#     # -- Summary --------------------------------------------------------------
+#     elapsed = datetime.now() - start
+#     console.print(Panel.fit(
+#         f"[bold cyan]ALL DONE[/bold cyan]\n"
+#         f"URLs tested : {len(urls)}\n"
+#         f"Total time  : {elapsed}",
+#         border_style="cyan"
+#     ))
 
 
-if __name__ == "__main__":
-    asyncio.run(main())
+# if __name__ == "__main__":
+#     asyncio.run(main())
 
 
 # For API Endpoints --------------
@@ -266,30 +208,181 @@ class CheckingPipeline:
         self.total_urls = 0
         self.completed_urls = 0
         self.error = None
+        self.session_id = None
+        self.completed_reports = []
+        self.ws_messages = []
+
+    # async def run(self):
+    #     try:
+    #         import base64
+    #         plan_path = await run_phase1_exploration(self.base_url, pipeline_ref=self)
+    #         urls = extract_target_urls(plan_path)
+
+    #         self.total_urls = len(urls)
+
+    #         EXCLUDED_URLS = {
+    #             "https://staging.isalaam.me/events"
+    #         }
+
+    #         filtered_urls = [u for u in urls if u not in EXCLUDED_URLS]
+
+    #         self.total_urls = len(filtered_urls)
+            
+    #         console.print(f"[cyan]Extracted {len(filtered_urls)} filtered unique URLs from plan.[/cyan]")
+
+    #         for i, url in enumerate(filtered_urls, 1):
+    #             self.current_url = url
+
+    #             tester = SemanticTester(
+    #                 openai_api_key=OPENAI_KEY,
+    #                 auth_file=AUTH_FILE
+    #             )
+
+    #             # Disables the "Press Enter" prompt
+    #             tester._interactive = False
+                
+    #             # Capture the session_id from the first tester session
+    #             if not self.session_id:
+    #                 self.session_id = tester.session_id
+
+    #             # IMPORTANT: attach screenshot hook
+    #             tester.external_pipeline_ref = self
+
+    #             await tester.run(url)
+
+    #             await asyncio.sleep(2)
+
+    #             self.completed_urls += 1
+
+
+    #             # 👇 NEW: Capture the Excel report for this specific URL run
+    #             report_filename = f"test_report_{tester.session_id}.xlsx"
+    #             report_path = Path("semantic_test_output") / report_filename
+
+    #             excel_b64 = None
+    #             if report_path.exists():
+    #                 with open(report_path, "rb") as f:
+    #                     excel_b64 = base64.b64encode(f.read()).decode("utf-8")
+
+    #             # Determine the next URL
+    #             next_url = filtered_urls[i] if i < len(filtered_urls) else None
+                
+    #             if next_url:
+    #                 msg_text = f"Exploration done for this {url}, excel sheet and proceeding to {next_url}"
+    #             else:
+    #                 msg_text = f"Exploration done for this {url}, excel sheet generated!"
+
+    #             # Append to the queue
+    #             self.ws_messages.append({
+    #                 "type": "url_report",
+    #                 "message": msg_text,
+    #                 "url": url,
+    #                 "next_url": next_url,
+    #                 "excel_filename": report_filename,
+    #                 "excel_base64": excel_b64
+    #             })
+
+    #         self.status = "completed"
+
+    #     except Exception as e:
+    #         self.status = "failed"
+    #         self.error = str(e)
+
+
 
     async def run(self):
         try:
-            plan_path = await run_phase1_exploration(self.base_url)
+            import base64
+            # 1. Phase 1 Start Message
+            self.ws_messages.append({"type": "status", "message": "🚀 Phase 1: Deep Exploration Started"})
+            
+            plan_path = await run_phase1_exploration(self.base_url, pipeline_ref=self)
+            
+            # 2. Phase 1 Complete / Transition Message
+            self.ws_messages.append({
+                "type": "status", 
+                "message": "✅ Phase 1 complete. Moving forward to Phase 2 !!!"
+            })
+
             urls = extract_target_urls(plan_path)
+            EXCLUDED_URLS = {"https://staging.isalaam.me/events"}
+#             EXCLUDED_URLS = {
+#   "https://staging.isalaam.me/events",
+#   "https://staging.isalaam.me/gallery",
+#   "https://staging.isalaam.me/reports",
+#   "https://staging.isalaam.me/techsupport",
+#   "https://staging.isalaam.me/mosque/controlcenter",
+#   "https://staging.isalaam.me/mosque/profile",
+#   "https://staging.isalaam.me/mosque/inventory",
+#   "https://staging.isalaam.me/mosque/pthreshold",
+#   "https://staging.isalaam.me/mosque/payment-transactions",
+#   "https://staging.isalaam.me/mosque/pay-outs",
+#   "https://staging.isalaam.me/mosque/keymembers"
+# }
+            filtered_urls = [u for u in urls if u not in EXCLUDED_URLS]
+            self.total_urls = len(filtered_urls)
+            console.print(f"[cyan]Extracted {len(filtered_urls)} filtered unique URLs from plan.[/cyan]")
 
-            self.total_urls = len(urls)
-
-            for i, url in enumerate(urls, 1):
+            # 3. Sequential Phase 2 Loop
+            for i, url in enumerate(filtered_urls, 1):
                 self.current_url = url
-                tester = SemanticTester(
-                    openai_api_key=OPENAI_KEY,
-                    auth_file=AUTH_FILE
-                )
+                next_url = filtered_urls[i] if i < len(filtered_urls) else None
+                
+                # Message for starting a specific URL
+                self.ws_messages.append({
+                    "type": "status", 
+                    "message": f"🔍 Started exploring {url} ({i}/{self.total_urls})"
+                })
 
-                # IMPORTANT: attach screenshot hook
-                tester.external_pipeline_ref = self
-
+                tester = SemanticTester(openai_api_key=OPENAI_KEY, auth_file=AUTH_FILE)
+                tester._interactive = False
+                tester.external_pipeline_ref = self # Required for image streaming
+                
                 await tester.run(url)
-
                 self.completed_urls += 1
 
+                # ✅ Track the completed session for Phase 3
+                self.completed_reports.append({
+                    "session_id": tester.session_id,
+                    "url": url
+                })
+
+                # 4. Immediate Excel Capture
+                report_filename = f"test_report_{tester.session_id}.xlsx"
+                report_path = Path("semantic_test_output") / report_filename
+                excel_b64 = None
+                
+                if report_path.exists():
+                    with open(report_path, "rb") as f:
+                        excel_b64 = base64.b64encode(f.read()).decode("utf-8")
+
+                # Final URL Report with download links and data
+                msg_text = f"✅ Exploration done for {url}. Excel generated."
+                if next_url:
+                    msg_text += f" Proceeding to next URL: {next_url}"
+
+                self.ws_messages.append({
+                    "type": "url_report",
+                    "message": msg_text,
+                    "url": url,
+                    "session_id": tester.session_id,
+                    "download_url": f"{BASE_API_URL}/semantic/{tester.session_id}/download-report",
+                    "excel_filename": report_filename,
+                    "excel_base64": excel_b64
+                })
+
+            self.status = "validating"
+            self.ws_messages.append({"type": "status", "message": "🎊 Phase 2 Exploration Completed!, 🚀 Phase 3: Validation Auto-Starting..."})
+
+            from app import trigger_phase3_logic
+            await trigger_phase3_logic(self)
+            print("Phase 3 Triggered!")
+
             self.status = "completed"
+            self.ws_messages.append({"type": "status", "message": "🏁 Phase 3 Validation Complete!"})
+
 
         except Exception as e:
             self.status = "failed"
             self.error = str(e)
+            self.ws_messages.append({"type": "error", "message": f"Pipeline failed: {str(e)}"})

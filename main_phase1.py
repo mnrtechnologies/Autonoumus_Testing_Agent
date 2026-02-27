@@ -5,10 +5,6 @@ from pathlib import Path
 from typing import Optional,Dict,List
 from urllib.parse import urlparse
 from datetime import datetime
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
 
 from anthropic import Anthropic
 from playwright.async_api import async_playwright, Page
@@ -18,15 +14,10 @@ from rich.table import Table
 from openai import OpenAI
 
 from core.graph_builder import GraphBuilder
-
-
 from core.knowledge_graph import KnowledgeGraph
 from core.logger import CrawlerLogger
-
 from core.state_manager import     StateManager
-
 from core.vision_analyzer import GPTVisionAnalyzer
-
 
 from detectors.component_detector import ComponentDetector
 from detectors.dom_observer import  DOMObserver
@@ -34,7 +25,6 @@ from executors.dom_validator import  DOMStateValidator
 from executors.path_resolver import  PathResolver
 from executors.semantic_selector import SemanticSelector
 from planning.planner import TwoTierPlanner
-from assertion_engine import AssertionEngine
 
 console = Console()
 
@@ -54,13 +44,12 @@ class TwoTierCrawler:
             self.auth_data = json.load(f)
 
         if openai_api_key:
-            self.openai = OpenAI(api_key=openai_api_key)
-            # self.openai = Anthropic(api_key=openai_api_key)
+            self.openai = Anthropic(api_key=openai_api_key)
         else:
             self.openai = OpenAI()
 
         # Initialize logger FIRST
-        self.logger = CrawlerLogger(Path('output'))
+        self.logger = CrawlerLogger(Path("semantic_test_output"))
 
         # Initialize all layers with logger
         self.vision             = GPTVisionAnalyzer(self.openai, self.logger)
@@ -72,13 +61,6 @@ class TwoTierCrawler:
         self.semantic_selector  = SemanticSelector(self.logger)
         self.planner            = TwoTierPlanner(self.logger)
         self.state_manager      = StateManager(self.logger)
-
-        self.assertion_engine = AssertionEngine(
-            page          = None,           # set to actual page after browser launches
-            openai_client = self.openai,
-            output_dir    = Path('output/assertions'),
-            logger        = self.logger,
-        )
 
         self.path_resolver = PathResolver(
             self.knowledge_graph,
@@ -102,7 +84,7 @@ class TwoTierCrawler:
             'path_restoration_failures': 0
         }
 
-        self.memory_file = Path('output') / 'two_tier_memory.json'
+        self.memory_file = Path('semantic_test_output') / 'two_tier_memory.json'
         self.exploration_memory = self._load_memory()
 
         self.knowledge_graph.load()
@@ -177,10 +159,6 @@ class TwoTierCrawler:
             browser = await p.chromium.launch(headless=True)
             context = await browser.new_context(viewport={'width': 1200, 'height': 700})
             page = await context.new_page()
-            self.assertion_engine.page    = page
-            self.assertion_engine.dom.page    = page
-            self.assertion_engine.network.page    = page
-            self.assertion_engine.visual.page = page
 
             try:
                 await self._setup_auth(page, context)
@@ -661,7 +639,7 @@ class TwoTierCrawler:
         self.logger.save_final_summary(self.stats, kg_summary)
 
     def _save_exploration_data(self):
-        output_dir = Path('output')
+        output_dir = Path('semantic_test_output')
         output_dir.mkdir(exist_ok=True)
 
         data = {
@@ -690,7 +668,7 @@ class TwoTierCrawler:
             json.dump(data, f, indent=2)
 
         console.print(f"\n[bold green]💾 Saved: {output_file}[/bold green]")
-        console.print(f"[bold green]💾 Knowledge Graph: output/knowledge_graph.json[/bold green]")
+        console.print(f"[bold green]💾 Knowledge Graph: semantic_test_output/knowledge_graph.json[/bold green]")
         console.print(f"[bold green]📁 Session Directory: {self.logger.session_dir}[/bold green]")
         console.print(f"[bold green]   ├─ crawler_log.txt (main log)[/bold green]")
         console.print(f"[bold green]   ├─ actions_log.jsonl (structured actions)[/bold green]")

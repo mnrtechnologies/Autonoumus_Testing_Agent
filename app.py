@@ -11,6 +11,7 @@ from pydantic import BaseModel
 from typing import List, Optional, Dict, Literal
 from threading import Thread
 from uuid import uuid4
+import re
 from dotenv import load_dotenv
 from fastapi import WebSocket, WebSocketDisconnect
 import base64
@@ -20,13 +21,25 @@ import sys
 if sys.platform == 'win32':
     asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
 from engines.orchestrator import Orchestrator
-
+from fastapi.responses import FileResponse
+from pathlib import Path
+import os
+import signal
+import pandas as pd
+from fastapi import BackgroundTasks
+from fastapi.responses import FileResponse
+from pathlib import Path
+from checking import CheckingPipeline
+from hello import SemanticTester
+from datetime import datetime
 load_dotenv()
 
 
 # =====================================================================
 # Pydantic Schemas
 # =====================================================================
+class SemanticStartRequest(BaseModel): #Hello.py
+    url: str
 
 class CheckingStartRequest(BaseModel):
     base_url: str
@@ -88,6 +101,8 @@ def create_checking_job(pipeline) -> str:
     }
     return job_id
 
+SEMANTIC_TESTS: Dict[str, dict] = {}
+
 # =====================================================================
 # FastAPI App
 # =====================================================================
@@ -137,7 +152,7 @@ def start_test(payload: StartTestRequest):
         try:
             goal = (
                 payload.goal
-                if payload.mode == "blackbox"
+                if payload.mode == "whitebox"
                 else "\n".join(payload.steps) if payload.steps else payload.goal
             )
 
@@ -282,45 +297,23 @@ async def stream_browser(websocket: WebSocket, test_id: str):
 
 #==========================================================================
 # CHECKING.PY ENDPOINTS
-#====================================================================================================
-from checking import CheckingPipeline
-
-# @app.post("/checking/start")
-# def start_checking(payload: CheckingStartRequest):
-
-#     pipeline = CheckingPipeline(base_url=payload.base_url)
-#     job_id = create_checking_job(pipeline)
-
-#     def run_pipeline():
-#         try:
-#             asyncio.run(pipeline.run())
-#             CHECKING_JOBS[job_id]["status"] = pipeline.status
-#         except Exception as e:
-#             CHECKING_JOBS[job_id]["status"] = "failed"
-
-#     Thread(target=run_pipeline, daemon=True).start()
-
-#     return {
-#         "job_id": job_id,
-#         "status": "running"
-#     }
-
+#==========================================================================
 @app.post("/checking/start")
-def start_checking(payload: CheckingStartRequest):
+async def start_checking(payload: CheckingStartRequest):
 
     pipeline = CheckingPipeline(base_url=payload.base_url)
     job_id = create_checking_job(pipeline)
 
-    def run_pipeline():
+    async def wrapped():
         try:
-            asyncio.run(pipeline.run())
+            await pipeline.run()
             CHECKING_JOBS[job_id]["status"] = pipeline.status
         except Exception as e:
             pipeline.status = "failed"
             pipeline.error = str(e)
             CHECKING_JOBS[job_id]["status"] = "failed"
 
-    Thread(target=run_pipeline, daemon=True).start()
+    asyncio.create_task(wrapped())
 
     return {
         "job_id": job_id,
@@ -340,40 +333,10 @@ def checking_status(job_id: str):
         "current_url": pipeline.current_url,
         "total_urls": pipeline.total_urls,
         "completed_urls": pipeline.completed_urls,
+        "completed_reports": pipeline.completed_reports,
+        "message": pipeline.ws_messages[-1]["message"] if pipeline.ws_messages else "Initializing...",
         "error": pipeline.error
     }
-
-# @app.websocket("/ws/checking/{job_id}")
-# async def stream_checking_browser(websocket: WebSocket, job_id: str):
-#     await websocket.accept()
-
-#     if job_id not in CHECKING_JOBS:
-#         await websocket.send_json({"error": "Invalid job_id"})
-#         await websocket.close()
-#         return
-
-#     pipeline = CHECKING_JOBS[job_id]["pipeline"]
-
-#     try:
-#         while True:
-#             screenshot_path = getattr(pipeline, "latest_screenshot", None)
-
-#             if screenshot_path and os.path.exists(screenshot_path):
-#                 with open(screenshot_path, "rb") as f:
-#                     img_bytes = f.read()
-
-#                 await websocket.send_json({
-#                     "type": "frame",
-#                     "image": base64.b64encode(img_bytes).decode("utf-8"),
-#                     "current_url": pipeline.current_url,
-#                     "completed": pipeline.completed_urls,
-#                     "total": pipeline.total_urls
-#                 })
-
-#             await asyncio.sleep(0.3)
-
-#     except WebSocketDisconnect:
-#         print("🔌 Checking WebSocket disconnected")
 
 @app.websocket("/ws/checking/{job_id}")
 async def stream_checking_browser(websocket: WebSocket, job_id: str):
@@ -391,12 +354,17 @@ async def stream_checking_browser(websocket: WebSocket, job_id: str):
 
     # ✅ If pipeline already finished before WS connected
     if pipeline.status == "completed":
+        # Send all historical report messages first
+        for msg in getattr(pipeline, "ws_messages", []):
+            await websocket.send_json(msg)
+            
         await websocket.send_json({
             "type": "done",
-            "message": "Exploration already completed",
+            "message": "Discovering Links completed !! , Started Exploration By Interacting Elements",
             "completed": pipeline.completed_urls,
             "total": pipeline.total_urls
         })
+        
         await websocket.close()
         return
 
@@ -408,14 +376,21 @@ async def stream_checking_browser(websocket: WebSocket, job_id: str):
         await websocket.close()
         return
 
+    last_msg_idx = 0  # 👈 NEW: Track which messages we've already sent
+
     try:
         while True:
+            # 👇 NEW: Send any new URL completion reports
+            while hasattr(pipeline, "ws_messages") and last_msg_idx < len(pipeline.ws_messages):
+                msg = pipeline.ws_messages[last_msg_idx]
+                await websocket.send_json(msg)
+                last_msg_idx += 1
 
-            # 🔹 1️⃣ Always check lifecycle FIRST
-            if pipeline.status == "completed":
+            # 🔹 1️⃣ Check lifecycle FIRST, but ONLY close if all messages are sent
+            if pipeline.status == "completed" and last_msg_idx == len(getattr(pipeline, "ws_messages", [])):
                 await websocket.send_json({
                     "type": "done",
-                    "message": "Exploration completed successfully",
+                    "message": "Exploration completed !!",
                     "completed": pipeline.completed_urls,
                     "total": pipeline.total_urls
                 })
@@ -430,7 +405,7 @@ async def stream_checking_browser(websocket: WebSocket, job_id: str):
                 await websocket.close()
                 break
 
-            # 🔹 2️⃣ Send frame if available
+            # 🔹 2️⃣ Send screenshot frame if available
             screenshot_path = getattr(pipeline, "latest_screenshot", None)
 
             if screenshot_path and os.path.exists(screenshot_path):
@@ -449,3 +424,342 @@ async def stream_checking_browser(websocket: WebSocket, job_id: str):
 
     except WebSocketDisconnect:
         print("🔌 Checking WebSocket disconnected")
+
+
+@app.post("/terminate")
+def terminate_program(background_tasks: BackgroundTasks):
+    """
+    Terminates the FastAPI server process immediately.
+    """
+    def kill_process():
+        # Get the current process ID (PID)
+        pid = os.getpid()
+        print(f"🛑 Termination signal received. Killing PID: {pid}")
+        # Send SIGTERM signal to self to trigger a clean shutdown or SIGKILL for immediate stop
+        os.kill(pid, signal.SIGTERM)
+
+    # Use a background task to ensure the API returns a response before shutting down
+    background_tasks.add_task(kill_process)
+    
+    return {
+        "status": "terminating",
+        "message": "The server is shutting down. Check console logs for PID status."
+    }
+
+# =====================================================================
+# Semantic Driver (hello.py) Endpoints
+# =====================================================================
+
+@app.post("/semantic/start")
+async def start_semantic_test(payload: SemanticStartRequest, background_tasks: BackgroundTasks):
+    """
+    Triggers the autonomous testing logic from hello.py (SemanticTester).
+    """
+    if not OPENAI_API_KEY:
+        raise HTTPException(status_code=500, detail="OPENAI_API_KEY not configured")
+
+    test_id = str(uuid4())
+    
+    # Initialize the tester
+    # Note: Ensure auth.json exists in your root directory as hello.py expects it
+    tester = SemanticTester(openai_api_key=OPENAI_API_KEY)
+    
+    SEMANTIC_TESTS[test_id] = {
+        "status": "running",
+        "url": payload.url,
+        "tester": tester,
+        "start_time": datetime.now().isoformat()
+    }
+
+    async def run_semantic_logic():
+        try:
+            # We call the run method from hello.py
+            await tester.run(payload.url)
+            SEMANTIC_TESTS[test_id]["status"] = "completed"
+        except Exception as e:
+            print(f"❌ Semantic Test Failed: {str(e)}")
+            SEMANTIC_TESTS[test_id]["status"] = "failed"
+            SEMANTIC_TESTS[test_id]["error"] = str(e)
+
+    # Run the playwright loop in the background
+    background_tasks.add_task(run_semantic_logic)
+
+    return {
+        "test_id": test_id,
+        "status": "running",
+        "message": "Semantic Driver started"
+    }
+
+@app.get("/semantic/{test_id}/status")
+def get_semantic_status(test_id: str):
+    """
+    Check progress of the Semantic Driver.
+    """
+    if test_id not in SEMANTIC_TESTS:
+        raise HTTPException(status_code=404, detail="Semantic test not found")
+
+    data = SEMANTIC_TESTS[test_id]
+    tester: SemanticTester = data["tester"]
+
+    return {
+        "test_id": test_id,
+        "status": data["status"],
+        "current_step": tester.step,
+        "history_count": len(tester.history),
+        "last_action": tester.history[-1]["decision"] if tester.history else None,
+        "error": data.get("error")
+    }
+
+@app.get("/semantic/{test_id}/download-report")
+async def download_semantic_report(test_id: str):
+    """
+    Locates the Excel file generated by hello.py and sends it to the frontend.
+    """
+    if test_id not in SEMANTIC_TESTS:
+        raise HTTPException(status_code=404, detail="Test record not found")
+
+    tester = SEMANTIC_TESTS[test_id]["tester"]
+    session_id = tester.session_id
+    
+    # Path where hello.py saves the files
+    output_dir = "semantic_test_output"
+    # Ensure your ReportGenerator in hello.py is named this way
+    report_filename = f"test_report_{session_id}.xlsx" 
+    report_path = os.path.join(output_dir, report_filename)
+
+    if not os.path.exists(report_path):
+        raise HTTPException(status_code=404, detail="Excel report not found.")
+
+    return FileResponse(
+        path=report_path, 
+        filename=report_filename, 
+        media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+
+# =====================================================================
+# Semantic Driver WebSocket (Live Screenshots)
+# =====================================================================
+
+@app.websocket("/ws/semantic/{test_id}")
+async def stream_semantic_browser(websocket: WebSocket, test_id: str):
+    await websocket.accept()
+
+    # Verify the test exists in memory
+    if test_id not in SEMANTIC_TESTS:
+        await websocket.send_json({"error": "Invalid semantic test_id or session expired"})
+        await websocket.close()
+        return
+
+    data = SEMANTIC_TESTS[test_id]
+    tester: SemanticTester = data["tester"]
+    last_sent_step = -1
+
+    try:
+        while True:
+            # Check if the tester has a new screenshot and if it actually exists on disk
+            screenshot_path = getattr(tester, "latest_screenshot", None)
+            current_step = tester.step
+
+            if screenshot_path and os.path.exists(screenshot_path):
+                # Optional: Only send if it's a new step to save bandwidth
+                if current_step > last_sent_step:
+                    with open(screenshot_path, "rb") as f:
+                        img_bytes = f.read()
+
+                    await websocket.send_json({
+                        "type": "frame",
+                        "image": base64.b64encode(img_bytes).decode("utf-8"),
+                        "step": current_step,
+                        "url": getattr(tester, "current_url", "N/A"),
+                        "status": data["status"]
+                    })
+                    last_sent_step = current_step
+
+            # If the test finishes, send a final 'done' message and close
+            if data["status"] in ["completed", "failed"]:
+                await websocket.send_json({
+                    "type": "done",
+                    "status": data["status"],
+                    "message": "Phase 2 Exploration Finished"
+                })
+                break
+
+            await asyncio.sleep(0.5) # ~2 FPS update rate
+            
+    except WebSocketDisconnect:
+        print(f"🔌 Semantic WebSocket disconnected for {test_id}")
+    except Exception as e:
+        print(f"⚠️ WebSocket Error: {str(e)}")
+    finally:
+        try:
+            await websocket.close()
+        except:
+            pass
+
+
+# Bridge for test/start to start the phase 3 which reads the excel sheet and return url, test stories
+
+@app.post("/semantic/{test_id}/convert-to-orchestrator")
+async def convert_stories_to_tests(test_id: str, background_tasks: BackgroundTasks):
+    """
+    Dynamically extracts the URL and stories from the Phase 2 session 
+    to feed into the Orchestrator.
+    """
+    output_dir = "semantic_test_output"
+    
+    # 1. Resolve Session Data and URL dynamically
+    if test_id in SEMANTIC_TESTS:
+        session_id = SEMANTIC_TESTS[test_id]["tester"].session_id
+        # Use the URL that was actually used in the Phase 2 session
+        starting_url = SEMANTIC_TESTS[test_id]["url"] 
+    else:
+        # Fallback if server restarted: check if test_id is a timestamp
+        session_id = test_id
+        # If the session is no longer in memory, we could theoretically parse 
+        # the URL from the Excel 'Summary' sheet if needed.
+        raise HTTPException(
+            status_code=404, 
+            detail="Session not found in memory. URL cannot be determined dynamically."
+        )
+    
+    report_path = os.path.join(output_dir, f"test_report_{session_id}.xlsx")
+
+    if not os.path.exists(report_path):
+        raise HTTPException(status_code=404, detail="Excel report not found on disk.")
+
+    try:
+        # 2. Read the 'Execution Plan' sheet
+        df = pd.read_excel(report_path, sheet_name='Execution Plan', skiprows=13)
+        tasks_to_run = []
+
+        for _, row in df.iterrows():
+            steps_text = str(row['Test Steps'])
+            feature_name = str(row['Feature / Context'])
+            
+            if "EXPLORE" not in steps_text:
+                continue
+
+            # 3. Extract all steps as a single goal
+            raw_steps = re.findall(r"'(.*?)'", steps_text) 
+            if not raw_steps:
+                continue
+
+            # Creating one single instruction encompassing all 8 steps
+            combined_goal = f"Perform the '{feature_name}' workflow: " + " then ".join(raw_steps)
+
+            tasks_to_run.append({
+                "url": starting_url, # Dynamic URL from Phase 2 session
+                "goal": combined_goal
+            })
+
+        # 4. Sequential Batch Runner
+        background_tasks.add_task(run_sequential_tests, tasks_to_run, pipeline_ref=None)
+
+        return {
+            "status": "sequential_batch_started",
+            "total_tasks": len(tasks_to_run),
+            "message": "Tasks will run one by one. Check /tests for progress."
+        }
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Parsing Error: {str(e)}")
+    
+@app.post("/checking/{job_id}/trigger-all-tests")
+async def trigger_all_tests(job_id: str, background_tasks: BackgroundTasks):
+    if job_id not in CHECKING_JOBS:
+        raise HTTPException(status_code=404)
+
+    pipeline = CHECKING_JOBS[job_id]["pipeline"]
+    all_tasks = []
+
+    # Iterate through all Excel reports generated in Phase 2
+    for msg in pipeline.ws_messages:
+        if msg.get("type") == "url_report":
+            session_id = msg["session_id"]
+            url = msg["url"]
+            
+            report_path = os.path.join("semantic_test_output", f"test_report_{session_id}.xlsx")
+            if os.path.exists(report_path):
+                # Extract "EXPLORE" stories as Orchestrator goals
+                df = pd.read_excel(report_path, sheet_name='Execution Plan', skiprows=13)
+                for _, row in df.iterrows():
+                    steps = re.findall(r"'(.*?)'", str(row['Test Steps']))
+                    if steps:
+                        all_tasks.append({
+                            "url": url,
+                            "goal": f"Perform '{row['Feature / Context']}' workflow: " + " then ".join(steps)
+                        })
+
+    background_tasks.add_task(trigger_phase3_logic, all_tasks)
+    return {"status": "batch_validation_started", "message": "Manual trigger successful.", "total_tasks": len(all_tasks)}
+
+async def run_sequential_tests(tasks, pipeline_ref=None):
+
+    print(f"🔄 Starting Sequential Batch for {len(tasks)} tasks...")
+    
+    if pipeline_ref:
+        pipeline_ref.ws_messages.append({
+            "type": "status", 
+            "message": f"🚀 Phase 3: Batch Validation Started for {len(tasks)} stories"
+        })
+
+    print(f"🔄 Starting Sequential Batch for {len(tasks)} tasks...")
+    
+    for i, task in enumerate(tasks):
+        msg = f"🚀 Launching Task {i+1}/{len(tasks)}: {task['goal'][:50]}..."
+        print(f"🚀 {msg}")
+        if pipeline_ref:
+            pipeline_ref.ws_messages.append({"type": "status", "message": msg})
+        
+        # 1. Trigger the standard start_test function
+        # This returns a StartTestResponse which contains the new test_id
+        response = start_test(StartTestRequest(
+            mode="whitebox",
+            url=task["url"],
+            goal=task["goal"]
+        ))
+        
+        new_job_id = response.test_id
+        
+        # 2. Wait for this specific job to finish
+        is_finished = False
+        while not is_finished:
+            await asyncio.sleep(5) # Poll every 5 seconds
+            
+            # Check the status in the global registry
+            current_status = TESTS.get(new_job_id, {}).get("status")
+            
+            if current_status in ["completed", "failed"]:
+                print(f"✅ Task {i+1} finished with status: {current_status}")
+                is_finished = True
+            else:
+                # Still running, continue waiting
+                continue
+        
+        # 3. Small cool-down to ensure browser processes are fully cleaned up
+        await asyncio.sleep(2)
+
+    print("🏁 All sequential tasks in the batch have been processed.")
+
+
+async def trigger_phase3_logic(pipeline):
+    all_tasks = []
+    for msg in pipeline.ws_messages:
+        if msg.get("type") == "url_report":
+            session_id = msg["session_id"]
+            url = msg["url"]
+            report_path = os.path.join("semantic_test_output", f"test_report_{session_id}.xlsx")
+            
+            if os.path.exists(report_path):
+                df = pd.read_excel(report_path, sheet_name='Execution Plan', skiprows=13)
+                for _, row in df.iterrows():
+                    steps = re.findall(r"'(.*?)'", str(row['Test Steps']))
+                    if steps:
+                        all_tasks.append({
+                            "url": url,
+                            "goal": f"Perform '{row['Feature / Context']}' workflow: " + " then ".join(steps)
+                        })
+    
+    if all_tasks:
+        # Launch the batch runner
+        await run_sequential_tests(all_tasks, pipeline_ref=pipeline)

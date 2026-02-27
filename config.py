@@ -22,7 +22,7 @@ class Config:
     # Authentication settings
     AUTH_USERNAME = os.getenv('AUTH_USERNAME', 'teacher@mnrtechnologies.com')
     AUTH_PASSWORD = os.getenv('AUTH_PASSWORD', 'Mnrtech@123456')
-    STORAGE_STATE_FILE = "output/storage_state.json"
+    STORAGE_STATE_FILE = "semantic_test_output/storage_state.json"
     
     # Crawler settings
     MAX_PAGES_TO_CRAWL = 10
@@ -34,7 +34,7 @@ class Config:
     VIEWPORT_HEIGHT = 720
     
     # Output directories
-    OUTPUT_DIR = Path("output")
+    OUTPUT_DIR = Path("semantic_test_output")
     MARKDOWN_DIR = OUTPUT_DIR / "markdown"
     USER_STORIES_FILE = OUTPUT_DIR / "user_stories.json"
     EXECUTION_LOG = OUTPUT_DIR / "execution_log.json"

@@ -423,7 +423,7 @@ Return ONLY valid JSON:
 
         try:
             response = self.openai.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-4o-mini",
                 messages=[{
                     "role": "user",
                     "content": [
@@ -498,7 +498,7 @@ If you need to close an overlay first:
 
         try:
             response = self.openai.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-4o-mini",
                 messages=[{
                     "role": "user",
                     "content": [
@@ -549,7 +549,7 @@ Return ONLY valid JSON:
 
         try:
             response = self.openai.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-4o-mini",
                 messages=[{
                     "role": "user",
                     "content": [

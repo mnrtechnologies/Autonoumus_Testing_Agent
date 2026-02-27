@@ -433,7 +433,7 @@ class ExcelReportGenerator:
     # ── SHEET 1: SUMMARY ──────────────────────────────────────
 
     def _build_summary(self, wb: Workbook, stories: List[TestStory]):
-        ws = wb.create_sheet("📊 Summary")
+        ws = wb.create_sheet("Summary")
         ws.sheet_view.showGridLines = False
         for col, w in zip("ABCDEF", [28, 30, 18, 18, 18, 22]):
             ws.column_dimensions[col].width = w
@@ -518,7 +518,7 @@ class ExcelReportGenerator:
     # ── SHEET 2: USER TEST STORIES ────────────────────────────
 
     def _build_user_test_stories(self, wb: Workbook, stories: List[TestStory]):
-        ws = wb.create_sheet("📋 User Test Stories")
+        ws = wb.create_sheet("User Test Stories")
         ws.sheet_view.showGridLines = False
 
         for i, w in enumerate([16, 28, 35, 45, 12, 14, 18, 12, 30], 1):
@@ -649,7 +649,7 @@ class ExcelReportGenerator:
     # ── SHEET 3: IMPLEMENTATION PLAN ─────────────────────────
 
     def _build_implementation_plan(self, wb: Workbook, stories: List[TestStory]):
-        ws = wb.create_sheet("🔧 Implementation Plan")
+        ws = wb.create_sheet("Implementation Plan")
         ws.sheet_view.showGridLines = False
 
         for i, w in enumerate([8, 25, 20, 22, 40, 15, 15, 20, 12], 1):
@@ -775,7 +775,7 @@ class ExcelReportGenerator:
     # ── SHEET 4: EXECUTION PLAN ───────────────────────────────
 
     def _build_execution_plan(self, wb: Workbook, stories: List[TestStory]):
-        ws = wb.create_sheet("🚀 Execution Plan")
+        ws = wb.create_sheet("Execution Plan")
         ws.sheet_view.showGridLines = False
 
         for i, w in enumerate([6, 20, 30, 45, 20, 45, 12, 18, 14], 1):

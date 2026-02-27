@@ -105,7 +105,7 @@ class TwoTierCrawler:
 
         self.openai = OpenAI(api_key=openai_key)
 
-        self.logger = CrawlerLogger(Path("output"))
+        self.logger = CrawlerLogger(Path("semantic_test_output"))
 
         self.vision             = GPTVisionAnalyzer(self.openai, self.logger)
         self.knowledge_graph    = KnowledgeGraph(self.logger)
@@ -135,7 +135,7 @@ class TwoTierCrawler:
             "modals_detected":   0,
         }
 
-        self.memory_file        = Path("output") / "two_tier_memory.json"
+        self.memory_file        = Path("semantic_test_output") / "two_tier_memory.json"
         self.exploration_memory = self._load_memory()
         self.knowledge_graph.load()
 
@@ -492,7 +492,7 @@ class TwoTierCrawler:
         console.print(kg_table)
 
     def _save_exploration_data(self):
-        output_dir = Path("output")
+        output_dir = Path("semantic_test_output")
         output_dir.mkdir(exist_ok=True)
         data = {
             "metadata": {
@@ -1091,7 +1091,7 @@ async def main():
     console.print("\n[cyan]🔍 Extracting test URLs from latest action plan...[/cyan]")
     urls = get_urls_from_latest_plan(output_dir=Path(session_dir) / "plans")
     if not urls:
-        urls = get_urls_from_latest_plan(output_dir=Path("output"))
+        urls = get_urls_from_latest_plan(output_dir=Path("semantic_test_output"))
 
     if not urls:
         console.print(

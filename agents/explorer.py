@@ -604,7 +604,7 @@ class CascadingExplorerAgent:
         """Execute cascading discovery"""
         discovery = await self.deep_discover()
         
-        output_path = Path('output') / 'knowledge_base_cascading.json'
+        output_path = Path('semantic_test_output') / 'knowledge_base_cascading.json'
         output_path.parent.mkdir(exist_ok=True)
         
         with open(output_path, 'w', encoding='utf-8') as f:

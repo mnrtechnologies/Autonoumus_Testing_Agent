@@ -1094,7 +1094,7 @@ Choose ONE element. Return JSON only."""
 
     def _save_state_graph(self):
         """Save state graph to file"""
-        output_path = Path('output') / 'state_graph.json'
+        output_path = Path('semantic_test_output') / 'state_graph.json'
         output_path.parent.mkdir(exist_ok=True)
 
         graph_data = {

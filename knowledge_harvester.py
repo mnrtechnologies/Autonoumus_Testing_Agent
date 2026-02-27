@@ -142,7 +142,7 @@ class KnowledgeHarvester:
 
         try:
             response = self.openai.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-4o-mini",
                 messages=[{"role": "user", "content": content}],
                 max_tokens=4000,
                 temperature=0.3   # lower temp = more consistent structured output
