@@ -305,7 +305,8 @@ class CheckingPipeline:
             })
 
             urls = extract_target_urls(plan_path)
-            EXCLUDED_URLS = {"https://staging.isalaam.me/events"}
+            EXCLUDED_URLS = {"https://staging.isalaam.me/events",
+                             "https://staging.isalaam.me/mosque/profile"}
 #             EXCLUDED_URLS = {
 #   "https://staging.isalaam.me/events",
 #   "https://staging.isalaam.me/gallery",

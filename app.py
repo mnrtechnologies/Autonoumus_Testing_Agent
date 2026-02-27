@@ -35,8 +35,10 @@ from pathlib import Path
 from checking import CheckingPipeline
 from hello import SemanticTester
 from datetime import datetime
+
 load_dotenv()
 
+BASE_API_URL = os.getenv("BASE_API_URL", "http://127.0.0.1:8000")
 
 # =====================================================================
 # Pydantic Schemas
@@ -591,10 +593,26 @@ async def stream_semantic_browser(websocket: WebSocket, test_id: str):
 
             # If the test finishes, send a final 'done' message and close
             if data["status"] in ["completed", "failed"]:
+                # 1. Define the report path
+                report_filename = f"test_report_{tester.session_id}.xlsx"
+                report_path = os.path.join("semantic_test_output", report_filename)
+                
+                # 2. Prepare file data (initialize as None)
+                excel_b64 = None
+                
+                # 3. Read and encode if it exists
+                if os.path.exists(report_path):
+                    with open(report_path, "rb") as f:
+                        excel_b64 = base64.b64encode(f.read()).decode("utf-8")
+                
+                # 4. Send the enriched message
                 await websocket.send_json({
                     "type": "done",
                     "status": data["status"],
-                    "message": "Phase 2 Exploration Finished"
+                    "message": "Phase 2 Exploration Finished",
+                    "excel_base64": excel_b64,   
+                    "download_url": f"{BASE_API_URL}/semantic/{tester.session_id}/download-report",    # The file content
+                    "excel_filename": report_filename # Filename for the frontend
                 })
                 break
 
