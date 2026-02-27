@@ -1,3 +1,0 @@
-{"action_id": 1, "timestamp": "2026-02-27T12:05:11.857360", "action_type": "auth_localStorage_set", "details": {"key": "isalaamAccessToken"}}
-{"action_id": 2, "timestamp": "2026-02-27T12:05:11.867439", "action_type": "auth_localStorage_set", "details": {"key": "isalaam-dir"}}
-{"action_id": 3, "timestamp": "2026-02-27T12:05:11.895216", "action_type": "auth_localStorage_set", "details": {"key": "isalaam-language"}}

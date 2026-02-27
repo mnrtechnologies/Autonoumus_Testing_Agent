@@ -734,6 +734,14 @@ async def run_sequential_tests(tasks, pipeline_ref=None):
         ))
         
         new_job_id = response.test_id
+
+        if pipeline_ref:
+            pipeline_ref.ws_messages.append({
+                "type": "test_started",
+                "test_id": new_job_id,
+                "story_index": i + 1,
+                "message": f"🧪 Test started with ID: {new_job_id}"
+            })
         
         # 2. Wait for this specific job to finish
         is_finished = False

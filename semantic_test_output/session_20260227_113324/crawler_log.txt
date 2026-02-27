@@ -1,8 +1,0 @@
-[2026-02-27 11:33:24.160] ================================================================================
-[2026-02-27 11:33:24.162] CRAWLER SESSION STARTED: 20260227_113324
-[2026-02-27 11:33:24.163] ================================================================================
-[2026-02-27 11:33:24.178] Starting crawler for https://staging.isalaam.me/dashboard
-[2026-02-27 11:33:28.389] Setting up authentication
-[2026-02-27 11:33:35.858] ACTION #1: auth_localStorage_set - {"key": "isalaamAccessToken"}
-[2026-02-27 11:33:35.885] ACTION #2: auth_localStorage_set - {"key": "isalaam-dir"}
-[2026-02-27 11:33:35.920] ACTION #3: auth_localStorage_set - {"key": "isalaam-language"}
