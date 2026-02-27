@@ -1,0 +1,9 @@
+[2026-02-27 12:05:04.650] ================================================================================
+[2026-02-27 12:05:04.654] CRAWLER SESSION STARTED: 20260227_120504
+[2026-02-27 12:05:04.654] ================================================================================
+[2026-02-27 12:05:04.668] Knowledge graph loaded: 3 nodes (1 with deep links), 0 edges
+[2026-02-27 12:05:04.668] Starting crawler for https://staging.isalaam.me/dashboard
+[2026-02-27 12:05:05.926] Setting up authentication
+[2026-02-27 12:05:11.857] ACTION #1: auth_localStorage_set - {"key": "isalaamAccessToken"}
+[2026-02-27 12:05:11.867] ACTION #2: auth_localStorage_set - {"key": "isalaam-dir"}
+[2026-02-27 12:05:11.896] ACTION #3: auth_localStorage_set - {"key": "isalaam-language"}

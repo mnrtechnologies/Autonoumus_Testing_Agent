@@ -1,0 +1,68 @@
+{
+  "nodes": {
+    "main_expandable_menu_acara_mendatang": {
+      "semantic_id": "main_expandable_menu_acara_mendatang",
+      "text": "Acara Mendatang",
+      "node_type": "container",
+      "location": "main",
+      "anchor_url": "https://staging.isalaam.me/dashboard",
+      "element_type": "expandable_menu",
+      "confidence": "vision_only",
+      "target_url": null,
+      "discovered_at": "2026-02-27T11:46:55.732421"
+    },
+    "main_button_sedekah_sekarang": {
+      "semantic_id": "main_button_sedekah_sekarang",
+      "text": "Sedekah Sekarang",
+      "node_type": "feature",
+      "location": "main",
+      "anchor_url": "https://staging.isalaam.me/dashboard",
+      "element_type": "button",
+      "confidence": "dom_confirmed",
+      "target_url": null,
+      "discovered_at": "2026-02-27T11:46:55.742024"
+    },
+    "main_link_lihat_semua": {
+      "semantic_id": "main_link_lihat_semua",
+      "text": "Lihat semua",
+      "node_type": "feature",
+      "location": "main",
+      "anchor_url": "https://staging.isalaam.me/dashboard",
+      "element_type": "link",
+      "confidence": "dom_confirmed",
+      "target_url": "https://staging.isalaam.me/events",
+      "discovered_at": "2026-02-27T11:46:55.758859"
+    }
+  },
+  "edges": [],
+  "paths": {
+    "main_expandable_menu_acara_mendatang": [
+      {
+        "step_type": "ensure_url",
+        "target_url": "https://staging.isalaam.me/dashboard",
+        "description": "Ensure browser is on https://staging.isalaam.me/dashboard"
+      }
+    ],
+    "main_button_sedekah_sekarang": [
+      {
+        "step_type": "ensure_url",
+        "target_url": "https://staging.isalaam.me/dashboard",
+        "description": "Ensure browser is on https://staging.isalaam.me/dashboard"
+      }
+    ],
+    "main_link_lihat_semua": [
+      {
+        "step_type": "ensure_url",
+        "target_url": "https://staging.isalaam.me/dashboard",
+        "description": "Ensure browser is on https://staging.isalaam.me/dashboard"
+      }
+    ]
+  },
+  "saved_at": "2026-02-27T11:47:00.098388",
+  "stats": {
+    "total_nodes": 3,
+    "nodes_with_deep_links": 1,
+    "total_edges": 0,
+    "total_paths": 3
+  }
+}

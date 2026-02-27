@@ -10,3 +10,4 @@ screenshots/
 llm_test_output/
 jit_test_output/
 */__pycache__/*
+semantic_test_output/

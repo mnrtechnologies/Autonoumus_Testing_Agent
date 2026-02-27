@@ -12,6 +12,9 @@ from typing import List, Optional, Dict, Literal
 from threading import Thread
 from uuid import uuid4
 import re
+import os
+import signal
+import sys
 from dotenv import load_dotenv
 from fastapi import WebSocket, WebSocketDisconnect
 import base64
@@ -424,6 +427,17 @@ async def stream_checking_browser(websocket: WebSocket, job_id: str):
 
     except WebSocketDisconnect:
         print("🔌 Checking WebSocket disconnected")
+
+@app.post("/terminate-and-restart")
+def terminate_and_restart():
+    # Perform any cleanup/save reports here...
+    print("Termination requested. Restarting Master service...")
+    
+    # This sends a SIGTERM to the parent (the Gunicorn Master)
+    # Systemd will see the Master die and restart it immediately.
+    os.kill(os.getppid(), signal.SIGTERM)
+    
+    return {"status": "Restarting system..."}
 
 
 @app.post("/terminate")
