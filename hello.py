@@ -2003,6 +2003,7 @@ class SemanticTester:
         self.step = 0
         self.external_pipeline_ref = None
         self.latest_screenshot = None
+        self.ws_logs = []
         self.story_tracker, self.report_gen, self.story_gen = build_story_tester(self.openai, self.output_dir, self.session_id)
 
         print(f"\n{'='*80}")
@@ -2010,6 +2011,10 @@ class SemanticTester:
         print(f"{'='*80}")
         print(f"Session: {self.session_id}\n")
 
+    
+    def log(self, msg: str, color: str = "white"):
+        print(msg)
+        self.ws_logs.append({"message": msg, "color": color})
     async def _full_screenshot(self, page: Page, name: str) -> str:
         path = self.output_dir / f"{self.session_id}_{name}.png"
         try:
@@ -2028,7 +2033,7 @@ class SemanticTester:
 
     async def run(self, target_url: str):
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=False)
+            browser = await p.chromium.launch(headless=True)
             context = await browser.new_context(viewport={'width': 1400, 'height': 900})
             page    = await context.new_page()
 
@@ -2040,10 +2045,10 @@ class SemanticTester:
             self.executor   = Executor(page)
 
             try:
-                print("[1/3] 🔑 Authenticating...")
+                self.log("[1/3] 🔑 Authenticating...")
                 await self._inject_auth(page, context, target_url)
 
-                print(f"[2/3] 🌐 Navigating to target...")
+                self.log(f"[2/3] 🌐 Navigating to target...")
                 await page.goto(target_url, wait_until='networkidle', timeout=30000)
                 await asyncio.sleep(2)
 
@@ -2058,7 +2063,7 @@ class SemanticTester:
                 )
                 self.context_stack.push(initial)
 
-                print(f"[3/3] 🚀 Starting testing loop...\n")
+                self.log(f"[3/3] 🚀 Starting testing loop...\n")
                 await self._test_loop(page)
 
             except Exception as e:
@@ -2172,7 +2177,7 @@ class SemanticTester:
             self.step  += 1
 
             print(f"\n{'='*80}")
-            print(f"STEP {iteration} | Depth: {self.context_stack.depth()}")
+            self.log(f"STEP {iteration} | Depth: {self.context_stack.depth()}")
             print(f"{'='*80}")
 
             # ── OBSERVE ──────────────────────────────────────────────────────
@@ -2189,7 +2194,7 @@ class SemanticTester:
             print(f"  Overlay: {elements_data.get('has_overlay')}")
             if elements_data.get('overlay_selector'):
                 print(f"  Overlay selector: {elements_data.get('overlay_selector')}")
-            print(f"  Discovered: {elements_data.get('total_discovered', 0)} interactive elements")
+            self.log(f"  Discovered: {elements_data.get('total_discovered', 0)} interactive elements")
 
             # ── UPDATE CONTEXT STACK ─────────────────────────────────────────
             print("\n[MEMORY]")
@@ -2340,7 +2345,7 @@ class SemanticTester:
             print(f"  Overlay scope: {current.overlay_selector or 'none (full page)'}")
             print(f"  In-scope elements: {len(scoped_elements)}")
             print(f"  Already tested (global): {len(scoped_elements) - len(untested)}")
-            print(f"  Remaining untested: {len(untested)}")
+            self.log(f"  Remaining untested: {len(untested)}")
 
             if not untested:
                 print(f"  ✅ All elements tested")
@@ -2348,7 +2353,7 @@ class SemanticTester:
                     self.context_stack.pop()
                     continue
                 else:
-                    print(f"  🏁 Testing complete!")
+                    self.log(f"  🏁 Testing complete!")
                     break
 
 
@@ -2374,8 +2379,8 @@ class SemanticTester:
                 break
             decision = self._validate_decision(decision, untested)
 
-            print(f"  Action: {decision.get('action')}")
-            print(f"  Target: {decision.get('target_name')}")
+            self.log(f"  Action: {decision.get('action')}")
+            self.log(f"  Target: {decision.get('target_name')}")
 
             # FIX 2: Record action BEFORE checking for loops
             self.loop_detector.record(
@@ -2637,7 +2642,7 @@ class SemanticTester:
                 "state_diff":   state_diff,
             })
 
-            print(f"  Success: {result.get('success')}")
+            self.log(f"  Success: {result.get('success')}")
             await asyncio.sleep(1)
             previous_elements = scoped_elements.copy()
 
@@ -2725,7 +2730,7 @@ class SemanticTester:
         print(f"\n📊 SUMMARY")
         print(f"  Total:   {len(self.history)}")
         print(f"  Success: {success}")
-        print(f"  Failed:  {len(self.history) - success}")
+        self.log(f"  Failed:  {len(self.history) - success}")
         await self.harvester.generate_stories(history=self.history)
 
     def read_excel_stories(file_path):
