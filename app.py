@@ -148,7 +148,7 @@ def health():
 def start_test(payload: StartTestRequest):
     orchestrator = Orchestrator(
         api_key=OPENAI_API_KEY,
-        headless=True
+        headless=False
     )
 
     test_id = create_test(orchestrator)
@@ -491,7 +491,9 @@ async def start_semantic_test(payload: SemanticStartRequest, background_tasks: B
         try:
             # We call the run method from hello.py
             await tester.run(payload.url)
-            SEMANTIC_TESTS[test_id]["status"] = "completed"
+            SEMANTIC_TESTS[test_id]["status"] = "validating"
+            SEMANTIC_TESTS[test_id]["status_message"] = "Phase 2 Exploration Finished, Moving to Phase 3 Validation..."
+            await convert_stories_to_tests(test_id, background_tasks)
         except Exception as e:
             print(f"❌ Semantic Test Failed: {str(e)}")
             SEMANTIC_TESTS[test_id]["status"] = "failed"
@@ -572,9 +574,10 @@ async def stream_semantic_browser(websocket: WebSocket, test_id: str):
 
     try:
         while True:
+            active_engine = data.get("active_orchestrator", data["tester"])
             # Check if the tester has a new screenshot and if it actually exists on disk
-            screenshot_path = getattr(tester, "latest_screenshot", None)
-            current_step = tester.step
+            screenshot_path = getattr(active_engine, "latest_screenshot", None)
+            current_step = getattr(active_engine, "step", getattr(active_engine, "step_count", 0))
 
             if screenshot_path and os.path.exists(screenshot_path):
                 # Optional: Only send if it's a new step to save bandwidth
@@ -604,7 +607,13 @@ async def stream_semantic_browser(websocket: WebSocket, test_id: str):
                 if os.path.exists(report_path):
                     with open(report_path, "rb") as f:
                         excel_b64 = base64.b64encode(f.read()).decode("utf-8")
-                
+
+                if data["status"] == "validating":
+                    await websocket.send_json({
+                        "type": "status", 
+                        "message": data.get("status_message", "Phase 2 Finished, Moving to Phase 3...")
+                    })
+                data["status"] = "in_validation_progress"
                 # 4. Send the enriched message
                 await websocket.send_json({
                     "type": "done",
@@ -685,7 +694,7 @@ async def convert_stories_to_tests(test_id: str, background_tasks: BackgroundTas
             })
 
         # 4. Sequential Batch Runner
-        background_tasks.add_task(run_sequential_tests, tasks_to_run, pipeline_ref=None)
+        background_tasks.add_task(run_sequential_tests, tasks_to_run, pipeline_ref=None,semantic_test_id=test_id)
 
         return {
             "status": "sequential_batch_started",
@@ -725,9 +734,10 @@ async def trigger_all_tests(job_id: str, background_tasks: BackgroundTasks):
     background_tasks.add_task(trigger_phase3_logic, all_tasks)
     return {"status": "batch_validation_started", "message": "Manual trigger successful.", "total_tasks": len(all_tasks)}
 
-async def run_sequential_tests(tasks, pipeline_ref=None):
+async def run_sequential_tests(tasks, pipeline_ref=None, semantic_test_id=None):
 
     print(f"🔄 Starting Sequential Batch for {len(tasks)} tasks...")
+    
     
     if pipeline_ref:
         pipeline_ref.ws_messages.append({
@@ -753,6 +763,10 @@ async def run_sequential_tests(tasks, pipeline_ref=None):
         
         new_job_id = response.test_id
 
+        if semantic_test_id and semantic_test_id in SEMANTIC_TESTS:
+            SEMANTIC_TESTS[semantic_test_id]["active_orchestrator"] = TESTS[new_job_id]["orchestrator"]
+            
+
         if pipeline_ref:
             pipeline_ref.ws_messages.append({
                 "type": "test_started",
@@ -765,6 +779,10 @@ async def run_sequential_tests(tasks, pipeline_ref=None):
         is_finished = False
         while not is_finished:
             await asyncio.sleep(5) # Poll every 5 seconds
+
+            orch = TESTS.get(new_job_id, {}).get("orchestrator")
+            if pipeline_ref and orch and hasattr(orch, "latest_screenshot"):
+                pipeline_ref.latest_screenshot = orch.latest_screenshot
             
             # Check the status in the global registry
             current_status = TESTS.get(new_job_id, {}).get("status")

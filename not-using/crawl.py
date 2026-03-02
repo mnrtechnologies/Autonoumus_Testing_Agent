@@ -151,7 +151,7 @@ class TagAndTrackCrawler:
 
         async with async_playwright() as p:
             logger.info("Launching browser...")
-            browser = await p.chromium.launch(headless=True)
+            browser = await p.chromium.launch(headless=False)
             context = await browser.new_context(
                 viewport={'width': 1920, 'height': 1080}
             )

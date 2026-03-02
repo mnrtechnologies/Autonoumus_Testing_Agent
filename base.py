@@ -640,7 +640,7 @@ class SemanticTester:
         """Main entry point"""
 
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True)
+            browser = await p.chromium.launch(headless=False)
             context = await browser.new_context(viewport={'width': 1400, 'height': 900})
             page = await context.new_page()
 

@@ -18,7 +18,7 @@ def test_basic_tagging():
     print("="*60)
     
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=False)
         page = browser.new_page(viewport={'width': 1280, 'height': 720})
         
         # Load a simple page
@@ -60,7 +60,7 @@ def test_stabilization_timing():
     print("="*60)
     
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=False)
         page = browser.new_page(viewport={'width': 1280, 'height': 720})
         
         # Load a page with dynamic content
@@ -117,7 +117,7 @@ def test_shadow_dom_detection():
     print("="*60)
     
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=False)
         page = browser.new_page(viewport={'width': 1280, 'height': 720})
         
         # Create a test page with Shadow DOM
@@ -196,7 +196,7 @@ def test_dropdown_options():
     print("="*60)
     
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=False)
         page = browser.new_page(viewport={'width': 1280, 'height': 720})
         
         # Create a test page with a dropdown
