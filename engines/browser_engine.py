@@ -34,44 +34,67 @@ class BrowserEngine:
         self.last_error: Dict[str, str] = {}  # Track last error message per element
         
     def start(self, url: str) -> bool:
-            """
-            Launch a PERSISTENT browser and navigate to the target URL.
-            This saves cookies and session data to a local folder.
-            """
-            try:
-                self.playwright = sync_playwright().start()
-                
-                # Define a folder to store the browser profile (cookies, local storage, etc.)
-                user_data_dir = "./browser_session"
-                
-                print(f"📂 Using persistent session in: {user_data_dir}")
-                
-                # launch_persistent_context combines browser launch and context creation
-                self.context = self.playwright.chromium.launch_persistent_context(
-                    user_data_dir,
-                    headless=self.headless,
-                    viewport={'width': 1280, 'height': 720},
-                    # This ensures the browser doesn't close between steps if you don't want it to
-                    no_viewport=False 
+        try:
+            import json, os
+            self.playwright = sync_playwright().start()
+            self.browser = self.playwright.chromium.launch(
+                headless=self.headless
+            )
+
+            # Load auth.json
+            auth_path = "auth.json"
+            storage_state = None
+            local_storage_data = {}
+
+            if os.path.exists(auth_path):
+                with open(auth_path) as f:
+                    auth = json.load(f)
+
+                # Handle legacy format {local_storage: {...}}
+                if "local_storage" in auth:
+                    local_storage_data = auth["local_storage"]
+                    storage_state = None  # can't use storage_state for localStorage
+                # Handle Playwright native format
+                elif "origins" in auth:
+                    storage_state = auth  # Playwright handles this natively
+
+            # Create context
+            if storage_state:
+                self.context = self.browser.new_context(
+                    storage_state=storage_state,
+                    viewport={'width': 1280, 'height': 720}
                 )
-                
-                # In a persistent context, a page is often already open
-                if len(self.context.pages) > 0:
-                    self.page = self.context.pages[0]
-                else:
-                    self.page = self.context.new_page()
-                
-                # Navigate to URL
-                print(f"🌐 Navigating to {url}...")
-                self.page.goto(url, wait_until="networkidle", timeout=30000)
-                time.sleep(2) 
-                
-                print("✅ Persistent browser started successfully")
-                return True
-                
-            except Exception as e:
-                print(f"❌ Failed to start browser: {str(e)}")
-                return False
+            else:
+                self.context = self.browser.new_context(
+                    viewport={'width': 1280, 'height': 720}
+                )
+
+            self.page = self.context.new_page()
+
+            # Navigate first (so origin exists), then inject localStorage
+            print(f"🌐 Navigating to {url}...")
+            self.page.goto(url, wait_until="domcontentloaded", timeout=30000)
+
+            # Inject localStorage tokens if using legacy format
+            if local_storage_data:
+                print(f"🔑 Injecting {len(local_storage_data)} localStorage keys...")
+                for key, value in local_storage_data.items():
+                    self.page.evaluate(
+                        f"window.localStorage.setItem({json.dumps(key)}, {json.dumps(value)})"
+                    )
+                # Reload so the app picks up the injected tokens
+                self.page.reload(wait_until="networkidle", timeout=30000)
+                time.sleep(2)
+            else:
+                self.page.wait_for_load_state("networkidle", timeout=30000)
+                time.sleep(2)
+
+            print("✅ Browser started with auth")
+            return True
+
+        except Exception as e:
+            print(f"❌ Failed to start browser: {str(e)}")
+            return False
             
                 
     def update_element_map(self, new_map: Dict):
